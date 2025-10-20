@@ -1,0 +1,4 @@
+[29-Jul-2025 13:30:34 America/New_York] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/hgpqgijw/public_html/ERP3/direccion/reportes/ctrl/ctrl-ingreso-diarios.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/hgpqgijw/public_html/ERP3/direccion/reportes/ctrl/ctrl-ingreso-diarios.php on line 16

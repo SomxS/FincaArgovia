@@ -1,0 +1,30 @@
+.table {
+  width: 100% !important;
+  font-family: Calibri;
+  border-radius: 5px;
+}
+
+.table th {
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  /* background-color: var(--aliceblue_other); */
+  color: var(--primary);
+}
+
+.table td {
+  color: black;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+table a {
+  color: black;
+  text-decoration: none;
+}
+.active > .page-link,
+.page-link.active {
+  color: var(--aliceblue);
+  background-color: var(--primary);
+  border-color: var(--primary);
+}

@@ -1,0 +1,68 @@
+.ck {
+    border: 1px solid;
+    border-radius: 6px;
+    min-width: 30px; /* Establece un ancho mínimo para el label */
+    min-height: 30px; /* Establece un alto mínimo para el label */
+    padding-left: 3px;
+    align-items: center; /* Para alinear verticalmente el contenido dentro del label */
+    display: inline-flex; /* Para que el label se comporte como un elemento en línea */
+  }
+  
+  #photo__colaborador {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      margin: 0 auto;
+      border-radius: 50%;
+      cursor: pointer;
+  }
+  
+  #photo__colaborador img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+  }
+   
+  #photo__colaborador span {
+      border-radius: 50%;
+      background-color: var(--disabled6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      font-size: 1.5rem;
+      color: aliceblue;
+      display: none;
+      transition: all 0.5s ease;
+  }
+  
+  #photo__colaborador:hover span {
+      display: flex;
+  }
+  
+  #photo__colaborador p {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      bottom: 15px;
+      right: 20px;
+      margin: 0;
+      border-radius: 50%;
+      background-color: var(--info);
+      color: aliceblue;
+      font-size: 0.8rem;
+  }
+  
+  #photo__colaborador:hover p {
+      display: none;
+  }
+  

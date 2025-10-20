@@ -1,0 +1,10 @@
+[31-Jul-2025 11:21:39 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Inventary' not found in /home/hgpqgijw/public_html/ERP3/diversificados/ctrl/ctrl-inventary.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/hgpqgijw/public_html/ERP3/diversificados/ctrl/ctrl-inventary.php on line 21
+[31-Jul-2025 11:24:32 America/Mexico_City] PHP Fatal error:  Cannot redeclare Inventary::getEntradaByIDx() in /home/hgpqgijw/public_html/ERP3/diversificados/mdl/mdl-inventary.php on line 94
+[31-Jul-2025 11:24:34 America/Mexico_City] PHP Fatal error:  Cannot redeclare Inventary::getEntradaByIDx() in /home/hgpqgijw/public_html/ERP3/diversificados/mdl/mdl-inventary.php on line 94
+[31-Jul-2025 11:41:58 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Inventary' not found in /home/hgpqgijw/public_html/ERP3/diversificados/ctrl/ctrl-inventary.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/hgpqgijw/public_html/ERP3/diversificados/ctrl/ctrl-inventary.php on line 21

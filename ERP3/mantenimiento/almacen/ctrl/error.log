@@ -1,0 +1,2625 @@
+[ 2023-10-10 07:13:21 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea as id, Nombre_Area as valor  FROM hgpqgijw_usuarios.zona
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'idArea' in 'field list'
+
+[ 2023-10-10 07:13:30 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea as id, Nombre_Area as valor  FROM hgpqgijw_usuarios.zona
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'idArea' in 'field list'
+
+[ 2023-10-10 07:13:35 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea as id, Nombre_Area as valor  FROM hgpqgijw_usuarios.zona
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'idArea' in 'field list'
+
+[ 2023-10-10 07:38:17 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea , Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:38:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea , Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:38:42 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea , Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:38:44 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea , Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:38:45 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea , Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:38:45 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea , Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:38:46 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea , Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:38:46 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea , Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:38:46 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea , Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:39:08 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea as id, Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:39:10 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea as id, Nombre_Area   FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:39:11 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea as id, Nombre_Area as valor  FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:39:12 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea as id, Nombre_Area as valor  FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:39:12 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  SELECT idArea as id, Nombre_Area as valor  FROM hgpqgijw_ventas.mtto_almacen_area
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hgpqgijw_ventas.mtto_almacen_area' doesn't exist
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:45:19 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*)
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:41 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2023-10-10 07:46:47 ]
+[ UNIX_USR ] :: hgpqgijw
+[ WINDOWS_USR ] :: %USERNAME%
+[ INFO ] ::  
+    SELECT
+
+    count(*) as r
+    FROM
+    hgpqgijw_operacion.mtto_almacen,
+    hgpqgijw_operacion.mtto_almacen_area,
+    hgpqgijw_operacion.mtto_almacen_equipos,
+    hgpqgijw_usuarios.udn,
+    hgpqgijw_usuarios.zona,
+    hgpqgijw_operacion.mtto_categoria,
+    hgpqgijw_operacion.mtto_proveedores
+    WHERE idUDN = UDN_Almacen and
+    idArea = Area and
+    idEquipo = Equipo and
+    id_categoria=idcategoria and
+    id_zona       = idzona  AND
+    id_proveedor  =idProveedor AND
+
+    Estado= ? 
+    AND Area = ?
+    ORDER BY idAlmacen desc
+    
+    
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
