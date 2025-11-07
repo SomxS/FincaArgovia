@@ -1,0 +1,10 @@
+[ 2025-11-06 22:45:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ ERROR CONECT ] :: SQLSTATE[HY000] [1045] Access denied for user 'hgpqgijw_desarrollo'@'localhost' (using password: YES)
+
+[ 2025-11-06 22:43:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ ERROR CONECT ] :: SQLSTATE[HY000] [1045] Access denied for user 'hgpqgijw_desarrollo'@'localhost' (using password: YES)
+

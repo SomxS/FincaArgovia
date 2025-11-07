@@ -7,8 +7,8 @@
             if (!$this->connected) {
                 // $conf = require_once('_conf.php'); 
                 $host = "localhost";
-                $user = "hgpqgijw_desarrollo";
-                $pass = "c(SomxD)3";
+                $user = "root";
+                $pass = "";
                 $db   = "hgpqgijw_erp";
                 
                 //  La opción especifica que se debe ejecutar el comando "SET NAMES utf8" para asegurarse de que la conexión use la codificación de caracteres UTF-8.
