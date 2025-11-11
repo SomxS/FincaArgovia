@@ -2,9 +2,7 @@
 
 if (empty($_POST['opc'])) exit(0);
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+
 
 require_once '../mdl/mdl-clientes.php';
 
@@ -13,6 +11,7 @@ class ctrl extends mdl {
     function init() {
         return [
             'clientes' => $this->lsClientes(),
+             'udn' => $this->lsUDN([1]),
             'tiposMovimiento' => [
                 ['id' => 'consumo', 'valor' => 'Consumo a crédito'],
                 ['id' => 'abono_parcial', 'valor' => 'Abono parcial'],
@@ -22,8 +21,35 @@ class ctrl extends mdl {
                 ['id' => 'N/A', 'valor' => 'N/A (No aplica)'],
                 ['id' => 'efectivo', 'valor' => 'Efectivo'],
                 ['id' => 'banco', 'valor' => 'Banco']
-            ]
+            ],
+            'userLevel' => 4
         ];
+    }
+
+    function getTotales() {
+        $fecha   = $_POST['fecha'];
+        $totales = $this->getTotalesPorFecha($fecha);
+
+        return [
+            'totalConsumos' => $totales['total_consumos'] ?? 0,
+            'totalPagosEfectivo' => $totales['total_pagos_efectivo'] ?? 0,
+            'totalPagosBanco' => $totales['total_pagos_banco'] ?? 0
+        ];
+    }
+
+
+
+    function checkUserLevel($requiredLevel) {
+        $userLevel = $_SESSION['nivel_usuario'] ?? 1;
+        
+        if ($userLevel < $requiredLevel) {
+            return [
+                'status' => 401,
+                'message' => 'No tiene permisos para realizar esta acción'
+            ];
+        }
+        
+        return true;
     }
 
     function ls() {
@@ -58,7 +84,7 @@ class ctrl extends mdl {
             ];
 
             $tipoLabel = '';
-            switch ($key['tipo_movimiento']) {
+            switch ($key['movement_type']) {
                 case 'consumo':
                     $tipoLabel = '<span class="badge bg-warning">Consumo</span>';
                     break;
@@ -74,9 +100,9 @@ class ctrl extends mdl {
                 'id' => $key['id'],
                 'Cliente' => $key['cliente_nombre'],
                 'Tipo de movimiento' => $tipoLabel,
-                'Método de pago' => $key['metodo_pago'],
+                'Método de pago' => $key['payment_method'],
                 'Monto' => [
-                    'html' => evaluar($key['cantidad']),
+                    'html' => evaluar($key['quantity']),
                     'class' => 'text-end'
                 ],
                 'a' => $a
@@ -89,16 +115,7 @@ class ctrl extends mdl {
         ];
     }
 
-    function getTotales() {
-        $fecha = $_POST['fecha'];
-        $totales = $this->getTotalesPorFecha($fecha);
 
-        return [
-            'totalConsumos' => $totales['total_consumos'] ?? 0,
-            'totalPagosEfectivo' => $totales['total_pagos_efectivo'] ?? 0,
-            'totalPagosBanco' => $totales['total_pagos_banco'] ?? 0
-        ];
-    }
 
     function getMovimiento() {
         $id = $_POST['id'];
@@ -123,7 +140,7 @@ class ctrl extends mdl {
 
     function getDeudaActual() {
         $clienteId = $_POST['cliente_id'];
-        $deuda = $this->getDeudaActual($clienteId);
+        $deuda = $this->getDeudaActualByID($clienteId);
 
         return [
             'deuda' => $deuda
@@ -242,10 +259,12 @@ class ctrl extends mdl {
         $__row = [];
         $fi = $_POST['fi'];
         $ff = $_POST['ff'];
+        $udn = $_POST['udn'] ?? 'todas';
 
         $ls = $this->listConcentrado([
             'fi' => $fi,
-            'ff' => $ff
+            'ff' => $ff,
+            'udn' => $udn
         ]);
 
         foreach ($ls as $key) {
@@ -268,6 +287,62 @@ class ctrl extends mdl {
                     'html' => evaluar($key['saldo_final']),
                     'class' => 'text-end font-bold'
                 ]
+            ];
+        }
+
+        return [
+            'row' => $__row,
+            'ls' => $ls
+        ];
+    }
+
+    function getDetalleCliente() {
+        $clienteId = $_POST['cliente_id'];
+        $fi = $_POST['fi'];
+        $ff = $_POST['ff'];
+
+        $cliente = $this->getClienteById($clienteId);
+        $movimientos = $this->listMovimientos([
+            'fecha' => null,
+            'tipo' => 'todos',
+            'cliente_id' => $clienteId,
+            'fi' => $fi,
+            'ff' => $ff
+        ]);
+
+        return [
+            'cliente_nombre' => $cliente['name'],
+            'movimientos' => $movimientos
+        ];
+    }
+
+    function lsClientesAdmin() {
+        $__row = [];
+        $ls = $this->lsClientes();
+
+        foreach ($ls as $key) {
+            $a = [];
+
+            $a[] = [
+                'class' => 'btn btn-sm btn-primary me-1',
+                'html' => '<i class="icon-pencil"></i>',
+                'onclick' => 'app.editCliente(' . $key['id'] . ')'
+            ];
+
+            $a[] = [
+                'class' => 'btn btn-sm btn-danger',
+                'html' => '<i class="icon-trash"></i>',
+                'onclick' => 'app.deleteCliente(' . $key['id'] . ')'
+            ];
+
+            $__row[] = [
+                'id' => $key['id'],
+                'Cliente' => $key['name'],
+                'Deuda Inicial' => [
+                    'html' => evaluar($key['deuda_inicial'] ?? 0),
+                    'class' => 'text-end'
+                ],
+                'a' => $a
             ];
         }
 

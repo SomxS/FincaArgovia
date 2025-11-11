@@ -1,30 +1,90 @@
 let api = 'ctrl/ctrl-clientes.php';
-let app, concentrado;
+let app, clientes, concentrado;
 
-let lsClientes, lsTiposMovimiento, lsMetodosPago;
+let lsClientes, lsTiposMovimiento, lsMetodosPago, userLevel;
+let udn;
+
+const PERMISOS = {
+    1: {
+        ver_dashboard: true,
+        registrar_movimiento: true,
+        editar_movimiento: true,
+        eliminar_movimiento: true,
+        ver_concentrado: false,
+        exportar_excel: false,
+        ver_administracion: false
+    },
+    2: {
+        ver_dashboard: true,
+        registrar_movimiento: false,
+        editar_movimiento: false,
+        eliminar_movimiento: false,
+        ver_concentrado: true,
+        exportar_excel: true,
+        ver_administracion: false
+    },
+    3: {
+        ver_dashboard: true,
+        registrar_movimiento: false,
+        editar_movimiento: false,
+        eliminar_movimiento: false,
+        ver_concentrado: true,
+        exportar_excel: true,
+        filtrar_udn: true,
+        ver_administracion: false
+    },
+    4: {
+        ver_dashboard: true,
+        registrar_movimiento: true,
+        editar_movimiento: true,
+        eliminar_movimiento: true,
+        ver_concentrado: true,
+        exportar_excel: true,
+        ver_administracion: true,
+        gestionar_clientes: true
+    }
+};
 
 $(async () => {
     const data = await useFetch({ url: api, data: { opc: "init" } });
     lsClientes = data.clientes;
     lsTiposMovimiento = data.tiposMovimiento;
     lsMetodosPago = data.metodosPago;
+    udn = data.udn;
+    userLevel = data.userLevel || 1;
 
     app = new App(api, "root");
     concentrado = new Concentrado(api, "root");
-    
+    clientes = new Clientes(api, "root");
+
     app.render();
+    clientes.render();
 });
 
 class App extends Templates {
     constructor(link, div_modulo) {
         super(link, div_modulo);
-        this.PROJECT_NAME = "clientes";
+        this.PROJECT_NAME = "clientess";
+    }
+
+    checkPermiso(accion) {
+        const permisos = PERMISOS[userLevel];
+        if (!permisos || !permisos[accion]) {
+            alert({
+                icon: "warning",
+                title: "Acceso Denegado",
+                text: "No tiene permisos para realizar esta acción"
+            });
+            return false;
+        }
+        return true;
     }
 
     render() {
         this.layout();
         this.filterBar();
-        this.ls();
+        // this.ls();
+        // this.renderAdmin()
     }
 
     layout() {
@@ -45,25 +105,63 @@ class App extends Templates {
             </div>
         `);
 
+        const tabs = [
+            {
+                id: "dashboard",
+                tab: "Dashboard",
+                class: "mb-1",
+
+                onClick: () => this.ls()
+            }
+        ];
+
+        if (PERMISOS[userLevel].ver_concentrado) {
+            tabs.push({
+                id: "concentrado",
+                tab: "Concentrado",
+                active: true,
+                onClick: () => concentrado.render()
+            });
+        }
+
+        if (PERMISOS[userLevel].ver_administracion) {
+            tabs.push({
+                id: "administracion",
+                tab: "Administración",
+                onClick: () => this.renderAdmin()
+            });
+        }
+
         this.tabLayout({
             parent: `container${this.PROJECT_NAME}`,
             id: `tabs${this.PROJECT_NAME}`,
             theme: "light",
             type: "short",
-            json: [
-                {
-                    id: "dashboard",
-                    tab: "Dashboard",
-                    class: "mb-1",
-                    active: true,
-                    onClick: () => this.ls()
-                },
-                {
-                    id: "concentrado",
-                    tab: "Concentrado",
-                    onClick: () => concentrado.render()
-                }
-            ]
+            json: tabs
+        });
+    }
+
+    renderAdmin() {
+        $(`#container-administracion`).html(`
+            <div class="p-4">
+                <h3 class="text-xl font-bold mb-4">⚙️ Administración de Clientes</h3>
+                <div id="admin-clientes-table"></div>
+            </div>
+        `);
+
+        this.createTable({
+            parent: 'admin-clientes-table',
+            data: { opc: 'lsClientesAdmin' },
+            coffeesoft: true,
+            conf: { datatable: true, pag: 15 },
+            attr: {
+                id: 'tbClientesAdmin',
+                theme: 'corporativo',
+                title: '👥 Gestión de Clientes',
+                subtitle: 'Administrar clientes del sistema',
+                center: [1, 2],
+                right: [3]
+            }
         });
     }
 
@@ -74,40 +172,11 @@ class App extends Templates {
             data: [
                 {
                     opc: "input-calendar",
-                    class: "col-sm-3",
+                    class: "col-sm-3 offset-sm-9",
                     id: `calendar${this.PROJECT_NAME}`,
                     lbl: "Fecha de captura:"
                 },
-                {
-                    opc: "select",
-                    id: "tipoMovimiento",
-                    lbl: "Tipo de movimiento",
-                    class: "col-sm-3",
-                    data: [
-                        { id: "todos", valor: "Todos" },
-                        { id: "consumo", valor: "Consumos" },
-                        { id: "abono_parcial", valor: "Abonos parciales" },
-                        { id: "pago_total", valor: "Pagos totales" }
-                    ],
-                    onchange: `app.ls()`
-                },
-                {
-                    opc: "button",
-                    class: "col-sm-3",
-                    id: "btnNuevoMovimiento",
-                    text: "Registrar nuevo movimiento",
-                    onClick: () => this.addMovimiento()
-                },
-                {
-                    opc: "button",
-                    class: "col-sm-3",
-                    id: "btnConcentrado",
-                    text: "Concentrado de clientes",
-                    color_btn: "secondary",
-                    onClick: () => {
-                        $(`#tabs${this.PROJECT_NAME}-concentrado`).click();
-                    }
-                }
+
             ]
         });
 
@@ -118,33 +187,7 @@ class App extends Templates {
         });
     }
 
-    ls() {
-        const fecha = $(`#calendar${this.PROJECT_NAME}`).val() || moment().format('YYYY-MM-DD');
-        const tipoMovimiento = $('#tipoMovimiento').val();
 
-        $(`#container-dashboard`).html(`
-            <div id="totales-cards" class="mb-4"></div>
-            <div id="tabla-movimientos"></div>
-        `);
-
-        this.updateTotales(fecha);
-
-        this.createTable({
-            parent: 'tabla-movimientos',
-            idFilterBar: `filterBar${this.PROJECT_NAME}`,
-            data: { opc: 'ls', fecha: fecha, tipo: tipoMovimiento },
-            coffeesoft: true,
-            conf: { datatable: true, pag: 15 },
-            attr: {
-                id: `tb${this.PROJECT_NAME}`,
-                theme: 'corporativo',
-                title: '📋 Movimientos del día',
-                subtitle: `Movimientos registrados el ${moment(fecha).format('DD/MM/YYYY')}`,
-                center: [1, 2],
-                right: [3]
-            }
-        });
-    }
 
     async updateTotales(fecha) {
         const data = await useFetch({
@@ -182,6 +225,8 @@ class App extends Templates {
     }
 
     addMovimiento() {
+        if (!this.checkPermiso('registrar_movimiento')) return;
+
         this.createModalForm({
             id: 'formMovimientoAdd',
             data: { opc: 'addMovimiento' },
@@ -309,7 +354,7 @@ class App extends Templates {
 
     setupMovimientoLogic() {
         setTimeout(() => {
-            $('#cliente_id').on('change', async function() {
+            $('#cliente_id').on('change', async function () {
                 const clienteId = $(this).val();
                 if (clienteId) {
                     const data = await useFetch({
@@ -320,10 +365,10 @@ class App extends Templates {
                 }
             });
 
-            $('#tipo_movimiento').on('change', function() {
+            $('#tipo_movimiento').on('change', function () {
                 const tipo = $(this).val();
                 const metodoPago = $('#metodo_pago');
-                
+
                 if (tipo === 'consumo') {
                     metodoPago.val('N/A').prop('disabled', true);
                 } else {
@@ -392,6 +437,147 @@ class App extends Templates {
     }
 }
 
+class Clientes extends Templates {
+
+    constructor(link, div_modulo) {
+        super(link, div_modulo);
+        this.PROJECT_NAME = "Clientes";
+    }
+
+    render() {
+        this.layout()
+        this.filterBar()
+        this.updateTotales()
+        this.lsClientes()
+    }
+
+    layout() {
+
+
+        this.primaryLayout({
+            parent: "container-concentrado",
+            id: this.PROJECT_NAME,
+            class: 'w-full',
+            card: {
+                filterBar: { class: 'w-full border-b pb-2', id: `filterBar${this.PROJECT_NAME}` },
+                container: { class: 'w-full my-2 h-full', id: `container${this.PROJECT_NAME}` }
+            }
+        });
+
+        $(`#container-concentrado`).prepend(`<div id="showCards" class="mb-5"></div>`);
+
+    }
+
+    filterBar() {
+
+        this.createfilterBar({
+            parent: `filterBar${this.PROJECT_NAME}`,
+            data: [
+                {
+                    opc: "button",
+                    class: "col-sm-2",
+                    className: 'w-100',
+                    id: "btnConcentrado",
+                    icon: 'icon-toggle-off',
+                    text: "Concentrado de clientes",
+                    color_btn: "outline-info",
+                    onClick: () => {
+                        $(`#tabs${this.PROJECT_NAME}-concentrado`).click();
+                    }
+                },
+                {
+                    opc: "button",
+                    class: "col-sm-2",
+                    className: 'w-100',
+                    id: "btnNuevoMovimiento",
+                    text: "Registrar nuevo movimiento",
+                    onClick: () => this.addMovimiento()
+                },
+
+                {
+                    opc: "select",
+                    id: "tipoMovimiento",
+                    className: 'w-100',
+                    lbl: "Tipo de movimiento",
+                    class: "col-sm-2",
+                    data: [
+                        { id: "todos", valor: "Todos" },
+                        { id: "consumo", valor: "Consumos" },
+                        { id: "abono_parcial", valor: "Abonos parciales" },
+                        { id: "pago_total", valor: "Pagos totales" }
+                    ],
+                    onchange: `clientes.lsClientes()`
+                },
+
+
+            ]
+        });
+
+    }
+
+    async updateTotales() {
+
+        const fecha = $(`#calendar${this.PROJECT_NAME}`).val() || moment().format('YYYY-MM-DD');
+
+
+        const data = await useFetch({
+            url: this._link,
+            data: { opc: 'getTotales', fecha: fecha }
+        });
+
+        this.infoCard({
+            parent: 'showCards',
+            theme: 'light',
+            json: [
+                {
+                    title: 'Total de consumos',
+                    data: {
+                        value: formatPrice(data.totalConsumos || 0),
+                        color: 'text-green-600'
+                    }
+                },
+                {
+                    title: 'Total pagos en efectivo',
+                    data: {
+                        value: formatPrice(data.totalPagosEfectivo || 0),
+                        color: 'text-blue-600'
+                    }
+                },
+                {
+                    title: 'Total pagos en banco',
+                    data: {
+                        value: formatPrice(data.totalPagosBanco || 0),
+                        color: 'text-purple-600'
+                    }
+                }
+            ]
+        });
+    }
+
+    lsClientes() {
+        const fecha = $(`#calendar${this.PROJECT_NAME}`).val() || moment().format('YYYY-MM-DD');
+
+        this.createTable({
+            parent: "containerClientes",
+            idFilterBar: `filterBar${this.PROJECT_NAME}`,
+            data: { opc: 'ls', fecha: fecha, },
+            coffeesoft: true,
+            conf: { datatable: true, pag: 15 },
+            attr: {
+                id: `tb${this.PROJECT_NAME}`,
+                theme: 'corporativo',
+                title: '📋 Movimientos del día',
+                subtitle: `Movimientos registrados el ${moment(fecha).format('DD/MM/YYYY')}`,
+                center: [1, 2],
+                right: [3]
+            },
+        });
+
+    }
+
+
+}
+
 class Concentrado extends App {
     constructor(link, div_modulo) {
         super(link, div_modulo);
@@ -413,9 +599,17 @@ class Concentrado extends App {
             data: [
                 {
                     opc: "input-calendar",
-                    class: "col-sm-4",
+                    class: "col-sm-3",
                     id: "calendarConcentrado",
                     lbl: "Rango de fechas:"
+                },
+                {
+                    opc: "select",
+                    id: "udnConcentrado",
+                    lbl: "Unidad de Negocio",
+                    class: "col-sm-3",
+                    data: udn,
+                    onchange: `concentrado.lsConcentrado()`
                 },
                 {
                     opc: "button",
@@ -437,11 +631,12 @@ class Concentrado extends App {
 
     lsConcentrado() {
         const rangePicker = getDataRangePicker("calendarConcentrado");
+        const udn = $('#udnConcentrado').val();
 
         this.createTable({
             parent: 'tabla-concentrado',
             idFilterBar: 'filterbar-concentrado',
-            data: { opc: 'lsConcentrado', fi: rangePicker.fi, ff: rangePicker.ff },
+            data: { opc: 'lsConcentrado', fi: rangePicker.fi, ff: rangePicker.ff, udn: udn },
             coffeesoft: true,
             conf: { datatable: true, pag: 15 },
             attr: {
@@ -450,14 +645,85 @@ class Concentrado extends App {
                 title: '📊 Concentrado de Clientes',
                 subtitle: `Período: ${moment(rangePicker.fi).format('DD/MM/YYYY')} - ${moment(rangePicker.ff).format('DD/MM/YYYY')}`,
                 center: [1, 2, 3, 4],
-                right: [5]
+                right: [5],
+                extends: true
+            },
+            success: (data) => {
+                this.setupExpandableRows(data.ls);
+            }
+        });
+    }
+
+    setupExpandableRows(data) {
+        setTimeout(() => {
+            $('#tbConcentrado tbody tr').each(function (index) {
+                const clienteId = data[index]?.cliente_id;
+                if (clienteId) {
+                    $(this).css('cursor', 'pointer');
+                    $(this).on('click', function () {
+                        concentrado.expandCliente(clienteId);
+                    });
+                }
+            });
+        }, 500);
+    }
+
+    async expandCliente(clienteId) {
+        const rangePicker = getDataRangePicker("calendarConcentrado");
+
+        const data = await useFetch({
+            url: this._link,
+            data: {
+                opc: 'getDetalleCliente',
+                cliente_id: clienteId,
+                fi: rangePicker.fi,
+                ff: rangePicker.ff
+            }
+        });
+
+        bootbox.dialog({
+            title: `Detalle de Movimientos - ${data.cliente_nombre}`,
+            size: 'large',
+            message: `
+                <div class="p-4">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Método</th>
+                                <th>Cantidad</th>
+                                <th>Deuda Nueva</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.movimientos.map(m => `
+                                <tr>
+                                    <td>${moment(m.fecha_captura).format('DD/MM/YYYY')}</td>
+                                    <td>${m.tipo_movimiento}</td>
+                                    <td>${m.metodo_pago}</td>
+                                    <td class="${m.tipo_movimiento === 'consumo' ? 'text-danger' : 'text-success'}">
+                                        ${formatPrice(m.cantidad)}
+                                    </td>
+                                    <td>${formatPrice(m.deuda_nueva)}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `,
+            buttons: {
+                ok: {
+                    label: 'Cerrar',
+                    className: 'btn-primary'
+                }
             }
         });
     }
 
     async exportExcel() {
         const rangePicker = getDataRangePicker("calendarConcentrado");
-        
+
         const data = await useFetch({
             url: this._link,
             data: { opc: 'exportExcel', fi: rangePicker.fi, ff: rangePicker.ff }
