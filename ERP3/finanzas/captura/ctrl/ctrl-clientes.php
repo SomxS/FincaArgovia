@@ -10,8 +10,8 @@ class ctrl extends mdl {
 
     function init() {
         return [
-            'clientes' => $this->lsClientes(),
-             'udn' => $this->lsUDN([1]),
+            'clientes' => $this->lsClientes([1]),
+            'udn' => $this->lsUDN(),
             'tiposMovimiento' => [
                 ['id' => 'consumo', 'valor' => 'Consumo a crédito'],
                 ['id' => 'abono_parcial', 'valor' => 'Abono parcial'],
@@ -27,7 +27,7 @@ class ctrl extends mdl {
     }
 
     function getTotales() {
-        $fecha   = $_POST['fecha'];
+        $fecha = $_POST['fecha'];
         $totales = $this->getTotalesPorFecha($fecha);
 
         return [
@@ -54,11 +54,11 @@ class ctrl extends mdl {
 
     function ls() {
         $__row = [];
-        $fecha = $_POST['fecha'];
+        $dailyClosureId = $_POST['daily_closure_id'];
         $tipo = $_POST['tipo'];
 
         $ls = $this->listMovimientos([
-            'fecha' => $fecha,
+            'daily_closure_id' => 1,
             'tipo' => $tipo
         ]);
 
@@ -84,26 +84,33 @@ class ctrl extends mdl {
             ];
 
             $tipoLabel = '';
+           
             switch ($key['movement_type']) {
                 case 'consumo':
-                    $tipoLabel = '<span class="badge bg-warning">Consumo</span>';
+                    $tipoLabel = '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
+                        <i class="icon-lock text-orange-600"></i> Consumo
+                    </span>';
                     break;
-                case 'abono_parcial':
-                    $tipoLabel = '<span class="badge bg-info">Abono parcial</span>';
+                case 'anticipo':
+                    $tipoLabel = '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                        <i class="icon-clock text-blue-600"></i> Anticipo
+                    </span>';
                     break;
-                case 'pago_total':
-                    $tipoLabel = '<span class="badge bg-success">Pago total</span>';
+                case 'pago':
+                    $tipoLabel = '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                        <i class="icon-check text-green-600"></i> Pago
+                    </span>';
                     break;
             }
 
             $__row[] = [
                 'id' => $key['id'],
-                'Cliente' => $key['cliente_nombre'],
+                'Cliente'            => $key['cliente_nombre'],
                 'Tipo de movimiento' => $tipoLabel,
-                'Método de pago' => $key['payment_method'],
-                'Monto' => [
-                    'html' => evaluar($key['quantity']),
-                    'class' => 'text-end'
+                'Método de pago'     => $key['method_pay'],
+                'Monto'              => [
+                    'html'  => evaluar($key['amount']),
+                    'class' => 'text-end '
                 ],
                 'a' => $a
             ];
@@ -114,8 +121,6 @@ class ctrl extends mdl {
             'ls' => $ls
         ];
     }
-
-
 
     function getMovimiento() {
         $id = $_POST['id'];
@@ -151,31 +156,27 @@ class ctrl extends mdl {
         $status = 500;
         $message = 'Error al registrar movimiento';
 
-        if (empty($_POST['cliente_id']) || empty($_POST['tipo_movimiento']) || empty($_POST['cantidad'])) {
+        if (empty($_POST['customer_id']) || empty($_POST['movement_type']) || empty($_POST['amount'])) {
             return [
                 'status' => 400,
                 'message' => 'Todos los campos son obligatorios'
             ];
         }
 
-        if ($_POST['tipo_movimiento'] === 'consumo' && $_POST['metodo_pago'] !== 'N/A') {
+        if ($_POST['movement_type'] === 'consumo' && $_POST['method_pay'] !== 'N/A') {
             return [
                 'status' => 400,
                 'message' => 'El tipo consumo debe tener método de pago N/A'
             ];
         }
 
-        $_POST['fecha_captura'] = date('Y-m-d');
-        $_POST['hora_captura'] = date('H:i:s');
-        $_POST['usuario_id'] = $_SESSION['usuario_id'] ?? 1;
+        $deudaAnterior = $this->getDeudaActualByID($_POST['customer_id']);
+        $_POST['old_debt'] = $deudaAnterior;
 
-        $deudaAnterior = $this->getDeudaActual($_POST['cliente_id']);
-        $_POST['deuda_anterior'] = $deudaAnterior;
-
-        if ($_POST['tipo_movimiento'] === 'consumo') {
-            $_POST['deuda_nueva'] = $deudaAnterior + $_POST['cantidad'];
+        if ($_POST['movement_type'] === 'consumo') {
+            $_POST['new_debt'] = $deudaAnterior + $_POST['amount'];
         } else {
-            $_POST['deuda_nueva'] = $deudaAnterior - $_POST['cantidad'];
+            $_POST['new_debt'] = $deudaAnterior - $_POST['amount'];
         }
 
         $create = $this->createMovimiento($this->util->sql($_POST));
@@ -196,20 +197,20 @@ class ctrl extends mdl {
         $status = 500;
         $message = 'Error al editar movimiento';
 
-        if (empty($_POST['cliente_id']) || empty($_POST['tipo_movimiento']) || empty($_POST['cantidad'])) {
+        if (empty($_POST['customer_id']) || empty($_POST['movement_type']) || empty($_POST['amount'])) {
             return [
                 'status' => 400,
                 'message' => 'Todos los campos son obligatorios'
             ];
         }
 
-        $deudaAnterior = $this->getDeudaActual($_POST['cliente_id']);
-        $_POST['deuda_anterior'] = $deudaAnterior;
+        $deudaAnterior = $this->getDeudaActualByID($_POST['customer_id']);
+        $_POST['old_debt'] = $deudaAnterior;
 
-        if ($_POST['tipo_movimiento'] === 'consumo') {
-            $_POST['deuda_nueva'] = $deudaAnterior + $_POST['cantidad'];
+        if ($_POST['movement_type'] === 'consumo') {
+            $_POST['new_debt'] = $deudaAnterior + $_POST['amount'];
         } else {
-            $_POST['deuda_nueva'] = $deudaAnterior - $_POST['cantidad'];
+            $_POST['new_debt'] = $deudaAnterior - $_POST['amount'];
         }
 
         $edit = $this->updateMovimiento($this->util->sql($_POST, 1));
@@ -235,7 +236,7 @@ class ctrl extends mdl {
         if ($movimiento) {
             $this->logAuditoria([
                 'movimiento_id' => $id,
-                'cliente_id' => $movimiento['cliente_id'],
+                'cliente_id' => $movimiento['customer_id'],
                 'accion' => 'delete',
                 'usuario_id' => $_SESSION['usuario_id'] ?? 1,
                 'datos_anteriores' => $movimiento
@@ -298,16 +299,12 @@ class ctrl extends mdl {
 
     function getDetalleCliente() {
         $clienteId = $_POST['cliente_id'];
-        $fi = $_POST['fi'];
-        $ff = $_POST['ff'];
+        $dailyClosureId = $_POST['daily_closure_id'];
 
         $cliente = $this->getClienteById($clienteId);
         $movimientos = $this->listMovimientos([
-            'fecha' => null,
-            'tipo' => 'todos',
-            'cliente_id' => $clienteId,
-            'fi' => $fi,
-            'ff' => $ff
+            'daily_closure_id' => $dailyClosureId,
+            'tipo' => 'todos'
         ]);
 
         return [
@@ -318,7 +315,7 @@ class ctrl extends mdl {
 
     function lsClientesAdmin() {
         $__row = [];
-        $ls = $this->lsClientes();
+        $ls = $this->lsClientes([1]);
 
         foreach ($ls as $key) {
             $a = [];
@@ -335,11 +332,13 @@ class ctrl extends mdl {
                 'onclick' => 'app.deleteCliente(' . $key['id'] . ')'
             ];
 
+            $deudaActual = $this->getDeudaActualByID($key['id']);
+
             $__row[] = [
                 'id' => $key['id'],
-                'Cliente' => $key['name'],
-                'Deuda Inicial' => [
-                    'html' => evaluar($key['deuda_inicial'] ?? 0),
+                'Cliente' => $key['valor'],
+                'Deuda Actual' => [
+                    'html' => evaluar($deudaActual),
                     'class' => 'text-end'
                 ],
                 'a' => $a

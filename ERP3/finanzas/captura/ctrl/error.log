@@ -1,3 +1,38 @@
+[ 2025-11-12 06:08:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  SELECT idUDN as id, nombre as valor FROM rfwsmqex_erp.udn   WHERE activo = ?  ORDER BY nombre ASC 
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre' in 'field list'
+
+
+[ 2025-11-12 06:08:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  SELECT id, name as valor FROM rfwsmqex_finanzas.supplier   WHERE active = ?  ORDER BY name ASC 
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+
+[ 2025-11-12 06:08:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  SELECT id, name as valor FROM rfwsmqex_finanzas.method_pay   WHERE active = ?  ORDER BY name ASC 
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+
+[ 2025-11-12 06:08:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  SELECT id, name as valor FROM rfwsmqex_finanzas.purchase_type   WHERE active = ?  ORDER BY id ASC 
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+
+[ 2025-11-12 06:08:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  SELECT id, name as valor FROM rfwsmqex_finanzas.product_class   WHERE active = ?  ORDER BY name ASC 
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+
 [ 2025-11-10 21:18:20 ]
 [ UNIX_USR ] :: nt authority\system
 [ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
@@ -1791,4 +1826,959 @@
             ORDER BY dcc.id DESC
         
 [ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:08:59 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:08:59 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:09:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:09:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:12:13 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:12:13 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:12 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:12 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:17 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:17 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:26 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:24:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:25:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:25:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:25:07 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:25:08 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:26:07 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:26:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:26:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:26:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:37:46 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_gvsl_finanzas2.clientes_credit_customers
+            WHERE active = 1
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:37:46 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                ccc.name as cliente_nombre,
+                u.nombre as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.clientes_credit_customers ccc ON dcc.customer_id = ccc.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.usuarios u ON dcc.user_id = u.id
+            WHERE dcc.capture_date = ? AND dcc.active = 1  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.clientes_credit_customers' doesn't exist
+
+[ 2025-11-12 06:48:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:48:14 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date < ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_inicial,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date <= ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_final
+            FROM rfwsmqex_gvsl_finanzas2.customer c
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON c.id = dcc.customer_id 
+                AND dcc.daily_closure_id IN (
+                    SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                    WHERE operation_date BETWEEN ? AND ?
+                )
+            WHERE c.active = 1  AND c.udn_id = ?
+            GROUP BY c.id, c.name
+            ORDER BY c.name
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-12 06:48:14 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date < ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_inicial,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date <= ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_final
+            FROM rfwsmqex_gvsl_finanzas2.customer c
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON c.id = dcc.customer_id 
+                AND dcc.daily_closure_id IN (
+                    SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                    WHERE operation_date BETWEEN ? AND ?
+                )
+            WHERE c.active = 1  AND c.udn_id = ?
+            GROUP BY c.id, c.name
+            ORDER BY c.name
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-12 06:48:16 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:48:17 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:48:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:48:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:48:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:50:04 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:50:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:50:07 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:50:26 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:50:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:54:47 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN rfwsmqex_gvsl_rrhh.empleados e ON dc.employee_id = e.idEmpleado
+            -- WHERE dcc.daily_closure_id = ?  AND dcc.movement_type = ?
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-12 06:55:12 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN rfwsmqex_gvsl_rrhh.empleados e ON dc.employee_id = e.idEmpleado
+            -- WHERE dcc.daily_closure_id = ? 
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-12 06:55:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN rfwsmqex_gvsl_rrhh.empleados e ON dc.employee_id = e.idEmpleado
+            -- WHERE dcc.daily_closure_id = ? 
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-12 06:56:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN rfwsmqex_gvsl_rrhh.empleados e ON dc.employee_id = e.idEmpleado
+            -- WHERE dcc.daily_closure_id = ?  
+            ORDER BY dcc.id DESC
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-12 06:59:32 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.id = ?
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:59:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.id = ?
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:59:37 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                dcc.*,
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
+            FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.customer c ON dcc.customer_id = c.id
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.id = ?
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.empleados' doesn't exist
+
+[ 2025-11-12 06:59:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date < ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_inicial,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date <= ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_final
+            FROM rfwsmqex_gvsl_finanzas2.customer c
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON c.id = dcc.customer_id 
+                AND dcc.daily_closure_id IN (
+                    SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                    WHERE operation_date BETWEEN ? AND ?
+                )
+            WHERE c.active = 1  AND c.udn_id = ?
+            GROUP BY c.id, c.name
+            ORDER BY c.name
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-12 06:59:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date < ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_inicial,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date <= ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_final
+            FROM rfwsmqex_gvsl_finanzas2.customer c
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON c.id = dcc.customer_id 
+                AND dcc.daily_closure_id IN (
+                    SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                    WHERE operation_date BETWEEN ? AND ?
+                )
+            WHERE c.active = 1  AND c.udn_id = ?
+            GROUP BY c.id, c.name
+            ORDER BY c.name
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-12 06:59:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date < ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_inicial,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date <= ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_final
+            FROM rfwsmqex_gvsl_finanzas2.customer c
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON c.id = dcc.customer_id 
+                AND dcc.daily_closure_id IN (
+                    SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                    WHERE operation_date BETWEEN ? AND ?
+                )
+            WHERE c.active = 1  AND c.udn_id = ?
+            GROUP BY c.id, c.name
+            ORDER BY c.name
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
 

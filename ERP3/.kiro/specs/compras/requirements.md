@@ -2,101 +2,119 @@
 
 ## Introduction
 
-El módulo de Compras es un sistema integral para la gestión y administración de compras realizadas por la unidad de negocio. Permite capturar, consultar y administrar diferentes tipos de compras (Fondo fijo, Corporativo, Crédito) con filtros dinámicos, control de accesos por perfil de usuario, y actualización de totales en tiempo real. El sistema incluye gestión de proveedores, métodos de pago, categorías de productos y generación de reportes concentrados.
+El módulo de Compras es un sistema integral para la gestión y administración de compras realizadas por la unidad de negocio. Permite capturar, consultar y administrar diferentes tipos de compras (Fondo fijo, Corporativo, Crédito) con filtros dinámicos, control de accesos por perfil de usuario, y seguimiento en tiempo real de totales y saldos.
 
 ## Glossary
 
-- **Sistema**: Módulo de Compras completo integrado en el ERP CoffeeSoft
-- **UDN**: Unidad de Negocio
-- **Fondo Fijo**: Tipo de compra con presupuesto limitado y control de saldo
-- **Compra Corporativa**: Compra realizada con métodos de pago corporativos (tarjeta de crédito, transferencia, etc.)
-- **Compra a Crédito**: Compra realizada con proveedores que otorgan crédito
-- **Clase de Insumo**: Categoría de producto (Alimentos, Bebidas, Gastos administrativos, etc.)
-- **Método de Pago**: Forma de pago utilizada (Efectivo, Tarjeta de crédito, Transferencia, etc.)
+- **Sistema**: Aplicación web de gestión financiera basada en CoffeeSoft Framework
+- **Usuario**: Persona con acceso al sistema según su perfil asignado
+- **Compra**: Registro de adquisición de productos o servicios
+- **Fondo Fijo**: Tipo de compra realizada con efectivo de caja chica
+- **Compra Corporativa**: Tipo de compra realizada con métodos de pago empresariales
+- **Compra a Crédito**: Tipo de compra realizada con proveedores que otorgan crédito
+- **Clase de Insumo**: Categoría de producto (Costo directo, Costo indirecto, Gastos operativos, etc.)
 - **Proveedor**: Entidad que suministra productos o servicios
+- **Método de Pago**: Forma de pago utilizada (Tarjeta de crédito, Transferencia, Efectivo, etc.)
 - **Reembolso**: Devolución de dinero del fondo fijo
-- **Bloqueo de Módulo**: Restricción temporal de edición controlada por Contabilidad
-- **Concentrado**: Reporte consolidado de compras por rango de fechas
+- **Módulo Bloqueado**: Estado del módulo donde se restringen ciertas operaciones de edición
+- **UDN**: Unidad de Negocio
 
 ## Requirements
 
-### Requirement 1
+### Requirement 1: Interfaz Principal del Módulo
 
 **User Story:** Como usuario del sistema, quiero acceder al módulo de compras con sus pestañas y componentes principales, para registrar, consultar y administrar las compras realizadas en la unidad de negocio.
 
 #### Acceptance Criteria
 
-1. WHEN el usuario accede al módulo de compras, THE Sistema SHALL mostrar la interfaz principal con las pestañas: Compras, Concentrado de compras, y Archivos
-2. WHEN el usuario visualiza la pestaña principal, THE Sistema SHALL mostrar los totales de compras generales, por tipo de compra (Fondo fijo, Corporativo, Crédito) y saldo del fondo fijo
-3. WHILE el usuario permanece en el módulo, THE Sistema SHALL mantener visible en todo momento la suma total de compras y el saldo actual del fondo fijo
-4. WHEN el usuario visualiza la interfaz principal, THE Sistema SHALL incluir los botones de acción "Subir archivos de compras" y "Registrar nueva compra"
-5. WHEN el usuario modifica la fecha de consulta o agrega un nuevo registro, THE Sistema SHALL actualizar en tiempo real la tabla de compras y los totales mostrados
+1. WHEN el usuario accede al módulo de compras, THE Sistema SHALL renderizar la interfaz con pestañas de navegación (Compras, Concentrado)
+2. WHILE el usuario visualiza la interfaz principal, THE Sistema SHALL mostrar los totales de compras generales, por tipo de compra y saldo del fondo fijo
+3. WHEN el usuario modifica la fecha de consulta, THE Sistema SHALL actualizar en tiempo real la tabla de compras y los totales
+4. THE Sistema SHALL incluir botones de acción "Subir archivos de compras" y "Registrar nueva compra"
+5. THE Sistema SHALL mantener visible en todo momento la suma total de compras y el saldo actual del fondo fijo
 
-### Requirement 2
+### Requirement 2: Registro de Nueva Compra
 
 **User Story:** Como usuario con acceso de captura, quiero registrar una nueva compra en el sistema, para mantener actualizada la información financiera y de insumos.
 
 #### Acceptance Criteria
 
-1. WHEN el usuario hace clic en "Registrar nueva compra", THE Sistema SHALL mostrar un formulario modal con los campos: Categoría de producto, Producto, Tipo de compra, Proveedor, Método de pago, Subtotal, Impuesto, y Descripción
-2. WHEN el usuario selecciona una clase de insumo en el campo Categoría de producto, THE Sistema SHALL mostrar únicamente los productos relacionados con esa categoría en el campo Producto
-3. WHEN el usuario selecciona el tipo de compra "Corporativo", THE Sistema SHALL desplegar el campo Método de pago con las formas de pago disponibles (Efectivo, Tarjeta de crédito, Transferencia)
-4. WHEN el usuario selecciona el tipo de compra "Crédito", THE Sistema SHALL mostrar el campo Proveedor con los proveedores que otorgan crédito
-5. WHEN el usuario selecciona el tipo de compra "Fondo fijo", THE Sistema SHALL ocultar los campos Método de pago y Proveedor
-6. WHEN el usuario ingresa el subtotal, THE Sistema SHALL calcular automáticamente el impuesto y el total
-7. WHEN el usuario completa todos los campos requeridos y hace clic en "Guardar compra", THE Sistema SHALL validar los datos, guardar el registro en la base de datos y actualizar la tabla de compras en tiempo real
-8. IF el saldo del fondo fijo es insuficiente para una compra de tipo "Fondo fijo", THEN THE Sistema SHALL mostrar un mensaje de error y no permitir guardar el registro
+1. WHEN el usuario hace clic en "Registrar nueva compra", THE Sistema SHALL desplegar un formulario modal con los campos requeridos
+2. THE Sistema SHALL incluir los siguientes campos en el formulario: Categoría de producto, Producto, Tipo de compra, Proveedor, Método de pago, Subtotal, Impuesto, Descripción
+3. WHEN el usuario selecciona una clase de insumo, THE Sistema SHALL mostrar únicamente los productos relacionados a esa categoría
+4. IF el usuario selecciona tipo de compra "Corporativo", THEN THE Sistema SHALL desplegar las formas de pago disponibles
+5. IF el usuario selecciona tipo de compra "Crédito", THEN THE Sistema SHALL mostrar los proveedores asociados con crédito
+6. THE Sistema SHALL ocultar los campos no aplicables hasta que se cumplan las condiciones de selección
+7. WHEN el usuario guarda la compra, THE Sistema SHALL validar todos los campos requeridos y actualizar la tabla en tiempo real
 
-### Requirement 3
+### Requirement 3: Edición y Eliminación de Compras
 
 **User Story:** Como usuario del sistema, quiero editar o eliminar compras registradas, para corregir errores o actualizar la información registrada.
 
 #### Acceptance Criteria
 
-1. WHEN el usuario hace clic en el botón de editar de una compra, THE Sistema SHALL mostrar un modal con el formulario de edición precargado con los datos actuales de la compra
-2. WHILE el módulo está bloqueado por Contabilidad, THE Sistema SHALL permitir editar todos los campos excepto monto y tipo de compra
-3. WHEN el usuario modifica los datos y hace clic en "Guardar cambios", THE Sistema SHALL validar los datos, actualizar el registro en la base de datos y refrescar la tabla en tiempo real
-4. WHEN el usuario hace clic en el botón de eliminar de una compra, THE Sistema SHALL mostrar un mensaje de confirmación "¿Esta seguro de querer eliminar la compra?"
-5. WHEN el usuario confirma la eliminación, THE Sistema SHALL eliminar el registro de la base de datos y actualizar la tabla en tiempo real
-6. IF la compra tiene un reembolso asociado del fondo fijo, THEN THE Sistema SHALL no permitir modificar el monto ni el tipo de compra y mostrar un mensaje informativo
-7. WHEN el usuario hace clic en el botón de detalles de una compra, THE Sistema SHALL mostrar un modal con toda la información del registro incluyendo: Categoría de producto, Producto, Tipo de compra, Método de pago, Proveedor, Número de Ticket/Factura, Descripción, Subtotal, Impuesto y Total
+1. WHEN el usuario hace clic en el botón de editar, THE Sistema SHALL desplegar un modal con los datos de la compra precargados
+2. WHILE el módulo está bloqueado, THE Sistema SHALL restringir la modificación de monto y tipo de compra
+3. THE Sistema SHALL permitir modificar todos los campos excepto monto y tipo de compra cuando existe un reembolso asociado
+4. WHEN el usuario hace clic en eliminar, THE Sistema SHALL mostrar un mensaje de confirmación antes de proceder
+5. WHEN el usuario confirma la eliminación, THE Sistema SHALL eliminar el registro y actualizar la tabla en tiempo real
+6. THE Sistema SHALL respetar las restricciones de reembolsos de fondo fijo al editar o eliminar
 
-### Requirement 4
+### Requirement 4: Filtros y Visualización Dinámica
 
 **User Story:** Como usuario del sistema, quiero filtrar las compras registradas según tipo y método de pago, para consultar fácilmente la información específica de cada tipo de compra.
 
 #### Acceptance Criteria
 
-1. WHEN el usuario visualiza la tabla de compras, THE Sistema SHALL incluir un filtro desplegable de tipo de compra con las opciones: Todas las compras, Compras de fondo fijo, Compras de corporativo, Compras a crédito
-2. WHEN el usuario selecciona "Compras de corporativo" en el filtro de tipo de compra, THE Sistema SHALL mostrar un segundo filtro desplegable de método de pago con las opciones disponibles (Efectivo, Tarjeta de crédito, Transferencia, Todos los métodos de pago)
-3. WHEN el usuario selecciona un tipo de compra diferente a "Corporativo", THE Sistema SHALL ocultar el filtro de método de pago
-4. WHEN el usuario aplica un filtro, THE Sistema SHALL actualizar dinámicamente la tabla mostrando únicamente las compras que cumplan con los criterios seleccionados
-5. WHEN el usuario aplica filtros, THE Sistema SHALL actualizar los totales mostrados para reflejar únicamente las compras filtradas
+1. THE Sistema SHALL incluir un filtro principal de tipo de compra con opciones: Fondo fijo, Corporativo, Crédito
+2. WHEN el usuario selecciona "Corporativo" en el filtro de tipo, THE Sistema SHALL mostrar el filtro de método de pago
+3. WHILE el tipo de compra no es "Corporativo", THE Sistema SHALL mantener oculto el filtro de método de pago
+4. WHEN el usuario aplica un filtro, THE Sistema SHALL actualizar dinámicamente la tabla según los criterios seleccionados
+5. THE Sistema SHALL mantener los totales actualizados según los filtros aplicados
 
-### Requirement 5
+### Requirement 5: Reporte Concentrado de Compras
 
 **User Story:** Como usuario con nivel de gerencia, quiero visualizar un concentrado de compras dentro de un rango de fechas, para analizar los gastos generales y balance del fondo fijo.
 
 #### Acceptance Criteria
 
-1. WHEN el usuario accede a la pestaña "Concentrado de compras", THE Sistema SHALL mostrar un selector de rango de fechas y un filtro de tipo de compra
-2. WHEN el usuario selecciona un rango de fechas y hace clic en "Consultar", THE Sistema SHALL mostrar una tabla comparativa con las compras agrupadas por clase de producto y día
-3. WHEN el Sistema muestra el concentrado, THE Sistema SHALL incluir columnas para cada día del rango seleccionado con subtotales, impuestos y totales diarios
-4. WHEN el usuario visualiza el concentrado de compras de fondo fijo, THE Sistema SHALL mostrar el saldo inicial del fondo fijo, las salidas del período y el saldo final
-5. WHEN el usuario hace clic en el botón "Exportar a Excel", THE Sistema SHALL generar un archivo Excel con los datos del concentrado mostrado
-6. WHEN el usuario hace clic en un ícono de información junto a una clase de producto, THE Sistema SHALL mostrar un modal con el detalle de todas las compras de esa categoría en el día seleccionado
+1. WHEN el usuario accede a la pestaña "Concentrado", THE Sistema SHALL mostrar una tabla comparativa por clase de producto y día
+2. THE Sistema SHALL incluir subtotales, impuestos y totales diarios en el reporte
+3. THE Sistema SHALL permitir filtrar por rango de fechas y tipo de compra
+4. THE Sistema SHALL mostrar saldo inicial, salidas del fondo fijo y saldo final
+5. WHEN el usuario hace clic en "Exportar", THE Sistema SHALL generar un archivo Excel con los resultados del reporte
 
-### Requirement 6
+### Requirement 6: Gestión de Accesos y Restricciones
 
 **User Story:** Como administrador del sistema, quiero gestionar los niveles de acceso del módulo de compras, para asegurar que cada usuario opere según su rol y permisos definidos.
 
 #### Acceptance Criteria
 
-1. WHEN un usuario con perfil de Captura accede al módulo, THE Sistema SHALL permitir registrar, editar y eliminar compras sin restricciones de bloqueo
-2. WHEN un usuario con perfil de Gerencia accede al módulo, THE Sistema SHALL permitir visualizar todas las compras y acceder al concentrado de compras
-3. WHEN un usuario con perfil de Dirección accede al módulo, THE Sistema SHALL permitir visualizar todas las compras, acceder al concentrado y descargar reportes
-4. WHEN un usuario con perfil de Contabilidad accede al módulo, THE Sistema SHALL mostrar un botón adicional para bloquear o desbloquear el módulo de compras
-5. WHEN el usuario de Contabilidad bloquea el módulo, THE Sistema SHALL restringir la edición de monto y tipo de compra para todos los usuarios
-6. WHEN el usuario de Contabilidad desbloquea el módulo, THE Sistema SHALL permitir la edición completa de todos los campos de las compras
-7. IF una compra tiene un reembolso asociado del fondo fijo, THEN THE Sistema SHALL no permitir modificar el monto ni el tipo de compra independientemente del estado de bloqueo del módulo
-8. WHEN el Sistema registra una acción de edición, eliminación o bloqueo, THE Sistema SHALL guardar un registro en la tabla audit_log con el usuario, fecha, acción realizada y datos modificados
+1. THE Sistema SHALL configurar cuatro niveles de acceso: Captura, Gerencia, Dirección, Contabilidad
+2. WHILE el usuario tiene perfil de Captura, THE Sistema SHALL limitar las funciones de edición y eliminación
+3. WHERE el usuario tiene perfil de Contabilidad, THE Sistema SHALL permitir bloquear o desbloquear el módulo
+4. WHEN existe un reembolso asociado, THE Sistema SHALL restringir la modificación de monto y tipo de compra
+5. THE Sistema SHALL validar permisos antes de ejecutar cualquier operación de escritura
+
+### Requirement 7: Integración con Clase Costo Directo
+
+**User Story:** Como usuario del sistema, quiero que la clase "Costo Directo" esté integrada con sus productos relacionados, para registrar compras de esta categoría correctamente.
+
+#### Acceptance Criteria
+
+1. WHEN el usuario selecciona "Costo directo" como categoría, THE Sistema SHALL cargar los productos asociados a esta clase
+2. THE Sistema SHALL mantener la relación entre clase de insumo y productos en la base de datos
+3. THE Sistema SHALL incluir "Costo directo" en los reportes y filtros disponibles
+4. THE Sistema SHALL calcular correctamente los totales de compras de costo directo
+
+### Requirement 8: Actualización en Tiempo Real
+
+**User Story:** Como usuario del sistema, quiero que los totales y la tabla se actualicen en tiempo real, para tener información precisa y actualizada en todo momento.
+
+#### Acceptance Criteria
+
+1. WHEN el usuario registra una nueva compra, THE Sistema SHALL actualizar inmediatamente los totales y la tabla sin recargar la página
+2. WHEN el usuario edita una compra, THE Sistema SHALL recalcular los totales afectados en tiempo real
+3. WHEN el usuario elimina una compra, THE Sistema SHALL actualizar los totales y remover la fila de la tabla instantáneamente
+4. WHEN el usuario cambia el rango de fechas, THE Sistema SHALL actualizar la tabla y totales según el nuevo período seleccionado
+5. THE Sistema SHALL mantener sincronizados los totales generales con los totales por tipo de compra

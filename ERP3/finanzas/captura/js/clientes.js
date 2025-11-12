@@ -566,10 +566,9 @@ class Clientes extends Templates {
             attr: {
                 id: `tb${this.PROJECT_NAME}`,
                 theme: 'corporativo',
-                title: '📋 Movimientos del día',
-                subtitle: `Movimientos registrados el ${moment(fecha).format('DD/MM/YYYY')}`,
-                center: [1, 2],
-                right: [3]
+                center: [2,3],
+                right: [4],
+                extends:true
             },
         });
 

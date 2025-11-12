@@ -2,213 +2,222 @@
 
 ## Overview
 
-El módulo de Compras es un sistema integral de gestión financiera que permite registrar, consultar y administrar compras de tres tipos: Fondo fijo, Corporativo y Crédito. El sistema implementa una arquitectura MVC utilizando el framework CoffeeSoft, con componentes reutilizables de jQuery + TailwindCSS, controladores PHP y modelos que extienden la clase CRUD base.
+El módulo de Compras es una aplicación web desarrollada con el framework CoffeeSoft que permite la gestión integral de compras de una unidad de negocio. El sistema implementa una arquitectura MVC (Modelo-Vista-Controlador) con componentes reutilizables, filtros dinámicos, actualización en tiempo real y control de accesos por roles.
 
-El diseño se basa en el pivote "admin" existente, adaptándolo para manejar múltiples tipos de compras, validaciones dinámicas, control de accesos por perfil y generación de reportes consolidados.
+**Tecnologías:**
+- Frontend: JavaScript (jQuery), CoffeeSoft Framework, TailwindCSS
+- Backend: PHP 7.4+
+- Base de datos: MySQL
+- Componentes: Chart.js (para reportes visuales), DataTables, SweetAlert2
 
 ## Architecture
-
-### Tech Stack
-- **Frontend**: JavaScript (jQuery), CoffeeSoft Framework, TailwindCSS
-- **Backend**: PHP 7.4+
-- **Database**: MySQL (rfwsmqex_finanzas)
-- **Componentes**: Templates, Components, Complements (CoffeeSoft)
 
 ### Estructura de Archivos
 
 ```
-finanzas/
-├── captura/
-│   ├── compras.js                    # Frontend principal
-│   ├── ctrl/
-│   │   └── ctrl-compras.php          # Controlador
-│   └── mdl/
-│       └── mdl-compras.php           # Modelo
-└── index.php                         # Punto de entrada
+finanzas/captura/
+├── js/
+│   └── compras.js              # Frontend principal (extiende Templates)
+├── ctrl/
+│   └── ctrl-compras.php        # Controlador PHP (lógica de negocio)
+├── mdl/
+│   └── mdl-compras.php         # Modelo PHP (acceso a datos)
+└── index.php                   # Punto de entrada (incluye root div)
 ```
 
-### Flujo de Datos
+### Patrón Arquitectónico
+
+**MVC con CoffeeSoft Framework:**
 
 ```
-Usuario → compras.js → ctrl-compras.php → mdl-compras.php → MySQL
-                ↓                                              ↓
-         CoffeeSoft Components                         CRUD Operations
+┌─────────────────────────────────────────────────────────┐
+│                    Vista (index.php)                     │
+│                    <div id="root"></div>                 │
+└─────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────┐
+│              Controlador Frontend (compras.js)           │
+│  - App (clase principal)                                 │
+│  - Extends Templates (CoffeeSoft)                        │
+│  - Gestión de UI y eventos                               │
+└─────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────┐
+│           Controlador Backend (ctrl-compras.php)         │
+│  - init() - Inicialización de filtros                    │
+│  - ls() - Listar compras                                 │
+│  - addPurchase() - Agregar compra                        │
+│  - editPurchase() - Editar compra                        │
+│  - deletePurchase() - Eliminar compra                    │
+│  - getConcentrado() - Reporte concentrado                │
+└─────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────┐
+│              Modelo (mdl-compras.php)                    │
+│  - listPurchases() - Consulta de compras                 │
+│  - createPurchase() - Inserción                          │
+│  - updatePurchase() - Actualización                      │
+│  - deletePurchaseById() - Eliminación                    │
+│  - lsProductClass() - Filtros de categorías              │
+│  - lsPurchaseType() - Filtros de tipos                   │
+│  - lsSupplier() - Filtros de proveedores                 │
+│  - lsMethodPay() - Filtros de métodos de pago            │
+└─────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────┐
+│                  Base de Datos (MySQL)                   │
+│  - purchase (tabla principal)                            │
+│  - product_class (categorías)                            │
+│  - product (productos)                                   │
+│  - supplier (proveedores)                                │
+│  - purchase_type (tipos de compra)                       │
+│  - method_pay (métodos de pago)                          │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ## Components and Interfaces
 
-### Frontend (compras.js)
+### Frontend Components (compras.js)
 
 #### Clase Principal: App
-Extiende `Templates` del framework CoffeeSoft.
-
-**Propiedades:**
-- `PROJECT_NAME`: "compras"
-- `_link`: "ctrl/ctrl-compras.php"
-- `_div_modulo`: "root"
-
-**Métodos principales:**
-
-- `render()`: Inicializa el layout, filterBar y carga la tabla principal
-- `layout()`: Crea la estructura visual usando `tabLayout` con 3 pestañas
-- `filterBar()`: Genera filtros dinámicos (fecha, tipo de compra, método de pago)
-- `ls()`: Lista todas las compras con filtros aplicados
-- `lsConcentrado()`: Muestra el reporte concentrado de compras
-- `addCompra()`: Abre modal para registrar nueva compra
-- `editCompra(id)`: Abre modal para editar compra existente
-- `deleteCompra(id)`: Elimina una compra con confirmación
-- `viewDetails(id)`: Muestra detalles completos de una compra
-- `toggleModuleLock()`: Bloquea/desbloquea el módulo (solo Contabilidad)
-
-#### Estructura de Tabs
 
 ```javascript
-tabLayout({
-    json: [
-        { id: "compras", tab: "Compras", active: true, onClick: () => this.ls() },
-        { id: "concentrado", tab: "Concentrado de compras", onClick: () => this.lsConcentrado() },
-        { id: "archivos", tab: "Archivos", onClick: () => this.lsArchivos() }
-    ]
-});
+class App extends Templates {
+    constructor(link, div_modulo) {
+        super(link, div_modulo);
+        this.PROJECT_NAME = "compras";
+    }
+    
+    // Métodos principales
+    render()              // Inicialización del módulo
+    layout()              // Estructura de pestañas y contenedores
+    filterBar()           // Barra de filtros principal
+    ls()                  // Listar compras en tabla
+    addPurchase()         // Modal para nueva compra
+    editPurchase(id)      // Modal para editar compra
+    deletePurchase(id)    // Confirmación de eliminación
+    showDetails(id)       // Modal de detalles de compra
+    jsonPurchase()        // Estructura del formulario
+    updateTotals()        // Actualización de totales en tiempo real
+}
 ```
 
-### Backend (ctrl-compras.php)
+#### Clase Secundaria: ConcentradoCompras
 
-#### Clase: ctrl extends mdl
+```javascript
+class ConcentradoCompras extends App {
+    constructor(link, div_modulo) {
+        super(link, div_modulo);
+    }
+    
+    render()              // Renderizar vista de concentrado
+    filterBarConcentrado() // Filtros específicos del reporte
+    lsConcentrado()       // Generar tabla de concentrado
+    exportExcel()         // Exportar reporte a Excel
+}
+```
 
-**Métodos del controlador:**
+### Componentes CoffeeSoft Utilizados
 
-1. `init()`: Inicializa datos para filtros
-   - Retorna: UDN, clases de producto, tipos de compra, métodos de pago, proveedores
+1. **primaryLayout()** - Layout principal con filterBar y container
+2. **tabLayout()** - Pestañas de navegación (Compras, Concentrado)
+3. **createfilterBar()** - Barra de filtros dinámica
+4. **createTable()** - Tabla de compras con DataTables
+5. **createModalForm()** - Formularios modales para CRUD
+6. **swalQuestion()** - Confirmaciones de eliminación
+7. **detailCard()** - Tarjeta de detalles de compra
 
-2. `ls()`: Lista compras con filtros
-   - Entrada: fi, ff, tipo_compra, metodo_pago, udn
-   - Salida: Array de compras formateadas con dropdown de acciones
+### Backend Interfaces
 
-3. `lsConcentrado()`: Genera reporte concentrado
-   - Entrada: fi, ff, tipo_compra, udn
-   - Salida: Datos agrupados por clase de producto y día
-
-4. `getCompra()`: Obtiene una compra por ID
-   - Entrada: id
-   - Salida: Datos completos de la compra
-
-5. `addCompra()`: Registra nueva compra
-   - Entrada: Datos del formulario
-   - Validaciones: Saldo fondo fijo, campos requeridos
-   - Salida: status, message
-
-6. `editCompra()`: Actualiza compra existente
-   - Entrada: id, datos modificados
-   - Validaciones: Bloqueo de módulo, reembolsos
-   - Salida: status, message
-
-7. `deleteCompra()`: Elimina una compra
-   - Entrada: id
-   - Validaciones: Permisos, reembolsos asociados
-   - Salida: status, message
-
-8. `statusCompra()`: Cambia estado activo/inactivo
-   - Entrada: id, active
-   - Salida: status, message
-
-9. `toggleModuleLock()`: Bloquea/desbloquea módulo
-   - Entrada: lock_status
-   - Validación: Perfil de Contabilidad
-   - Salida: status, message
-
-**Funciones auxiliares:**
+#### Controlador (ctrl-compras.php)
 
 ```php
-function dropdown($id, $tipo_compra, $tiene_reembolso) {
-    // Genera opciones de acción según contexto
-}
-
-function renderStatus($active) {
-    // Retorna badge HTML según estado
-}
-
-function formatPurchaseType($type) {
-    // Formatea tipo de compra para visualización
+class ctrl extends mdl {
+    
+    // Inicialización
+    function init()
+    // Retorna: ['productClass' => [], 'purchaseType' => [], 'supplier' => [], 'methodPay' => []]
+    
+    // Listar compras
+    function ls()
+    // Entrada: $_POST['fi'], $_POST['ff'], $_POST['purchase_type_id'], $_POST['method_pay_id']
+    // Retorna: ['row' => [], 'totals' => [], 'balance' => []]
+    
+    // Obtener compra
+    function getPurchase()
+    // Entrada: $_POST['id']
+    // Retorna: ['status' => 200, 'data' => [], 'message' => '']
+    
+    // Agregar compra
+    function addPurchase()
+    // Entrada: $_POST['product_class_id'], $_POST['product_id'], $_POST['purchase_type_id'], 
+    //          $_POST['supplier_id'], $_POST['method_pay_id'], $_POST['subtotal'], 
+    //          $_POST['tax'], $_POST['description']
+    // Retorna: ['status' => 200, 'message' => '']
+    
+    // Editar compra
+    function editPurchase()
+    // Entrada: $_POST['id'] + campos editables
+    // Retorna: ['status' => 200, 'message' => '']
+    
+    // Eliminar compra
+    function deletePurchase()
+    // Entrada: $_POST['id']
+    // Retorna: ['status' => 200, 'message' => '']
+    
+    // Concentrado de compras
+    function getConcentrado()
+    // Entrada: $_POST['fi'], $_POST['ff'], $_POST['purchase_type_id']
+    // Retorna: ['row' => [], 'totals' => [], 'balance' => []]
 }
 ```
 
-### Modelo (mdl-compras.php)
+#### Modelo (mdl-compras.php)
 
-#### Clase: mdl extends CRUD
-
-**Propiedades:**
-- `$bd`: "rfwsmqex_finanzas."
-- `$util`: Instancia de Utileria
-
-**Métodos del modelo:**
-
-1. `listCompras($array)`: Lista compras con joins
-   - Joins: product_class, product, purchase_type, method_pay, supplier
-   - Filtros: fecha, tipo_compra, metodo_pago, udn, active
-   - Order: DESC por operation_date
-
-2. `listConcentrado($array)`: Datos para reporte concentrado
-   - Agrupación: product_class_id, DATE(operation_date)
-   - Cálculos: SUM(subtotal), SUM(tax), SUM(total)
-   - Filtros: rango de fechas, tipo_compra, udn
-
-3. `getCompraById($id)`: Obtiene compra específica
-   - Joins: Todas las tablas relacionadas
-   - Where: purchase.id = ?
-
-4. `createCompra($array)`: Inserta nueva compra
-   - Tabla: purchase
-   - Campos: udn_id, product_class_id, product_id, purchase_type_id, supplier_id, method_pay_id, subtotal, tax, total, description, operation_date, active
-
-5. `updateCompra($array)`: Actualiza compra
-   - Tabla: purchase
-   - Where: id = ?
-
-6. `deleteCompraById($id)`: Elimina compra
-   - Tabla: purchase
-   - Where: id = ?
-
-7. `lsProductClass()`: Lista clases de producto
-   - Tabla: product_class
-   - Where: active = 1
-   - Order: name ASC
-
-8. `lsProductByClass($class_id)`: Lista productos por clase
-   - Tabla: product
-   - Where: product_class_id = ? AND active = 1
-
-9. `lsPurchaseType()`: Lista tipos de compra
-   - Tabla: purchase_type
-   - Where: active = 1
-
-10. `lsMethodPay()`: Lista métodos de pago
-    - Tabla: method_pay
-    - Where: active = 1
-
-11. `lsSupplier()`: Lista proveedores
-    - Tabla: supplier
-    - Where: active = 1
-
-12. `lsUDN()`: Lista unidades de negocio
-    - Tabla: udn
-    - Where: active = 1
-
-13. `getSaldoFondoFijo($udn_id)`: Calcula saldo actual
-    - Cálculo: saldo_inicial - SUM(salidas) + SUM(reembolsos)
-    - Filtros: udn_id, tipo_compra = 'Fondo fijo'
-
-14. `existsReembolso($compra_id)`: Verifica si tiene reembolso
-    - Tabla: reembolsos
-    - Where: compra_id = ?
-
-15. `getModuleLockStatus($udn_id, $month)`: Estado de bloqueo
-    - Tabla: monthly_module_lock
-    - Where: module_id = 'compras' AND udn_id = ? AND month = ?
-
-16. `createAuditLog($array)`: Registra auditoría
-    - Tabla: audit_log
-    - Campos: udn_id, user_id, record_id, name_table, name_user, name_udn, name_collaborator, action, change_items, creation_date
+```php
+class mdl extends CRUD {
+    
+    // Consultas de listado
+    function listPurchases($array)
+    // Parámetros: [fi, ff, purchase_type_id, method_pay_id, udn_id]
+    // Retorna: Array de compras con joins a tablas relacionadas
+    
+    function listConcentrado($array)
+    // Parámetros: [fi, ff, purchase_type_id, udn_id]
+    // Retorna: Array agrupado por clase de producto y fecha
+    
+    // Operaciones CRUD
+    function createPurchase($array)
+    // Parámetros: ['values' => '', 'data' => []]
+    // Retorna: bool
+    
+    function updatePurchase($array)
+    // Parámetros: ['values' => '', 'where' => 'id = ?', 'data' => []]
+    // Retorna: bool
+    
+    function deletePurchaseById($array)
+    // Parámetros: [id]
+    // Retorna: bool
+    
+    function getPurchaseById($array)
+    // Parámetros: [id]
+    // Retorna: Array asociativo con datos de la compra
+    
+    // Consultas para filtros (usando _Read)
+    function lsProductClass($array)
+    function lsProduct($array)
+    function lsPurchaseType($array)
+    function lsSupplier($array)
+    function lsMethodPay($array)
+    
+    // Cálculos
+    function getTotalsByType($array)
+    // Retorna: ['total_fondo_fijo' => 0, 'total_corporativo' => 0, 'total_credito' => 0]
+    
+    function getBalanceFondoFijo($array)
+    // Retorna: ['saldo_inicial' => 0, 'salidas' => 0, 'saldo_final' => 0]
+}
+```
 
 ## Data Models
 
@@ -231,12 +240,18 @@ CREATE TABLE purchase (
     active TINYINT DEFAULT 1,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
     FOREIGN KEY (udn_id) REFERENCES udn(idUDN),
     FOREIGN KEY (product_class_id) REFERENCES product_class(id),
     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (purchase_type_id) REFERENCES purchase_type(id),
     FOREIGN KEY (supplier_id) REFERENCES supplier(id),
-    FOREIGN KEY (method_pay_id) REFERENCES method_pay(id)
+    FOREIGN KEY (method_pay_id) REFERENCES method_pay(id),
+    
+    INDEX idx_operation_date (operation_date),
+    INDEX idx_purchase_type (purchase_type_id),
+    INDEX idx_udn (udn_id),
+    INDEX idx_active (active)
 );
 ```
 
@@ -249,7 +264,9 @@ CREATE TABLE product_class (
     name VARCHAR(50) NOT NULL,
     description TEXT NULL,
     active TINYINT DEFAULT 1,
-    FOREIGN KEY (udn_id) REFERENCES udn(idUDN)
+    
+    FOREIGN KEY (udn_id) REFERENCES udn(idUDN),
+    INDEX idx_active (active)
 );
 ```
 
@@ -261,7 +278,10 @@ CREATE TABLE product (
     product_class_id INT NOT NULL,
     name VARCHAR(50) NOT NULL,
     active TINYINT DEFAULT 1,
-    FOREIGN KEY (product_class_id) REFERENCES product_class(id)
+    
+    FOREIGN KEY (product_class_id) REFERENCES product_class(id),
+    INDEX idx_class (product_class_id),
+    INDEX idx_active (active)
 );
 ```
 
@@ -271,31 +291,16 @@ CREATE TABLE product (
 CREATE TABLE purchase_type (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
-    active TINYINT DEFAULT 1
+    active TINYINT DEFAULT 1,
+    
+    INDEX idx_active (active)
 );
 
 -- Datos iniciales
-INSERT INTO purchase_type (name) VALUES 
-('Fondo fijo'),
-('Corporativo'),
-('Crédito');
-```
-
-### Tabla: method_pay
-
-```sql
-CREATE TABLE method_pay (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    active TINYINT DEFAULT 1
-);
-
--- Datos iniciales
-INSERT INTO method_pay (name) VALUES 
-('Efectivo'),
-('Tarjeta de crédito'),
-('Transferencia'),
-('Cheque');
+INSERT INTO purchase_type (id, name) VALUES
+(1, 'Fondo fijo'),
+(2, 'Corporativo'),
+(3, 'Crédito');
 ```
 
 ### Tabla: supplier
@@ -306,291 +311,390 @@ CREATE TABLE supplier (
     udn_id INT NOT NULL,
     name VARCHAR(50) NOT NULL,
     active TINYINT DEFAULT 1,
-    FOREIGN KEY (udn_id) REFERENCES udn(idUDN)
-);
-```
-
-### Tabla: module_unlock
-
-```sql
-CREATE TABLE module_unlock (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    udn_id INT NOT NULL,
-    module_id INT NOT NULL,
-    unlock_date DATETIME NOT NULL,
-    lock_date DATETIME NULL,
-    lock_reason TEXT NULL,
-    operation_date DATE NOT NULL,
-    active TINYINT DEFAULT 1,
+    
     FOREIGN KEY (udn_id) REFERENCES udn(idUDN),
-    FOREIGN KEY (module_id) REFERENCES module(id)
+    INDEX idx_active (active)
 );
 ```
 
-### Tabla: monthly_module_lock
+### Tabla: method_pay
 
 ```sql
-CREATE TABLE monthly_module_lock (
+CREATE TABLE method_pay (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    month VARCHAR(50) NOT NULL,
-    lock_time TIME NOT NULL,
-    INDEX idx_month (month)
+    name VARCHAR(50) NOT NULL,
+    active TINYINT DEFAULT 1,
+    
+    INDEX idx_active (active)
 );
+
+-- Datos iniciales
+INSERT INTO method_pay (name) VALUES
+('Tarjeta de crédito'),
+('Transferencia'),
+('Efectivo'),
+('Cheque');
 ```
 
-### Tabla: audit_log
+### Relaciones entre Tablas
 
-```sql
-CREATE TABLE audit_log (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    udn_id INT NOT NULL,
-    user_id INT NOT NULL,
-    record_id INT NOT NULL,
-    name_table VARCHAR(255) NOT NULL,
-    name_user VARCHAR(50) NOT NULL,
-    name_udn VARCHAR(50) NOT NULL,
-    name_collaborator VARCHAR(255) NULL,
-    action ENUM('insert', 'update', 'delete', 'lock', 'unlock') NOT NULL,
-    change_items LONGTEXT NULL,
-    creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (udn_id) REFERENCES udn(idUDN)
-);
 ```
+udn (1) ──────────── (N) purchase
+udn (1) ──────────── (N) product_class
+udn (1) ──────────── (N) supplier
 
-### Tabla: file (para archivos adjuntos)
+product_class (1) ── (N) product
+product_class (1) ── (N) purchase
 
-```sql
-CREATE TABLE file (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    udn_id INT NOT NULL,
-    user_id INT NOT NULL,
-    file_name VARCHAR(255) NOT NULL,
-    upload_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    size_bytes TEXT NULL,
-    path TEXT NOT NULL,
-    extension CHAR(5) NOT NULL,
-    operation_date DATE NOT NULL,
-    FOREIGN KEY (udn_id) REFERENCES udn(idUDN)
-);
+product (1) ───────── (N) purchase
+purchase_type (1) ─── (N) purchase
+supplier (1) ──────── (N) purchase
+method_pay (1) ────── (N) purchase
 ```
 
 ## Error Handling
 
-### Validaciones Frontend
+### Frontend Error Handling
 
-1. **Campos requeridos**: Validación automática con `required` en formularios
-2. **Saldo insuficiente**: Verificar antes de guardar compra de fondo fijo
-3. **Formato de números**: Validación con `validationInputForNumber()`
-4. **Fechas**: Validación de rango de fechas en filtros
+```javascript
+// Validación de formularios
+try {
+    const validation = $('#formPurchase').validation_form(
+        { opc: 'addPurchase' },
+        (formData) => {
+            // Envío exitoso
+        }
+    );
+} catch (error) {
+    alert({
+        icon: "error",
+        text: "Error al validar el formulario"
+    });
+}
 
-### Validaciones Backend
-
-1. **Existencia de registros**: Verificar que existan product_class, product, etc.
-2. **Permisos de usuario**: Validar perfil antes de operaciones críticas
-3. **Bloqueo de módulo**: Verificar estado antes de editar/eliminar
-4. **Reembolsos**: Verificar si existe reembolso antes de modificar monto
-5. **Integridad referencial**: Validar foreign keys antes de insertar
-
-### Manejo de Errores
-
-```php
-// Estructura estándar de respuesta
-return [
-    'status' => 200,  // 200: éxito, 400: validación, 500: error servidor
-    'message' => 'Mensaje descriptivo',
-    'data' => []  // Datos adicionales si aplica
-];
+// Manejo de respuestas del servidor
+success: (response) => {
+    if (response.status === 200) {
+        alert({ icon: "success", text: response.message });
+        this.ls(); // Actualizar tabla
+    } else if (response.status === 409) {
+        alert({ icon: "warning", text: response.message });
+    } else {
+        alert({ icon: "error", text: response.message });
+    }
+}
 ```
 
-### Mensajes de Error
+### Backend Error Handling
 
-- **400**: "El saldo del fondo fijo es insuficiente"
-- **400**: "No se puede modificar una compra con reembolso asociado"
-- **403**: "No tiene permisos para realizar esta acción"
-- **404**: "Compra no encontrada"
-- **409**: "El módulo está bloqueado por Contabilidad"
-- **500**: "Error al guardar la compra"
+```php
+// Validación de permisos
+function addPurchase() {
+    $status = 500;
+    $message = 'Error al registrar la compra';
+    
+    try {
+        // Validar campos requeridos
+        if (empty($_POST['product_class_id']) || empty($_POST['product_id'])) {
+            return [
+                'status' => 400,
+                'message' => 'Campos requeridos faltantes'
+            ];
+        }
+        
+        // Validar tipo de compra y campos condicionales
+        if ($_POST['purchase_type_id'] == 2 && empty($_POST['method_pay_id'])) {
+            return [
+                'status' => 400,
+                'message' => 'Debe seleccionar un método de pago para compras corporativas'
+            ];
+        }
+        
+        if ($_POST['purchase_type_id'] == 3 && empty($_POST['supplier_id'])) {
+            return [
+                'status' => 400,
+                'message' => 'Debe seleccionar un proveedor para compras a crédito'
+            ];
+        }
+        
+        // Calcular total
+        $_POST['total'] = $_POST['subtotal'] + $_POST['tax'];
+        $_POST['operation_date'] = date('Y-m-d');
+        $_POST['udn_id'] = $_POST['udn'];
+        
+        $create = $this->createPurchase($this->util->sql($_POST));
+        
+        if ($create) {
+            $status = 200;
+            $message = 'Compra registrada correctamente';
+        }
+        
+    } catch (Exception $e) {
+        $status = 500;
+        $message = 'Error del servidor: ' . $e->getMessage();
+    }
+    
+    return [
+        'status' => $status,
+        'message' => $message
+    ];
+}
+```
+
+### Códigos de Estado HTTP
+
+- **200**: Operación exitosa
+- **400**: Datos inválidos o faltantes
+- **403**: Permisos insuficientes
+- **404**: Registro no encontrado
+- **409**: Conflicto (ej: registro duplicado)
+- **500**: Error del servidor
 
 ## Testing Strategy
 
-### Unit Tests
+### Unit Tests (Modelo)
 
-1. **Modelo (mdl-compras.php)**
-   - Test: `listCompras()` retorna array con estructura correcta
-   - Test: `getSaldoFondoFijo()` calcula correctamente el saldo
-   - Test: `existsReembolso()` detecta reembolsos asociados
-   - Test: `createCompra()` inserta registro correctamente
+```php
+// Pruebas para mdl-compras.php
+class MdlComprasTest extends PHPUnit\Framework\TestCase {
+    
+    public function testListPurchases() {
+        // Verificar que retorna array
+        // Verificar estructura de datos
+        // Verificar filtros aplicados correctamente
+    }
+    
+    public function testCreatePurchase() {
+        // Verificar inserción exitosa
+        // Verificar datos insertados
+        // Verificar validaciones
+    }
+    
+    public function testGetTotalsByType() {
+        // Verificar cálculos correctos
+        // Verificar agrupación por tipo
+    }
+    
+    public function testGetBalanceFondoFijo() {
+        // Verificar cálculo de saldo inicial
+        // Verificar cálculo de salidas
+        // Verificar cálculo de saldo final
+    }
+}
+```
 
-2. **Controlador (ctrl-compras.php)**
-   - Test: `init()` retorna todos los datos de filtros
-   - Test: `addCompra()` valida saldo de fondo fijo
-   - Test: `editCompra()` respeta bloqueo de módulo
-   - Test: `deleteCompra()` verifica permisos
+### Integration Tests (Controlador)
 
-3. **Frontend (compras.js)**
-   - Test: `filterBar()` muestra/oculta campos según tipo de compra
-   - Test: `addCompra()` valida campos requeridos
-   - Test: Cálculo automático de impuesto y total
+```php
+// Pruebas para ctrl-compras.php
+class CtrlComprasTest extends PHPUnit\Framework\TestCase {
+    
+    public function testInit() {
+        // Verificar que retorna todos los filtros
+        // Verificar estructura de respuesta
+    }
+    
+    public function testAddPurchaseValidation() {
+        // Verificar validación de campos requeridos
+        // Verificar validación de tipo corporativo
+        // Verificar validación de tipo crédito
+    }
+    
+    public function testEditPurchaseRestrictions() {
+        // Verificar restricciones cuando módulo está bloqueado
+        // Verificar restricciones con reembolso
+    }
+}
+```
 
-### Integration Tests
+### Frontend Tests (JavaScript)
 
-1. **Flujo completo de registro de compra**
-   - Usuario selecciona tipo de compra → campos dinámicos se muestran
-   - Usuario completa formulario → validación frontend
-   - Submit → controlador valida → modelo inserta
-   - Tabla se actualiza en tiempo real
+```javascript
+// Pruebas para compras.js
+describe('App - Módulo de Compras', () => {
+    
+    it('debe renderizar la interfaz correctamente', () => {
+        // Verificar que se crean las pestañas
+        // Verificar que se crea el filterBar
+        // Verificar que se crea el container
+    });
+    
+    it('debe actualizar totales en tiempo real', () => {
+        // Simular registro de compra
+        // Verificar actualización de totales
+    });
+    
+    it('debe mostrar campos condicionales según tipo de compra', () => {
+        // Seleccionar tipo "Corporativo"
+        // Verificar que aparece método de pago
+        // Seleccionar tipo "Crédito"
+        // Verificar que aparece proveedor
+    });
+    
+    it('debe filtrar productos por categoría', () => {
+        // Seleccionar categoría
+        // Verificar que solo aparecen productos de esa categoría
+    });
+});
+```
 
-2. **Flujo de edición con restricciones**
-   - Usuario edita compra → verificar bloqueo de módulo
-   - Si tiene reembolso → campos monto/tipo bloqueados
-   - Guardar cambios → auditoría registrada
+### End-to-End Tests
 
-3. **Flujo de filtros dinámicos**
-   - Usuario selecciona tipo de compra → tabla se filtra
-   - Usuario selecciona método de pago → tabla se actualiza
-   - Totales se recalculan correctamente
+```javascript
+// Pruebas E2E con Cypress
+describe('Flujo completo de compras', () => {
+    
+    it('debe registrar una compra de fondo fijo', () => {
+        cy.visit('/finanzas/captura/');
+        cy.get('#btnNuevaCompra').click();
+        cy.get('#product_class_id').select('Costo directo');
+        cy.get('#product_id').select('Alimentos');
+        cy.get('#purchase_type_id').select('Fondo fijo');
+        cy.get('#subtotal').type('100.00');
+        cy.get('#tax').type('16.00');
+        cy.get('#description').type('Compra de prueba');
+        cy.get('#btnGuardar').click();
+        cy.contains('Compra registrada correctamente');
+    });
+    
+    it('debe editar una compra existente', () => {
+        cy.get('table tbody tr:first .btn-edit').click();
+        cy.get('#description').clear().type('Descripción actualizada');
+        cy.get('#btnGuardar').click();
+        cy.contains('Compra actualizada correctamente');
+    });
+    
+    it('debe generar reporte concentrado', () => {
+        cy.get('#tab-concentrado').click();
+        cy.get('#fi').type('2025-01-01');
+        cy.get('#ff').type('2025-01-31');
+        cy.get('#btnBuscar').click();
+        cy.get('table tbody tr').should('have.length.greaterThan', 0);
+    });
+});
+```
 
-### Manual Testing
+## Performance Considerations
 
-1. **Permisos por perfil**
-   - Captura: puede registrar, editar, eliminar
-   - Gerencia: puede ver todo, acceder a concentrado
-   - Dirección: puede ver y descargar reportes
-   - Contabilidad: puede bloquear/desbloquear módulo
+### Optimizaciones de Base de Datos
 
-2. **Validaciones de negocio**
-   - Saldo de fondo fijo insuficiente → error
-   - Editar compra con reembolso → campos bloqueados
-   - Módulo bloqueado → edición restringida
+1. **Índices estratégicos:**
+   - `idx_operation_date` en `purchase` para filtros por fecha
+   - `idx_purchase_type` en `purchase` para filtros por tipo
+   - `idx_udn` en `purchase` para filtros por unidad de negocio
+   - `idx_active` en todas las tablas para filtros de registros activos
 
-3. **Interfaz responsive**
-   - Probar en desktop, tablet, móvil
-   - Modales se ajustan correctamente
-   - Tablas con scroll horizontal en móvil
+2. **Consultas optimizadas:**
+   - Usar JOINs en lugar de múltiples consultas
+   - Limitar resultados con paginación (DataTables)
+   - Usar agregaciones en SQL para totales
 
-## Design Decisions
+### Optimizaciones de Frontend
 
-### 1. Uso del Framework CoffeeSoft
+1. **Carga diferida:**
+   - Cargar pestañas solo cuando se acceden
+   - Usar DataTables con paginación del lado del servidor
 
-**Decisión**: Utilizar CoffeeSoft como base del frontend
-**Razón**: 
-- Componentes reutilizables ya probados (createTable, createForm, swalQuestion)
-- Consistencia con otros módulos del ERP
-- Reducción de tiempo de desarrollo
-- Mantenimiento simplificado
+2. **Actualización selectiva:**
+   - Actualizar solo los elementos afectados (totales, fila específica)
+   - Evitar recargas completas de la tabla
 
-### 2. Arquitectura MVC
+3. **Caché de filtros:**
+   - Almacenar opciones de filtros en variables globales
+   - Evitar consultas repetidas al backend
 
-**Decisión**: Separar lógica en ctrl, mdl y js
-**Razón**:
-- Separación de responsabilidades
-- Facilita testing y mantenimiento
-- Reutilización de código
-- Escalabilidad del sistema
+## Security Considerations
 
-### 3. Filtros Dinámicos
+### Validación de Permisos
 
-**Decisión**: Mostrar/ocultar campos según tipo de compra
-**Razón**:
-- Mejora UX al mostrar solo campos relevantes
-- Reduce errores de captura
-- Interfaz más limpia y enfocada
+```php
+// En ctrl-compras.php
+function validatePermissions($action) {
+    $userLevel = $_SESSION['user_level'];
+    
+    $permissions = [
+        'Captura' => ['add', 'ls'],
+        'Gerencia' => ['add', 'edit', 'ls', 'concentrado'],
+        'Dirección' => ['add', 'edit', 'delete', 'ls', 'concentrado'],
+        'Contabilidad' => ['add', 'edit', 'delete', 'ls', 'concentrado', 'lock']
+    ];
+    
+    if (!in_array($action, $permissions[$userLevel])) {
+        return [
+            'status' => 403,
+            'message' => 'No tiene permisos para realizar esta acción'
+        ];
+    }
+    
+    return true;
+}
+```
 
-### 4. Cálculo Automático de Totales
+### Sanitización de Datos
 
-**Decisión**: Calcular impuesto y total automáticamente en frontend
-**Razón**:
-- Feedback inmediato al usuario
-- Reduce errores de cálculo manual
-- Mejora experiencia de usuario
+```php
+// Usar $this->util->sql() para prevenir SQL Injection
+$data = $this->util->sql($_POST);
 
-### 5. Sistema de Auditoría
+// Validar tipos de datos
+$subtotal = filter_var($_POST['subtotal'], FILTER_VALIDATE_FLOAT);
+$tax = filter_var($_POST['tax'], FILTER_VALIDATE_FLOAT);
 
-**Decisión**: Registrar todas las operaciones en audit_log
-**Razón**:
-- Trazabilidad completa de cambios
-- Cumplimiento de requisitos contables
-- Facilita resolución de conflictos
-- Permite análisis de uso del sistema
+// Escapar salida HTML
+echo htmlspecialchars($purchase['description']);
+```
 
-### 6. Bloqueo de Módulo por Mes
+### Protección CSRF
 
-**Decisión**: Permitir a Contabilidad bloquear el módulo mensualmente
-**Razón**:
-- Control de cierre contable
-- Previene modificaciones post-cierre
-- Flexibilidad para desbloquear si es necesario
-- Cumple con procesos contables estándar
+```php
+// Validar token CSRF en todas las operaciones de escritura
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    return ['status' => 403, 'message' => 'Token CSRF inválido'];
+}
+```
 
-### 7. Restricción de Edición con Reembolsos
+## Deployment Considerations
 
-**Decisión**: No permitir modificar monto/tipo si existe reembolso
-**Razón**:
-- Mantiene integridad de datos financieros
-- Evita descuadres en fondo fijo
-- Protege información ya procesada
+### Requisitos del Servidor
 
-### 8. Tres Tipos de Compra
+- PHP 7.4 o superior
+- MySQL 5.7 o superior
+- Apache/Nginx con mod_rewrite
+- Extensiones PHP: mysqli, json, session
 
-**Decisión**: Separar en Fondo fijo, Corporativo y Crédito
-**Razón**:
-- Diferentes flujos de aprobación
-- Diferentes controles financieros
-- Facilita reportes específicos por tipo
-- Refleja procesos reales de negocio
+### Configuración de Base de Datos
 
-### 9. Concentrado de Compras
+```sql
+-- Crear base de datos
+CREATE DATABASE IF NOT EXISTS rfwsmqex_finanzas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-**Decisión**: Vista separada para reporte consolidado
-**Razón**:
-- Análisis de gastos por período
-- Visualización de tendencias
-- Facilita toma de decisiones gerenciales
-- Exportación a Excel para análisis externo
+-- Ejecutar scripts de creación de tablas
+SOURCE create_tables.sql;
 
-### 10. Uso de Pivote Admin
+-- Insertar datos iniciales
+SOURCE seed_data.sql;
+```
 
-**Decisión**: Basar diseño en pivote admin existente
-**Razón**:
-- Aprovecha estructura probada
-- Consistencia visual con otros módulos
-- Reduce curva de aprendizaje
-- Acelera desarrollo
+### Variables de Entorno
 
-## UI/UX Considerations
+```php
+// En conf/coffeSoft.php
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'rfwsmqex_finanzas');
+define('DB_USER', 'usuario');
+define('DB_PASS', 'contraseña');
+define('TIMEZONE', 'America/Mexico_City');
+```
 
-### Paleta de Colores
+### Checklist de Deployment
 
-- **Azul corporativo**: `#103B60` (botones principales, headers)
-- **Verde acción**: `#8CC63F` (estados activos, confirmaciones)
-- **Rojo alerta**: `#DC2626` (eliminaciones, errores)
-- **Gris claro**: `#EAEAEA` (fondos, separadores)
-- **Fondo oscuro**: `#1F2A37` (modales, cards)
-
-### Componentes Visuales
-
-1. **Totales destacados**: Cards con fondo de color según tipo
-   - Fondo fijo: Verde claro
-   - Corporativo: Azul claro
-   - Crédito: Naranja claro
-
-2. **Tabla de compras**: Tema corporativo con:
-   - Filas alternadas para mejor lectura
-   - Iconos de acción en última columna
-   - Badges de colores para estados
-
-3. **Modales**: Fondo oscuro con:
-   - Título descriptivo
-   - Campos agrupados lógicamente
-   - Botones de acción destacados
-
-4. **Filtros**: Barra superior con:
-   - Selectores desplegables
-   - Calendario de rango de fechas
-   - Botones de acción rápida
-
-### Responsive Design
-
-- **Desktop**: Layout completo con todas las columnas
-- **Tablet**: Ocultar columnas secundarias, mantener acciones
-- **Móvil**: Vista de cards en lugar de tabla, scroll horizontal si necesario
+- [ ] Crear estructura de base de datos
+- [ ] Insertar datos iniciales (purchase_type, method_pay)
+- [ ] Configurar permisos de archivos (755 para directorios, 644 para archivos)
+- [ ] Configurar variables de entorno
+- [ ] Verificar extensiones PHP requeridas
+- [ ] Probar conexión a base de datos
+- [ ] Ejecutar pruebas de integración
+- [ ] Configurar backups automáticos
+- [ ] Configurar logs de errores
+- [ ] Documentar credenciales de acceso

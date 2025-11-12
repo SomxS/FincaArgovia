@@ -127,36 +127,89 @@ Debe respetarse el formato de CoffeeSoft
 
 ### 4. Estructura para Consultas tipo `<select>`
 
-  ####  Nivel 1: Consulta directa (_Read)
+**CRÍTICO:** Todos los selects DEBEN usar el formato `_Read` con consultas SQL directas.
 
-  Para consultas SQL manuales sin estructura:
+#### Formato Obligatorio para Selects (_Read)
 
-  ```php
-    public function getTableByID($array) {
-        $query = "
-            SELECT *
-            FROM {$this->bd}table_name
-            WHERE id = ?
-        ";
-        return $this->_Read($query, $array);
-    }
-  ```
-  #### Nivel 2: Consulta estructurada (_Select)
+Para todas las consultas de tipo select (filtros, dropdowns, listas), usar SIEMPRE `_Read`:
 
-  Para obtener valores usando estructura predefinida:
+```php
+public function lsCategory($array) {
+    $query = "
+        SELECT id, classification AS valor, description
+        FROM {$this->bd}table_name
+        WHERE active = ?
+        ORDER BY id DESC
+    ";
+    return $this->_Read($query, $array);
+}
+```
 
-  ```php
-    public function getMaxSeasonId() {
-      return $this->_Select([
-      'table'     => "{$this->bd}table_name",
-      'values'    => 'id,name',
-      'where'     => 'id',
-      'order'     => ['ASC'=>'Nombres'],
-      'data'      => $array
-      ]);
+#### Ejemplos de Consultas Select con _Read
 
-    }
-  ```
+**Select simple:**
+```php
+public function lsStatus() {
+    $query = "
+        SELECT id, name AS valor
+        FROM {$this->bd}status
+        WHERE active = 1
+        ORDER BY name ASC
+    ";
+    return $this->_Read($query, []);
+}
+```
+
+**Select con parámetros:**
+```php
+public function lsProductsByCategory($array) {
+    $query = "
+        SELECT id, name AS valor, price
+        FROM {$this->bd}products
+        WHERE category_id = ? AND active = 1
+        ORDER BY name ASC
+    ";
+    return $this->_Read($query, $array);
+}
+```
+
+**Select con JOIN:**
+```php
+public function lsOrdersWithClient($array) {
+    $query = "
+        SELECT 
+            o.id,
+            o.folio AS valor,
+            c.name AS client_name,
+            o.total
+        FROM {$this->bd}orders o
+        LEFT JOIN {$this->bd}clients c ON o.client_id = c.id
+        WHERE o.status = ?
+        ORDER BY o.created_at DESC
+    ";
+    return $this->_Read($query, $array);
+}
+```
+
+#### Otras Consultas (_Read)
+
+Para consultas complejas o personalizadas que no sean selects:
+
+```php
+public function getTableByID($array) {
+    $query = "
+        SELECT *
+        FROM {$this->bd}table_name
+        WHERE id = ?
+    ";
+    return $this->_Read($query, $array);
+}
+```
+
+**IMPORTANTE:** 
+- NO usar `_Select` para consultas de tipo select/filtros
+- SIEMPRE usar `_Read` con SQL directo para mayor control y claridad
+- Usar alias `AS valor` para campos que se mostrarán en selects del frontend
 
 **Consideraciones Finales**
 - Este prompt puede ser reutilizado para todos los módulos que requieran interacción con datos tipo filtro `<mdl>`.

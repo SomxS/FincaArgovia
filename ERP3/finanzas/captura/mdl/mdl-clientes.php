@@ -1,6 +1,7 @@
 <?php
 require_once '../../../conf/_CRUD3.php';
 require_once '../../../conf/_Utileria.php';
+require_once '../../../conf/coffeSoft.php';
 session_start();
 
 class mdl extends CRUD {
@@ -12,14 +13,14 @@ class mdl extends CRUD {
         $this->bd = "rfwsmqex_gvsl_finanzas2.";
     }
 
-    function lsClientes() {
+    function lsClientes($array) {
         $query = "
-            SELECT id, name
-            FROM {$this->bd}clientes_credit_customers
-            WHERE active = 1
+            SELECT id, name AS valor
+            FROM {$this->bd}customer
+            WHERE active = ?
             ORDER BY name ASC
         ";
-        return $this->_Read($query, null);
+        return $this->_Read($query, $array);
     }
 
     function lsUDN() {
@@ -29,13 +30,13 @@ class mdl extends CRUD {
             WHERE Stado = 1 AND idUDN NOT IN (8, 10, 7)
             ORDER BY UDN ASC
         ";
-        return $this->_Read($query, null);
+        return $this->_Read($query, []);
     }
 
     function getClienteById($id) {
         $query = "
             SELECT *
-            FROM {$this->bd}clientes_credit_customers
+            FROM {$this->bd}customer
             WHERE id = ?
         ";
         $result = $this->_Read($query, [$id]);
@@ -49,37 +50,37 @@ class mdl extends CRUD {
                     (SELECT new_debt 
                      FROM {$this->bd}detail_credit_customer 
                      WHERE customer_id = ? 
-                     AND active = 1 
                      ORDER BY id DESC 
                      LIMIT 1),
-                    (SELECT initial_debt 
-                     FROM {$this->bd}clientes_credit_customers 
-                     WHERE id = ?)
+                    0
                 ) as deuda_actual
         ";
 
-        $result = $this->_Read($query, [$clienteId, $clienteId]);
+        $result = $this->_Read($query, [$clienteId]);
         return $result[0]['deuda_actual'] ?? 0;
     }
 
     function listMovimientos($params) {
         $whereType = '';
-        $data = [$params['fecha']];
+        $data = [$params['daily_closure_id']];
 
-        if ($params['tipo'] !== 'todos') {
-            $whereType = ' AND dcc.movement_type = ?';
-            $data[] = $params['tipo'];
-        }
+        // if ($params['tipo'] !== 'todos') {
+        //     $whereType = ' AND dcc.movement_type = ?';
+        //     $data[] = $params['tipo'];
+        // }
+
+        //
 
         $query = "
             SELECT 
                 dcc.*,
-                ccc.name as cliente_nombre,
-                u.nombre as usuario_nombre
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
             FROM {$this->bd}detail_credit_customer dcc
-            LEFT JOIN {$this->bd}clientes_credit_customers ccc ON dcc.customer_id = ccc.id
-            LEFT JOIN {$this->bd}usuarios u ON dcc.user_id = u.id
-            WHERE dcc.capture_date = ? AND dcc.active = 1 {$whereType}
+            LEFT JOIN {$this->bd}customer c ON dcc.customer_id = c.id
+            LEFT JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN rfwsmqex_gvsl_rrhh.empleados e ON dc.employee_id = e.idEmpleado
+            WHERE dcc.daily_closure_id = ?  {$whereType}
             ORDER BY dcc.id DESC
         ";
 
@@ -90,11 +91,12 @@ class mdl extends CRUD {
         $query = "
             SELECT 
                 dcc.*,
-                ccc.name as cliente_nombre,
-                u.nombre as usuario_nombre
+                c.name as cliente_nombre,
+                e.Nombres as usuario_nombre
             FROM {$this->bd}detail_credit_customer dcc
-            LEFT JOIN {$this->bd}clientes_credit_customers ccc ON dcc.customer_id = ccc.id
-            LEFT JOIN {$this->bd}usuarios u ON dcc.user_id = u.id
+            LEFT JOIN {$this->bd}customer c ON dcc.customer_id = c.id
+            LEFT JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
+            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
             WHERE dcc.id = ?
         ";
         
@@ -136,7 +138,7 @@ class mdl extends CRUD {
                 SUM(CASE WHEN dcc.movement_type != 'consumo' AND dcc.method_pay = 'banco' THEN dcc.amount ELSE 0 END) as total_pagos_banco
             FROM {$this->bd}daily_closure dc
             INNER JOIN {$this->bd}detail_credit_customer dcc ON dcc.daily_closure_id = dc.id
-            WHERE dc.operation_date = ? 
+            WHERE dc.operation_date = ?
         ";
 
         $result = $this->_Read($query, [$fecha]);
@@ -148,30 +150,64 @@ class mdl extends CRUD {
         $dataParams = [$params['fi'], $params['ff']];
 
         if (isset($params['udn']) && $params['udn'] !== 'todas') {
-            $whereUdn = ' AND ccc.udn_id = ?';
+            $whereUdn = ' AND c.udn_id = ?';
             $dataParams[] = $params['udn'];
         }
 
         $query = "
             SELECT 
-                ccc.id as cliente_id,
-                ccc.name as cliente_nombre,
-                ccc.initial_debt as saldo_inicial,
-                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.quantity ELSE 0 END), 0) as total_consumos,
-                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.quantity ELSE 0 END), 0) as total_pagos,
-                (ccc.initial_debt + 
-                 COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.quantity ELSE 0 END), 0) -
-                 COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.quantity ELSE 0 END), 0)) as saldo_final
-            FROM {$this->bd}clientes_credit_customers ccc
-            LEFT JOIN {$this->bd}detail_credit_customer dcc ON ccc.id = dcc.customer_id 
-                AND dcc.capture_date BETWEEN ? AND ?
-                AND dcc.active = 1
-            WHERE ccc.active = 1 {$whereUdn}
-            GROUP BY ccc.id, ccc.name, ccc.initial_debt
-            ORDER BY ccc.name
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM {$this->bd}detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM {$this->bd}daily_closure 
+                         WHERE operation_date < ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_inicial,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM {$this->bd}detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM {$this->bd}daily_closure 
+                         WHERE operation_date <= ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_final
+            FROM {$this->bd}customer c
+            LEFT JOIN {$this->bd}detail_credit_customer dcc ON c.id = dcc.customer_id 
+                AND dcc.daily_closure_id IN (
+                    SELECT id FROM {$this->bd}daily_closure 
+                    WHERE operation_date BETWEEN ? AND ?
+                )
+            WHERE c.active = 1 {$whereUdn}
+            GROUP BY c.id, c.name
+            ORDER BY c.name
         ";
 
         return $this->_Read($query, $dataParams);
+    }
+
+    function getDailyClosureByDate($fecha, $udnId) {
+        $query = "
+            SELECT id
+            FROM {$this->bd}daily_closure
+            WHERE operation_date = ? AND udn_id = ?
+            LIMIT 1
+        ";
+        
+        $result = $this->_Read($query, [$fecha, $udnId]);
+        return $result[0]['id'] ?? null;
     }
 
     function logAuditoria($data) {
