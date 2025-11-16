@@ -80,7 +80,7 @@ class mdl extends CRUD {
             LEFT JOIN {$this->bd}customer c ON dcc.customer_id = c.id
             LEFT JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
             LEFT JOIN rfwsmqex_gvsl_rrhh.empleados e ON dc.employee_id = e.idEmpleado
-            WHERE dcc.daily_closure_id = ?  {$whereType}
+            WHERE dcc.daily_closure_id = ?  {$whereType} AND dcc.active = 1
             ORDER BY dcc.id DESC
         ";
 
@@ -96,7 +96,7 @@ class mdl extends CRUD {
             FROM {$this->bd}detail_credit_customer dcc
             LEFT JOIN {$this->bd}customer c ON dcc.customer_id = c.id
             LEFT JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
-            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            LEFT JOIN rfwsmqex_gvsl_rrhh.empleados e ON dc.employee_id = e.idEmpleado
             WHERE dcc.id = ?
         ";
         
@@ -121,12 +121,12 @@ class mdl extends CRUD {
         ]);
     }
 
-    function deleteMovimientoById($data) {
+    function deleteMovimientoById($array) {
         return $this->_Update([
             'table' => $this->bd . 'detail_credit_customer',
-            'values' => 'active = 0',
-            'where' => 'id = ?',
-            'data' => $data
+            'values' => $array['values'],
+            'where' => $array['where'],
+            'data' => $array['data']
         ]);
     }
 
@@ -207,7 +207,38 @@ class mdl extends CRUD {
         ";
         
         $result = $this->_Read($query, [$fecha, $udnId]);
-        return $result[0]['id'] ?? null;
+        return $result[0] ?? null;
+    }
+
+    function getDailyClosure($array) {
+        $query = "
+            SELECT id, operation_date, udn_id, turn
+            FROM {$this->bd}daily_closure
+            WHERE operation_date = ? AND udn_id = ?
+            LIMIT 1
+        ";
+        
+        $result = $this->_Read($query, $array);
+        return $result[0] ?? null;
+    }
+
+    function getMovimientosByCliente($array) {
+        $query = "
+            SELECT 
+                dcc.id,
+                dcc.customer_id,
+                dcc.movement_type,
+                dcc.amount,
+                dc.operation_date as fecha
+            FROM {$this->bd}detail_credit_customer dcc
+            INNER JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
+            WHERE dcc.customer_id = ?
+              AND dc.operation_date BETWEEN ? AND ?
+              AND dcc.active = 1
+            ORDER BY dc.operation_date ASC
+        ";
+        
+        return $this->_Read($query, $array);
     }
 
     function logAuditoria($data) {

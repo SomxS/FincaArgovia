@@ -1,3 +1,7 @@
+// update: 16/11/2025
+// title modal.
+
+
 class Complements {
 
     constructor(link, div_modulo) {
@@ -2382,6 +2386,34 @@ class Components extends Complements {
         });
 
         $(`#${opts.parent}`).html(container);
+    }
+
+    createTitleModal(options = {}) {
+        const defaults = {
+            parent: "root",
+            class: "space-y-2",
+            icon: "icon-trophy",
+            title: "Top 10 Clientes",
+            subtitle: "",
+            color: "bg-blue-600",
+        };
+
+        const opts = Object.assign({}, defaults, options);
+
+
+        const card = $(`
+        <div class="flex items-center space-x-3  ${opts.class}">
+            <div class="w-10 h-10 ${opts.color} rounded flex items-center justify-center">
+                <i class="${opts.icon} text-white text-sm"></i>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-gray-800 mb-0">${opts.title}</h3>
+                <p class="text-xs text-gray-600 mb-0">${opts.subtitle}</p>
+            </div>
+        </div>
+    `);
+
+        return card;
     }
 
 

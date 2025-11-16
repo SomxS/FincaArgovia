@@ -9,9 +9,14 @@ require_once '../mdl/mdl-clientes.php';
 class ctrl extends mdl {
 
     function init() {
+        $fecha = $_POST['fecha'] ?? date('Y-m-d');
+        $udnId = $_POST['udn_id'] ?? 1;
+
+        $dailyClosure = $this->getDailyClosure([$fecha, $udnId]);
+
         return [
-            'clientes' => $this->lsClientes([1]),
-            'udn' => $this->lsUDN(),
+            'clientes'        => $this->lsClientes([1]),
+            'udn'             => $this->lsUDN(),
             'tiposMovimiento' => [
                 ['id' => 'consumo', 'valor' => 'Consumo a crédito'],
                 ['id' => 'abono_parcial', 'valor' => 'Abono parcial'],
@@ -22,8 +27,21 @@ class ctrl extends mdl {
                 ['id' => 'efectivo', 'valor' => 'Efectivo'],
                 ['id' => 'banco', 'valor' => 'Banco']
             ],
+            'dailyClosure' => $dailyClosure,
             'userLevel' => 4
         ];
+    }
+
+    function DailyClousure(){
+
+        $fecha = $_POST['date'] ?? date('Y-m-d');
+        $udnId = $_POST['udn_id'] ?? 1;
+
+        return [
+            'data' =>$this->getDailyClosure([$fecha, $udnId]),
+            [$fecha, $udnId]
+        ];
+
     }
 
     function getTotales() {
@@ -36,8 +54,6 @@ class ctrl extends mdl {
             'totalPagosBanco' => $totales['total_pagos_banco'] ?? 0
         ];
     }
-
-
 
     function checkUserLevel($requiredLevel) {
         $userLevel = $_SESSION['nivel_usuario'] ?? 1;
@@ -54,11 +70,19 @@ class ctrl extends mdl {
 
     function ls() {
         $__row = [];
-        $dailyClosureId = $_POST['daily_closure_id'];
-        $tipo = $_POST['tipo'];
+        $dailyClosureId = $_POST['daily_closure_id'] ?? null;
+        $tipo = $_POST['tipo'] ?? 'todos';
+
+        if (!$dailyClosureId) {
+            return [
+                'row' => [],
+                'ls' => [],
+                'message' => 'No se proporcionó un ID de cierre diario'
+            ];
+        }
 
         $ls = $this->listMovimientos([
-            'daily_closure_id' => 1,
+            'daily_closure_id' => $dailyClosureId,
             'tipo' => $tipo
         ]);
 
@@ -66,47 +90,27 @@ class ctrl extends mdl {
             $a = [];
 
             $a[] = [
-                'class' => 'btn btn-sm btn-info me-1',
-                'html' => '<i class="icon-eye"></i>',
-                'onclick' => 'app.viewDetalle(' . $key['id'] . ')'
+                'class'   => 'btn btn-sm btn-info me-1',
+                'html'    => '<i class="icon-eye"></i>',
+                'onclick' => 'clientes.viewDetalle(' . $key['id'] . ')'
             ];
 
             $a[] = [
                 'class' => 'btn btn-sm btn-primary me-1',
                 'html' => '<i class="icon-pencil"></i>',
-                'onclick' => 'app.editMovimiento(' . $key['id'] . ')'
+                'onclick' => 'clientes.editMovimiento(' . $key['id'] . ')'
             ];
 
             $a[] = [
                 'class' => 'btn btn-sm btn-danger',
                 'html' => '<i class="icon-trash"></i>',
-                'onclick' => 'app.deleteMovimiento(' . $key['id'] . ')'
+                'onclick' => 'clientes.deleteMovimiento(' . $key['id'] . ')'
             ];
-
-            $tipoLabel = '';
-           
-            switch ($key['movement_type']) {
-                case 'consumo':
-                    $tipoLabel = '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
-                        <i class="icon-lock text-orange-600"></i> Consumo
-                    </span>';
-                    break;
-                case 'anticipo':
-                    $tipoLabel = '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                        <i class="icon-clock text-blue-600"></i> Anticipo
-                    </span>';
-                    break;
-                case 'pago':
-                    $tipoLabel = '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                        <i class="icon-check text-green-600"></i> Pago
-                    </span>';
-                    break;
-            }
 
             $__row[] = [
                 'id' => $key['id'],
                 'Cliente'            => $key['cliente_nombre'],
-                'Tipo de movimiento' => $tipoLabel,
+                'Tipo de movimiento' => renderMovementType($key['movement_type']),
                 'Método de pago'     => $key['method_pay'],
                 'Monto'              => [
                     'html'  => evaluar($key['amount']),
@@ -123,23 +127,23 @@ class ctrl extends mdl {
     }
 
     function getMovimiento() {
-        $id = $_POST['id'];
-        $status = 404;
+        $id      = $_POST['id'];
+        $status  = 404;
         $message = 'Movimiento no encontrado';
-        $data = null;
+        $data    = null;
 
         $movimiento = $this->getMovimientoById($id);
 
         if ($movimiento) {
-            $status = 200;
+            $status  = 200;
             $message = 'Movimiento encontrado';
-            $data = $movimiento;
+            $data    = $movimiento;
         }
 
         return [
-            'status' => $status,
+            'status'  => $status,
             'message' => $message,
-            'data' => $data
+            'data'    => $data
         ];
     }
 
@@ -156,28 +160,23 @@ class ctrl extends mdl {
         $status = 500;
         $message = 'Error al registrar movimiento';
 
-        if (empty($_POST['customer_id']) || empty($_POST['movement_type']) || empty($_POST['amount'])) {
-            return [
-                'status' => 400,
-                'message' => 'Todos los campos son obligatorios'
-            ];
-        }
+       
 
-        if ($_POST['movement_type'] === 'consumo' && $_POST['method_pay'] !== 'N/A') {
-            return [
-                'status' => 400,
-                'message' => 'El tipo consumo debe tener método de pago N/A'
-            ];
-        }
+        // if ($_POST['movement_type'] === 'consumo' && $_POST['method_pay'] !== 'N/A') {
+        //     return [
+        //         'status' => 400,
+        //         'message' => 'El tipo consumo debe tener método de pago N/A'
+        //     ];
+        // }
 
-        $deudaAnterior = $this->getDeudaActualByID($_POST['customer_id']);
-        $_POST['old_debt'] = $deudaAnterior;
+        // $deudaAnterior = $this->getDeudaActualByID($_POST['customer_id']);
+        // $_POST['old_debt'] = $deudaAnterior;
 
-        if ($_POST['movement_type'] === 'consumo') {
-            $_POST['new_debt'] = $deudaAnterior + $_POST['amount'];
-        } else {
-            $_POST['new_debt'] = $deudaAnterior - $_POST['amount'];
-        }
+        // if ($_POST['movement_type'] === 'consumo') {
+        //     $_POST['new_debt'] = $deudaAnterior + $_POST['amount'];
+        // } else {
+        //     $_POST['new_debt'] = $deudaAnterior - $_POST['amount'];
+        // }
 
         $create = $this->createMovimiento($this->util->sql($_POST));
 
@@ -231,35 +230,42 @@ class ctrl extends mdl {
         $status = 500;
         $message = 'Error al eliminar movimiento';
 
-        $movimiento = $this->getMovimientoById($id);
+        // $movimiento = $this->getMovimientoById($id);
 
-        if ($movimiento) {
-            $this->logAuditoria([
-                'movimiento_id' => $id,
-                'cliente_id' => $movimiento['customer_id'],
-                'accion' => 'delete',
-                'usuario_id' => $_SESSION['usuario_id'] ?? 1,
-                'datos_anteriores' => $movimiento
-            ]);
-
-            $delete = $this->deleteMovimientoById([$id]);
+        // if ($movimiento) {
+        //     // $this->logAuditoria([
+        //     //     'movimiento_id' => $id,
+        //     //     'cliente_id' => $movimiento['customer_id'],
+        //     //     'accion' => 'delete',
+        //     //     'usuario_id' => $_SESSION['usuario_id'] ?? 1,
+        //     //     'datos_anteriores' => $movimiento
+        //     // ]);
+        $values  = $this->util->sql([
+            'active' =>0,
+            'id'     => $id
+        ], 1);
+        $delete = $this->deleteMovimientoById($values);
 
             if ($delete) {
                 $status = 200;
                 $message = 'Movimiento eliminado correctamente';
             }
-        }
+        // }
 
         return [
             'status' => $status,
-            'message' => $message
+            'message' => $message,
+            'endpoint' =>$values
         ];
     }
 
-    function lsConcentrado() {
-        $__row = [];
-        $fi = $_POST['fi'];
-        $ff = $_POST['ff'];
+
+    // Concentrado clientes.
+
+
+    function getTotalesConcentrado() {
+        $fi  = $_POST['fi'];
+        $ff  = $_POST['ff'];
         $udn = $_POST['udn'] ?? 'todas';
 
         $ls = $this->listConcentrado([
@@ -268,32 +274,223 @@ class ctrl extends mdl {
             'udn' => $udn
         ]);
 
+        $saldoInicial = 0;
+        $totalConsumos = 0;
+        $totalPagos = 0;
+        $saldoFinal = 0;
+
         foreach ($ls as $key) {
-            $__row[] = [
-                'id' => $key['cliente_id'],
-                'Cliente' => $key['cliente_nombre'],
-                'Saldo inicial' => [
-                    'html' => evaluar($key['saldo_inicial']),
-                    'class' => 'text-end'
-                ],
-                'Total consumos' => [
-                    'html' => evaluar($key['total_consumos']),
-                    'class' => 'text-end bg-green-100'
-                ],
-                'Total pagos' => [
-                    'html' => evaluar($key['total_pagos']),
-                    'class' => 'text-end bg-orange-100'
-                ],
-                'Saldo final' => [
-                    'html' => evaluar($key['saldo_final']),
-                    'class' => 'text-end font-bold'
-                ]
-            ];
+            $saldoInicial += $key['saldo_inicial'];
+            $totalConsumos += $key['total_consumos'];
+            $totalPagos += $key['total_pagos'];
+            $saldoFinal += $key['saldo_final'];
         }
 
         return [
-            'row' => $__row,
-            'ls' => $ls
+            'saldoInicial' => $saldoInicial,
+            'totalConsumos' => $totalConsumos,
+            'totalPagos' => $totalPagos,
+            'saldoFinal' => $saldoFinal
+        ];
+    }
+
+    function lsConcentrado() {
+        $rows = [];
+        $fi   = $_POST['fi'];
+        $ff   = $_POST['ff'];
+        $udn  = $_POST['udn'] ?? 'todas';
+
+        $clientes = $this->listConcentrado([
+            'fi' => $fi,
+            'ff' => $ff,
+            'udn' => $udn
+        ]);
+
+        $dias = [];
+        $diasName = [];
+        $thead = ['CLIENTES', 'DEUDA'];
+
+        $start = new DateTime($fi);
+        $end = new DateTime($ff);
+        $end->modify('+1 day');
+        $interval = new DateInterval('P1D');
+        $period = new DatePeriod($start, $interval, $end);
+
+        foreach ($period as $date) {
+            $fecha = $date->format('Y-m-d');
+            $fechaName = strtoupper($date->format('d \D\E M'));
+            
+            $dias[] = $fecha;
+            $diasName[] = $fechaName;
+            
+            $thead[] = "CONSUMOS $fechaName";
+            $thead[] = "PAGOS $fechaName";
+        }
+
+        foreach ($clientes as $cliente) {
+            $clienteId = $cliente['cliente_id'];
+            $clienteNombre = $cliente['cliente_nombre'];
+
+            $headerCliente = [
+                'id' => $clienteId,
+                'key' => '',
+                'CLIENTES' => $clienteNombre,
+                'DEUDA' => [
+                    'html' => evaluar($cliente['saldo_inicial']),
+                    'class' => 'text-end font-bold'
+                ]
+            ];
+
+            foreach ($diasName as $dia) {
+                $headerCliente["CONSUMOS $dia"] = '';
+                $headerCliente["PAGOS $dia"] = '';
+            }
+
+            $headerCliente['opc'] = 1;
+            $idxHeader = count($rows);
+            $rows[] = $headerCliente;
+
+            $movimientos = $this->getMovimientosByCliente([
+                $clienteId,
+                $fi,
+                $ff
+            ]);
+
+            $movimientosPorDia = [];
+            foreach ($movimientos as $mov) {
+                $fecha = $mov['fecha'];
+                if (!isset($movimientosPorDia[$fecha])) {
+                    $movimientosPorDia[$fecha] = [
+                        'consumos' => 0,
+                        'pagos' => 0
+                    ];
+                }
+
+                if ($mov['movement_type'] === 'consumo') {
+                    $movimientosPorDia[$fecha]['consumos'] += floatval($mov['amount']);
+                } else {
+                    $movimientosPorDia[$fecha]['pagos'] += floatval($mov['amount']);
+                }
+            }
+
+            $saldoActual = floatval($cliente['saldo_inicial']);
+            $totalConsumos = 0;
+            $totalPagos = 0;
+
+            $rowSaldoInicial = [
+                'id' => $clienteId,
+                'key' => 'saldo_inicial',
+                'CLIENTES' => 'Saldo inicial',
+                'DEUDA' => [
+                    'html' => evaluar($saldoActual),
+                    'class' => 'text-end'
+                ]
+            ];
+
+            foreach ($dias as $i => $fecha) {
+                $rowSaldoInicial["CONSUMOS {$diasName[$i]}"] = '-';
+                $rowSaldoInicial["PAGOS {$diasName[$i]}"] = '-';
+            }
+            $rowSaldoInicial['opc'] = 0;
+            $rows[] = $rowSaldoInicial;
+
+            $rowConsumos = [
+                'id' => $clienteId,
+                'key' => 'consumos',
+                'CLIENTES' => 'Consumo a crédito',
+                'DEUDA' => ''
+            ];
+
+            $rowPagos = [
+                'id' => $clienteId,
+                'key' => 'pagos',
+                'CLIENTES' => 'Pagos y anticipos',
+                'DEUDA' => ''
+            ];
+
+            $rowSaldoFinal = [
+                'id' => $clienteId,
+                'key' => 'saldo_final',
+                'CLIENTES' => 'Saldo final',
+                'DEUDA' => ''
+            ];
+
+            foreach ($dias as $i => $fecha) {
+                $consumo = $movimientosPorDia[$fecha]['consumos'] ?? 0;
+                $pago = $movimientosPorDia[$fecha]['pagos'] ?? 0;
+
+                $totalConsumos += $consumo;
+                $totalPagos += $pago;
+
+                $rowConsumos["CONSUMOS {$diasName[$i]}"] = [
+                    'html' => $consumo > 0 ? evaluar($consumo) : '-',
+                    'val' => $consumo,
+                    'class' => 'text-end bg-green-50'
+                ];
+                $rowConsumos["PAGOS {$diasName[$i]}"] = '-';
+
+                $rowPagos["CONSUMOS {$diasName[$i]}"] = '-';
+                $rowPagos["PAGOS {$diasName[$i]}"] = [
+                    'html' => $pago > 0 ? '<span class="text-red-600">' . evaluar($pago) . '</span>' : '-',
+                    'val' => $pago,
+                    'class' => 'text-end bg-red-50'
+                ];
+
+                $saldoActual = $saldoActual + $consumo - $pago;
+
+                $rowSaldoFinal["CONSUMOS {$diasName[$i]}"] = '-';
+                $rowSaldoFinal["PAGOS {$diasName[$i]}"] = [
+                    'html' => evaluar($saldoActual),
+                    'val' => $saldoActual,
+                    'class' => 'text-end'
+                ];
+            }
+
+            $rowConsumos['opc'] = 0;
+            $rowPagos['opc'] = 0;
+            $rowSaldoFinal['opc'] = 0;
+
+            $rows[] = $rowConsumos;
+            $rows[] = $rowPagos;
+            $rows[] = $rowSaldoFinal;
+
+            $rowTotalConsumos = [
+                'id' => $clienteId,
+                'key' => 'total_consumos',
+                'CLIENTES' => 'Total de consumos a crédito',
+                'DEUDA' => [
+                    'html' => '<strong>' . evaluar($totalConsumos) . '</strong>',
+                    'class' => 'text-end font-bold'
+                ]
+            ];
+
+            $rowTotalPagos = [
+                'id' => $clienteId,
+                'key' => 'total_pagos',
+                'CLIENTES' => 'Total de pagos y anticipos',
+                'DEUDA' => [
+                    'html' => '<strong class="text-red-600">' . evaluar($totalPagos) . '</strong>',
+                    'class' => 'text-end font-bold'
+                ]
+            ];
+
+            foreach ($diasName as $dia) {
+                $rowTotalConsumos["CONSUMOS $dia"] = '';
+                $rowTotalConsumos["PAGOS $dia"] = '';
+                $rowTotalPagos["CONSUMOS $dia"] = '';
+                $rowTotalPagos["PAGOS $dia"] = '';
+            }
+
+            $rowTotalConsumos['opc'] = 0;
+            $rowTotalPagos['opc'] = 0;
+
+            $rows[] = $rowTotalConsumos;
+            $rows[] = $rowTotalPagos;
+        }
+
+        return [
+            'thead' => $thead,
+            'row' => $rows
         ];
     }
 
@@ -383,6 +580,29 @@ class ctrl extends mdl {
             'message' => 'Archivo generado correctamente',
             'fileUrl' => '../../exports/' . $filename
         ];
+    }
+}
+
+// Complements
+
+function renderMovementType($movementType) {
+    switch ($movementType) {
+        case 'consumo':
+            return '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
+                <i class="icon-lock text-orange-600"></i> Consumo
+            </span>';
+        case 'anticipo':
+            return '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                <i class="icon-clock text-blue-600"></i> Anticipo
+            </span>';
+        case 'pago':
+            return '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                <i class="icon-check text-green-600"></i> Pago
+            </span>';
+        default:
+            return '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                <i class="icon-help text-gray-600"></i> Desconocido
+            </span>';
     }
 }
 
