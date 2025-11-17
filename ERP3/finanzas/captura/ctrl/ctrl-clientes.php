@@ -9,49 +9,46 @@ require_once '../mdl/mdl-clientes.php';
 class ctrl extends mdl {
 
     function init() {
-        $fecha = $_POST['fecha'] ?? date('Y-m-d');
-        $udnId = $_POST['udn_id'] ?? 1;
-
+        $fecha        = $_POST['fecha'] ?? date('Y-m-d');
+        $udnId        = $_POST['udn_id'] ?? 4;
         $dailyClosure = $this->getDailyClosure([$fecha, $udnId]);
 
         return [
             'clientes'        => $this->lsClientes([1]),
             'udn'             => $this->lsUDN(),
             'tiposMovimiento' => [
-                ['id' => 'consumo', 'valor' => 'Consumo a crédito'],
+                ['id' => 'consumo',       'valor' => 'Consumo a crédito'],
                 ['id' => 'abono_parcial', 'valor' => 'Abono parcial'],
-                ['id' => 'pago_total', 'valor' => 'Pago total']
+                ['id' => 'pago_total',    'valor' => 'Pago total']
             ],
             'metodosPago' => [
-                ['id' => 'N/A', 'valor' => 'N/A (No aplica)'],
+                ['id' => 'N/A',      'valor' => 'N/A (No aplica)'],
                 ['id' => 'efectivo', 'valor' => 'Efectivo'],
-                ['id' => 'banco', 'valor' => 'Banco']
+                ['id' => 'banco',    'valor' => 'Banco']
             ],
             'dailyClosure' => $dailyClosure,
-            'userLevel' => 4
+            'userLevel'    => 4
         ];
     }
 
     function DailyClousure(){
-
         $fecha = $_POST['date'] ?? date('Y-m-d');
-        $udnId = $_POST['udn_id'] ?? 1;
+        $udnId = $_POST['udn_id'] ?? 4;
 
         return [
-            'data' =>$this->getDailyClosure([$fecha, $udnId]),
+            'data' => $this->getDailyClosure([$fecha, $udnId]),
             [$fecha, $udnId]
         ];
-
     }
 
     function getTotales() {
-        $fecha = $_POST['fecha'];
+        $fecha   = $_POST['fecha'];
         $totales = $this->getTotalesPorFecha($fecha);
 
         return [
-            'totalConsumos' => $totales['total_consumos'] ?? 0,
+            'totalConsumos'      => $totales['total_consumos'] ?? 0,
             'totalPagosEfectivo' => $totales['total_pagos_efectivo'] ?? 0,
-            'totalPagosBanco' => $totales['total_pagos_banco'] ?? 0
+            'totalPagosBanco'    => $totales['total_pagos_banco'] ?? 0
         ];
     }
 
@@ -69,14 +66,14 @@ class ctrl extends mdl {
     }
 
     function ls() {
-        $__row = [];
+        $__row          = [];
         $dailyClosureId = $_POST['daily_closure_id'] ?? null;
-        $tipo = $_POST['tipo'] ?? 'todos';
+        $tipo           = $_POST['tipo'] ?? 'todos';
 
         if (!$dailyClosureId) {
             return [
-                'row' => [],
-                'ls' => [],
+                'row'     => [],
+                'ls'      => [],
                 'message' => 'No se proporcionó un ID de cierre diario'
             ];
         }
@@ -108,7 +105,7 @@ class ctrl extends mdl {
             ];
 
             $__row[] = [
-                'id' => $key['id'],
+                'id'                 => $key['id'],
                 'Cliente'            => $key['cliente_nombre'],
                 'Tipo de movimiento' => renderMovementType($key['movement_type']),
                 'Método de pago'     => $key['method_pay'],
@@ -157,105 +154,70 @@ class ctrl extends mdl {
     }
 
     function addMovimiento() {
-        $status = 500;
+        $status  = 500;
         $message = 'Error al registrar movimiento';
-
-       
-
-        // if ($_POST['movement_type'] === 'consumo' && $_POST['method_pay'] !== 'N/A') {
-        //     return [
-        //         'status' => 400,
-        //         'message' => 'El tipo consumo debe tener método de pago N/A'
-        //     ];
-        // }
-
-        // $deudaAnterior = $this->getDeudaActualByID($_POST['customer_id']);
-        // $_POST['old_debt'] = $deudaAnterior;
-
-        // if ($_POST['movement_type'] === 'consumo') {
-        //     $_POST['new_debt'] = $deudaAnterior + $_POST['amount'];
-        // } else {
-        //     $_POST['new_debt'] = $deudaAnterior - $_POST['amount'];
-        // }
-
-        $create = $this->createMovimiento($this->util->sql($_POST));
+        $create  = $this->createMovimiento($this->util->sql($_POST));
 
         if ($create) {
-            $status = 200;
+            $status  = 200;
             $message = 'Movimiento registrado correctamente';
         }
 
         return [
-            'status' => $status,
+            'status'  => $status,
             'message' => $message
         ];
     }
 
     function editMovimiento() {
-        $id = $_POST['id'];
-        $status = 500;
+        $id      = $_POST['id'];
+        $status  = 500;
         $message = 'Error al editar movimiento';
 
         if (empty($_POST['customer_id']) || empty($_POST['movement_type']) || empty($_POST['amount'])) {
             return [
-                'status' => 400,
+                'status'  => 400,
                 'message' => 'Todos los campos son obligatorios'
             ];
         }
 
-        $deudaAnterior = $this->getDeudaActualByID($_POST['customer_id']);
-        $_POST['old_debt'] = $deudaAnterior;
-
-        if ($_POST['movement_type'] === 'consumo') {
-            $_POST['new_debt'] = $deudaAnterior + $_POST['amount'];
-        } else {
-            $_POST['new_debt'] = $deudaAnterior - $_POST['amount'];
-        }
-
-        $edit = $this->updateMovimiento($this->util->sql($_POST, 1));
+        $deudaAnterior         = $this->getDeudaActualByID($_POST['customer_id']);
+        $_POST['old_debt']     = $deudaAnterior;
+        $_POST['new_debt']     = ($_POST['movement_type'] === 'consumo') 
+                                 ? $deudaAnterior + $_POST['amount'] 
+                                 : $deudaAnterior - $_POST['amount'];
+        $edit                  = $this->updateMovimiento($this->util->sql($_POST, 1));
 
         if ($edit) {
-            $status = 200;
+            $status  = 200;
             $message = 'Movimiento editado correctamente';
         }
 
         return [
-            'status' => $status,
+            'status'  => $status,
             'message' => $message
         ];
     }
 
     function deleteMovimiento() {
-        $id = $_POST['id'];
-        $status = 500;
+        $id      = $_POST['id'];
+        $status  = 500;
         $message = 'Error al eliminar movimiento';
-
-        // $movimiento = $this->getMovimientoById($id);
-
-        // if ($movimiento) {
-        //     // $this->logAuditoria([
-        //     //     'movimiento_id' => $id,
-        //     //     'cliente_id' => $movimiento['customer_id'],
-        //     //     'accion' => 'delete',
-        //     //     'usuario_id' => $_SESSION['usuario_id'] ?? 1,
-        //     //     'datos_anteriores' => $movimiento
-        //     // ]);
         $values  = $this->util->sql([
-            'active' =>0,
+            'active' => 0,
             'id'     => $id
         ], 1);
         $delete = $this->deleteMovimientoById($values);
 
-            if ($delete) {
-                $status = 200;
-                $message = 'Movimiento eliminado correctamente';
-            }
-        // }
+        if ($delete) {
+            $status  = 200;
+            $message = 'Movimiento eliminado correctamente';
+        }
 
         return [
-            'status' => $status,
-            'message' => $message,
-            'endpoint' =>$values
+            'status'   => $status,
+            'message'  => $message,
+            'endpoint' => $values
         ];
     }
 
@@ -267,320 +229,271 @@ class ctrl extends mdl {
         $fi  = $_POST['fi'];
         $ff  = $_POST['ff'];
         $udn = $_POST['udn'] ?? 'todas';
-
-        $ls = $this->listConcentrado([
-            'fi' => $fi,
-            'ff' => $ff,
+        $ls  = $this->listConcentrado([
+            'fi'  => $fi,
+            'ff'  => $ff,
             'udn' => $udn
         ]);
 
-        $saldoInicial = 0;
+        $saldoInicial  = 0;
         $totalConsumos = 0;
-        $totalPagos = 0;
-        $saldoFinal = 0;
+        $totalPagos    = 0;
+        $saldoFinal    = 0;
 
         foreach ($ls as $key) {
-            $saldoInicial += $key['saldo_inicial'];
+            $saldoInicial  += $key['saldo_inicial'];
             $totalConsumos += $key['total_consumos'];
-            $totalPagos += $key['total_pagos'];
-            $saldoFinal += $key['saldo_final'];
+            $totalPagos    += $key['total_pagos'];
+            $saldoFinal    += $key['saldo_final'];
         }
 
         return [
-            'saldoInicial' => $saldoInicial,
+            'saldoInicial'  => $saldoInicial,
             'totalConsumos' => $totalConsumos,
-            'totalPagos' => $totalPagos,
-            'saldoFinal' => $saldoFinal
+            'totalPagos'    => $totalPagos,
+            'saldoFinal'    => $saldoFinal
         ];
     }
 
     function lsConcentrado() {
-        $rows = [];
-        $fi   = $_POST['fi'];
-        $ff   = $_POST['ff'];
-        $udn  = $_POST['udn'] ?? 'todas';
-
-        $clientes = $this->listConcentrado([
-            'fi' => $fi,
-            'ff' => $ff,
-            'udn' => $udn
-        ]);
-
-        $dias = [];
-        $diasName = [];
-        $thead = ['CLIENTES', 'DEUDA'];
-
+        
+        // Vars.
+        $fi    = $_POST['fi'];
+        $ff    = $_POST['ff'];
+        $udn   = $_POST['udn'];
+        
         $start = new DateTime($fi);
-        $end = new DateTime($ff);
+        $end   = new DateTime($ff);
         $end->modify('+1 day');
-        $interval = new DateInterval('P1D');
-        $period = new DatePeriod($start, $interval, $end);
 
+        $interval = new DateInterval('P1D');
+        $period   = new DatePeriod($start, $interval, $end);
+                
+        $dias        = [];
+        $diasName    = [];
+        $rows        = [];
+              
+        $diasSemana = getDiasSemanaEspanol();
+        $meses      = getMesesEspanol();
+   
+
+        // Crear thead.
+        $thead       = ['CLIENTES', 'DEUDA'];
+        $theadGroups = [];
+
+        $theadGroups[] = [
+            'label'   => '',
+            'colspan' => 2,
+            'color'   => 'bg-[#003360] text-white'
+        ];
+
+
+        $colIndex = 0;
         foreach ($period as $date) {
-            $fecha = $date->format('Y-m-d');
-            $fechaName = strtoupper($date->format('d \D\E M'));
+            $fecha       = $date->format('Y-m-d');
+            $dia         = $date->format('d');
+            $mesEn       = $date->format('M');
+            $mesEs       = $meses[$mesEn];
+            $diaSemanaEn = $date->format('l');
+            $diaSemanaEs = $diasSemana[$diaSemanaEn];
             
-            $dias[] = $fecha;
-            $diasName[] = $fechaName;
-            
-            $thead[] = "CONSUMOS $fechaName";
-            $thead[] = "PAGOS $fechaName";
+            $dias[]     = $fecha;
+            $diasName[] = "$diaSemanaEs, $dia DE $mesEs";
+            $thead[]    = 'CONSUMOS';
+            $thead[]    = 'PAGOS';
+
+            $theadGroups[] = [
+                'label'   => "$diaSemanaEs, $dia DE $mesEs",
+                'colspan' => 2,
+                'color'   => 'bg-[#003360] text-white'
+            ];
+            $colIndex++;
         }
+
+
+        // Crear body.
+        $totalConsumos = array_fill(0, count($dias), 0);
+        $totalPagos    = array_fill(0, count($dias), 0);
+      
+        $subRows = [
+            ['label' => 'Saldo inicial', 'type' => 'saldo_inicial'],
+            ['label' => 'Consumo a crédito', 'type' => 'consumo'],
+            ['label' => 'Pagos y anticipos', 'type' => 'pagos'],
+            ['label' => 'Saldo final', 'type' => 'saldo_final']
+        ];
+
+        $clientes      = $this->listCustomer([$fi, $ff, $udn]);
 
         foreach ($clientes as $cliente) {
-            $clienteId = $cliente['cliente_id'];
-            $clienteNombre = $cliente['cliente_nombre'];
+
+            $clienteId     = $cliente['id'];
+            $clienteNombre = $cliente['valor'];
+            
+            $totalesCliente = $this->getTotalesClientePeriodo($clienteId, $fi, $ff);
+            $consumoTotal   = floatval($totalesCliente['total_consumos']);
 
             $headerCliente = [
-                'id' => $clienteId,
-                'key' => '',
-                'CLIENTES' => $clienteNombre,
-                'DEUDA' => [
-                    'html' => evaluar($cliente['saldo_inicial']),
-                    'class' => 'text-end font-bold'
+                'id'         => $clienteId,
+                'expandable' => true,
+                'CLIENTES'   => [
+                    'html'  => $clienteNombre,
+                    'class' => 'font-bold bg-white'
+                ],
+                'DEUDA'      => [
+                    'html'  => evaluar($consumoTotal),
+                    'class' => 'text-end font-bold bg-white'
                 ]
             ];
 
-            foreach ($diasName as $dia) {
-                $headerCliente["CONSUMOS $dia"] = '';
-                $headerCliente["PAGOS $dia"] = '';
+            // Recorrido por periodos.
+
+            $colIdx = 0;
+            $movimientosPorFecha = $this->getMovimientosPorFecha($clienteId, $fi, $ff);
+            $movimientosIndexados = [];
+            foreach ($movimientosPorFecha as $mov) {
+                $movimientosIndexados[$mov['fecha']] = [
+                    'consumo' => floatval($mov['consumo']),
+                    'pago'    => floatval($mov['pago'])
+                ];
             }
 
-            $headerCliente['opc'] = 1;
-            $idxHeader = count($rows);
+            $colIdx = 0;
+            foreach ($dias as $fecha) {
+                $bgColor = ($colIdx % 2 == 0) ? 'bg-orange-200' : 'bg-green-200';
+                
+                $consumoDia = $movimientosIndexados[$fecha]['consumo'] ?? 0;
+                $pagoDia    = $movimientosIndexados[$fecha]['pago'] ?? 0;
+                
+                $headerCliente["CONSUMOS_$colIdx"] = [
+                    'html'  => $consumoDia > 0 ? evaluar($consumoDia) : '-',
+                    'class' => "text-center $bgColor"
+                ];
+                
+                $headerCliente["PAGOS_$colIdx"] = [
+                    'html'  => $pagoDia > 0 ? evaluar($pagoDia) : '-',
+                    'class' => "text-center $bgColor"
+                ];
+                
+                $totalConsumos[$colIdx] += $consumoDia;
+                $totalPagos[$colIdx] += $pagoDia;
+                
+                $colIdx++;
+            }
+
             $rows[] = $headerCliente;
 
-            $movimientos = $this->getMovimientosByCliente([
-                $clienteId,
-                $fi,
-                $ff
-            ]);
+           
 
-            $movimientosPorDia = [];
-            foreach ($movimientos as $mov) {
-                $fecha = $mov['fecha'];
-                if (!isset($movimientosPorDia[$fecha])) {
-                    $movimientosPorDia[$fecha] = [
-                        'consumos' => 0,
-                        'pagos' => 0
+            foreach ($subRows as $subRow) {
+                $row = [
+                    'id'       => $clienteId,
+                    'subrow'   => true,
+                    'CLIENTES' => [
+                        'html'  => $subRow['label'],
+                        'class' => 'pl-8 text-gray-700 bg-gray-50'
+                    ],
+                    'DEUDA'    => [
+                        'html'  => evaluar(0),
+                        'class' => 'text-end bg-gray-50'
+                    ]
+                ];
+
+                $colIdx = 0;
+                foreach ($diasName as $diaName) {
+
+                    $bgColor = ($colIdx % 2 == 0) ? 'bg-orange-50' : 'bg-green-50';
+                    $valueConsumo = '-';
+                    $valuePago    = '-';
+                    
+                    if ($subRow['type'] === 'consumo') {
+                        $valueConsumo = evaluar(0);
+                        $totalConsumos[$colIdx] += 0;
+                    } elseif ($subRow['type'] === 'pagos') {
+                        $valuePago = evaluar(0);
+                        $totalPagos[$colIdx] += 0;
+                    }
+
+                    $row["CONSUMOS_$colIdx"] = [
+                        'html'  => $valueConsumo,
+                        'class' => "text-center $bgColor"
                     ];
+                    $row["PAGOS_$colIdx"] = [
+                        'html'  => $valuePago,
+                        'class' => "text-center $bgColor"
+                    ];
+                    $colIdx++;
                 }
 
-                if ($mov['movement_type'] === 'consumo') {
-                    $movimientosPorDia[$fecha]['consumos'] += floatval($mov['amount']);
-                } else {
-                    $movimientosPorDia[$fecha]['pagos'] += floatval($mov['amount']);
-                }
+                $rows[] = $row;
             }
-
-            $saldoActual = floatval($cliente['saldo_inicial']);
-            $totalConsumos = 0;
-            $totalPagos = 0;
-
-            $rowSaldoInicial = [
-                'id' => $clienteId,
-                'key' => 'saldo_inicial',
-                'CLIENTES' => 'Saldo inicial',
-                'DEUDA' => [
-                    'html' => evaluar($saldoActual),
-                    'class' => 'text-end'
-                ]
-            ];
-
-            foreach ($dias as $i => $fecha) {
-                $rowSaldoInicial["CONSUMOS {$diasName[$i]}"] = '-';
-                $rowSaldoInicial["PAGOS {$diasName[$i]}"] = '-';
-            }
-            $rowSaldoInicial['opc'] = 0;
-            $rows[] = $rowSaldoInicial;
-
-            $rowConsumos = [
-                'id' => $clienteId,
-                'key' => 'consumos',
-                'CLIENTES' => 'Consumo a crédito',
-                'DEUDA' => ''
-            ];
-
-            $rowPagos = [
-                'id' => $clienteId,
-                'key' => 'pagos',
-                'CLIENTES' => 'Pagos y anticipos',
-                'DEUDA' => ''
-            ];
-
-            $rowSaldoFinal = [
-                'id' => $clienteId,
-                'key' => 'saldo_final',
-                'CLIENTES' => 'Saldo final',
-                'DEUDA' => ''
-            ];
-
-            foreach ($dias as $i => $fecha) {
-                $consumo = $movimientosPorDia[$fecha]['consumos'] ?? 0;
-                $pago = $movimientosPorDia[$fecha]['pagos'] ?? 0;
-
-                $totalConsumos += $consumo;
-                $totalPagos += $pago;
-
-                $rowConsumos["CONSUMOS {$diasName[$i]}"] = [
-                    'html' => $consumo > 0 ? evaluar($consumo) : '-',
-                    'val' => $consumo,
-                    'class' => 'text-end bg-green-50'
-                ];
-                $rowConsumos["PAGOS {$diasName[$i]}"] = '-';
-
-                $rowPagos["CONSUMOS {$diasName[$i]}"] = '-';
-                $rowPagos["PAGOS {$diasName[$i]}"] = [
-                    'html' => $pago > 0 ? '<span class="text-red-600">' . evaluar($pago) . '</span>' : '-',
-                    'val' => $pago,
-                    'class' => 'text-end bg-red-50'
-                ];
-
-                $saldoActual = $saldoActual + $consumo - $pago;
-
-                $rowSaldoFinal["CONSUMOS {$diasName[$i]}"] = '-';
-                $rowSaldoFinal["PAGOS {$diasName[$i]}"] = [
-                    'html' => evaluar($saldoActual),
-                    'val' => $saldoActual,
-                    'class' => 'text-end'
-                ];
-            }
-
-            $rowConsumos['opc'] = 0;
-            $rowPagos['opc'] = 0;
-            $rowSaldoFinal['opc'] = 0;
-
-            $rows[] = $rowConsumos;
-            $rows[] = $rowPagos;
-            $rows[] = $rowSaldoFinal;
-
-            $rowTotalConsumos = [
-                'id' => $clienteId,
-                'key' => 'total_consumos',
-                'CLIENTES' => 'Total de consumos a crédito',
-                'DEUDA' => [
-                    'html' => '<strong>' . evaluar($totalConsumos) . '</strong>',
-                    'class' => 'text-end font-bold'
-                ]
-            ];
-
-            $rowTotalPagos = [
-                'id' => $clienteId,
-                'key' => 'total_pagos',
-                'CLIENTES' => 'Total de pagos y anticipos',
-                'DEUDA' => [
-                    'html' => '<strong class="text-red-600">' . evaluar($totalPagos) . '</strong>',
-                    'class' => 'text-end font-bold'
-                ]
-            ];
-
-            foreach ($diasName as $dia) {
-                $rowTotalConsumos["CONSUMOS $dia"] = '';
-                $rowTotalConsumos["PAGOS $dia"] = '';
-                $rowTotalPagos["CONSUMOS $dia"] = '';
-                $rowTotalPagos["PAGOS $dia"] = '';
-            }
-
-            $rowTotalConsumos['opc'] = 0;
-            $rowTotalPagos['opc'] = 0;
-
-            $rows[] = $rowTotalConsumos;
-            $rows[] = $rowTotalPagos;
         }
 
-        return [
-            'thead' => $thead,
-            'row' => $rows
+        $totalRow = [
+            'id'         => 'total_consumos',
+            'expandable' => true,
+            'CLIENTES'   => [
+                'html'  => 'Total de consumos a crédito',
+                'class' => 'font-bold bg-white'
+            ],
+            'DEUDA'      => [
+                'html'  => evaluar(0),
+                'class' => 'text-end font-bold bg-white'
+            ]
         ];
-    }
 
-    function getDetalleCliente() {
-        $clienteId = $_POST['cliente_id'];
-        $dailyClosureId = $_POST['daily_closure_id'];
-
-        $cliente = $this->getClienteById($clienteId);
-        $movimientos = $this->listMovimientos([
-            'daily_closure_id' => $dailyClosureId,
-            'tipo' => 'todos'
-        ]);
-
-        return [
-            'cliente_nombre' => $cliente['name'],
-            'movimientos' => $movimientos
-        ];
-    }
-
-    function lsClientesAdmin() {
-        $__row = [];
-        $ls = $this->lsClientes([1]);
-
-        foreach ($ls as $key) {
-            $a = [];
-
-            $a[] = [
-                'class' => 'btn btn-sm btn-primary me-1',
-                'html' => '<i class="icon-pencil"></i>',
-                'onclick' => 'app.editCliente(' . $key['id'] . ')'
+        $colIdx = 0;
+        foreach ($diasName as $diaName) {
+            $bgColor = ($colIdx % 2 == 0) ? 'bg-orange-50' : 'bg-green-50';
+            $totalRow["CONSUMOS_$colIdx"] = [
+                'html'  => evaluar($totalConsumos[$colIdx]),
+                'class' => "text-center font-bold $bgColor"
             ];
-
-            $a[] = [
-                'class' => 'btn btn-sm btn-danger',
-                'html' => '<i class="icon-trash"></i>',
-                'onclick' => 'app.deleteCliente(' . $key['id'] . ')'
+            $totalRow["PAGOS_$colIdx"] = [
+                'html'  => '-',
+                'class' => "text-center $bgColor"
             ];
-
-            $deudaActual = $this->getDeudaActualByID($key['id']);
-
-            $__row[] = [
-                'id' => $key['id'],
-                'Cliente' => $key['valor'],
-                'Deuda Actual' => [
-                    'html' => evaluar($deudaActual),
-                    'class' => 'text-end'
-                ],
-                'a' => $a
-            ];
+            $colIdx++;
         }
+        $rows[] = $totalRow;
 
-        return [
-            'row' => $__row,
-            'ls' => $ls
+        $totalPagosRow = [
+            'id'         => 'total_pagos',
+            'expandable' => true,
+            'CLIENTES'   => [
+                'html'  => 'Total de pagos y anticipos',
+                'class' => 'font-bold bg-white'
+            ],
+            'DEUDA'      => [
+                'html'  => evaluar(0),
+                'class' => 'text-end font-bold bg-white'
+            ]
         ];
-    }
 
-    function exportExcel() {
-        $fi = $_POST['fi'];
-        $ff = $_POST['ff'];
-
-        $data = $this->listConcentrado([
-            'fi' => $fi,
-            'ff' => $ff
-        ]);
-
-        $filename = 'concentrado_clientes_' . date('Y-m-d_His') . '.csv';
-        $filepath = '../../exports/' . $filename;
-
-        $file = fopen($filepath, 'w');
-        fputcsv($file, ['Cliente', 'Saldo Inicial', 'Total Consumos', 'Total Pagos', 'Saldo Final']);
-
-        foreach ($data as $row) {
-            fputcsv($file, [
-                $row['cliente_nombre'],
-                $row['saldo_inicial'],
-                $row['total_consumos'],
-                $row['total_pagos'],
-                $row['saldo_final']
-            ]);
+        $colIdx = 0;
+        foreach ($diasName as $diaName) {
+            $bgColor = ($colIdx % 2 == 0) ? 'bg-orange-50' : 'bg-green-50';
+            $totalPagosRow["CONSUMOS_$colIdx"] = [
+                'html'  => '-',
+                'class' => "text-center $bgColor"
+            ];
+            $totalPagosRow["PAGOS_$colIdx"] = [
+                'html'  => evaluar($totalPagos[$colIdx]),
+                'class' => "text-center font-bold $bgColor"
+            ];
+            $colIdx++;
         }
-
-        fclose($file);
+        $rows[] = $totalPagosRow;
 
         return [
-            'status' => 200,
-            'message' => 'Archivo generado correctamente',
-            'fileUrl' => '../../exports/' . $filename
+            'thead'       => $thead,
+            'row'         => $rows,
+            'theadGroups' => $theadGroups,
+            'clientes'    => $clientes,
+            'params'      => ['fi' => $fi, 'ff' => $ff, 'udn' => $udn]
         ];
     }
+
+  
 }
 
 // Complements
@@ -604,6 +517,28 @@ function renderMovementType($movementType) {
                 <i class="icon-help text-gray-600"></i> Desconocido
             </span>';
     }
+}
+
+// Complements
+
+function getDiasSemanaEspanol() {
+    return [
+        'Monday'    => 'LUNES',
+        'Tuesday'   => 'MARTES',
+        'Wednesday' => 'MIÉRCOLES',
+        'Thursday'  => 'JUEVES',
+        'Friday'    => 'VIERNES',
+        'Saturday'  => 'SÁBADO',
+        'Sunday'    => 'DOMINGO'
+    ];
+}
+
+function getMesesEspanol() {
+    return [
+        'Jan' => 'ENE', 'Feb' => 'FEB', 'Mar' => 'MAR', 'Apr' => 'ABR',
+        'May' => 'MAY', 'Jun' => 'JUN', 'Jul' => 'JUL', 'Aug' => 'AGO',
+        'Sep' => 'SEP', 'Oct' => 'OCT', 'Nov' => 'NOV', 'Dec' => 'DIC'
+    ];
 }
 
 $obj = new ctrl();

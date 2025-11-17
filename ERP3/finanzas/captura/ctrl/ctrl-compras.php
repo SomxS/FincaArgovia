@@ -2,73 +2,43 @@
 
 if (empty($_POST['opc'])) exit(0);
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
-
 require_once '../mdl/mdl-compras.php';
 
 class ctrl extends mdl {
 
-    function validatePermissions($action) {
-        $userLevel = $_SESSION['user_level'] ?? 'Captura';
-        
-        $permissions = [
-            'Captura' => ['add', 'ls', 'getPurchase'],
-            'Gerencia' => ['add', 'edit', 'ls', 'getPurchase', 'concentrado'],
-            'Dirección' => ['add', 'edit', 'delete', 'ls', 'getPurchase', 'concentrado'],
-            'Contabilidad' => ['add', 'edit', 'delete', 'ls', 'getPurchase', 'concentrado', 'lock', 'unlock']
-        ];
-        
-        if (!isset($permissions[$userLevel]) || !in_array($action, $permissions[$userLevel])) {
-            return [
-                'status' => 403,
-                'message' => 'No tiene permisos para realizar esta acción'
-            ];
-        }
-        
-        return true;
-    }
-
-    function isModuleLocked() {
-        $query = "
-            SELECT lock_time 
-            FROM {$this->bd}monthly_module_lock 
-            WHERE month = ? AND lock_time IS NOT NULL
-            ORDER BY lock_time DESC 
-            LIMIT 1
-        ";
-        $result = $this->_Read($query, [date('Y-m')]);
-        return !empty($result);
-    }
-
     function init() {
-        $udn = $_POST['udn'] ?? 1;
         return [
-            'productClass' => $this->lsProductClass([]),
-            'purchaseType' => $this->lsPurchaseType(),
-            'supplier'     => $this->lsSupplier([$udn]),
-            'methodPay'    => $this->lsMethodPay(),
-            'userLevel'    => $_SESSION['user_level'] ?? 'Captura',
-            'moduleLocked' => $this->isModuleLocked()
+            'productClass'  => $this->lsProductClass([1]),
+            'product'       => $this->lsProduct([1]),
+            'purchaseType'  => $this->lsPurchaseType([1]),
+            'supplier'      => $this->lsSupplier([1]),
+            'methodPay'     => $this->lsMethodPay([1]),
+            'udn'           => $this->lsUDN(),
+            'userLevel'     => 4
+        ];
+    }
+
+    function getTotales() {
+        $fecha   = $_POST['fecha'];
+        $totales = $this->getTotalesPorFecha($fecha);
+
+        return [
+            'totalCompras'     => $totales['total_compras'] ?? 0,
+            'totalFondoFijo'   => $totales['total_fondo_fijo'] ?? 0,
+            'totalCorporativo' => $totales['total_corporativo'] ?? 0,
+            'totalCredito'     => $totales['total_credito'] ?? 0
         ];
     }
 
     function ls() {
         $__row = [];
-        $udn = $_POST['udn'] ?? 1;
-        $fi = $_POST['fi'] ?? date('Y-m-01');
-        $ff = $_POST['ff'] ?? date('Y-m-t');
+        $fecha = $_POST['fecha'] ?? date('Y-m-d');
+        $tipo  = $_POST['tipoCompra'] ?? 'todos';
 
-        $ls = $this->listPurchases([$udn, $fi, $ff]);
-        $totals = $this->getTotalsByType([$udn, $fi, $ff]);
-        $balance = $this->getBalanceFondoFijo([$udn, $fi, $ff]);
-
-        $userLevel = $_SESSION['user_level'] ?? 'Captura';
-        $moduleLocked = $this->isModuleLocked();
-
-        $canEdit = in_array($userLevel, ['Gerencia', 'Dirección', 'Contabilidad']) && !$moduleLocked;
-        $canDelete = in_array($userLevel, ['Dirección', 'Contabilidad']) && !$moduleLocked;
+        $ls = $this->listCompras([
+            'fecha' => $fecha,
+            'tipo'  => $tipo
+        ]);
 
         foreach ($ls as $key) {
             $a = [];
@@ -76,33 +46,29 @@ class ctrl extends mdl {
             $a[] = [
                 'class'   => 'btn btn-sm btn-info me-1',
                 'html'    => '<i class="icon-eye"></i>',
-                'onclick' => 'app.showDetails(' . $key['id'] . ')'
+                'onclick' => 'compras.viewDetalle(' . $key['id'] . ')'
             ];
 
-            if ($canEdit) {
-                $a[] = [
-                    'class'   => 'btn btn-sm btn-primary me-1',
-                    'html'    => '<i class="icon-pencil"></i>',
-                    'onclick' => 'app.editPurchase(' . $key['id'] . ')'
-                ];
-            }
+            $a[] = [
+                'class'   => 'btn btn-sm btn-primary me-1',
+                'html'    => '<i class="icon-pencil"></i>',
+                'onclick' => 'compras.editCompra(' . $key['id'] . ')'
+            ];
 
-            if ($canDelete) {
-                $a[] = [
-                    'class'   => 'btn btn-sm btn-danger',
-                    'html'    => '<i class="icon-trash"></i>',
-                    'onclick' => 'app.deletePurchase(' . $key['id'] . ')'
-                ];
-            }
+            $a[] = [
+                'class'   => 'btn btn-sm btn-danger',
+                'html'    => '<i class="icon-trash"></i>',
+                'onclick' => 'compras.deleteCompra(' . $key['id'] . ')'
+            ];
 
             $__row[] = [
-                'id'              => $key['id'],
-                'Fecha'           => $key['operation_date'],
-                'Clase Producto'  => $key['product_class'],
-                'Producto'        => $key['product'],
-                'Tipo'            => renderPurchaseType($key['purchase_type']),
-                'Total'           => [
-                    'html'  => '$' . number_format($key['total'], 2),
+                'id'                   => $key['id'],
+                'Categoría'            => $key['product_class_name'],
+                'Producto'             => $key['product_name'],
+                'Tipo de compra'       => renderPurchaseType($key['purchase_type_name']),
+                'Método de pago'       => $key['method_pay_name'] ?? 'N/A',
+                'Total'                => [
+                    'html'  => evaluar($key['total']),
                     'class' => 'text-end'
                 ],
                 'a' => $a
@@ -110,24 +76,23 @@ class ctrl extends mdl {
         }
 
         return [
-            'row'     => $__row,
-            'totals'  => $totals,
-            'balance' => $balance
+            'row' => $__row,
+            'ls'  => $ls
         ];
     }
 
-    function getPurchase() {
-        $id = $_POST['id'];
-        $status = 404;
+    function getCompra() {
+        $id      = $_POST['id'];
+        $status  = 404;
         $message = 'Compra no encontrada';
-        $data = null;
+        $data    = null;
 
-        $purchase = $this->getPurchaseById([$id]);
+        $compra = $this->getCompraById($id);
 
-        if ($purchase) {
-            $status = 200;
+        if ($compra) {
+            $status  = 200;
             $message = 'Compra encontrada';
-            $data = $purchase;
+            $data    = $compra;
         }
 
         return [
@@ -137,206 +102,248 @@ class ctrl extends mdl {
         ];
     }
 
-    function addPurchase() {
-        $permissionCheck = $this->validatePermissions('add');
-        if ($permissionCheck !== true) {
-            return $permissionCheck;
-        }
+    function getProductsByClass() {
+        $classId = $_POST['product_class_id'];
+        $products = $this->lsProductByClass([$classId]);
 
-        $status = 500;
-        $message = 'Error al registrar la compra';
+        return [
+            'products' => $products
+        ];
+    }
 
-        if (empty($_POST['product_class_id']) || empty($_POST['product_id'])) {
-            return [
-                'status' => 400,
-                'message' => 'Campos requeridos faltantes'
-            ];
-        }
+    function addCompra() {
+        $status  = 500;
+        $message = 'Error al registrar compra';
 
-        if ($_POST['purchase_type_id'] == 2 && empty($_POST['method_pay_id'])) {
-            return [
-                'status' => 400,
-                'message' => 'Debe seleccionar un método de pago para compras corporativas'
-            ];
-        }
+        $_POST['operation_date'] = $_POST['fecha'] ?? date('Y-m-d');
+        $_POST['udn_id']         = $_POST['udn'] ?? 4;
+        $_POST['active']         = 1;
 
-        if ($_POST['purchase_type_id'] == 3 && empty($_POST['supplier_id'])) {
-            return [
-                'status' => 400,
-                'message' => 'Debe seleccionar un proveedor para compras a crédito'
-            ];
-        }
-
-        $_POST['total'] = $_POST['subtotal'] + $_POST['tax'];
-        $_POST['operation_date'] = date('Y-m-d');
-        $_POST['udn_id'] = $_POST['udn'];
-        $_POST['active'] = 1;
-
-        $create = $this->createPurchase($this->util->sql($_POST));
+        $create = $this->createCompra($this->util->sql($_POST));
 
         if ($create) {
-            $status = 200;
+            $status  = 200;
             $message = 'Compra registrada correctamente';
         }
 
         return [
-            'status' => $status,
+            'status'  => $status,
             'message' => $message
         ];
     }
 
-    function editPurchase() {
-        $permissionCheck = $this->validatePermissions('edit');
-        if ($permissionCheck !== true) {
-            return $permissionCheck;
-        }
-
-        if ($this->isModuleLocked()) {
-            return [
-                'status' => 403,
-                'message' => 'El módulo está bloqueado. No se pueden realizar modificaciones.'
-            ];
-        }
-
-        $id = $_POST['id'];
-        $status = 500;
+    function editCompra() {
+        $id      = $_POST['id'];
+        $status  = 500;
         $message = 'Error al editar compra';
 
-        $edit = $this->updatePurchase($this->util->sql($_POST, 1));
+        $edit = $this->updateCompra($this->util->sql($_POST, 1));
 
         if ($edit) {
-            $status = 200;
-            $message = 'Compra actualizada correctamente';
+            $status  = 200;
+            $message = 'Compra editada correctamente';
         }
 
         return [
-            'status' => $status,
+            'status'  => $status,
             'message' => $message
         ];
     }
 
-    function deletePurchase() {
-        $permissionCheck = $this->validatePermissions('delete');
-        if ($permissionCheck !== true) {
-            return $permissionCheck;
-        }
-
-        if ($this->isModuleLocked()) {
-            return [
-                'status' => 403,
-                'message' => 'El módulo está bloqueado. No se pueden eliminar compras.'
-            ];
-        }
-
-        $id = $_POST['id'];
-        $status = 500;
+    function deleteCompra() {
+        $id      = $_POST['id'];
+        $status  = 500;
         $message = 'Error al eliminar compra';
 
-        $delete = $this->deletePurchaseById([$id]);
+        $values = $this->util->sql([
+            'active' => 0,
+            'id'     => $id
+        ], 1);
+
+        $delete = $this->deleteCompraById($values);
 
         if ($delete) {
-            $status = 200;
+            $status  = 200;
             $message = 'Compra eliminada correctamente';
         }
 
         return [
-            'status' => $status,
+            'status'  => $status,
             'message' => $message
         ];
     }
 
-    function getConcentrado() {
-        $udn = $_POST['udn'] ?? 1;
-        $fi = $_POST['fi'] ?? date('Y-m-01');
-        $ff = $_POST['ff'] ?? date('Y-m-t');
+    function getTotalesConcentrado() {
+        $fi  = $_POST['fi'];
+        $ff  = $_POST['ff'];
+        $udn = $_POST['udn'] ?? 4;
 
-        $data = $this->listConcentrado([$udn, $fi, $ff]);
-        $balance = $this->getBalanceFondoFijo([$udn, $fi, $ff]);
+        $totales = $this->getTotalesConcentradoPeriodo([
+            'fi'  => $fi,
+            'ff'  => $ff,
+            'udn' => $udn
+        ]);
 
-        $__row = [];
-        foreach ($data as $key) {
-            $__row[] = [
-                'Fecha'          => $key['fecha'],
-                'Día'            => $key['dia'],
-                'Clase Producto' => $key['clase_producto'],
-                'Subtotal'       => '$' . number_format($key['subtotal'], 2),
-                'Impuesto'       => '$' . number_format($key['impuesto'], 2),
-                'Total'          => '$' . number_format($key['total'], 2)
+        return [
+            'saldoInicial'    => $totales['saldo_inicial'] ?? 15000,
+            'totalCompras'    => $totales['total_compras'] ?? 0,
+            'salidasFondoFijo' => $totales['salidas_fondo_fijo'] ?? 0,
+            'saldoFinal'      => ($totales['saldo_inicial'] ?? 15000) - ($totales['salidas_fondo_fijo'] ?? 0)
+        ];
+    }
+
+    function lsConcentrado() {
+        $fi   = $_POST['fi'];
+        $ff   = $_POST['ff'];
+        $udn  = $_POST['udn'] ?? 4;
+
+        $start = new DateTime($fi);
+        $end   = new DateTime($ff);
+        $end->modify('+1 day');
+
+        $interval = new DateInterval('P1D');
+        $period   = new DatePeriod($start, $interval, $end);
+
+        $dias     = [];
+        $diasName = [];
+        $rows     = [];
+
+        $diasSemana = getDiasSemanaEspanol();
+        $meses      = getMesesEspanol();
+
+        $thead = ['CLASE PRODUCTO'];
+
+        foreach ($period as $date) {
+            $fecha       = $date->format('Y-m-d');
+            $dia         = $date->format('d');
+            $mesEn       = $date->format('M');
+            $mesEs       = $meses[$mesEn];
+            $diaSemanaEn = $date->format('l');
+            $diaSemanaEs = $diasSemana[$diaSemanaEn];
+
+            $dias[]     = $fecha;
+            $diasName[] = "$diaSemanaEs, $dia DE $mesEs";
+            $thead[]    = "$diaSemanaEs, $dia";
+        }
+
+        $thead[] = 'TOTAL';
+
+        $totalPorDia = array_fill(0, count($dias), 0);
+        $clases      = $this->listProductClass([$fi, $ff, $udn]);
+
+        foreach ($clases as $clase) {
+            $claseId     = $clase['id'];
+            $claseNombre = $clase['name'];
+
+            $row = [
+                'id'              => $claseId,
+                'CLASE PRODUCTO'  => [
+                    'html'  => $claseNombre,
+                    'class' => 'font-bold bg-white'
+                ]
             ];
+
+            $totalClase = 0;
+            $colIdx     = 0;
+
+            foreach ($dias as $fecha) {
+                $comprasDia = $this->getComprasPorClaseYFecha($claseId, $fecha);
+                $total      = floatval($comprasDia['total'] ?? 0);
+
+                $bgColor = ($colIdx % 2 == 0) ? 'bg-blue-50' : 'bg-green-50';
+
+                $row["DIA_$colIdx"] = [
+                    'html'  => $total > 0 ? evaluar($total) : '-',
+                    'class' => "text-center $bgColor"
+                ];
+
+                $totalPorDia[$colIdx] += $total;
+                $totalClase += $total;
+                $colIdx++;
+            }
+
+            $row['TOTAL'] = [
+                'html'  => evaluar($totalClase),
+                'class' => 'text-end font-bold bg-gray-100'
+            ];
+
+            $rows[] = $row;
         }
 
-        return [
-            'row'     => $__row,
-            'balance' => $balance
+        $totalRow = [
+            'id'             => 'total',
+            'CLASE PRODUCTO' => [
+                'html'  => 'TOTAL',
+                'class' => 'font-bold bg-white'
+            ]
         ];
-    }
 
-    function getProducts() {
-        $classId = $_POST['product_class_id'];
-        $products = $this->lsProduct([$classId]);
+        $totalGeneral = 0;
+        $colIdx       = 0;
 
-        return [
-            'status' => 200,
-            'data'   => $products
-        ];
-    }
-
-    function lockModule() {
-        $permissionCheck = $this->validatePermissions('lock');
-        if ($permissionCheck !== true) {
-            return $permissionCheck;
+        foreach ($diasName as $diaName) {
+            $bgColor = ($colIdx % 2 == 0) ? 'bg-blue-50' : 'bg-green-50';
+            $totalRow["DIA_$colIdx"] = [
+                'html'  => evaluar($totalPorDia[$colIdx]),
+                'class' => "text-center font-bold $bgColor"
+            ];
+            $totalGeneral += $totalPorDia[$colIdx];
+            $colIdx++;
         }
 
-        $month = $_POST['month'] ?? date('Y-m');
-        $udn = $_POST['udn'] ?? 1;
-
-        $query = "
-            INSERT INTO {$this->bd}monthly_module_lock (udn_id, module_id, month, lock_time)
-            VALUES (?, 1, ?, NOW())
-            ON DUPLICATE KEY UPDATE lock_time = NOW()
-        ";
-
-        $result = $this->_Read($query, [$udn, $month]);
-
-        return [
-            'status' => 200,
-            'message' => 'Módulo bloqueado correctamente'
+        $totalRow['TOTAL'] = [
+            'html'  => evaluar($totalGeneral),
+            'class' => 'text-end font-bold bg-gray-100'
         ];
-    }
 
-    function unlockModule() {
-        $permissionCheck = $this->validatePermissions('unlock');
-        if ($permissionCheck !== true) {
-            return $permissionCheck;
-        }
-
-        $month = $_POST['month'] ?? date('Y-m');
-        $udn = $_POST['udn'] ?? 1;
-
-        $query = "
-            UPDATE {$this->bd}monthly_module_lock 
-            SET lock_time = NULL 
-            WHERE udn_id = ? AND module_id = 1 AND month = ?
-        ";
-
-        $result = $this->_Read($query, [$udn, $month]);
+        $rows[] = $totalRow;
 
         return [
-            'status' => 200,
-            'message' => 'Módulo desbloqueado correctamente'
+            'thead' => $thead,
+            'row'   => $rows
         ];
     }
 }
 
-function renderPurchaseType($type) {
-    $colors = [
-        'Fondo fijo'   => 'bg-green-100 text-green-800',
-        'Corporativo'  => 'bg-blue-100 text-blue-800',
-        'Crédito'      => 'bg-orange-100 text-orange-800'
-    ];
+function renderPurchaseType($purchaseType) {
+    switch ($purchaseType) {
+        case 'Fondo fijo':
+            return '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                <i class="icon-money text-green-600"></i> Fondo fijo
+            </span>';
+        case 'Corporativo':
+            return '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                <i class="icon-briefcase text-blue-600"></i> Corporativo
+            </span>';
+        case 'Crédito':
+            return '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
+                <i class="icon-credit-card text-orange-600"></i> Crédito
+            </span>';
+        default:
+            return '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                <i class="icon-help text-gray-600"></i> Desconocido
+            </span>';
+    }
+}
 
-    $color = $colors[$type] ?? 'bg-gray-100 text-gray-800';
-    return '<span class="px-2 py-1 rounded-md text-sm font-semibold ' . $color . '">' . $type . '</span>';
+function getDiasSemanaEspanol() {
+    return [
+        'Monday'    => 'LUNES',
+        'Tuesday'   => 'MARTES',
+        'Wednesday' => 'MIÉRCOLES',
+        'Thursday'  => 'JUEVES',
+        'Friday'    => 'VIERNES',
+        'Saturday'  => 'SÁBADO',
+        'Sunday'    => 'DOMINGO'
+    ];
+}
+
+function getMesesEspanol() {
+    return [
+        'Jan' => 'ENE', 'Feb' => 'FEB', 'Mar' => 'MAR', 'Apr' => 'ABR',
+        'May' => 'MAY', 'Jun' => 'JUN', 'Jul' => 'JUL', 'Aug' => 'AGO',
+        'Sep' => 'SEP', 'Oct' => 'OCT', 'Nov' => 'NOV', 'Dec' => 'DIC'
+    ];
 }
 
 $obj = new ctrl();
