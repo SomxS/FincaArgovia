@@ -1,3 +1,7 @@
+// update: 16/11/2025
+// title modal.
+
+
 class Complements {
 
     constructor(link, div_modulo) {
@@ -1644,7 +1648,9 @@ class Components extends Complements {
             border_table: "border border-gray-300",
             border_row: "border-t border-gray-200",
             color_row_alt: "bg-gray-100",
-            striped: false
+            striped: false,
+            theadGroups: null,
+            color_th_group: null
         };
 
         if (options.theme === 'dark') {
@@ -1701,6 +1707,20 @@ class Components extends Complements {
 
         const table = $("<table>", { id: opts.id, class: ` border-separate border-spacing-0 ${opts.border_table} ${opts.class}` });
         const thead = $("<thead>");
+
+        if (opts.theadGroups && Array.isArray(opts.theadGroups)) {
+            const groupRow = $('<tr>');
+            opts.theadGroups.forEach(group => {
+                const groupColor = group.color || opts.color_th_group || opts.color_th;
+                const th = $('<th>', {
+                    colspan: group.colspan || 1,
+                    class: `text-center px-3 py-2 font-semibold ${groupColor} ${opts.border_row}`,
+                    text: group.label || ''
+                });
+                groupRow.append(th);
+            });
+            thead.append(groupRow);
+        }
 
         if (opts.data.thead) {
             if (opts.extends) {
@@ -1899,6 +1919,24 @@ class Components extends Complements {
         `).appendTo("head");
     }
 
+  
+
+    setupExpandableConcentrado(tableId) {
+        $(`#${tableId} .expandable-row`).on('click', function() {
+            const $row = $(this);
+            const parentId = $row.data('parent-id');
+            const isExpanded = $row.hasClass('expanded');
+            
+            $row.toggleClass('expanded');
+            
+            let $nextRow = $row.next();
+            while ($nextRow.length && $nextRow.hasClass('subrow') && $nextRow.data('parent-id') === parentId) {
+                $nextRow.toggle();
+                $nextRow = $nextRow.next();
+            }
+        });
+    }
+
     tabLayout(options) {
         const defaults = {
             parent: "root",
@@ -1911,7 +1949,7 @@ class Components extends Complements {
             },
             content: { class: '', id: '' },
             renderContainer: true,
-
+            tab_container: { class: '' },
             json: [
                 { id: "TAB1", tab: "TAB1", icon: "", active: true, onClick: () => { } },
                 { id: "TAB2", tab: "TAB2", icon: "", onClick: () => { } },
@@ -1932,16 +1970,16 @@ class Components extends Complements {
                 inactive: "text-gray-600 hover:bg-white"
             },
             button: {
-                base: "", // sin fondo de contenedor
+                base: "bg-gray-100  p-1 rounded-lg inline-flex shadow-blue-500/50",
                 active: "bg-blue-600 text-white",
-                inactive: "bg-blue-100 text-blue-700 hover:bg-blue-200"
+                inactive: " text-gray-600 hover:bg-gray-50"
             }
         };
 
         const sizes = {
             large: "rounded-lg flex gap-1 px-1 py-1 w-full text-sm",
             short: "rounded-lg flex gap-1 px-1 py-1 text-sm",
-            button: "flex flex-wrap gap-2" // para botones
+            button: "gap-1" // gap entre botones
         };
 
         const themeStyle = themes[opts.type] || themes[opts.theme];
@@ -1955,11 +1993,16 @@ class Components extends Complements {
         opts.json.forEach(tab => {
             const isActive = tab.active || false;
 
+            const buttonClass = opts.type === 'button'
+                ? `transition-all duration-200 text-sm font-medium rounded-md px-4 py-2 
+                   ${isActive ? themeStyle.active : themeStyle.inactive}`
+                : `transition text-sm font-medium rounded px-3 py-2 
+                   ${isActive ? themeStyle.active : themeStyle.inactive}`;
+
             const tabButton = $("<button>", {
                 id: `tab-${tab.id}`,
                 html: tab.icon ? `<i class='${tab.icon} mr-2 h-4 w-4'></i>${tab.tab}` : tab.tab,
-                class: `transition text-sm font-medium rounded px-3 py-2 
-                ${isActive ? themeStyle.active : themeStyle.inactive}`,
+                class: buttonClass,
                 "data-state": isActive ? "active" : "inactive",
                 click: () => {
                     $(`#${opts.id} button`).each(function () {
@@ -1989,13 +2032,14 @@ class Components extends Complements {
         if (opts.renderContainer) {
             const contentContainer = $("<div>", {
                 id: `content-${opts.id}`,
-                class: `mt-2 ${opts.content.class}`,
+                class: `mt-2 h-screens ${opts.content.class}`,
             });
 
             opts.json.forEach(tab => {
+                const borderClass = opts.type === 'button' ? '' : 'border';
                 const contentView = $("<div>", {
                     id: `container-${tab.id}`,
-                    class: `hidden p-3 h-full rounded-lg`,
+                    class: `hidden p-3 border ${tab.class ?? ''} rounded-lg`,
                     html: tab.content || ""
                 });
                 contentContainer.append(contentView);
@@ -2382,6 +2426,34 @@ class Components extends Complements {
         });
 
         $(`#${opts.parent}`).html(container);
+    }
+
+    createTitleModal(options = {}) {
+        const defaults = {
+            parent: "root",
+            class: "space-y-2",
+            icon: "icon-trophy",
+            title: "Top 10 Clientes",
+            subtitle: "",
+            color: "bg-blue-600",
+        };
+
+        const opts = Object.assign({}, defaults, options);
+
+
+        const card = $(`
+        <div class="flex items-center space-x-3  ${opts.class}">
+            <div class="w-10 h-10 ${opts.color} rounded flex items-center justify-center">
+                <i class="${opts.icon} text-white text-sm"></i>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-gray-800 mb-0">${opts.title}</h3>
+                <p class="text-xs text-gray-600 mb-0">${opts.subtitle}</p>
+            </div>
+        </div>
+    `);
+
+        return card;
     }
 
 

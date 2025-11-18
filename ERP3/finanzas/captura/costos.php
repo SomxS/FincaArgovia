@@ -21,6 +21,6 @@
         </div>
     </main>
    
-    <script src="js/compras.js"></script>
+    <script src="js/costos.js"></script>
 </body>
 </html>

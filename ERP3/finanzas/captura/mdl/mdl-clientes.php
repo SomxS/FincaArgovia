@@ -80,7 +80,7 @@ class mdl extends CRUD {
             LEFT JOIN {$this->bd}customer c ON dcc.customer_id = c.id
             LEFT JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
             LEFT JOIN rfwsmqex_gvsl_rrhh.empleados e ON dc.employee_id = e.idEmpleado
-            WHERE dcc.daily_closure_id = ?  {$whereType}
+            WHERE dcc.daily_closure_id = ?  {$whereType} AND dcc.active = 1
             ORDER BY dcc.id DESC
         ";
 
@@ -96,7 +96,7 @@ class mdl extends CRUD {
             FROM {$this->bd}detail_credit_customer dcc
             LEFT JOIN {$this->bd}customer c ON dcc.customer_id = c.id
             LEFT JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
-            LEFT JOIN empleados e ON dc.employee_id = e.idEmpleado
+            LEFT JOIN rfwsmqex_gvsl_rrhh.empleados e ON dc.employee_id = e.idEmpleado
             WHERE dcc.id = ?
         ";
         
@@ -106,27 +106,27 @@ class mdl extends CRUD {
 
     function createMovimiento($data) {
         return $this->_Insert([
-            'table' => $this->bd . 'detail_credit_customer',
+            'table'  => $this->bd .  'detail_credit_customer',
             'values' => $data['values'],
-            'data' => $data['data']
+            'data'   => $data['data']
         ]);
     }
 
     function updateMovimiento($data) {
         return $this->_Update([
-            'table' => $this->bd . 'detail_credit_customer',
+            'table'  => $this->bd . 'detail_credit_customer',
             'values' => $data['values'],
-            'where' => 'id = ?',
-            'data' => $data['data']
+            'where'  => 'id = ?',
+            'data'   => $data['data']
         ]);
     }
 
-    function deleteMovimientoById($data) {
+    function deleteMovimientoById($array) {
         return $this->_Update([
-            'table' => $this->bd . 'detail_credit_customer',
-            'values' => 'active = 0',
-            'where' => 'id = ?',
-            'data' => $data
+            'table'  => $this->bd . 'detail_credit_customer',
+            'values' => $array['values'],
+            'where'  => $array['where'],
+            'data'   => $array['data']
         ]);
     }
 
@@ -138,7 +138,7 @@ class mdl extends CRUD {
                 SUM(CASE WHEN dcc.movement_type != 'consumo' AND dcc.method_pay = 'banco' THEN dcc.amount ELSE 0 END) as total_pagos_banco
             FROM {$this->bd}daily_closure dc
             INNER JOIN {$this->bd}detail_credit_customer dcc ON dcc.daily_closure_id = dc.id
-            WHERE dc.operation_date = ?
+            WHERE dc.operation_date = ? and dcc.active = 1
         ";
 
         $result = $this->_Read($query, [$fecha]);
@@ -146,11 +146,11 @@ class mdl extends CRUD {
     }
 
     function listConcentrado($params) {
-        $whereUdn = '';
+        $whereUdn   = '';
         $dataParams = [$params['fi'], $params['ff']];
 
         if (isset($params['udn']) && $params['udn'] !== 'todas') {
-            $whereUdn = ' AND c.udn_id = ?';
+            $whereUdn     = ' AND c.udn_id = ?';
             $dataParams[] = $params['udn'];
         }
 
@@ -207,24 +207,137 @@ class mdl extends CRUD {
         ";
         
         $result = $this->_Read($query, [$fecha, $udnId]);
-        return $result[0]['id'] ?? null;
+        return $result[0] ?? null;
+    }
+
+    function getDailyClosure($array) {
+        $query = "
+            SELECT id, operation_date, udn_id, turn
+            FROM {$this->bd}daily_closure
+            WHERE operation_date = ? AND udn_id = ?
+            LIMIT 1
+        ";
+        
+        $result = $this->_Read($query, $array);
+        return $result[0] ?? null;
+    }
+
+    function getMovimientosByCliente($array) {
+        $query = "
+            SELECT 
+                dcc.id,
+                dcc.customer_id,
+                dcc.movement_type,
+                dcc.amount,
+                dc.operation_date as fecha
+            FROM {$this->bd}detail_credit_customer dcc
+            INNER JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
+            WHERE dcc.customer_id = ?
+              AND dc.operation_date BETWEEN ? AND ?
+              AND dcc.active = 1
+            ORDER BY dc.operation_date ASC
+        ";
+        
+        return $this->_Read($query, $array);
+    }
+
+    function getMovimientosAgrupadosPorFecha($params) {
+        $whereUdn   = '';
+        $dataParams = [$params['fi'], $params['ff']];
+
+        if (isset($params['udn']) && $params['udn'] !== 'todas') {
+            $whereUdn     = ' AND c.udn_id = ?';
+            $dataParams[] = $params['udn'];
+        }
+
+        $query = "
+            SELECT 
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                dc.operation_date as fecha,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as pagos
+            FROM {$this->bd}customer c
+            INNER JOIN {$this->bd}detail_credit_customer dcc ON c.id = dcc.customer_id
+            INNER JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
+            WHERE dc.operation_date BETWEEN ? AND ?
+              AND dcc.active = 1
+              AND c.active = 1
+              {$whereUdn}
+            GROUP BY c.id, c.name, dc.operation_date
+            ORDER BY c.name, dc.operation_date
+        ";
+
+        return $this->_Read($query, $dataParams);
     }
 
     function logAuditoria($data) {
         $logData = [
-            'movimiento_id' => $data['movimiento_id'] ?? null,
-            'cliente_id' => $data['cliente_id'],
-            'accion' => $data['accion'],
-            'usuario_id' => $data['usuario_id'],
-            'fecha_accion' => date('Y-m-d H:i:s'),
-            'datos_anteriores' => json_encode($data['datos_anteriores'] ?? null),
-            'datos_nuevos' => json_encode($data['datos_nuevos'] ?? null)
+            'movimiento_id'     => $data['movimiento_id'] ?? null,
+            'cliente_id'        => $data['cliente_id'],
+            'accion'            => $data['accion'],
+            'usuario_id'        => $data['usuario_id'],
+            'fecha_accion'      => date('Y-m-d H:i:s'),
+            'datos_anteriores'  => json_encode($data['datos_anteriores'] ?? null),
+            'datos_nuevos'      => json_encode($data['datos_nuevos'] ?? null)
         ];
 
         return $this->_Insert([
-            'table' => $this->bd . 'audit_log_clientes',
+            'table'  => $this->bd . 'audit_log_clientes',
             'values' => implode(',', array_keys($logData)),
-            'data' => array_values($logData)
+            'data'   => array_values($logData)
         ]);
+    }
+
+    function listCustomer($array){
+        $query = "
+            SELECT
+                customer.id ,
+                customer.`name` as valor,
+                customer.active
+
+            FROM
+            {$this->bd}detail_credit_customer
+            INNER JOIN {$this->bd}daily_closure ON detail_credit_customer.daily_closure_id = daily_closure.id
+            INNER JOIN {$this->bd}customer ON detail_credit_customer.customer_id = customer.id
+            WHERE operation_date BETWEEN ? AND ? and customer.udn_id = ?
+            GROUP BY name 
+        ";
+        
+        return $this->_Read($query, $array);
+    }
+
+    function getTotalesClientePeriodo($clienteId, $fi, $ff) {
+        $query = "
+            SELECT 
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos
+            FROM {$this->bd}detail_credit_customer dcc
+            INNER JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
+            WHERE dcc.customer_id = ?
+              AND dc.operation_date BETWEEN ? AND ?
+              AND dcc.active = 1
+        ";
+        
+        $result = $this->_Read($query, [$clienteId, $fi, $ff]);
+        return $result[0] ?? ['total_consumos' => 0, 'total_pagos' => 0];
+    }
+
+    function getMovimientosPorFecha($clienteId, $fi, $ff) {
+        $query = "
+            SELECT 
+                dc.operation_date as fecha,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as consumo,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as pago
+            FROM {$this->bd}detail_credit_customer dcc
+            INNER JOIN {$this->bd}daily_closure dc ON dcc.daily_closure_id = dc.id
+            WHERE dcc.customer_id = ?
+              AND dc.operation_date BETWEEN ? AND ?
+              AND dcc.active = 1
+            GROUP BY dc.operation_date
+            ORDER BY dc.operation_date
+        ";
+        
+        return $this->_Read($query, [$clienteId, $fi, $ff]);
     }
 }

@@ -1,20 +1,69 @@
 let api = 'ctrl/ctrl-compras.php';
-let app, concentrado;
-let productClass, purchaseType, supplier, methodPay, userLevel, moduleLocked;
+let app, compras, concentrado;
+
+let lsProductClass, lsProduct, lsPurchaseType, lsSupplier, lsMethodPay, userLevel, udn;
+
+let idUDN;
+
+const PERMISOS = {
+    1: {
+        ver_dashboard: true,
+        registrar_compra: true,
+        editar_compra: true,
+        eliminar_compra: true,
+        ver_concentrado: false,
+        exportar_excel: false,
+        ver_administracion: false
+    },
+    2: {
+        ver_dashboard: true,
+        registrar_compra: false,
+        editar_compra: false,
+        eliminar_compra: false,
+        ver_concentrado: true,
+        exportar_excel: true,
+        ver_administracion: false
+    },
+    3: {
+        ver_dashboard: true,
+        registrar_compra: false,
+        editar_compra: false,
+        eliminar_compra: false,
+        ver_concentrado: true,
+        exportar_excel: true,
+        filtrar_udn: true,
+        ver_administracion: false
+    },
+    4: {
+        ver_dashboard: true,
+        registrar_compra: true,
+        editar_compra: true,
+        eliminar_compra: true,
+        ver_concentrado: true,
+        exportar_excel: true,
+        ver_administracion: true,
+        gestionar_productos: true
+    }
+};
 
 $(async () => {
-    const data = await useFetch({ url: api, data: { opc: "init", udn: 1 } });
-    productClass = data.productClass;
-    purchaseType = data.purchaseType;
-    supplier = data.supplier;
-    methodPay = data.methodPay;
-    userLevel = data.userLevel;
-    moduleLocked = data.moduleLocked;
+
+    // Sustituir variable por cookie o session_storage.
+    idUDN = 4;
+
+
+    const data = await useFetch({ url: api, data: { opc: "init", udn:idUDN } });
+    lsProductClass  = data.productClass;
+    lsProduct       = data.product;
+    lsPurchaseType  = data.purchaseType;
+    lsSupplier      = data.supplier;
+    lsMethodPay     = data.methodPay;
+    udn             = data.udn;
+    userLevel       = data.userLevel || 1;
 
     app = new App(api, "root");
-    concentrado = new ConcentradoCompras(api, "root");
-    
     app.render();
+    app.renderDaily();
 });
 
 class App extends Templates {
@@ -23,10 +72,11 @@ class App extends Templates {
         this.PROJECT_NAME = "compras";
     }
 
+  
+
     render() {
         this.layout();
         this.filterBar();
-        this.ls();
     }
 
     layout() {
@@ -35,440 +85,307 @@ class App extends Templates {
             id: this.PROJECT_NAME,
             class: 'w-full',
             card: {
-                filterBar: { class: 'w-full mb-3', id: `filterBar${this.PROJECT_NAME}` },
-                container: { class: 'w-full h-full', id: `container${this.PROJECT_NAME}` }
+                filterBar: { class: 'w-full border-b pb-2', id: `filterBar${this.PROJECT_NAME}` },
+                container: { class: 'w-full my-2 h-full', id: `container${this.PROJECT_NAME}` }
             }
         });
+
+        const tabs = [
+            {
+                id: "dashboard",
+                tab: "Dashboard",
+                class: "mb-1",
+                active: true,
+                onClick: () => compras.render()
+            }
+        ];
+
+        if (PERMISOS[userLevel].ver_concentrado) {
+            tabs.push({
+                id: "concentrado",
+                tab: "Concentrado",
+                onClick: () => concentrado.render()
+            });
+        }
 
         this.tabLayout({
             parent: `container${this.PROJECT_NAME}`,
             id: `tabs${this.PROJECT_NAME}`,
             theme: "light",
-            type: "short",
-            json: [
-                {
-                    id: "compras",
-                    tab: "Compras",
-                    active: true,
-                    onClick: () => this.ls()
-                },
-                {
-                    id: "concentrado",
-                    tab: "Concentrado",
-                    onClick: () => concentrado.render()
-                }
-            ]
+            type: "button",
+            json: tabs
         });
-
-        const lockBadge = moduleLocked 
-            ? '<span class="ml-3 px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-semibold">🔒 Módulo Bloqueado</span>'
-            : '<span class="ml-3 px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold">🔓 Módulo Activo</span>';
-
-        const lockButton = userLevel === 'Contabilidad' 
-            ? `<button onclick="app.toggleModuleLock()" class="ml-3 px-4 py-2 ${moduleLocked ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'} text-white rounded-lg text-sm">
-                ${moduleLocked ? '🔓 Desbloquear' : '🔒 Bloquear'} Módulo
-               </button>`
-            : '';
-
-        $(`#container${this.PROJECT_NAME}`).prepend(`
-            <div class="px-4 pt-3 pb-3 flex justify-between items-center">
-                <div>
-                    <h2 class="text-2xl font-semibold">🛒 Módulo de Compras ${lockBadge}</h2>
-                    <p class="text-gray-400">Gestiona las compras de la unidad de negocio - Nivel: ${userLevel}</p>
-                </div>
-                <div>
-                    ${lockButton}
-                </div>
-            </div>
-        `);
     }
 
     filterBar() {
-        const container = $("#container-compras");
-        container.html('<div id="filterbar-compras" class="mb-2"></div><div id="totals-compras" class="mb-3"></div><div id="tabla-compras"></div>');
-
-        const canAdd = ['Captura', 'Gerencia', 'Dirección', 'Contabilidad'].includes(userLevel);
-
-        const filterData = [
-            {
-                opc: "select",
-                id: "purchase_type_id",
-                lbl: "Tipo de compra",
-                class: "col-12 col-md-3",
-                data: [{ id: "", valor: "Todas" }, ...purchaseType],
-                onchange: 'app.ls()'
-            },
-            {
-                opc: "select",
-                id: "method_pay_id",
-                lbl: "Método de pago",
-                class: "col-12 col-md-3",
-                data: [{ id: "", valor: "Todos" }, ...methodPay],
-                onchange: 'app.ls()'
-            },
-            {
-                opc: "input-calendar",
-                id: "calendar",
-                lbl: "Rango de fechas",
-                class: "col-12 col-md-4"
-            }
-        ];
-
-        if (canAdd) {
-            filterData.push({
-                opc: "button",
-                class: "col-12 col-md-2",
-                id: "btnNuevaCompra",
-                text: "Nueva Compra",
-                onClick: () => this.addPurchase()
-            });
-        }
-
         this.createfilterBar({
-            parent: "filterbar-compras",
-            data: filterData
-        });
-
-        dataPicker({
-            parent: "calendar",
-            onSelect: () => this.ls()
-        });
-    }
-
-    ls() {
-        let rangePicker = getDataRangePicker("calendar");
-
-        this.createTable({
-            parent: "tabla-compras",
-            idFilterBar: "filterbar-compras",
-            data: { 
-                opc: "ls", 
-                fi: rangePicker.fi, 
-                ff: rangePicker.ff,
-                udn: 1
-            },
-            coffeesoft: true,
-            conf: { datatable: true, pag: 15 },
-            attr: {
-                id: "tbCompras",
-                theme: 'corporativo',
-                title: 'Lista de Compras',
-                subtitle: 'Compras registradas en el sistema',
-                center: [1, 4],
-                right: [5]
-            },
-            success: (data) => {
-                this.updateTotals(data.totals, data.balance);
-            }
-        });
-    }
-
-    updateTotals(totals, balance) {
-        let totalGeneral = 0;
-        let totalFondoFijo = 0;
-        let totalCorporativo = 0;
-        let totalCredito = 0;
-
-        totals.forEach(t => {
-            totalGeneral += parseFloat(t.total);
-            if (t.type_id == 1) totalFondoFijo = parseFloat(t.total);
-            if (t.type_id == 2) totalCorporativo = parseFloat(t.total);
-            if (t.type_id == 3) totalCredito = parseFloat(t.total);
-        });
-
-        const html = `
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <p class="text-sm text-gray-600">Total Compras</p>
-                    <p class="text-2xl font-bold text-gray-800">$${totalGeneral.toFixed(2)}</p>
-                </div>
-                <div class="bg-green-50 p-4 rounded-lg shadow">
-                    <p class="text-sm text-green-600">Fondo Fijo</p>
-                    <p class="text-2xl font-bold text-green-800">$${totalFondoFijo.toFixed(2)}</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg shadow">
-                    <p class="text-sm text-blue-600">Corporativo</p>
-                    <p class="text-2xl font-bold text-blue-800">$${totalCorporativo.toFixed(2)}</p>
-                </div>
-                <div class="bg-orange-50 p-4 rounded-lg shadow">
-                    <p class="text-sm text-orange-600">Crédito</p>
-                    <p class="text-2xl font-bold text-orange-800">$${totalCredito.toFixed(2)}</p>
-                </div>
-            </div>
-            <div class="mt-3 bg-blue-50 p-4 rounded-lg shadow">
-                <p class="text-sm text-blue-600">Balance Fondo Fijo</p>
-                <div class="grid grid-cols-3 gap-4 mt-2">
-                    <div>
-                        <p class="text-xs text-gray-600">Saldo Inicial</p>
-                        <p class="text-lg font-bold">$${balance.saldo_inicial.toFixed(2)}</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-600">Salidas</p>
-                        <p class="text-lg font-bold text-red-600">-$${balance.salidas.toFixed(2)}</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-600">Saldo Final</p>
-                        <p class="text-lg font-bold text-green-600">$${balance.saldo_final.toFixed(2)}</p>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        $("#totals-compras").html(html);
-    }
-
-    jsonPurchase() {
-        return [
-            {
-                opc: "label",
-                id: "lblProducto",
-                text: "Información del Producto",
-                class: "col-12 fw-bold text-lg mb-2 border-b p-1"
-            },
-            {
-                opc: "select",
-                id: "product_class_id",
-                lbl: "Categoría de producto",
-                class: "col-12 col-md-6 mb-3",
-                data: productClass,
-                text: "valor",
-                value: "id",
-                onchange: "app.loadProducts()"
-            },
-            {
-                opc: "select",
-                id: "product_id",
-                lbl: "Producto",
-                class: "col-12 col-md-6 mb-3",
-                data: [],
-                text: "valor",
-                value: "id"
-            },
-            {
-                opc: "label",
-                id: "lblCompra",
-                text: "Información de la Compra",
-                class: "col-12 fw-bold text-lg mb-2 border-b p-1"
-            },
-            {
-                opc: "select",
-                id: "purchase_type_id",
-                lbl: "Tipo de compra",
-                class: "col-12 col-md-4 mb-3",
-                data: purchaseType,
-                text: "valor",
-                value: "id",
-                onchange: "app.toggleConditionalFields()"
-            },
-            {
-                opc: "select",
-                id: "supplier_id",
-                lbl: "Proveedor",
-                class: "col-12 col-md-4 mb-3 d-none",
-                data: supplier,
-                text: "valor",
-                value: "id"
-            },
-            {
-                opc: "select",
-                id: "method_pay_id",
-                lbl: "Método de pago",
-                class: "col-12 col-md-4 mb-3 d-none",
-                data: methodPay,
-                text: "valor",
-                value: "id"
-            },
-            {
-                opc: "input",
-                id: "subtotal",
-                lbl: "Subtotal",
-                tipo: "cifra",
-                class: "col-12 col-md-4 mb-3",
-                onkeyup: "validationInputForNumber('#subtotal')"
-            },
-            {
-                opc: "input",
-                id: "tax",
-                lbl: "Impuesto",
-                tipo: "cifra",
-                class: "col-12 col-md-4 mb-3",
-                onkeyup: "validationInputForNumber('#tax')"
-            },
-            {
-                opc: "textarea",
-                id: "description",
-                lbl: "Descripción",
-                rows: 3,
-                class: "col-12 mb-3"
-            },
-            {
-                opc: "btn-submit",
-                id: "btnGuardarCompra",
-                text: "Guardar Compra",
-                class: "col-12 col-md-6 offset-md-6"
-            }
-        ];
-    }
-
-    addPurchase() {
-        this.createModalForm({
-            id: 'formCompraAdd',
-            data: { opc: 'addPurchase', udn: 1 },
-            bootbox: {
-                title: 'Nueva Compra',
-            },
-            json: this.jsonPurchase(),
-            success: (response) => {
-                if (response.status === 200) {
-                    alert({ icon: "success", text: response.message });
-                    this.ls();
-                } else {
-                    alert({ icon: "info", title: "Oops!...", text: response.message, btn1: true, btn1Text: "Ok" });
-                }
-            }
-        });
-
-        $("#lblProducto").addClass("border-b p-1");
-        $("#lblCompra").addClass("border-b p-1");
-    }
-
-    async loadProducts() {
-        const classId = $('#product_class_id').val();
-        if (!classId) return;
-
-        const products = await useFetch({
-            url: this._link,
-            data: { opc: 'getProducts', product_class_id: classId }
-        });
-
-        $('#product_id').option_select({
-            data: products.data || [],
-            placeholder: "Seleccionar producto"
-        });
-    }
-
-    toggleConditionalFields() {
-        const typeId = $('#purchase_type_id').val();
-        
-        $('#supplier_id').closest('.col-12').addClass('d-none');
-        $('#method_pay_id').closest('.col-12').addClass('d-none');
-
-        if (typeId == 2) {
-            $('#method_pay_id').closest('.col-12').removeClass('d-none');
-        } else if (typeId == 3) {
-            $('#supplier_id').closest('.col-12').removeClass('d-none');
-        }
-    }
-
-    async editPurchase(id) {
-        const request = await useFetch({
-            url: this._link,
-            data: { opc: "getPurchase", id: id }
-        });
-
-        const purchase = request.data;
-
-        this.createModalForm({
-            id: 'formCompraEdit',
-            data: { opc: 'editPurchase', id: id, udn: 1 },
-            bootbox: {
-                title: 'Editar Compra',
-            },
-            autofill: purchase,
-            json: this.jsonPurchase(),
-            success: (response) => {
-                if (response.status === 200) {
-                    alert({ icon: "success", text: response.message });
-                    this.ls();
-                } else {
-                    alert({ icon: "info", title: "Oops!...", text: response.message });
-                }
-            }
-        });
-
-        $("#lblProducto").addClass("border-b p-1");
-        $("#lblCompra").addClass("border-b p-1");
-    }
-
-    deletePurchase(id) {
-        this.swalQuestion({
-            opts: {
-                title: "¿Desea eliminar esta compra?",
-                text: "Esta acción no se puede deshacer.",
-                icon: "warning",
-            },
-            data: {
-                opc: "deletePurchase",
-                id: id,
-                udn: 1
-            },
-            methods: {
-                send: (response) => {
-                    if (response.status === 200) {
-                        alert({ icon: "success", text: response.message });
-                        this.ls();
-                    } else {
-                        alert({ icon: "info", title: "Oops!...", text: response.message });
-                    }
-                }
-            }
-        });
-    }
-
-    async showDetails(id) {
-        const request = await useFetch({
-            url: this._link,
-            data: { opc: "getPurchase", id: id }
-        });
-
-        const purchase = request.data;
-
-        this.detailCard({
-            parent: "modalDetails",
-            title: "Detalle de Compra",
-            class: "cols-2",
+            parent: `filterBar${this.PROJECT_NAME}`,
             data: [
-                { text: "Categoría", value: purchase.product_class_id },
-                { text: "Producto", value: purchase.product_id },
-                { text: "Tipo de compra", value: purchase.purchase_type_id },
-                { text: "Subtotal", value: `$${parseFloat(purchase.subtotal).toFixed(2)}` },
-                { text: "Impuesto", value: `$${parseFloat(purchase.tax).toFixed(2)}` },
-                { text: "Total", value: `$${parseFloat(purchase.total).toFixed(2)}` },
-                { type: "observacion", text: "Descripción", value: purchase.description }
+                {
+                    opc: "div",
+                    id: 'lblInfo',
+                    class: "col-sm-6",
+                    html: `<div class="p-3 text-sm text-gray-600">Módulo de Compras</div>`
+                },
+                {
+                    opc: "input-calendar",
+                    class: "col-sm-3 offset-sm-3",
+                    id: `calendar${this.PROJECT_NAME}`,
+                    lbl: "Fecha de captura:"
+                }
             ]
         });
 
-        bootbox.dialog({
-            title: "Detalle de Compra",
-            message: $("#modalDetails").html(),
-            size: 'large',
-            closeButton: true
+        dataPicker({
+            parent: `calendar${this.PROJECT_NAME}`,
+            type: 'simple',
+            rangeDefault: {
+                singleDatePicker: true,
+                showDropdowns: true,
+                autoApply: true,
+                locale: {
+                    format: "YYYY-MM-DD"
+                }
+            },
+            onSelect: (start) => {
+                const fechaSeleccionada = start.format('YYYY-MM-DD');
+                $(`#calendar${this.PROJECT_NAME}`).val(fechaSeleccionada);
+                setTimeout(() => {
+                    this.renderDaily();
+                }, 150);
+            }
         });
     }
 
-    async toggleModuleLock() {
-        const action = moduleLocked ? 'unlockModule' : 'lockModule';
-        const confirmText = moduleLocked 
-            ? '¿Desea desbloquear el módulo de compras?' 
-            : '¿Desea bloquear el módulo de compras? Esto impedirá ediciones y eliminaciones.';
+    async renderDaily() {
+        const fecha = $(`#calendar${this.PROJECT_NAME}`).val() || moment().format('YYYY-MM-DD');
+
+        compras = new Compras(api, "root");
+        concentrado = new Concentrado(api, "root");
+        compras.render();
+    }
+
+    checkPermiso(accion) {
+        const permisos = PERMISOS[userLevel];
+        if (!permisos || !permisos[accion]) {
+            alert({
+                icon: "warning",
+                title: "Acceso Denegado",
+                text: "No tiene permisos para realizar esta acción"
+            });
+            return false;
+        }
+        return true;
+    }
+}
+
+class Compras extends Templates {
+    constructor(link, div_modulo) {
+        super(link, div_modulo);
+        this.PROJECT_NAME = "Compras";
+    }
+
+    render() {
+        this.layout();
+        this.filterBar();
+        this.updateTotales();
+        this.lsCompras();
+    }
+
+    layout() {
+        this.primaryLayout({
+            parent: "container-dashboard",
+            id: this.PROJECT_NAME,
+            class: 'w-full',
+            card: {
+                filterBar: { class: 'w-full pb-2', id: `filterBar${this.PROJECT_NAME}` },
+                container: { class: 'w-full my-2 h-full', id: `container${this.PROJECT_NAME}` }
+            }
+        });
+
+        $(`#container-dashboard`).prepend(`<div id="showCards" class="mb-5"></div>`);
+    }
+
+    filterBar() {
+        this.createfilterBar({
+            parent: `filterBar${this.PROJECT_NAME}`,
+            data: [
+                {
+                    opc: "button",
+                    class: "col-sm-3",
+                    className: 'w-100',
+                    id: "btnConcentrado",
+                    icon: 'icon-toggle-off',
+                    text: "Concentrado de compras",
+                    color_btn: "outline-info",
+                    onClick: () => concentrado.render()
+                },
+                {
+                    opc: "button",
+                    class: "col-sm-3",
+                    className: 'w-100',
+                    id: "btnNuevaCompra",
+                    text: "Registrar nueva compra",
+                    onClick: () => this.addCompra()
+                },
+                {
+                    opc: "select",
+                    id: "tipoCompra",
+                    className: 'w-100',
+                    lbl: "Tipo de compra",
+                    class: "col-sm-3",
+                    data: [
+                        { id: "todos", valor: "Todos" },
+                        { id: "1", valor: "Fondo fijo" },
+                        { id: "2", valor: "Corporativo" },
+                        { id: "3", valor: "Crédito" }
+                    ],
+                    onchange: `compras.lsCompras()`
+                },
+                {
+                    opc: "select",
+                    id: "metodoPago",
+                    className: 'w-100',
+                    lbl: "Método de pago",
+                    class: "col-sm-3",
+                    data: lsMethodPay,
+                    onchange: `compras.lsCompras()`
+                }
+            ]
+        });
+    }
+
+    async updateTotales() {
+        const fecha = $(`#calendar${app.PROJECT_NAME}`).val() || moment().format('YYYY-MM-DD');
+
+        const data = await useFetch({
+            url: this._link,
+            data: { opc: 'getTotales', fecha: fecha }
+        });
+
+        this.infoCard({
+            parent: 'showCards',
+            theme: 'light',
+            json: [
+                {
+                    title: 'Total de compras',
+                    data: {
+                        value: formatPrice(data.totalCompras || 0),
+                        color: 'text-blue-600'
+                    }
+                },
+                {
+                    title: 'Compras fondo fijo',
+                    data: {
+                        value: formatPrice(data.totalFondoFijo || 0),
+                        color: 'text-green-600'
+                    }
+                },
+                {
+                    title: 'Compras corporativo',
+                    data: {
+                        value: formatPrice(data.totalCorporativo || 0),
+                        color: 'text-purple-600'
+                    }
+                },
+                {
+                    title: 'Compras a crédito',
+                    data: {
+                        value: formatPrice(data.totalCredito || 0),
+                        color: 'text-orange-600'
+                    }
+                }
+            ]
+        });
+    }
+
+    lsCompras() {
+        const fecha = $(`#calendar${app.PROJECT_NAME}`).val() || moment().format('YYYY-MM-DD');
+
+        this.createTable({
+            parent: "containerCompras",
+            idFilterBar: `filterBar${this.PROJECT_NAME}`,
+            data: { opc: 'ls', udn_id: idUDN, fecha: fecha },
+            coffeesoft: true,
+            conf: { datatable: true, pag: 15 },
+            attr: {
+                id: `tb${this.PROJECT_NAME}`,
+                theme: 'corporativo',
+                center: [2, 3],
+                right: [5],
+                extends: true
+            }
+        });
+    }
+
+    addCompra() {
+        this.createModalForm({
+            id: 'formCompraAdd',
+            data: { opc: 'addCompra', udn_id: idUDN },
+            bootbox: {
+                title: 'Nueva Compra'
+            },
+            json: this.jsonCompra(),
+            success: (response) => {
+                if (response.status === 200) {
+                    alert({ icon: "success", text: response.message });
+                    this.lsCompras();
+                    this.updateTotales();
+                } else {
+                    alert({ icon: "error", text: response.message });
+                }
+            }
+        });
+
+        this.setupCompraLogic();
+    }
+
+    async editCompra(id) {
+        const request = await useFetch({
+            url: this._link,
+            data: { opc: "getCompra", id: id }
+        });
+
+        this.createModalForm({
+            id: 'formCompraEdit',
+            data: { opc: 'editCompra', id: id },
+            bootbox: {
+                title: 'Editar Compra'
+            },
+            autofill: request.data,
+            json: this.jsonCompra(),
+            success: (response) => {
+                if (response.status === 200) {
+                    alert({ icon: "success", text: response.message });
+                    this.lsCompras();
+                    this.updateTotales();
+                } else {
+                    alert({ icon: "error", text: response.message });
+                }
+            }
+        });
+
+        this.setupCompraLogic();
+    }
+
+    deleteCompra(id) {
+        const row = event.target.closest('tr');
+        const producto = row.querySelectorAll('td')[1]?.innerText || 'Producto';
+        const monto = row.querySelectorAll('td')[4]?.innerText || '$0.00';
 
         this.swalQuestion({
             opts: {
-                title: "Confirmar acción",
-                text: confirmText,
-                icon: "warning",
+                title: "¿Está seguro?",
+                html: `¿Desea eliminar la compra de <strong>${producto}</strong> por un monto de <strong>${monto}</strong>?`,
+                icon: "warning"
             },
-            data: {
-                opc: action,
-                udn: 1,
-                month: moment().format('YYYY-MM')
-            },
+            data: { opc: "deleteCompra", id: id },
             methods: {
                 send: (response) => {
                     if (response.status === 200) {
                         alert({ icon: "success", text: response.message });
-                        moduleLocked = !moduleLocked;
-                        location.reload();
+                        this.lsCompras();
+                        this.updateTotales();
                     } else {
                         alert({ icon: "error", text: response.message });
                     }
@@ -477,114 +394,354 @@ class App extends Templates {
         });
     }
 
-    canEdit() {
-        return ['Gerencia', 'Dirección', 'Contabilidad'].includes(userLevel) && !moduleLocked;
+    async viewDetalle(id) {
+        const request = await useFetch({
+            url: this._link,
+            data: { opc: "getCompra", id: id }
+        });
+
+        const compra = request.data;
+
+        bootbox.dialog({
+            title: this.createTitleModal({
+                title: 'Detalle de Compra',
+                subtitle: `Actualizado por última vez: ${moment(compra.updated_at).format('DD/MM/YYYY HH:mm')}`
+            }),
+            message: `
+            <div class="p-2 text-gray-800 space-y-2 my-3">
+                <div>
+                    <h3 class="font-semibold text-xs tracking-widest text-gray-500 mb-1">INFORMACIÓN DEL PRODUCTO</h3>
+                    <div class="p-3">
+                        <p class="text-sm"><strong>Categoría de producto:</strong> ${compra.product_class_name}</p>
+                        <p class="text-sm"><strong>Producto:</strong> ${compra.product_name}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-xs tracking-widest text-gray-500 mb-1">DETALLES DE LA COMPRA</h3>
+                    <div class="p-3 grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <p class="text-gray-600 text-sm mb-1">Tipo de compra</p>
+                            <p class="text-gray-900 font-medium">${compra.purchase_type_name}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600 text-sm mb-1">Método de Pago</p>
+                            <p class="text-gray-900 font-medium">${compra.method_pay_name || 'N/A'}</p>
+                        </div>
+                        ${compra.supplier_name ? `
+                        <div>
+                            <p class="text-gray-600 text-sm mb-1">Proveedor</p>
+                            <p class="text-gray-900 font-medium">${compra.supplier_name}</p>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-xs tracking-widest text-gray-500 mb-1">DESCRIPCIÓN</h3>
+                    <div class="p-3 text-sm">
+                        ${compra.description || 'Ninguna'}
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-xs tracking-widest text-gray-500 mb-1">RESUMEN FINANCIERO</h3>
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200 space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span>Subtotal:</span>
+                            <span class="font-bold">${formatPrice(compra.subtotal)}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Impuesto:</span>
+                            <span class="font-bold">${formatPrice(compra.tax)}</span>
+                        </div>
+                        <div class="border-t pt-3 flex justify-between text-base font-semibold">
+                            <span>Total:</span>
+                            <span>${formatPrice(compra.total)}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+        });
     }
 
-    canDelete() {
-        return ['Dirección', 'Contabilidad'].includes(userLevel) && !moduleLocked;
+    setupCompraLogic() {
+        setTimeout(() => {
+            $('#product_class_id').on('change', async function () {
+                const classId = $(this).val();
+                if (classId) {
+                    const data = await useFetch({
+                        url: api,
+                        data: { opc: 'getProductsByClass', product_class_id: classId }
+                    });
+                    $('#product_id').option_select({
+                        data: data.products,
+                        placeholder: "Seleccionar producto"
+                    });
+                }
+            });
+
+            $('#purchase_type_id').on('change', function () {
+                const tipo = $(this).val();
+                const metodoPago = $('#method_pay_id');
+                const proveedor = $('#supplier_id');
+
+                if (tipo === '1') {
+                    metodoPago.val('').prop('disabled', true);
+                    proveedor.val('').prop('disabled', true);
+                } else if (tipo === '2') {
+                    metodoPago.prop('disabled', false);
+                    proveedor.val('').prop('disabled', true);
+                } else if (tipo === '3') {
+                    metodoPago.val('').prop('disabled', true);
+                    proveedor.prop('disabled', false);
+                }
+            });
+
+            $('#subtotal, #tax').on('input', function () {
+                const subtotal = parseFloat($('#subtotal').val()) || 0;
+                const tax = parseFloat($('#tax').val()) || 0;
+                const total = subtotal + tax;
+                $('#total').val(total.toFixed(2));
+            });
+        }, 300);
+    }
+
+    jsonCompra() {
+        return [
+            {
+                opc: "select",
+                id: "product_class_id",
+                lbl: "Categoría de producto",
+                class: "col-12 col-md-6 mb-3",
+                data: lsProductClass,
+                text: "name",
+                value: "id",
+                required: true
+            },
+            {
+                opc: "select",
+                id: "product_id",
+                lbl: "Producto",
+                class: "col-12 col-md-6 mb-3",
+                data: [],
+                required: true
+            },
+            {
+                opc: "select",
+                id: "purchase_type_id",
+                lbl: "Tipo de compra",
+                class: "col-12 col-md-6 mb-3",
+                data: lsPurchaseType,
+                text: "name",
+                value: "id",
+                required: true
+            },
+            {
+                opc: "select",
+                id: "supplier_id",
+                lbl: "Proveedor",
+                class: "col-12 col-md-6 mb-3",
+                data: lsSupplier,
+                text: "name",
+                value: "id"
+            },
+            {
+                opc: "select",
+                id: "method_pay_id",
+                lbl: "Método de pago",
+                class: "col-12 col-md-6 mb-3",
+                data: lsMethodPay,
+                text: "name",
+                value: "id"
+            },
+            {
+                opc: "input",
+                id: "subtotal",
+                lbl: "Subtotal",
+                tipo: "cifra",
+                class: "col-12 col-md-6 mb-3",
+                required: true
+            },
+            {
+                opc: "input",
+                id: "tax",
+                lbl: "Impuesto",
+                tipo: "cifra",
+                class: "col-12 col-md-6 mb-3",
+                required: true
+            },
+            {
+                opc: "input",
+                id: "total",
+                lbl: "Total",
+                tipo: "cifra",
+                class: "col-12 col-md-6 mb-3",
+                readonly: true
+            },
+            {
+                opc: "textarea",
+                id: "description",
+                lbl: "Descripción de la compra",
+                rows: 3,
+                class: "col-12 mb-3"
+            }
+        ];
     }
 }
 
-class ConcentradoCompras extends App {
+class Concentrado extends App {
     constructor(link, div_modulo) {
         super(link, div_modulo);
     }
 
     render() {
         this.filterBarConcentrado();
+        this.updateTotalesConcentrado();
         this.lsConcentrado();
     }
 
     filterBarConcentrado() {
-        const container = $("#container-concentrado");
-        container.html('<div id="filterbar-concentrado" class="mb-2"></div><div id="balance-concentrado" class="mb-3"></div><div id="tabla-concentrado"></div>');
+        $(`#container-concentrado`).html(`
+            <div id="cards-concentrado" class="mb-4"></div>
+            <div id="filterbar-concentrado" class="mb-3"></div>
+            <div id="tabla-concentrado"></div>
+        `);
 
         this.createfilterBar({
             parent: "filterbar-concentrado",
             data: [
                 {
+                    opc: "button",
+                    class: "col-sm-3",
+                    className: 'w-100',
+                    id: "btnConcentrado",
+                    icon: 'icon-toggle-on',
+                    text: "Regresar a compras",
+                    color_btn: "outline-info",
+                    onClick: () => compras.render()
+                },
+                {
                     opc: "input-calendar",
+                    class: "col-sm-4",
                     id: "calendarConcentrado",
-                    lbl: "Rango de fechas",
-                    class: "col-12 col-md-6"
+                    lbl: "Rango de fechas:"
                 },
                 {
-                    opc: "button",
-                    class: "col-12 col-md-3",
-                    id: "btnBuscar",
-                    text: "Buscar",
-                    onClick: () => this.lsConcentrado()
-                },
-                {
-                    opc: "button",
-                    class: "col-12 col-md-3",
-                    id: "btnExportar",
-                    text: "Exportar Excel",
-                    onClick: () => this.exportExcel()
+                    opc: "select",
+                    id: "udn",
+                    lbl: "Unidad de Negocio",
+                    class: "col-sm-4",
+                    data: udn,
+                    onchange: `concentrado.lsConcentrado()`
                 }
             ]
         });
 
         dataPicker({
             parent: "calendarConcentrado",
-            onSelect: () => this.lsConcentrado()
-        });
-    }
-
-    lsConcentrado() {
-        let rangePicker = getDataRangePicker("calendarConcentrado");
-
-        this.createTable({
-            parent: "tabla-concentrado",
-            idFilterBar: "filterbar-concentrado",
-            data: { 
-                opc: "getConcentrado", 
-                fi: rangePicker.fi, 
-                ff: rangePicker.ff,
-                udn: 1
+            type: 'all',
+            rangepicker: {
+                startDate: moment().subtract(3, 'days'),
+                endDate: moment(),
+                showDropdowns: true,
+                autoApply: true,
+                locale: {
+                    format: "DD-MM-YYYY"
+                },
+                ranges: {
+                    "Hoy": [moment(), moment()],
+                    "Ayer": [moment().subtract(1, "days"), moment().subtract(1, "days")],
+                    "Últimos 3 días": [moment().subtract(3, "days"), moment()],
+                    "Últimos 7 días": [moment().subtract(6, "days"), moment()],
+                    "Mes actual": [moment().startOf("month"), moment()],
+                    "Mes anterior": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+                }
             },
-            coffeesoft: true,
-            conf: { datatable: true, pag: 15 },
-            attr: {
-                id: "tbConcentrado",
-                theme: 'corporativo',
-                title: 'Concentrado de Compras',
-                subtitle: 'Reporte detallado por fecha y categoría',
-                center: [0, 1],
-                right: [3, 4, 5]
-            },
-            success: (data) => {
-                this.showBalance(data.balance);
+            onSelect: () => {
+                this.updateTotalesConcentrado();
+                this.lsConcentrado();
             }
         });
     }
 
-    showBalance(balance) {
-        const html = `
-            <div class="bg-blue-50 p-4 rounded-lg shadow">
-                <p class="text-sm text-blue-600 font-bold mb-2">Balance del Fondo Fijo</p>
-                <div class="grid grid-cols-3 gap-4">
-                    <div>
-                        <p class="text-xs text-gray-600">Saldo Inicial</p>
-                        <p class="text-lg font-bold">$${balance.saldo_inicial.toFixed(2)}</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-600">Salidas</p>
-                        <p class="text-lg font-bold text-red-600">-$${balance.salidas.toFixed(2)}</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-600">Saldo Final</p>
-                        <p class="text-lg font-bold text-green-600">$${balance.saldo_final.toFixed(2)}</p>
-                    </div>
-                </div>
-            </div>
-        `;
+    async updateTotalesConcentrado() {
+        const rangePicker = getDataRangePicker("calendarConcentrado");
+        const udnId = $('#udn').val();
 
-        $("#balance-concentrado").html(html);
+        const data = await useFetch({
+            url: this._link,
+            data: { 
+                opc: 'getTotalesConcentrado', 
+                fi: rangePicker.fi, 
+                ff: rangePicker.ff,
+                udn: udnId
+            }
+        });
+
+        this.infoCard({
+            parent: 'cards-concentrado',
+            theme: 'light',
+            json: [
+                {
+                    title: 'Saldo inicial fondo fijo',
+                    data: {
+                        value: formatPrice(data.saldoInicial || 0),
+                        color: 'text-gray-700'
+                    }
+                },
+                {
+                    title: 'Total compras',
+                    data: {
+                        value: formatPrice(data.totalCompras || 0),
+                        color: 'text-blue-600'
+                    }
+                },
+                {
+                    title: 'Salidas fondo fijo',
+                    data: {
+                        value: formatPrice(data.salidasFondoFijo || 0),
+                        color: 'text-orange-600'
+                    }
+                },
+                {
+                    title: 'Saldo final fondo fijo',
+                    data: {
+                        value: formatPrice(data.saldoFinal || 0),
+                        color: 'text-gray-700'
+                    }
+                }
+            ]
+        });
     }
 
-    exportExcel() {
-        alert({ icon: "info", text: "Funcionalidad de exportación en desarrollo" });
+    async lsConcentrado() {
+        const rangePicker = getDataRangePicker("calendarConcentrado");
+        const udnId = $('#udn').val();
+
+        const data = await useFetch({
+            url: this._link,
+            data: { 
+                opc: 'lsConcentrado', 
+                fi: rangePicker.fi, 
+                ff: rangePicker.ff, 
+                udn: udnId 
+            }
+        });
+
+        this.createCoffeTable({
+            parent: 'tabla-concentrado',
+            id: 'tbConcentrado',
+            theme: 'corporativo',
+            title: '📊 Concentrado de Compras',
+            subtitle: `Del ${rangePicker.fi} al ${rangePicker.ff}`,
+            data: {
+                thead: data.thead,
+                row: data.row
+            },
+            center: [0, 1, 2, 3, 4, 5],
+            right: [6]
+        });
     }
 }
