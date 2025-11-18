@@ -3,6 +3,8 @@ let app, compras, concentrado;
 
 let lsProductClass, lsProduct, lsPurchaseType, lsSupplier, lsMethodPay, userLevel, udn;
 
+let idUDN;
+
 const PERMISOS = {
     1: {
         ver_dashboard: true,
@@ -45,7 +47,12 @@ const PERMISOS = {
 };
 
 $(async () => {
-    const data = await useFetch({ url: api, data: { opc: "init" } });
+
+    // Sustituir variable por cookie o session_storage.
+    idUDN = 4;
+
+
+    const data = await useFetch({ url: api, data: { opc: "init", udn:idUDN } });
     lsProductClass  = data.productClass;
     lsProduct       = data.product;
     lsPurchaseType  = data.purchaseType;
@@ -65,26 +72,7 @@ class App extends Templates {
         this.PROJECT_NAME = "compras";
     }
 
-    async renderDaily() {
-        const fecha = $(`#calendar${this.PROJECT_NAME}`).val() || moment().format('YYYY-MM-DD');
-        
-        compras = new Compras(api, "root");
-        concentrado = new Concentrado(api, "root");
-        compras.render();
-    }
-
-    checkPermiso(accion) {
-        const permisos = PERMISOS[userLevel];
-        if (!permisos || !permisos[accion]) {
-            alert({
-                icon: "warning",
-                title: "Acceso Denegado",
-                text: "No tiene permisos para realizar esta acción"
-            });
-            return false;
-        }
-        return true;
-    }
+  
 
     render() {
         this.layout();
@@ -124,7 +112,7 @@ class App extends Templates {
             parent: `container${this.PROJECT_NAME}`,
             id: `tabs${this.PROJECT_NAME}`,
             theme: "light",
-            type: "short",
+            type: "button",
             json: tabs
         });
     }
@@ -167,6 +155,27 @@ class App extends Templates {
                 }, 150);
             }
         });
+    }
+
+    async renderDaily() {
+        const fecha = $(`#calendar${this.PROJECT_NAME}`).val() || moment().format('YYYY-MM-DD');
+
+        compras = new Compras(api, "root");
+        concentrado = new Concentrado(api, "root");
+        compras.render();
+    }
+
+    checkPermiso(accion) {
+        const permisos = PERMISOS[userLevel];
+        if (!permisos || !permisos[accion]) {
+            alert({
+                icon: "warning",
+                title: "Acceso Denegado",
+                text: "No tiene permisos para realizar esta acción"
+            });
+            return false;
+        }
+        return true;
     }
 }
 
@@ -296,7 +305,7 @@ class Compras extends Templates {
         this.createTable({
             parent: "containerCompras",
             idFilterBar: `filterBar${this.PROJECT_NAME}`,
-            data: { opc: 'ls', fecha: fecha },
+            data: { opc: 'ls', udn_id: idUDN, fecha: fecha },
             coffeesoft: true,
             conf: { datatable: true, pag: 15 },
             attr: {
@@ -312,7 +321,7 @@ class Compras extends Templates {
     addCompra() {
         this.createModalForm({
             id: 'formCompraAdd',
-            data: { opc: 'addCompra' },
+            data: { opc: 'addCompra', udn_id: idUDN },
             bootbox: {
                 title: 'Nueva Compra'
             },
@@ -552,7 +561,7 @@ class Compras extends Templates {
                 id: "subtotal",
                 lbl: "Subtotal",
                 tipo: "cifra",
-                class: "col-12 col-md-4 mb-3",
+                class: "col-12 col-md-6 mb-3",
                 required: true
             },
             {
@@ -560,7 +569,7 @@ class Compras extends Templates {
                 id: "tax",
                 lbl: "Impuesto",
                 tipo: "cifra",
-                class: "col-12 col-md-4 mb-3",
+                class: "col-12 col-md-6 mb-3",
                 required: true
             },
             {
@@ -568,7 +577,7 @@ class Compras extends Templates {
                 id: "total",
                 lbl: "Total",
                 tipo: "cifra",
-                class: "col-12 col-md-4 mb-3",
+                class: "col-12 col-md-6 mb-3",
                 readonly: true
             },
             {

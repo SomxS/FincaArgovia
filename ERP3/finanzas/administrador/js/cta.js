@@ -494,7 +494,7 @@ class TipoCompras extends Templates {
                 },
                 {
                     opc: "button",
-                    class: "col-12 col-md-2",
+                    class: "col-12 col-md-3",
                     id: "btnAddTipoCompra",
                     className: 'w-100',
                     text: "+ Agregar tipo de compra",

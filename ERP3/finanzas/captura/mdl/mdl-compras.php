@@ -10,12 +10,12 @@ class mdl extends CRUD {
 
     public function __construct() {
         $this->util = new Utileria;
-        $this->bd = "rfwsmqex_finanzas.";
+        $this->bd = "rfwsmqex_gvsl_finanzas2.";
     }
 
     function lsProductClass($array) {
         $query = "
-            SELECT id, name, description
+            SELECT id, name as valor, description
             FROM {$this->bd}product_class
             WHERE active = ?
             ORDER BY name ASC
@@ -25,7 +25,7 @@ class mdl extends CRUD {
 
     function lsProduct($array) {
         $query = "
-            SELECT id, name
+            SELECT id, name as valor
             FROM {$this->bd}product
             WHERE active = ?
             ORDER BY name ASC
@@ -45,7 +45,7 @@ class mdl extends CRUD {
 
     function lsPurchaseType($array) {
         $query = "
-            SELECT id, name
+            SELECT id, name as valor
             FROM {$this->bd}purchase_type
             WHERE active = ?
             ORDER BY name ASC
@@ -55,7 +55,7 @@ class mdl extends CRUD {
 
     function lsSupplier($array) {
         $query = "
-            SELECT id, name
+            SELECT id, name as valor
             FROM {$this->bd}supplier
             WHERE active = ?
             ORDER BY name ASC
@@ -85,11 +85,17 @@ class mdl extends CRUD {
 
     function listCompras($params) {
         $whereType = '';
+        $whereUdn  = '';
         $data      = [$params['fecha']];
 
         if ($params['tipo'] !== 'todos') {
             $whereType = ' AND p.purchase_type_id = ?';
             $data[]    = $params['tipo'];
+        }
+
+        if (!empty($params['udn'])) {
+            $whereUdn = ' AND p.udn = ?';
+            $data[]   = $params['udn'];
         }
 
         $query = "
@@ -106,7 +112,7 @@ class mdl extends CRUD {
             LEFT JOIN {$this->bd}purchase_type pt ON p.purchase_type_id = pt.id
             LEFT JOIN {$this->bd}supplier s ON p.supplier_id = s.id
             LEFT JOIN {$this->bd}method_pay mp ON p.method_pay_id = mp.id
-            WHERE p.operation_date = ? {$whereType} AND p.active = 1
+            WHERE p.operation_date = ? {$whereType} {$whereUdn} AND p.active = 1
             ORDER BY p.id DESC
         ";
 

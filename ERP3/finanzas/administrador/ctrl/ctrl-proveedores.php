@@ -17,50 +17,47 @@ class ctrl extends mdl {
     }
 
     function lsSuppliers() {
+        $__row = [];
+        $udn = $_POST['udn'];
         $active = $_POST['active'] ?? 1;
-        $udn_id = $_POST['udn'] ?? null;
         
-        $data = $this->listSuppliers([
-            'active' => $active,
-            'udn_id' => $udn_id
-        ]);
-        
-        $rows = [];
+        $ls = $this->listSupplier([$udn, $active]);
 
-        foreach ($data as $item) {
+        foreach ($ls as $key) {
             $a = [];
 
-            if ($active == 1) {
+            if ($key['active'] == 1) {
                 $a[] = [
                     'class' => 'btn btn-sm btn-primary me-1',
                     'html' => '<i class="icon-pencil"></i>',
-                    'onclick' => 'supplier.editSupplier(' . $item['id'] . ')'
+                    'onclick' => 'supplier.editSupplier(' . $key['id'] . ')'
                 ];
 
                 $a[] = [
                     'class' => 'btn btn-sm btn-danger',
                     'html' => '<i class="icon-toggle-on"></i>',
-                    'onclick' => 'supplier.toggleStatus(' . $item['id'] . ', ' . $item['active'] . ')'
+                    'onclick' => 'supplier.toggleStatus(' . $key['id'] . ', ' . $key['active'] . ')'
                 ];
             } else {
                 $a[] = [
-                    'class' => 'btn btn-sm btn-outline-success',
+                    'class' => 'btn btn-sm btn-outline-danger',
                     'html' => '<i class="icon-toggle-off"></i>',
-                    'onclick' => 'supplier.toggleStatus(' . $item['id'] . ', ' . $item['active'] . ')'
+                    'onclick' => 'supplier.toggleStatus(' . $key['id'] . ', ' . $key['active'] . ')'
                 ];
             }
 
-            $rows[] = [
-                'id' => $item['id'],
-                'Proveedor' => $item['name'],
-                'Estado' => renderStatus($item['active']),
-                'a' => $a
+            $__row[] = [
+                'id'        => $key['id'],
+                'Proveedor' => $key['name'],
+                'UDN'       => $key['udn_name'],
+                'Estado'    => renderStatus($key['active']),
+                'a'         => $a
             ];
         }
 
         return [
-            'row' => $rows,
-            'ls' => $data
+            'row' => $__row,
+            'ls' => $ls
         ];
     }
 
@@ -152,21 +149,15 @@ class ctrl extends mdl {
         ];
     }
 
-    function toggleStatus() {
+    function statusSupplier() {
         $status = 500;
-        $message = 'Error al cambiar el estado del proveedor';
+        $message = 'No se pudo actualizar el estado';
 
-        $newStatus = $_POST['active'];
-        
         $update = $this->updateSupplier($this->util->sql($_POST, 1));
 
         if ($update) {
             $status = 200;
-            if ($newStatus == 1) {
-                $message = 'El proveedor estará disponible para captura de información.';
-            } else {
-                $message = 'El proveedor ya no estará disponible, pero seguirá reflejándose en los registros contables.';
-            }
+            $message = 'El estado del proveedor se actualizó correctamente';
         }
 
         return [
@@ -179,11 +170,11 @@ class ctrl extends mdl {
 function renderStatus($status) {
     switch ($status) {
         case 1:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#014737] text-[#3FC189]">Activo</span>';
+            return '<span class="px-3 py-1 rounded-lg text-sm font-semibold bg-green-100 text-green-700 inline-block min-w-[80px] text-center">Activo</span>';
         case 0:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#721c24] text-[#ba464d]">Inactivo</span>';
+            return '<span class="px-3 py-1 rounded-lg text-sm font-semibold bg-red-100 text-red-700 inline-block min-w-[80px] text-center">Inactivo</span>';
         default:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-gray-500 text-white">Desconocido</span>';
+            return '<span class="px-3 py-1 rounded-lg text-sm font-semibold bg-gray-100 text-gray-700 inline-block min-w-[80px] text-center">Desconocido</span>';
     }
 }
 

@@ -1,7 +1,7 @@
 
 
 let api_cliente = 'ctrl/ctrl-cliente.php';
-let api_supplier = 'ctrl/ctrl-proveedores.php';
+
 let api_efectivo = 'ctrl/ctrl-efectivo.php';
 let api_formasPago = 'ctrl/ctrl-formasPago.php';
 let api_moneda = 'ctrl/ctrl-moneda.php';
@@ -20,9 +20,16 @@ let modules;
 let salesAccount;
 let api_cta = 'ctrl/ctrl-cuenta-venta.php';
 
+// clientes.
+
+
+
 // Compras.
 let api_compra = 'ctrl/ctrl-cta.php';
 let ctaCompra, mayorAccount, subAccount, purchaseType, paymentMethod;
+
+// Proveedores
+let api_supplier = 'ctrl/ctrl-proveedores.php';
 
 
 $(async () => {
@@ -39,35 +46,52 @@ $(async () => {
     modules.render();
 
 
-    // supplier     = new AdminSupplier(api_supplier, "root");
-    // supplier.render();
-
+  
 
     // salesAccount = new SalesAccountManager(api_cta, "root");
-    // client       = new Clientes(api_cliente, "root");
+
     // formasPago   = new PaymentMethod(api_efectivo, "root");
     // moneda       = new AdminForeignCurrency(api_moneda, "root");
     // banco        = new AdminBankAccounts(api_banco, "root");
 
-  
-   
+
+        // initial.
+        // salesAccount.render();
+     
+        
+
+        // formasPago.render();
+        // moneda.render();
+        // banco.render();
+
+
+    // Clientes.
     
-    // paymentMethod = new FormasPago('ctrl/ctrl-formasPago.php', "root");
-
+    client = new Clientes(api_cliente, "root");
+    client.render();
+    
     // Compras. 
+    
     ctaCompra = new ComprasCta(api_compra, "root");
-    ctaCompra.render();
+  
 
-    // Compras modules
     mayorAccount  = new MayorAccount(api_compra, "root");
     subAccount    = new SubAccount(api_compra, "root");
     purchaseType  = new TipoCompras('ctrl/ctrl-tipo-compras.php', "root");
-    
+    paymentMethod = new FormasPago('ctrl/ctrl-formasPago.php', "root");
+
+    ctaCompra.render();
     mayorAccount.render();
     subAccount.render();
     purchaseType.render();
+    paymentMethod.render()
 
-    // paymentMethod.render()
+    // Proveedores
+
+    supplier     = new AdminSupplier(api_supplier, "root");
+    supplier.render();
+
+
 });
 
 class App extends Templates {
@@ -80,18 +104,7 @@ class App extends Templates {
 
         this.layout();
         this.layoutHeader();
-      
-
-
-        // initial.
-        // salesAccount.render();
-        // client.render();
-        
-
-        // formasPago.render();
-        // moneda.render();
-        // banco.render();
-
+    
     }
 
     layout() {

@@ -178,7 +178,7 @@ class AdminSupplier extends Templates {
                 icon: "warning"
             },
             data: {
-                opc: "toggleStatus",
+                opc: "statusSupplier",
                 active: newStatus,
                 id: id
             },

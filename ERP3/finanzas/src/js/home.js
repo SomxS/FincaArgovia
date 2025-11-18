@@ -104,16 +104,16 @@ class App extends Templates {
 
     renderSummary(data) {
         const container = $("<div>", {
-            class: "mb-8"
+            class: "mb-6"
         });
 
         const title = $("<h2>", {
-            class: "text-lg font-semibold text-gray-700 mb-4",
+            class: "text-base font-semibold text-gray-700 mb-3",
             text: "Resumen del periodo"
         });
 
         const cardsContainer = $("<div>", {
-            class: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+            class: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3"
         });
 
         const cards = [
@@ -150,27 +150,27 @@ class App extends Templates {
 
         cards.forEach(card => {
             const cardElement = $("<div>", {
-                class: "bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+                class: "bg-white p-4 rounded-lg shadow-sm border border-gray-200"
             });
 
             const iconContainer = $("<div>", {
-                class: `w-12 h-12 ${card.bgColor} rounded-lg flex items-center justify-center mb-3`
+                class: `w-10 h-10 ${card.bgColor} rounded-lg flex items-center justify-center mb-2`
             });
 
             iconContainer.append(
                 $("<i>", {
-                    class: `${card.icon} text-xl ${card.iconColor}`
+                    class: `${card.icon} text-lg ${card.iconColor}`
                 })
             );
 
             cardElement.append(
                 iconContainer,
                 $("<p>", {
-                    class: "text-sm text-gray-600 mb-2",
+                    class: "text-xs text-gray-600 mb-1",
                     text: card.title
                 }),
                 $("<p>", {
-                    class: "text-2xl font-bold text-gray-800",
+                    class: "text-xl font-bold text-gray-800",
                     text: card.value
                 })
             );
@@ -191,27 +191,27 @@ class App extends Templates {
 
     renderMainMenu() {
         const menuContainer = $("<div>", {
-            class: "mt-8"
+            class: "mt-6"
         });
 
         const title = $("<h2>", {
-            class: "text-lg font-semibold text-gray-700 mb-4",
+            class: "text-base font-semibold text-gray-700 mb-3",
             text: "Menú principal"
         });
 
         const gridContainer = $("<div>", {
-            class: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+            class: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3"
         });
 
         const modules = [
-            // {
-            //     icon: "icon-folder-open",
-            //     iconColor: "text-green-600",
-            //     bgColor: "bg-green-50",
-            //     title: "Archivos",
-            //     description: "Concentrado de archivos",
-            //     link: "../captura/index.php"
-            // },
+            {
+                icon: "icon-folder-open",
+                iconColor: "text-green-600",
+                bgColor: "bg-gray-50",
+                title: "Archivos",
+                description: "Concentrado de archivos",
+                link: "../captura/index.php"
+            },
             // {
             //     icon: "icon-basket",
             //     iconColor: "text-green-600",
@@ -236,14 +236,14 @@ class App extends Templates {
                 description: "Concentrado de compras",
                 link: "../finanzas/captura/compras.php"
             },
-            // {
-            //     icon: "icon-box",
-            //     iconColor: "text-green-600",
-            //     bgColor: "bg-green-50",
-            //     title: "Almacén",
-            //     description: "Concentrado de entradas y salidas de almacén",
-            //     link: "../captura/index.php"
-            // },
+            {
+                icon: "icon-box",
+                iconColor: "text-orange-600",
+                bgColor: "bg-orange-50",
+                title: "Almacén",
+                description: "Concentrado de entradas y salidas de almacén",
+                link: "../finanzas/captura/almacen.php"
+            },
             // {
             //     icon: "icon-calculator",
             //     iconColor: "text-green-600",
@@ -296,7 +296,7 @@ class App extends Templates {
 
         modules.forEach(module => {
             const card = $("<div>", {
-                class: "bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
+                class: "bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
             });
 
             card.on('click', () => {
@@ -304,7 +304,7 @@ class App extends Templates {
             });
 
             const iconContainer = $("<div>", {
-                class: `w-12 h-12 ${module.bgColor} rounded-lg flex items-center justify-center mb-3`
+                class: `w-14 h-14 ${module.bgColor} rounded-lg flex items-center justify-center mb-2`
             });
 
             iconContainer.append(
@@ -320,7 +320,7 @@ class App extends Templates {
                     text: module.title
                 }),
                 $("<p>", {
-                    class: "text-sm text-gray-500",
+                    class: "text-sm text-gray-500 line-clamp-2",
                     text: module.description
                 })
             );

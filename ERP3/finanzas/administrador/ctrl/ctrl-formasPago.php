@@ -59,7 +59,7 @@ class ctrl extends mdl {
         $message = 'Error al obtener los datos';
         $data = null;
 
-        $get = $this->getFormaPagoById($_POST['id']);
+        $get = $this->getFormaPagoById([$_POST['id']]);
 
         if ($get) {
             $status = 200;
@@ -68,9 +68,10 @@ class ctrl extends mdl {
         }
 
         return [
-            'status' => $status,
-            'message' => $message,
-            'data' => $data
+            'status'   => $status,
+            'message'  => $message,
+            'data'     => $data,
+            'endpoint' => $get
         ];
     }
 
@@ -159,11 +160,11 @@ class ctrl extends mdl {
 function renderStatus($status) {
     switch ($status) {
         case 1:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#014737] text-[#3FC189]">Activo</span>';
+            return '<span class="px-3 py-1 rounded-lg text-sm font-semibold bg-green-100 text-green-700 inline-block min-w-[80px] text-center">Activo</span>';
         case 0:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#721c24] text-[#ba464d]">Inactivo</span>';
+            return '<span class="px-3 py-1 rounded-lg text-sm font-semibold bg-red-100 text-red-700 inline-block min-w-[80px] text-center">Inactivo</span>';
         default:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-gray-500 text-white">Desconocido</span>';
+            return '<span class="px-3 py-1 rounded-lg text-sm font-semibold bg-gray-100 text-gray-700 inline-block min-w-[80px] text-center">Desconocido</span>';
     }
 }
 

@@ -1,5 +1,5 @@
 <?php
-require_once '../../../conf/_CRUD.php';
+require_once '../../../conf/_CRUD3.php';
 require_once '../../../conf/_Utileria.php';
 session_start();
 
@@ -9,7 +9,7 @@ class mdl extends CRUD {
 
     public function __construct() {
         $this->util = new Utileria;
-        $this->bd = "rfwsmqex_contabilidad.";
+        $this->bd = "rfwsmqex_gvsl_finanzas2.";
     }
 
     function listFormasPago($array) {
@@ -18,7 +18,7 @@ class mdl extends CRUD {
                 id,
                 name,
                 active
-           FROM {$this->bd}payment_methods
+            FROM {$this->bd}method_pay
             WHERE active = ?
             ORDER BY id DESC
         ";
@@ -26,29 +26,30 @@ class mdl extends CRUD {
         return $this->_Read($query, $array);
     }
 
-    function getFormaPagoById($id) {
-        return $this->_Select([
-            'table' => $this->bd . 'payment_methods',
-            'values' => '*',
-            'where' => 'id = ?',
-            'data' => [$id]
-        ])[0];
+    function getFormaPagoById($array) {
+        $query = "
+            SELECT *
+            FROM {$this->bd}method_pay
+            WHERE id = ?
+        ";
+        
+        return $this->_Read($query, $array)[0];
     }
 
     function existsFormaPagoByName($array) {
         $query = "
             SELECT id
-            FROM {$this->bd}payment_methods
+            FROM {$this->bd}method_pay
             WHERE LOWER(name) = LOWER(?)
             AND active = 1
         ";
-        $result = $this->_Read($query, $array);
-        return count($result) > 0;
+        $exists = $this->_Read($query, $array);
+        return count($exists) > 0;
     }
 
     function createFormaPago($array) {
         return $this->_Insert([
-            'table' => $this->bd . 'payment_methods',
+            'table' => $this->bd . 'method_pay',
             'values' => $array['values'],
             'data' => $array['data']
         ]);
@@ -56,9 +57,9 @@ class mdl extends CRUD {
 
     function updateFormaPago($array) {
         return $this->_Update([
-            'table' => $this->bd . 'payment_methods',
+            'table' => $this->bd . 'method_pay',
             'values' => $array['values'],
-            'where' => 'id = ?',
+            'where' => $array['where'],
             'data' => $array['data']
         ]);
     }

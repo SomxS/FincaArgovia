@@ -34,10 +34,12 @@ class ctrl extends mdl {
         $__row = [];
         $fecha = $_POST['fecha'] ?? date('Y-m-d');
         $tipo  = $_POST['tipoCompra'] ?? 'todos';
+        $udn   = $_POST['udn'] ?? null;
 
         $ls = $this->listCompras([
             'fecha' => $fecha,
-            'tipo'  => $tipo
+            'tipo'  => $tipo,
+            'udn'   => $udn
         ]);
 
         foreach ($ls as $key) {
@@ -116,10 +118,12 @@ class ctrl extends mdl {
         $message = 'Error al registrar compra';
 
         $_POST['operation_date'] = $_POST['fecha'] ?? date('Y-m-d');
-        $_POST['udn_id']         = $_POST['udn'] ?? 4;
-        $_POST['active']         = 1;
+        // $_POST['udn_id']         = $_POST['udn'] ?? 4;
+        // $_POST['active']         = 1;
 
-        $create = $this->createCompra($this->util->sql($_POST));
+        $values = $this->util->sql($_POST);
+
+        $create = $this->createCompra($values);
 
         if ($create) {
             $status  = 200;
@@ -128,7 +132,8 @@ class ctrl extends mdl {
 
         return [
             'status'  => $status,
-            'message' => $message
+            'message' => $message,
+            'endpoint' => $values
         ];
     }
 

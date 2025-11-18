@@ -1,3 +1,27 @@
+[ 2025-11-17 23:04:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT DISTINCT id, name AS valor
+            FROM rfwsmqex_gvsl_finanzas2.usuarios
+            WHERE active = 1 AND nivel IN (2, 3)
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.usuarios' doesn't exist
+
+
+[ 2025-11-17 23:04:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT DISTINCT id, name AS valor
+            FROM rfwsmqex_gvsl_finanzas2.usuarios
+            WHERE active = 1 AND nivel IN (2, 3)
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.usuarios' doesn't exist
+
+
 [ 2025-11-12 06:08:49 ]
 [ UNIX_USR ] :: nt authority\system
 [ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
@@ -10895,4 +10919,1426 @@
             ORDER BY p.id DESC
         
 [ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:20:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name, description
+            FROM rfwsmqex_finanzas.product_class
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:20:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.product
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:20:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.purchase_type
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:20:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.supplier
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:20:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name AS valor
+            FROM rfwsmqex_finanzas.method_pay
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:20:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:20:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:21:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name, description
+            FROM rfwsmqex_finanzas.product_class
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:21:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.product
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:21:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.purchase_type
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:21:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.supplier
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:21:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name AS valor
+            FROM rfwsmqex_finanzas.method_pay
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:21:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:21:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:25 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as salidas_fondo_fijo
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:25 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT DISTINCT
+                pc.id,
+                pc.name
+            FROM rfwsmqex_finanzas.purchase p
+            INNER JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+            ORDER BY pc.name
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as salidas_fondo_fijo
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT DISTINCT
+                pc.id,
+                pc.name
+            FROM rfwsmqex_finanzas.purchase p
+            INNER JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+            ORDER BY pc.name
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT DISTINCT
+                pc.id,
+                pc.name
+            FROM rfwsmqex_finanzas.purchase p
+            INNER JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+            ORDER BY pc.name
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as salidas_fondo_fijo
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:46 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name, description
+            FROM rfwsmqex_finanzas.product_class
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:46 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.product
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:46 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.purchase_type
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:46 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.supplier
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:47 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name AS valor
+            FROM rfwsmqex_finanzas.method_pay
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:47 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 11:23:47 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 13:27:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date < ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_inicial,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date <= ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_final
+            FROM rfwsmqex_gvsl_finanzas2.customer c
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON c.id = dcc.customer_id 
+                AND dcc.daily_closure_id IN (
+                    SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                    WHERE operation_date BETWEEN ? AND ?
+                )
+            WHERE c.active = 1  AND c.udn_id = ?
+            GROUP BY c.id, c.name
+            ORDER BY c.name
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-17 13:37:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date < ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_inicial,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date <= ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_final
+            FROM rfwsmqex_gvsl_finanzas2.customer c
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON c.id = dcc.customer_id 
+                AND dcc.daily_closure_id IN (
+                    SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                    WHERE operation_date BETWEEN ? AND ?
+                )
+            WHERE c.active = 1  AND c.udn_id = ?
+            GROUP BY c.id, c.name
+            ORDER BY c.name
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-17 14:26:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name, description
+            FROM rfwsmqex_finanzas.product_class
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:26:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.product
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:26:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.purchase_type
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:26:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.supplier
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:26:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name AS valor
+            FROM rfwsmqex_finanzas.method_pay
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:26:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:26:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:03 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name, description
+            FROM rfwsmqex_finanzas.product_class
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:04 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.product
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:04 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.purchase_type
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:04 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.supplier
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:04 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name AS valor
+            FROM rfwsmqex_finanzas.method_pay
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:04 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:04 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name, description
+            FROM rfwsmqex_finanzas.product_class
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.product
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.purchase_type
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.supplier
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name AS valor
+            FROM rfwsmqex_finanzas.method_pay
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:55 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:55 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:56 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as salidas_fondo_fijo
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:44:56 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT DISTINCT
+                pc.id,
+                pc.name
+            FROM rfwsmqex_finanzas.purchase p
+            INNER JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+            ORDER BY pc.name
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:45:01 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:45:01 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:48:55 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date < ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_inicial,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date <= ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_final
+            FROM rfwsmqex_gvsl_finanzas2.customer c
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON c.id = dcc.customer_id 
+                AND dcc.daily_closure_id IN (
+                    SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                    WHERE operation_date BETWEEN ? AND ?
+                )
+            WHERE c.active = 1  AND c.udn_id = ?
+            GROUP BY c.id, c.name
+            ORDER BY c.name
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-17 14:49:01 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name, description
+            FROM rfwsmqex_finanzas.product_class
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:49:01 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.product
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:49:01 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.purchase_type
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:49:02 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.supplier
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:49:02 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name AS valor
+            FROM rfwsmqex_finanzas.method_pay
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:49:02 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 14:49:02 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:40:47 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name, description
+            FROM rfwsmqex_finanzas.product_class
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:40:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.product
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:40:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.purchase_type
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:40:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.supplier
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:40:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name AS valor
+            FROM rfwsmqex_finanzas.method_pay
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:40:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:40:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:41:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name, description
+            FROM rfwsmqex_finanzas.product_class
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:41:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.product
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:41:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.purchase_type
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:41:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name
+            FROM rfwsmqex_finanzas.supplier
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:41:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT id, name AS valor
+            FROM rfwsmqex_finanzas.method_pay
+            WHERE active = ?
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:41:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:41:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:54:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as salidas_fondo_fijo
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:54:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT DISTINCT
+                pc.id,
+                pc.name
+            FROM rfwsmqex_finanzas.purchase p
+            INNER JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+            ORDER BY pc.name
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:54:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 15:54:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 21:49:57 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT DISTINCT
+                pc.id,
+                pc.name
+            FROM rfwsmqex_finanzas.purchase p
+            INNER JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+            ORDER BY pc.name
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 21:49:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as salidas_fondo_fijo
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 21:50:01 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 21:50:01 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 21:50:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as salidas_fondo_fijo
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 21:50:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT DISTINCT
+                pc.id,
+                pc.name
+            FROM rfwsmqex_finanzas.purchase p
+            INNER JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            WHERE p.operation_date BETWEEN ? AND ?
+              AND p.udn_id = ?
+              AND p.active = 1
+            ORDER BY pc.name
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 21:50:14 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                p.*,
+                pc.name as product_class_name,
+                pr.name as product_name,
+                pt.name as purchase_type_name,
+                s.name as supplier_name,
+                mp.name as method_pay_name
+            FROM rfwsmqex_finanzas.purchase p
+            LEFT JOIN rfwsmqex_finanzas.product_class pc ON p.product_class_id = pc.id
+            LEFT JOIN rfwsmqex_finanzas.product pr ON p.product_id = pr.id
+            LEFT JOIN rfwsmqex_finanzas.purchase_type pt ON p.purchase_type_id = pt.id
+            LEFT JOIN rfwsmqex_finanzas.supplier s ON p.supplier_id = s.id
+            LEFT JOIN rfwsmqex_finanzas.method_pay mp ON p.method_pay_id = mp.id
+            WHERE p.operation_date = ?  AND p.active = 1
+            ORDER BY p.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 21:50:14 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                SUM(p.total) as total_compras,
+                SUM(CASE WHEN p.purchase_type_id = 1 THEN p.total ELSE 0 END) as total_fondo_fijo,
+                SUM(CASE WHEN p.purchase_type_id = 2 THEN p.total ELSE 0 END) as total_corporativo,
+                SUM(CASE WHEN p.purchase_type_id = 3 THEN p.total ELSE 0 END) as total_credito
+            FROM rfwsmqex_finanzas.purchase p
+            WHERE p.operation_date = ? AND p.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas'
+
+[ 2025-11-17 22:34:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  INSERT INTO rfwsmqex_gvsl_finanzas2.purchase (product_class_id,product_id,purchase_type_id,supplier_id,method_pay_id,subtotal,tax,total,description,operation_date,udn_id,active) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+[ ERROR C.U.D. ] :: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`rfwsmqex_gvsl_finanzas2`.`purchase`, CONSTRAINT `purchase_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE SET NULL ON UPDATE CASCADE)
 
