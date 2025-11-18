@@ -13,6 +13,12 @@ class CRUD extends Conection {
 public function _CUD($query, $values) {
     try {
         $this->connect();
+        
+        // Verificar que la conexión se estableció correctamente
+        if ($this->mysql === null) {
+            throw new Exception("No se pudo establecer la conexión a la base de datos");
+        }
+        
         $stm = $this->mysql->prepare($query);
 
         // Verificar si $values es un array multidimensional
@@ -43,6 +49,8 @@ public function _CUD($query, $values) {
         $message  =  "[ INFO ] ::  $query";
         $message .=  "\n[ ERROR C.U.D. ] :: ". $e->getMessage()."\n";
         $this->writeToLog($message);
+        // Retornar false en caso de error
+        return false;
     }
 }
 /* Función Read
@@ -54,6 +62,12 @@ public function _Read($query, $values,$retorno = false) {
         if($retorno == true) return $query;
 
         $this->connect();
+        
+        // Verificar que la conexión se estableció correctamente
+        if ($this->mysql === null) {
+            throw new Exception("No se pudo establecer la conexión a la base de datos");
+        }
+        
         $stm = $this->mysql->prepare($query);
         //si el array contiene datos o es null se envia el stm a la conexion 
         if (!isset($values)) {
@@ -75,7 +89,9 @@ public function _Read($query, $values,$retorno = false) {
     } catch (PDOException $e) {
         $message  =  "[ INFO ] ::  $query";
         $message .=  "\n[ ERROR READ] :: ". $e->getMessage()."\n";
-        $this->writeToLog($message); 
+        $this->writeToLog($message);
+        // Retornar array vacío en caso de error para evitar warnings en foreach
+        return [];
     }
 }
 // Select

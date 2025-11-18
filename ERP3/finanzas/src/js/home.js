@@ -212,14 +212,14 @@ class App extends Templates {
                 description: "Concentrado de archivos",
                 link: "../captura/index.php"
             },
-            // {
-            //     icon: "icon-basket",
-            //     iconColor: "text-green-600",
-            //     bgColor: "bg-green-50",
-            //     title: "Ventas",
-            //     description: "Concentrado de ventas",
-            //     link: "../captura/index.php"
-            // },
+            {
+                icon: "icon-basket",
+                iconColor: "text-green-600",
+                bgColor: "bg-green-50",
+                title: "Ventas",
+                description: "Concentrado de ventas",
+                link: "../captura/index.php"
+            },
             {
                 icon: "icon-users",
                 iconColor: "text-orange-600",
@@ -244,46 +244,46 @@ class App extends Templates {
                 description: "Concentrado de entradas y salidas de almacén",
                 link: "../finanzas/captura/almacen.php"
             },
-            // {
-            //     icon: "icon-calculator",
-            //     iconColor: "text-green-600",
-            //     bgColor: "bg-green-50",
-            //     title: "Costos",
-            //     description: "Concentrado de costos",
-            //     link: "../captura/index.php"
-            // },
-            // {
-            //     icon: "icon-briefcase",
-            //     iconColor: "text-green-600",
-            //     bgColor: "bg-green-50",
-            //     title: "Proveedores",
-            //     description: "Concentrado de compras y pagos",
-            //     link: "../captura/index.php"
-            // },
-            // {
-            //     icon: "icon-doc-text",
-            //     iconColor: "text-green-600",
-            //     bgColor: "bg-green-50",
-            //     title: "Carátula",
-            //     description: "Consulta el resumen por periodo",
-            //     link: "../captura/index.php"
-            // },
-            // {
-            //     icon: "icon-money",
-            //     iconColor: "text-blue-600",
-            //     bgColor: "bg-blue-50",
-            //     title: "Tesorería",
-            //     description: "Concentrado de retiros y reembolsos",
-            //     // link: "../captura/index.php"
-            // },
-            // {
-            //     icon: "icon-user",
-            //     iconColor: "text-blue-600",
-            //     bgColor: "bg-blue-50",
-            //     title: "Capital Humano",
-            //     description: "Consulta de anticipos",
-            //     // link: "../captura/index.php"
-            // },
+            {
+                icon: "icon-calculator",
+                iconColor: "text-green-600",
+                bgColor: "bg-green-50",
+                title: "Costos",
+                description: "Concentrado de costos",
+                link: "../captura/index.php"
+            },
+            {
+                icon: "icon-briefcase",
+                iconColor: "text-green-600",
+                bgColor: "bg-green-50",
+                title: "Proveedores",
+                description: "Concentrado de compras y pagos",
+                link: "../captura/index.php"
+            },
+            {
+                icon: "icon-doc-text",
+                iconColor: "text-green-600",
+                bgColor: "bg-green-50",
+                title: "Carátula",
+                description: "Consulta el resumen por periodo",
+                link: "../captura/index.php"
+            },
+            {
+                icon: "icon-money",
+                iconColor: "text-blue-600",
+                bgColor: "bg-blue-50",
+                title: "Tesorería",
+                description: "Concentrado de retiros y reembolsos",
+                // link: "../captura/index.php"
+            },
+            {
+                icon: "icon-user",
+                iconColor: "text-blue-600",
+                bgColor: "bg-blue-50",
+                title: "Capital Humano",
+                description: "Consulta de anticipos",
+                // link: "../captura/index.php"
+            },
             {
                 icon: "icon-cog",
                 iconColor: "text-blue-600",

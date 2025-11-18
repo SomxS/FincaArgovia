@@ -12342,3 +12342,45 @@
 [ INFO ] ::  INSERT INTO rfwsmqex_gvsl_finanzas2.purchase (product_class_id,product_id,purchase_type_id,supplier_id,method_pay_id,subtotal,tax,total,description,operation_date,udn_id,active) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
 [ ERROR C.U.D. ] :: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`rfwsmqex_gvsl_finanzas2`.`purchase`, CONSTRAINT `purchase_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE SET NULL ON UPDATE CASCADE)
 
+[ 2025-11-18 10:59:00 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END) as total_consumos,
+                SUM(CASE WHEN dcc.movement_type != 'consumo' AND dcc.method_pay = 'efectivo' THEN dcc.amount ELSE 0 END) as total_pagos_efectivo,
+                SUM(CASE WHEN dcc.movement_type != 'consumo' AND dcc.method_pay = 'banco' THEN dcc.amount ELSE 0 END) as total_pagos_banco
+            FROM rfwsmqex_gvsl_finanzas2.daily_closure dc
+            INNER JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON dcc.daily_closure_id = dc.id
+            WHERE dc.operation_date = ? and dcc.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dcc.active' in 'where clause'
+
+[ 2025-11-18 10:59:07 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END) as total_consumos,
+                SUM(CASE WHEN dcc.movement_type != 'consumo' AND dcc.method_pay = 'efectivo' THEN dcc.amount ELSE 0 END) as total_pagos_efectivo,
+                SUM(CASE WHEN dcc.movement_type != 'consumo' AND dcc.method_pay = 'banco' THEN dcc.amount ELSE 0 END) as total_pagos_banco
+            FROM rfwsmqex_gvsl_finanzas2.daily_closure dc
+            INNER JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON dcc.daily_closure_id = dc.id
+            WHERE dc.operation_date = ? and dcc.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dcc.active' in 'where clause'
+
+[ 2025-11-18 11:21:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END) as total_consumos,
+                SUM(CASE WHEN dcc.movement_type != 'consumo' AND dcc.method_pay = 'efectivo' THEN dcc.amount ELSE 0 END) as total_pagos_efectivo,
+                SUM(CASE WHEN dcc.movement_type != 'consumo' AND dcc.method_pay = 'banco' THEN dcc.amount ELSE 0 END) as total_pagos_banco
+            FROM rfwsmqex_gvsl_finanzas2.daily_closure dc
+            INNER JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON dcc.daily_closure_id = dc.id
+            WHERE dc.operation_date = ? and dcc.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dcc.active' in 'where clause'
+

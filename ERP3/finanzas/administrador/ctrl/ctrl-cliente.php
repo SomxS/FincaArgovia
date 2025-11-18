@@ -23,6 +23,11 @@ class ctrl extends mdl {
         $udn = $_POST['udn'];
 
         $ls = $this->listClientes([$active, $udn]);
+        
+        // Validar que $ls sea un array antes de iterar
+        if (!is_array($ls)) {
+            $ls = [];
+        }
 
         foreach ($ls as $key) {
             $a = [];

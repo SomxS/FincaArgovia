@@ -23,6 +23,8 @@
                 } catch (PDOException $e) {
                     $message =  "[ ERROR CONECT ] :: ". $e->getMessage();
                     $this->writeToLog($message);
+                    // Lanzar la excepción para que el error sea visible
+                    throw new Exception("Error de conexión a la base de datos: " . $e->getMessage());
                 }
             }
 		}
