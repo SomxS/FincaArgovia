@@ -190,145 +190,188 @@ class App extends Templates {
     }
 
     renderMainMenu() {
-        const menuContainer = $("<div>", {
-            class: "mt-6"
-        });
+        const modules = this.createModules();
+        this.renderModules(modules);
+    }
 
-        const title = $("<h2>", {
-            class: "text-base font-semibold text-gray-700 mb-3",
-            text: "Menú principal"
-        });
-
-        const gridContainer = $("<div>", {
-            class: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3"
-        });
-
-        const modules = [
+    createModules() {
+        return [
             {
                 icon: "icon-folder-open",
-                iconColor: "text-green-600",
-                bgColor: "bg-gray-50",
-                title: "Archivos",
-                description: "Concentrado de archivos",
-                link: "../captura/index.php"
+                color: "bg-gray-50",
+                textColor: "text-green-600",
+                titulo: "Archivos",
+                descripcion: "Concentrado de archivos",
+                enlace: "../captura/index.php"
             },
             {
                 icon: "icon-basket",
-                iconColor: "text-green-600",
-                bgColor: "bg-green-50",
-                title: "Ventas",
-                description: "Concentrado de ventas",
-                link: "../captura/index.php"
+                color: "bg-green-50",
+                textColor: "text-green-600",
+                titulo: "Ventas",
+                descripcion: "Concentrado de ventas",
+                enlace: "../captura/index.php"
             },
             {
                 icon: "icon-users",
-                iconColor: "text-orange-600",
-                bgColor: "bg-orange-50",
-                title: "Clientes",
-                description: "Concentrado de consumos y pagos a créditos",
-                link: "../finanzas/captura/clientes.php"
+                color: "bg-orange-50",
+                textColor: "text-orange-600",
+                titulo: "Clientes",
+                descripcion: "Concentrado de consumos y pagos a créditos",
+                enlace: "../finanzas/captura/clientes.php"
             },
             {
                 icon: "icon-basket",
-                iconColor: "text-orange-600",
-                bgColor: "bg-orange-50",
-                title: "Compras",
-                description: "Concentrado de compras",
-                link: "../finanzas/captura/compras.php"
+                color: "bg-orange-50",
+                textColor: "text-orange-600",
+                titulo: "Compras",
+                descripcion: "Concentrado de compras",
+                enlace: "../finanzas/captura/compras.php"
             },
             {
                 icon: "icon-box",
-                iconColor: "text-orange-600",
-                bgColor: "bg-orange-50",
-                title: "Almacén",
-                description: "Concentrado de entradas y salidas de almacén",
-                link: "../finanzas/captura/almacen.php"
+                color: "bg-orange-50",
+                textColor: "text-orange-600",
+                titulo: "Almacén",
+                descripcion: "Concentrado de entradas y salidas de almacén",
+                enlace: "../finanzas/captura/almacen.php"
             },
             {
                 icon: "icon-calculator",
-                iconColor: "text-green-600",
-                bgColor: "bg-green-50",
-                title: "Costos",
-                description: "Concentrado de costos",
-                link: "../captura/index.php"
+                color: "bg-green-50",
+                textColor: "text-green-600",
+                titulo: "Costos",
+                descripcion: "Concentrado de costos",
+                enlace: "../captura/index.php"
             },
             {
                 icon: "icon-briefcase",
-                iconColor: "text-green-600",
-                bgColor: "bg-green-50",
-                title: "Proveedores",
-                description: "Concentrado de compras y pagos",
-                link: "../captura/index.php"
+                color: "bg-green-50",
+                textColor: "text-green-600",
+                titulo: "Proveedores",
+                descripcion: "Concentrado de compras y pagos",
+                enlace: "../captura/index.php"
             },
             {
                 icon: "icon-doc-text",
-                iconColor: "text-green-600",
-                bgColor: "bg-green-50",
-                title: "Carátula",
-                description: "Consulta el resumen por periodo",
-                link: "../captura/index.php"
+                color: "bg-green-50",
+                textColor: "text-green-600",
+                titulo: "Carátula",
+                descripcion: "Consulta el resumen por periodo",
+                enlace: "../captura/index.php"
             },
             {
                 icon: "icon-money",
-                iconColor: "text-blue-600",
-                bgColor: "bg-blue-50",
-                title: "Tesorería",
-                description: "Concentrado de retiros y reembolsos",
-                // link: "../captura/index.php"
+                color: "bg-blue-50",
+                textColor: "text-blue-600",
+                titulo: "Tesorería",
+                descripcion: "Concentrado de retiros y reembolsos"
             },
             {
                 icon: "icon-user",
-                iconColor: "text-blue-600",
-                bgColor: "bg-blue-50",
-                title: "Capital Humano",
-                description: "Consulta de anticipos",
-                // link: "../captura/index.php"
+                color: "bg-blue-50",
+                textColor: "text-blue-600",
+                titulo: "Capital Humano",
+                descripcion: "Consulta de anticipos"
             },
             {
                 icon: "icon-cog",
-                iconColor: "text-blue-600",
-                bgColor: "bg-blue-50",
-                title: "Administración",
-                description: "Desbloqueo de módulos y gestión de conceptos",
-                link: "../finanzas/administrador/index.php"
+                color: "bg-blue-50",
+                textColor: "text-blue-600",
+                titulo: "Administración",
+                descripcion: "Desbloqueo de módulos y gestión de conceptos",
+                enlace: "../finanzas/administrador/index.php"
             }
         ];
+    }
 
-        modules.forEach(module => {
-            const card = $("<div>", {
-                class: "bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
-            });
+    renderModules(modules) {
+        this.moduleCard({
+            parent: 'container' + this.PROJECT_NAME,
+            title: "Menú principal",
+            subtitle: "",
+            theme: "light",
+            json: modules
+        });
+    }
 
-            card.on('click', () => {
-                window.location.href = module.link;
-            });
+    moduleCard(options) {
+        const defaults = {
+            parent: "root",
+            title: "",
+            subtitle: "",
+            theme: "light",
+            json: []
+        };
 
-            const iconContainer = $("<div>", {
-                class: `w-14 h-14 ${module.bgColor} rounded-lg flex items-center justify-center mb-2`
-            });
+        const opts = Object.assign({}, defaults, options);
+        const isDark = opts.theme === "dark";
 
-            iconContainer.append(
-                $("<i>", {
-                    class: `${module.icon} text-2xl ${module.iconColor}`
-                })
-            );
+        const colors = {
+            cardBg: isDark ? "bg-[#2C3544]" : "bg-white",
+            titleColor: isDark ? "text-white" : "text-gray-800",
+            subtitleColor: isDark ? "text-gray-400" : "text-gray-600",
+            badgeColor: isDark ? "bg-blue-800 text-white" : "bg-blue-100 text-blue-800"
+        };
 
-            card.append(
-                iconContainer,
-                $("<h3>", {
-                    class: "text-base font-semibold text-gray-800 mb-1",
-                    text: module.title
-                }),
-                $("<p>", {
-                    class: "text-sm text-gray-500 line-clamp-2",
-                    text: module.description
-                })
-            );
+        const titleContainer = $("<div>", { class: "w-full px-4 mt-2 mb-2" });
+        const title = $("<h1>", { 
+            class: "text-2xl font-bold text-gray-900 mb-2", 
+            text: opts.title 
+        });
+        const subtitle = $("<p>", { 
+            class: colors.subtitleColor + " ", 
+            text: opts.subtitle 
+        });
+        titleContainer.append(title, subtitle);
 
-            gridContainer.append(card);
+        const container = $("<div>", {
+            class: "w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4"
         });
 
-        menuContainer.append(title, gridContainer);
-        $('#container' + this.PROJECT_NAME).append(menuContainer);
+        opts.json.forEach((item) => {
+            let iconContent = item.icon
+                ? `<div class="w-10 h-10 flex items-center justify-center ${item.color} ${item.textColor} rounded-lg text-lg mb-3 group-hover:bg-opacity-80 transition-all"><i class="${item.icon}"></i></div>`
+                : item.imagen
+                    ? `<img class="w-10 h-10 rounded-lg mb-2" src="${item.imagen}" alt="${item.titulo}">`
+                    : "";
+
+            const badge = item.badge
+                ? `<span class="px-2 py-0.5 rounded-full text-xs font-medium ${colors.badgeColor}">${item.badge}</span>`
+                : "";
+
+            const card = $(`
+                <div class="group relative h-[180px] ${colors.cardBg} rounded-xl shadow-md
+                overflow-hidden p-3 flex flex-col justify-between cursor-pointer
+                border border-transparent hover:scale-[1.05] hover:border-blue-700
+                transition-transform duration-300 ease-in-out transform font-[Poppins]">
+                    <div class="flex justify-between items-start">
+                        ${iconContent}
+                        ${badge}
+                    </div>
+                    <div class="flex-grow flex flex-col justify-center">
+                        <h2 class="text-base font-bold ${colors.titleColor}">${item.titulo}</h2>
+                        ${item.descripcion ? `<p class="${colors.subtitleColor} text-xs mt-1 line-clamp-2">${item.descripcion}</p>` : ""}
+                    </div>
+                    <div class="mt-2 flex items-center ${item.textColor} text-[11px]">
+                        <span>Acceder</span>
+                        <i class="icon-right-1 ml-2 text-xs transition-transform group-hover:translate-x-2"></i>
+                    </div>
+                </div>
+            `).click(function () {
+                if (item.enlace) window.location.href = item.enlace;
+                if (item.href) window.location.href = item.href;
+                if (item.onClick) item.onClick();
+            });
+
+            container.append(card);
+        });
+
+        const div = $('<div>', {
+            class: 'lg:px-8 mt-5'
+        });
+        div.append(titleContainer, container);
+
+        $(`#${opts.parent}`).empty().append(div);
     }
 }

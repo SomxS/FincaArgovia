@@ -1,98 +1,93 @@
-
-
-let api_cliente = 'ctrl/ctrl-cliente.php';
-
-let api_efectivo = 'ctrl/ctrl-efectivo.php';
-let api_formasPago = 'ctrl/ctrl-formasPago.php';
-let api_moneda = 'ctrl/ctrl-moneda.php';
-let api_banco = 'ctrl/ctrl-banco.php';
-// vars.
-let app,  client, moneda, banco, compras, cashMovement, supplier, formasPago;
+// Global 
 let lsudn, udn, lsmodules;
 
-
-
-// Modules Unlocked.
+//  App
+let app, modules;
 let api = 'ctrl/ctrl-admin.php';
-let modules;
 
-// Sales Acounts
+// Clientes
+let client;
+let api_cliente = 'ctrl/ctrl-cliente.php';
+
+// Proveedores
+let supplier;
+let api_supplier = 'ctrl/ctrl-proveedores.php';
+
+// Compras
+let ctaCompra, mayorAccount, subAccount, purchaseType, paymentMethod;
+let api_compra = 'ctrl/ctrl-cta.php';
+
+// Formas de Pago
+let formasPago;
+let api_formasPago = 'ctrl/ctrl-formasPago.php';
+
+// Cuentas de Ventas
 let salesAccount;
 let api_cta = 'ctrl/ctrl-cuenta-venta.php';
 
-// clientes.
+// Cuentas Bancarias
+let moneda, banco, cashMovement;
+let api_efectivo = 'ctrl/ctrl-efectivo.php';
+let api_moneda   = 'ctrl/ctrl-moneda.php';
+let api_banco    = 'ctrl/ctrl-banco.php';
 
 
+(async () => {
 
-// Compras.
-let api_compra = 'ctrl/ctrl-cta.php';
-let ctaCompra, mayorAccount, subAccount, purchaseType, paymentMethod;
+    // 📜 Inicializar datos globales
+    const data = await useFetch({
+        url: api,
+        data: { opc: "init" }
+    });
 
-// Proveedores
-let api_supplier = 'ctrl/ctrl-proveedores.php';
+    lsudn     = data.udn;
+    udn       = data.udn;
+    lsmodules = data.modules;
 
+    // 🔵 Aplicación principal
+    app = new App(api, "root");
+    app.render();
 
-$(async () => {
-
-    const data      = await useFetch({ url: api, data: { opc: "init" } });
-          lsudn     = data.udn;
-          udn       = data.udn;
-          lsmodules = data.modules;
-
-          app = new App(api, "root");
-          app.render();
-
-    modules = new Modules(api,'root');
+    //  Módulos de desbloqueo
+    modules = new Modules(api, "root");
     modules.render();
 
+    // 💳 Cuentas de ventas
+    salesAccount = new SalesAccountManager(api_cta, "root");
+    salesAccount.render();
 
-  
-
-    // salesAccount = new SalesAccountManager(api_cta, "root");
-
-    // formasPago   = new PaymentMethod(api_efectivo, "root");
-    // moneda       = new AdminForeignCurrency(api_moneda, "root");
-    // banco        = new AdminBankAccounts(api_banco, "root");
-
-
-        // initial.
-        // salesAccount.render();
-     
-        
-
-        // formasPago.render();
-        // moneda.render();
-        // banco.render();
-
-
-    // Clientes.
+    // 💰 Formas de pago y cuentas bancarias
+    formasPago = new PaymentMethod(api_efectivo, "root");
+    moneda     = new AdminForeignCurrency(api_moneda, "root");
+    banco      = new AdminBankAccounts(api_banco, "root");
     
+    formasPago.render();
+    moneda.render();
+    banco.render();
+
+    // 👥 Clientes
     client = new Clientes(api_cliente, "root");
     client.render();
-    
-    // Compras. 
-    
-    ctaCompra = new ComprasCta(api_compra, "root");
-  
 
+    // 🛒 Compras
+    ctaCompra     = new ComprasCta(api_compra, "root");
     mayorAccount  = new MayorAccount(api_compra, "root");
     subAccount    = new SubAccount(api_compra, "root");
-    purchaseType  = new TipoCompras('ctrl/ctrl-tipo-compras.php', "root");
-    paymentMethod = new FormasPago('ctrl/ctrl-formasPago.php', "root");
-
+    purchaseType  = new TipoCompras("ctrl/ctrl-tipo-compras.php", "root");
+    paymentMethod = new FormasPago("ctrl/ctrl-formasPago.php", "root");
+   
     ctaCompra.render();
     mayorAccount.render();
     subAccount.render();
     purchaseType.render();
-    paymentMethod.render()
+    paymentMethod.render();
 
-    // Proveedores
-
-    supplier     = new AdminSupplier(api_supplier, "root");
+    // 🏢 Proveedores
+    supplier = new AdminSupplier(api_supplier, "root");
     supplier.render();
 
+})();
 
-});
 
 class App extends Templates {
     constructor(link, div_modulo) {
@@ -104,7 +99,6 @@ class App extends Templates {
 
         this.layout();
         this.layoutHeader();
-    
     }
 
     layout() {
@@ -167,7 +161,6 @@ class App extends Templates {
                 {
                     id: "payment",
                     tab: "Formas de pago",
-                    onClick: () => formasPago.lsFormasPago()
                 },
                 {
                     id: "client",

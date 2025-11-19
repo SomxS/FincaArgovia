@@ -31,7 +31,6 @@ class mdl extends CRUD {
                 id, 
                 name, 
                 active, 
-                DATE_FORMAT(date_create, '%d %M %Y') as date_create,
                 udn_id
             FROM {$this->bd}customer
             WHERE active = ? AND udn_id = ?

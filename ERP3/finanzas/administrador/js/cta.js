@@ -469,7 +469,7 @@ class TipoCompras extends Templates {
             class: 'w-full',
             card: {
                 filterBar: { class: 'w-full mb-3', id: `filterBar${this.PROJECT_NAME}` },
-                container: { class: 'w-full h-full', id: `container${this.PROJECT_NAME}` }
+                container: { class: 'w-full my-2 h-full', id: `container${this.PROJECT_NAME}` }
             }
         });
 
@@ -494,10 +494,10 @@ class TipoCompras extends Templates {
                 },
                 {
                     opc: "button",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     id: "btnAddTipoCompra",
                     className: 'w-100',
-                    text: "+ Agregar tipo de compra",
+                    text: "+ Agregar",
                     color_btn: "primary",
                     onClick: () => this.addTipoCompra()
                 }
@@ -693,7 +693,7 @@ class FormasPago extends Templates {
             id: this.PROJECT_NAME,
             card: {
                 filterBar: { class: 'w-full pb-2', id: `filterBar${this.PROJECT_NAME}` },
-                container: { class: 'w-full my-2 h-full', id: `container${this.PROJECT_NAME}` }
+                container: { class: 'w-full my-3 h-full', id: `container${this.PROJECT_NAME}` }
             }
         });
      
@@ -709,7 +709,7 @@ class FormasPago extends Templates {
                     opc: "select",
                     id: "active",
                     lbl: "Estado",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: [
                         { id: "1", valor: "Activos" },
                         { id: "0", valor: "Inactivos" }
@@ -718,10 +718,10 @@ class FormasPago extends Templates {
                 },
                 {
                     opc: "button",
-                    class: "col-12 col-md-4",
+                    class: "col-12 col-md-2",
                     id: "btnNuevaFormaPago",
                     className: 'w-full',
-                    text: "Nuevo método de pago",
+                    text: "Agregar",
                     color_btn: "primary",
                     onClick: () => this.addFormaPago()
                 }

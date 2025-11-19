@@ -38,26 +38,15 @@ require_once('layout/core-libraries.php');
 
           <!-- Módulos del Sistema -->
         <script src = "js/admin.js?t=<?php echo time(); ?>"></script>
-
-         <script src="js/cliente.js?t=<?php echo time(); ?>"></script>
+        <script src="js/cuenta-venta.js?t=<?php echo time(); ?>"></script>
+        <script src="js/efectivo.js?t=<?php echo time(); ?>"></script>
+        <script src="js/moneda.js?t=<?php echo time(); ?>"></script>
+        <script src="js/banco.js?t=<?php echo time(); ?>"></script>
+        
+        <script src="js/cliente.js?t=<?php echo time(); ?>"></script>
         <script src = "js/cta.js?t=<?php echo time(); ?>"></script>
         <script src = "js/proveedores.js?t=<?php echo time(); ?>"></script>
 
-
-          <!-- <script src="js/pago-proveedor.js"></script> -->
-
-
-
-        <!-- <script src="js/cuenta-venta.js?t=<?php echo time(); ?>"></script>
-       
-       
-        <script src="js/formasPago.js?t=<?php echo time(); ?>"></script>
-        
-        <script src="js/efectivo.js?t=<?php echo time(); ?>"></script>
-        <script src="js/moneda.js?t=<?php echo time(); ?>"></script>
-        <script src="js/banco.js?t=<?php echo time(); ?>"></script> -->
-          
-        
 
 
         </div>

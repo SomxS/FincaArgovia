@@ -3,19 +3,12 @@ session_start();
 
 if (empty($_POST['opc'])) exit(0);
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+
 
 require_once '../mdl/mdl-cliente.php';
 
 class ctrl extends mdl {
 
-    function init() {
-        return [
-            'udn' => $this->lsUDN()
-        ];
-    }
 
     function lsClientes() {
         $__row = [];
@@ -90,7 +83,6 @@ class ctrl extends mdl {
     function addCliente() {
         $status               = 500;
         $message              = 'No se pudo agregar el cliente';
-        $_POST['date_create'] = date('Y-m-d H:i:s');
         $_POST['active']      = 1;
 
         $exists = $this->existsClienteByName([$_POST['name'], $_POST['udn_id']]);
@@ -148,14 +140,14 @@ class ctrl extends mdl {
     
 }
 
-function renderStatus($estatus) {
-    switch ($estatus) {
+function renderStatus($status) {
+    switch ($status) {
         case 1:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#014737] text-[#3FC189]">Activo</span>';
+            return '<span class="px-3 py-1 rounded-lg text-sm font-semibold bg-green-100 text-green-700 inline-block min-w-[80px] text-center">Activo</span>';
         case 0:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#721c24] text-[#ba464d]">Inactivo</span>';
+            return '<span class="px-3 py-1 rounded-lg text-sm font-semibold bg-red-100 text-red-700 inline-block min-w-[80px] text-center">Inactivo</span>';
         default:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-gray-500 text-white">Desconocido</span>';
+            return '<span class="px-3 py-1 rounded-lg text-sm font-semibold bg-gray-100 text-gray-700 inline-block min-w-[80px] text-center">Desconocido</span>';
     }
 }
 

@@ -1,6 +1,3 @@
-
-
-
 class Clientes extends Templates {
     constructor(link, div_modulo) {
         super(link, div_modulo);
@@ -41,7 +38,7 @@ class Clientes extends Templates {
                 {
                     opc     : "select",
                     id      : "udn",
-                    lbl     : "Filtrar por unidad de negocio",
+                    lbl     : "Unidad de negocio",
                     class   : "col-12 col-md-3",
                     data    : lsudn,
                     text    : "valor",
@@ -89,20 +86,23 @@ class Clientes extends Templates {
 
     addCliente() {
         const udn = $(`#filterBar${this.PROJECT_NAME} #udn`).val();
-        const udnName = $(`#filterBar${this.PROJECT_NAME} #udn option:selected`).text();
 
         this.createModalForm({
             id: 'formClienteAdd',
-            data: { opc: 'addCliente', udn_id: udn },
+            data: { opc: 'addCliente' },
             bootbox: {
                 title: 'Agregar Cliente',
             },
             json: [
                 {
-                    opc: "label",
-                    id: "lblUdn",
-                    text: `Unidad de negocio: ${udnName}`,
-                    class: "col-12 mb-2 text-gray-600"
+                    opc: "select",
+                    id: "udn_id",
+                    lbl: "Unidad de negocio",
+                    class: "col-12 mb-3",
+                    data: lsudn,
+                    text: "valor",
+                    value: "id",
+                    required: true
                 },
                 {
                     opc: "input",
@@ -121,6 +121,10 @@ class Clientes extends Templates {
                 }
             }
         });
+
+        setTimeout(() => {
+            $(`#formClienteAdd #udn_id`).val(udn).trigger('change');
+        }, 100);
     }
 
     async editCliente(id) {
@@ -133,7 +137,6 @@ class Clientes extends Templates {
         });
 
         const cliente = request.data;
-        const udnName = $(`#filterBar${this.PROJECT_NAME} #udn option[value="${cliente.udn_id}"]`).text();
 
         this.createModalForm({
             id: 'formClienteEdit',
@@ -144,10 +147,14 @@ class Clientes extends Templates {
             autofill: cliente,
             json: [
                 {
-                    opc: "label",
-                    id: "lblUdn",
-                    text: `Unidad de negocio: ${udnName}`,
-                    class: "col-12 mb-2 text-gray-600"
+                    opc: "select",
+                    id: "udn_id",
+                    lbl: "Unidad de negocio",
+                    class: "col-12 mb-3",
+                    data: lsudn,
+                    text: "valor",
+                    value: "id",
+                    required: true
                 },
                 {
                     opc: "input",
