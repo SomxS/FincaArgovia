@@ -1,0 +1,333 @@
+<?php
+
+if (empty($_POST['opc'])) exit(0);
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+
+require_once '../mdl/mdl-inventario.php';
+
+class ctrl extends mdl {
+
+    function init() {
+        return [
+            'tipoMovimiento' => $this->lsTipoMovimiento(),
+            'productos'      => $this->lsProductos()
+        ];
+    }
+
+    function lsMovimientos() {
+        $fi = $_POST['fi'];
+        $ff = $_POST['ff'];
+        $tipo = $_POST['tipo_movimiento'] ?? 'Todos';
+
+        $ls = $this->listMovimientos([$fi, $ff, $tipo, $tipo]);
+        $rows = [];
+
+        foreach ($ls as $item) {
+            $dropdown = [];
+
+            if ($item['estado'] == 'Activa') {
+                $dropdown[] = [
+                    'icon'    => 'icon-pencil',
+                    'text'    => 'Editar',
+                    'onclick' => 'inventario.editMovimiento(' . $item['id_movimiento'] . ')'
+                ];
+                $dropdown[] = [
+                    'icon'    => 'icon-cancel',
+                    'text'    => 'Cancelar',
+                    'onclick' => 'inventario.cancelMovimiento(' . $item['id_movimiento'] . ')'
+                ];
+            }
+
+            $rows[] = [
+                'id_movimiento'   => $item['id_movimiento'],
+                'Folio'           => $item['folio'],
+                'Fecha'           => $item['fecha'],
+                'Tipo'            => renderTipoMovimiento($item['tipo_movimiento']),
+                'Total Productos' => $item['total_productos'],
+                'Total Unidades'  => $item['total_unidades'],
+                'Estado'          => renderEstado($item['estado']),
+                'dropdown'        => $dropdown
+            ];
+        }
+
+        return [
+            'row' => $rows,
+            'ls'  => $ls
+        ];
+    }
+
+    function addMovimiento() {
+        $status = 500;
+        $message = 'Error al crear movimiento';
+
+        $maxFolio = $this->getMaxFolio();
+        $nuevoNumero = $maxFolio + 1;
+        $folio = formatFolio($nuevoNumero);
+
+        $_POST['folio'] = $folio;
+        $_POST['total_productos'] = 0;
+        $_POST['total_unidades'] = 0;
+        $_POST['estado'] = 'Activa';
+
+        $create = $this->createMovimiento($this->util->sql($_POST));
+
+        if ($create) {
+            $status = 200;
+            $message = 'Lista creada exitosamente';
+        }
+
+        return [
+            'status'        => $status,
+            'message'       => $message,
+            'id_movimiento' => $create,
+            'folio'         => $folio
+        ];
+    }
+
+    function getMovimiento() {
+        $id = $_POST['id'];
+        $status = 404;
+        $message = 'Movimiento no encontrado';
+        $data = null;
+
+        $movimiento = $this->getMovimientoById($id);
+
+        if ($movimiento) {
+            $status = 200;
+            $message = 'Movimiento encontrado';
+            $data = $movimiento;
+        }
+
+        return [
+            'status'  => $status,
+            'message' => $message,
+            'data'    => $data
+        ];
+    }
+
+    function editMovimiento() {
+        $id = $_POST['id'];
+        $status = 500;
+        $message = 'Error al editar movimiento';
+
+        $edit = $this->updateMovimiento($this->util->sql($_POST, 1));
+
+        if ($edit) {
+            $status = 200;
+            $message = 'Movimiento actualizado correctamente';
+        }
+
+        return [
+            'status'  => $status,
+            'message' => $message
+        ];
+    }
+
+    function cancelMovimiento() {
+        $id = $_POST['id'];
+        $status = 500;
+        $message = 'Error al cancelar movimiento';
+
+        $movimiento = $this->getMovimientoById($id);
+
+        if ($movimiento && $movimiento['estado'] == 'Activa') {
+            $detalles = $this->listDetalleMovimiento([$id]);
+
+            foreach ($detalles as $detalle) {
+                $stockAnterior = $detalle['stock_anterior'];
+                $this->updateStockProducto([
+                    'values' => 'cantidad = ?',
+                    'data'   => [$stockAnterior, $detalle['id_producto']]
+                ]);
+            }
+
+            $cancel = $this->updateMovimiento([
+                'values' => 'estado = ?',
+                'where'  => 'id_movimiento = ?',
+                'data'   => ['Cancelada', $id]
+            ]);
+
+            if ($cancel) {
+                $status = 200;
+                $message = 'Movimiento cancelado y stock revertido';
+            }
+        }
+
+        return [
+            'status'  => $status,
+            'message' => $message
+        ];
+    }
+
+    function lsDetalleMovimiento() {
+        $idMovimiento = $_POST['id_movimiento'];
+        $ls = $this->listDetalleMovimiento([$idMovimiento]);
+        $rows = [];
+
+        foreach ($ls as $item) {
+            $rows[] = [
+                'id_detalle'       => $item['id_detalle'],
+                '#'                => count($rows) + 1,
+                'Producto'         => $item['nombre_producto'],
+                'Stock Actual'     => $item['stock_actual'],
+                'Cantidad'         => [
+                    'html'  => '<span class="text-green-600 font-bold">+' . $item['cantidad'] . '</span>',
+                    'class' => 'text-center'
+                ],
+                'Stock Resultante' => $item['stock_resultante'],
+                'a'                => [
+                    [
+                        'class'   => 'btn btn-sm btn-danger',
+                        'html'    => '<i class="icon-trash"></i>',
+                        'onclick' => 'captura.deleteProducto(' . $item['id_detalle'] . ')'
+                    ]
+                ]
+            ];
+        }
+
+        return [
+            'row' => $rows,
+            'ls'  => $ls
+        ];
+    }
+
+    function addProductoMovimiento() {
+        $status = 500;
+        $message = 'Error al agregar producto';
+
+        $idMovimiento = $_POST['id_movimiento'];
+        $idProducto = $_POST['id_producto'];
+        $cantidad = intval($_POST['cantidad']);
+
+        if ($cantidad <= 0) {
+            return [
+                'status'  => 400,
+                'message' => 'La cantidad debe ser mayor a cero'
+            ];
+        }
+
+        $stockActual = $this->getStockProducto($idProducto);
+        $movimiento = $this->getMovimientoById($idMovimiento);
+        $tipoMovimiento = $movimiento['tipo_movimiento'];
+
+        $stockResultante = ($tipoMovimiento == 'Entrada') 
+            ? $stockActual + $cantidad 
+            : $stockActual - $cantidad;
+
+        $_POST['stock_anterior'] = $stockActual;
+        $_POST['stock_resultante'] = $stockResultante;
+
+        $create = $this->createDetalleMovimiento($this->util->sql($_POST));
+
+        if ($create) {
+            $status = 200;
+            $message = 'Producto agregado exitosamente';
+        }
+
+        return [
+            'status'           => $status,
+            'message'          => $message,
+            'stock_actual'     => $stockActual,
+            'stock_resultante' => $stockResultante
+        ];
+    }
+
+    function deleteProductoMovimiento() {
+        $idDetalle = $_POST['id_detalle'];
+        $status = 500;
+        $message = 'Error al eliminar producto';
+
+        $delete = $this->deleteDetalleMovimientoById($idDetalle);
+
+        if ($delete) {
+            $status = 200;
+            $message = 'Producto eliminado correctamente';
+        }
+
+        return [
+            'status'  => $status,
+            'message' => $message
+        ];
+    }
+
+    function guardarMovimiento() {
+        $idMovimiento = $_POST['id_movimiento'];
+        $status = 500;
+        $message = 'Error al guardar movimiento';
+
+        $detalles = $this->listDetalleMovimiento([$idMovimiento]);
+
+        if (count($detalles) == 0) {
+            return [
+                'status'  => 400,
+                'message' => 'Debe agregar al menos un producto'
+            ];
+        }
+
+        $movimiento = $this->getMovimientoById($idMovimiento);
+        $tipoMovimiento = $movimiento['tipo_movimiento'];
+
+        $totalProductos = count($detalles);
+        $totalUnidades = 0;
+
+        foreach ($detalles as $detalle) {
+            $totalUnidades += $detalle['cantidad'];
+
+            $nuevoStock = $detalle['stock_resultante'];
+            $this->updateStockProducto([
+                'values' => 'cantidad = ?',
+                'data'   => [$nuevoStock, $detalle['id_producto']]
+            ]);
+        }
+
+        $update = $this->updateMovimiento([
+            'values' => 'total_productos = ?, total_unidades = ?, estado = ?',
+            'where'  => 'id_movimiento = ?',
+            'data'   => [$totalProductos, $totalUnidades, 'Activa', $idMovimiento]
+        ]);
+
+        if ($update) {
+            $status = 200;
+            $message = 'Lista guardada exitosamente';
+        }
+
+        return [
+            'status'  => $status,
+            'message' => $message
+        ];
+    }
+}
+
+// Complements
+
+function renderEstado($estado) {
+    switch ($estado) {
+        case 'Activa':
+            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#014737] text-[#3FC189]">Activa</span>';
+        case 'Cancelada':
+            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#721c24] text-[#ba464d]">Cancelada</span>';
+        default:
+            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-gray-500 text-white">Desconocido</span>';
+    }
+}
+
+function renderTipoMovimiento($tipo) {
+    switch ($tipo) {
+        case 'Entrada':
+            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#1e3a5f] text-[#60a5fa]">↑ Entrada</span>';
+        case 'Salida':
+            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#7c2d12] text-[#fb923c]">↓ Salida</span>';
+        default:
+            return $tipo;
+    }
+}
+
+function formatFolio($numero) {
+    return 'MOV-' . str_pad($numero, 3, '0', STR_PAD_LEFT);
+}
+
+$obj = new ctrl();
+echo json_encode($obj->{$_POST['opc']}());

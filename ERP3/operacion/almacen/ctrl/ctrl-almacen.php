@@ -2,9 +2,7 @@
 
 if (empty($_POST['opc'])) exit(0);
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+session_start();
 
 require_once '../mdl/mdl-almacen.php';
 
@@ -23,7 +21,6 @@ class ctrl extends mdl {
             'zone'     => $_POST['zone'] ?? '',
             'category' => $_POST['category'] ?? '',
             'area'     => $_POST['area'] ?? '',
-            'search'   => $_POST['search'] ?? ''
         ];
 
         $data = $this->listMateriales($filters);
@@ -54,9 +51,9 @@ class ctrl extends mdl {
                     'html'  => renderProductImage($item['rutaImagen'], $item['Equipo'])
                 ],
                 'Código'   => $item['CodigoEquipo'],
-                'Zona'     => $item['zona'] ?? '-',
+                'Departamento' => $item['zona'] ?? '-',
                 'Equipo'   => $item['Equipo'],
-                'Categoría' => $item['categoria'] ?? '-',
+                'Presentación' => $item['categoria'] ?? '-',
                 'Área'     => $item['area'] ?? '-',
                 'Cantidad' => $item['cantidad'],
                 'Costo'    => [
@@ -162,26 +159,26 @@ function renderProductImage($foto, $nombre) {
     $src = !empty($foto) ? $foto : '';
 
     $img = !empty($src)
-        ? '<img src="' . htmlspecialchars($src) . '" alt="Imagen Material" class="w-10 h-10 bg-gray-500 rounded-md object-cover" />'
-        : '<div class="w-12 h-12 bg-[#1F2A37] rounded-md flex items-center justify-center">
-                <i class="icon-box text-gray-500"></i>
+        ? '<img src="' . htmlspecialchars($src) . '" alt="Imagen Material" class="w-8 h-8 bg-gray-500 rounded-md object-cover" />'
+        : '<div class="w-10 h-10 bg-blue-100 rounded flex items-center justify-center">
+                <i class="icon-box text-blue-600"></i>
            </div>';
 
     return '
-        <div class="flex items-center justify-start gap-2">
+        <div class="flex items-center justify-start gap-2 py-1">
             ' . $img . '
-            <div class="text-sm">' . htmlspecialchars($nombre) . '</div>
+            <div class="text-xs">' . htmlspecialchars($nombre) . '</div>
         </div>';
 }
 
 function renderStatus($estatus) {
     switch ($estatus) {
         case 1:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#014737] text-[#3FC189]">Activo</span>';
+            return '<span class="px-2 py-1 rounded-md text-xs font-semibold bg-green-100 text-green-700">Activo</span>';
         case 0:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#721c24] text-[#ba464d]">Inactivo</span>';
+            return '<span class="px-2 py-1 rounded-md text-xs font-semibold bg-red-100 text-red-700">Inactivo</span>';
         default:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-gray-500 text-white">Desconocido</span>';
+            return '<span class="px-2 py-1 rounded-md text-xs font-semibold bg-gray-100 text-gray-700">Desconocido</span>';
     }
 }
 

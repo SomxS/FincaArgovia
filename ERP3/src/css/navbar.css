@@ -15,7 +15,7 @@ header {
   /* background-color: var(--navbar); */
 background-color: #293042;
   display: flex;
-  font-family: "Verdana";
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   z-index: 999;
 }
 header p {

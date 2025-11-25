@@ -1,7 +1,7 @@
 <?php
-require_once '../../conf/_CRUD.php';
-require_once '../../conf/_Utileria.php';
-session_start();
+
+require_once '../../../conf/_CRUD.php';
+require_once '../../../conf/_Utileria.php';
 
 class mdl extends CRUD {
     protected $util;
@@ -56,7 +56,7 @@ class mdl extends CRUD {
             LEFT JOIN {$this->bd}mtto_almacen_area ar ON a.Area = ar.idArea
             LEFT JOIN {$this->bd}mtto_categoria c ON a.id_categoria = c.idcategoria
             LEFT JOIN {$this->bd}mtto_almacen_area z ON a.id_zona = z.idArea
-            WHERE 1=1
+          
         ";
 
         $params = [];
@@ -76,12 +76,7 @@ class mdl extends CRUD {
             $params[] = $filters['area'];
         }
 
-        if (!empty($filters['search'])) {
-            $query .= " AND (a.CodigoEquipo LIKE ? OR a.Equipo LIKE ?)";
-            $searchTerm = '%' . $filters['search'] . '%';
-            $params[] = $searchTerm;
-            $params[] = $searchTerm;
-        }
+      
 
         $query .= " ORDER BY a.idAlmacen DESC";
 

@@ -28,7 +28,7 @@ class App extends Templates {
         this.primaryLayout({
             parent: 'root',
             id: this.PROJECT_NAME,
-            class: 'w-full',
+            class: 'w-full p-3',
             card: {
                 filterBar: { class: 'w-full mb-3', id: 'filterBar' + this.PROJECT_NAME },
                 container: { class: 'w-full h-full', id: 'container' + this.PROJECT_NAME }
@@ -50,16 +50,16 @@ class App extends Templates {
                 {
                     opc: "select",
                     id: "zone",
-                    lbl: "Zona",
-                    class: "col-12 col-md-3",
+                    lbl: "Departamento",
+                    class: "col-12 col-md-2",
                     data: zones,
                     onchange: 'app.lsMateriales()'
                 },
                 {
                     opc: "select",
                     id: "category",
-                    lbl: "Categoría",
-                    class: "col-12 col-md-3",
+                    lbl: "Presentación",
+                    class: "col-12 col-md-2",
                     data: categories,
                     onchange: 'app.lsMateriales()'
                 },
@@ -67,23 +67,23 @@ class App extends Templates {
                     opc: "select",
                     id: "area",
                     lbl: "Área",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: areas,
                     onchange: 'app.lsMateriales()'
                 },
-                {
-                    opc: "input",
-                    id: "search",
-                    lbl: "Buscar",
-                    placeholder: "Código o nombre...",
-                    class: "col-12 col-md-2",
-                    onkeyup: 'app.lsMateriales()'
-                },
+                // {
+                //     opc: "input",
+                //     id: "search",
+                //     lbl: "Buscar",
+                //     placeholder: "Código o nombre...",
+                //     class: "col-12 col-md-2",
+                //     onkeyup: 'app.lsMateriales()'
+                // },
                 {
                     opc: "button",
                     id: "btnNuevoMaterial",
                     text: "+ Nuevo Material",
-                    class: "col-12 col-md-1",
+                    class: "col-12 col-md-3",
                     color_btn: "primary",
                     onClick: () => this.addMaterial()
                 }
@@ -92,30 +92,28 @@ class App extends Templates {
     }
 
     lsMateriales() {
-        const zone = $(`#filterBar${this.PROJECT_NAME} #zone`).val() || '';
-        const category = $(`#filterBar${this.PROJECT_NAME} #category`).val() || '';
-        const area = $(`#filterBar${this.PROJECT_NAME} #area`).val() || '';
-        const search = $(`#filterBar${this.PROJECT_NAME} #search`).val() || '';
 
+        const zone     = $(`#filterBar${this.PROJECT_NAME} #zone`).val() || '';
+        const category = $(`#filterBar${this.PROJECT_NAME} #category`).val() || '';
+        const area     = $(`#filterBar${this.PROJECT_NAME} #area`).val() || '';
+     
         this.createTable({
             parent: `container${this.PROJECT_NAME}`,
             idFilterBar: `filterBar${this.PROJECT_NAME}`,
             data: { 
                 opc: 'lsMateriales',
-                zone: zone,
-                category: category,
-                area: area,
-                search: search
             },
             coffeesoft: true,
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: 'tbMateriales',
-                theme: 'light',
-                title: 'Lista de Materiales',
-                subtitle: 'Materiales registrados en el almacén',
+                theme: 'shadcdn',
+                title: 'Lista de productos',
+                class:'w-100 lowercase',
+                subtitle: 'Productos registrados en el sistema',
                 center: [1, 6, 7, 8],
-                right: [9]
+                right: [9],
+                f_size:12,
             },
             success: (response) => {
                 if (response.total_value) {
@@ -133,25 +131,25 @@ class App extends Templates {
 
     jsonMaterial() {
         return [
-            {
-                opc: "label",
-                id: "lblFoto",
-                text: "Foto del Material",
-                class: "col-12 fw-bold text-sm mb-2"
-            },
-            {
-                opc: "input-file",
-                id: "rutaImagen",
-                lbl: "Seleccionar archivo",
-                class: "col-12 mb-3",
-                accept: "image/jpeg,image/png,image/gif"
-            },
-            {
-                opc: "label",
-                id: "lblInfo",
-                text: "Formatos: JPG, PNG, GIF. Máximo 5MB",
-                class: "col-12 text-xs text-gray-500 mb-3"
-            },
+            // {
+            //     opc: "label",
+            //     id: "lblFoto",
+            //     text: "Foto del Material",
+            //     class: "col-12 fw-bold text-sm mb-2"
+            // },
+            // {
+            //     opc: "input-file",
+            //     id: "rutaImagen",
+            //     lbl: "Seleccionar archivo",
+            //     class: "col-12 mb-3",
+            //     accept: "image/jpeg,image/png,image/gif"
+            // },
+            // {
+            //     opc: "label",
+            //     id: "lblInfo",
+            //     text: "Formatos: JPG, PNG, GIF. Máximo 5MB",
+            //     class: "col-12 text-xs text-gray-500 mb-3"
+            // },
             {
                 opc: "input",
                 id: "CodigoEquipo",
@@ -163,7 +161,7 @@ class App extends Templates {
             {
                 opc: "select",
                 id: "id_zona",
-                lbl: "Zona *",
+                lbl: "Departamento *",
                 class: "col-12 col-md-6 mb-3",
                 data: zones,
                 required: true
@@ -179,7 +177,7 @@ class App extends Templates {
             {
                 opc: "select",
                 id: "id_categoria",
-                lbl: "Categoría *",
+                lbl: "Presentación *",
                 class: "col-12 col-md-6 mb-3",
                 data: categories,
                 required: true

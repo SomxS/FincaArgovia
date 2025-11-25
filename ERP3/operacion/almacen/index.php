@@ -1,37 +1,45 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materiales - Sistema de Almacén ERP</title>
-    
-    <!-- TailwindCSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- DataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-    <!-- Bootbox -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
-    
-    <!-- Fontello Icons -->
-    <link rel="stylesheet" href="../../src/css/fontello.css">
-    
-    <!-- CoffeeSoft Framework -->
-    <script src="../../src/js/coffeSoft.js"></script>
-    <script src="../../src/js/plugins.js"></script>
-    
-    <!-- Almacen Module -->
-    <script src="js/almacen.js"></script>
-</head>
-<body class="bg-gray-100">
-    <div id="root"></div>
+<?php
+session_start();
+
+// Validar sesión de usuario
+if (empty($_COOKIE["IDU"])) {
+    require_once('../../acceso/ctrl/ctrl-logout.php');
+    exit();
+}
+
+require_once('layout/head.php');
+require_once('layout/core-libraries.php');
+?>
+
+<!-- CoffeeSoft Framework -->
+<script src="../../src/js/coffeeSoft.js"></script>
+<script src="https://rawcdn.githack.com/SomxS/Grupo-Varoch/refs/heads/main/src/js/plugins.js"></script>
+<script src="https://www.plugins.erp-varoch.com/ERP/JS/complementos.js"></script>
+
+<body>
+    <?php require_once('../../layout/navbar.php'); ?>
+
+    <main>
+        <section id="sidebar"></section>
+
+        <div id="main__content">
+            <!-- Breadcrumb Navigation -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item text-uppercase text-muted">Operación</li>
+                    <li class="breadcrumb-item fw-bold active">Almacén</li>
+                </ol>
+            </nav>
+
+            <!-- Main Container -->
+            <div class="main-container" id="root"></div>
+
+            <!-- Módulo de Almacén -->
+            <script src="js/almacen.js?t=<?php echo time(); ?>"></script>
+            
+            <!-- Módulo de Inventario -->
+            <script src="js/inventario.js?t=<?php echo time(); ?>"></script>
+        </div>
+    </main>
 </body>
 </html>

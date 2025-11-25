@@ -1,6 +1,6 @@
 .table {
   width: 100% !important;
-  font-family: Calibri;
+  /* font-family: Calibri; */
   border-radius: 5px;
 }
 
@@ -10,12 +10,16 @@
   text-transform: uppercase;
   /* background-color: var(--aliceblue_other); */
   color: var(--primary);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .table td {
   color: black;
   font-size: 14px;
   vertical-align: middle;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 table a {
