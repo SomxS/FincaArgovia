@@ -20,6 +20,29 @@ Debe respetarse el formato de CoffeeSoft
 
   ```
 
+  **Nota sobre rutas relativas:**
+  - Los `../` indican que debes subir un nivel desde la ubicación actual del archivo
+  - Si tu archivo modelo está en `proyecto/mdl/mdl-proyecto.php`, los `../` te llevan a la raíz del proyecto
+  - La estructura típica es:
+    ```
+    ├── ERP
+    ├── conf/
+    │   ├── _CRUD.php
+    │   └── _Utileria.php
+    
+   proyecto/
+    ├── mdl/
+    │   └── mdl-proyecto.php  ← Desde aquí, ../ sube a proyecto/
+    ├── ctrl/
+    │   └── ctrl-proyecto.php
+    └── js/
+        └── proyecto.js
+    ```
+  - Ajusta el número de `../` según la profundidad de tu archivo:
+    - Archivo en `mdl/`: usa `../conf/`
+    - Archivo en `modulo/mdl/`: usa `../../conf/`
+    - Archivo en `modulo/submodulo/mdl/`: usa `../../../conf/`
+
 - Propiedades comunes a declarar en la clase:
   ```php
   public $util;

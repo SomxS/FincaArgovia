@@ -1,0 +1,411 @@
+[ 2025-11-26 14:35:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                id_movimiento,
+                folio,
+                DATE_FORMAT(fecha, '%d/%m/%Y') as fecha,
+                tipo_movimiento,
+                total_productos,
+                total_unidades,
+                estado,
+                DATE_FORMAT(fecha_creacion, '%d/%m/%Y %H:%i') as fecha_creacion
+            FROM rfwsmqex_erp.mtto_inventario_movimientos
+            WHERE fecha BETWEEN ? AND ?
+            AND (? = 'Todos' OR tipo_movimiento = ?)
+            ORDER BY id_movimiento DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_inventario_movimientos' doesn't exist
+
+
+[ 2025-11-26 14:35:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 14:35:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                id_movimiento,
+                folio,
+                DATE_FORMAT(fecha, '%d/%m/%Y') as fecha,
+                tipo_movimiento,
+                total_productos,
+                total_unidades,
+                estado,
+                DATE_FORMAT(fecha_creacion, '%d/%m/%Y %H:%i') as fecha_creacion
+            FROM rfwsmqex_erp.mtto_inventario_movimientos
+            WHERE fecha BETWEEN ? AND ?
+            AND (? = 'Todos' OR tipo_movimiento = ?)
+            ORDER BY id_movimiento DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_inventario_movimientos' doesn't exist
+
+
+[ 2025-11-26 14:35:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 14:32:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                id_movimiento,
+                folio,
+                DATE_FORMAT(fecha, '%d/%m/%Y') as fecha,
+                tipo_movimiento,
+                total_productos,
+                total_unidades,
+                estado,
+                DATE_FORMAT(fecha_creacion, '%d/%m/%Y %H:%i') as fecha_creacion
+            FROM rfwsmqex_erp.mtto_inventario_movimientos
+            WHERE fecha BETWEEN ? AND ?
+            AND (? = 'Todos' OR tipo_movimiento = ?)
+            ORDER BY id_movimiento DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_inventario_movimientos' doesn't exist
+
+
+[ 2025-11-26 14:32:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 14:32:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                id_movimiento,
+                folio,
+                DATE_FORMAT(fecha, '%d/%m/%Y') as fecha,
+                tipo_movimiento,
+                total_productos,
+                total_unidades,
+                estado,
+                DATE_FORMAT(fecha_creacion, '%d/%m/%Y %H:%i') as fecha_creacion
+            FROM rfwsmqex_erp.mtto_inventario_movimientos
+            WHERE fecha BETWEEN ? AND ?
+            AND (? = 'Todos' OR tipo_movimiento = ?)
+            ORDER BY id_movimiento DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_inventario_movimientos' doesn't exist
+
+
+[ 2025-11-26 14:32:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 14:32:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 14:32:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                id_movimiento,
+                folio,
+                DATE_FORMAT(fecha, '%d/%m/%Y') as fecha,
+                tipo_movimiento,
+                total_productos,
+                total_unidades,
+                estado,
+                DATE_FORMAT(fecha_creacion, '%d/%m/%Y %H:%i') as fecha_creacion
+            FROM rfwsmqex_erp.mtto_inventario_movimientos
+            WHERE fecha BETWEEN ? AND ?
+            AND (? = 'Todos' OR tipo_movimiento = ?)
+            ORDER BY id_movimiento DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_inventario_movimientos' doesn't exist
+
+
+[ 2025-11-26 14:32:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 14:31:52 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                id_movimiento,
+                folio,
+                DATE_FORMAT(fecha, '%d/%m/%Y') as fecha,
+                tipo_movimiento,
+                total_productos,
+                total_unidades,
+                estado,
+                DATE_FORMAT(fecha_creacion, '%d/%m/%Y %H:%i') as fecha_creacion
+            FROM rfwsmqex_erp.mtto_inventario_movimientos
+            WHERE fecha BETWEEN ? AND ?
+            AND (? = 'Todos' OR tipo_movimiento = ?)
+            ORDER BY id_movimiento DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_inventario_movimientos' doesn't exist
+
+
+[ 2025-11-26 14:31:52 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 14:31:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                id_movimiento,
+                folio,
+                DATE_FORMAT(fecha, '%d/%m/%Y') as fecha,
+                tipo_movimiento,
+                total_productos,
+                total_unidades,
+                estado,
+                DATE_FORMAT(fecha_creacion, '%d/%m/%Y %H:%i') as fecha_creacion
+            FROM rfwsmqex_erp.mtto_inventario_movimientos
+            WHERE fecha BETWEEN ? AND ?
+            AND (? = 'Todos' OR tipo_movimiento = ?)
+            ORDER BY id_movimiento DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_inventario_movimientos' doesn't exist
+
+
+[ 2025-11-26 14:31:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                id_movimiento,
+                folio,
+                DATE_FORMAT(fecha, '%d/%m/%Y') as fecha,
+                tipo_movimiento,
+                total_productos,
+                total_unidades,
+                estado,
+                DATE_FORMAT(fecha_creacion, '%d/%m/%Y %H:%i') as fecha_creacion
+            FROM rfwsmqex_erp.mtto_inventario_movimientos
+            WHERE fecha BETWEEN ? AND ?
+            AND (? = 'Todos' OR tipo_movimiento = ?)
+            ORDER BY id_movimiento DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_inventario_movimientos' doesn't exist
+
+
+[ 2025-11-26 14:31:41 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                id_movimiento,
+                folio,
+                DATE_FORMAT(fecha, '%d/%m/%Y') as fecha,
+                tipo_movimiento,
+                total_productos,
+                total_unidades,
+                estado,
+                DATE_FORMAT(fecha_creacion, '%d/%m/%Y %H:%i') as fecha_creacion
+            FROM rfwsmqex_erp.mtto_inventario_movimientos
+            WHERE fecha BETWEEN ? AND ?
+            AND (? = 'Todos' OR tipo_movimiento = ?)
+            ORDER BY id_movimiento DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_inventario_movimientos' doesn't exist
+
+
+[ 2025-11-26 14:31:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 14:31:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 14:19:56 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 09:13:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                idAlmacen as id,
+                Equipo as valor,
+                cantidad as stock_actual
+            FROM rfwsmqex_erp.mtto_almacen
+            WHERE Estado = 1
+            ORDER BY Equipo ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_erp.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 09:11:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                a.idAlmacen as id,
+                a.CodigoEquipo,
+                a.Equipo,
+                a.cantidad,
+                a.Costo,
+                a.Estado,
+                a.rutaImagen,
+                ar.Nombre_Area as area,
+                c.nombreCategoria as categoria,
+                z.Nombre_Area as zona
+            FROM rfwsmqex_mtto.mtto_almacen a
+            LEFT JOIN rfwsmqex_mtto.mtto_almacen_area ar ON a.Area = ar.idArea
+            LEFT JOIN rfwsmqex_mtto.mtto_categoria c ON a.id_categoria = c.idcategoria
+            LEFT JOIN rfwsmqex_mtto.mtto_almacen_area z ON a.id_zona = z.idArea
+          
+         AND a.id_zona = ? AND a.id_categoria = ? AND a.Area = ? ORDER BY a.idAlmacen DESC
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen' doesn't exist
+
+
+[ 2025-11-26 09:11:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT idArea as id, Nombre_Area AS valor
+            FROM rfwsmqex_mtto.mtto_almacen_area
+            ORDER BY Nombre_Area ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_area' doesn't exist
+
+
+[ 2025-11-26 09:11:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT idcategoria as id, nombreCategoria AS valor
+            FROM rfwsmqex_mtto.mtto_categoria
+            ORDER BY nombreCategoria ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_categoria' doesn't exist
+
+
+[ 2025-11-26 09:11:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT idArea as id, Nombre_Area AS valor
+            FROM rfwsmqex_mtto.mtto_almacen_area
+            ORDER BY Nombre_Area ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_area' doesn't exist
+
+

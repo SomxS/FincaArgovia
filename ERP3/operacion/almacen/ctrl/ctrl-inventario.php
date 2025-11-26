@@ -18,11 +18,11 @@ class ctrl extends mdl {
     }
 
     function lsMovimientos() {
-        $fi = $_POST['fi'];
-        $ff = $_POST['ff'];
+        $fi   = $_POST['fi'];
+        $ff   = $_POST['ff'];
         $tipo = $_POST['tipo_movimiento'] ?? 'Todos';
 
-        $ls = $this->listMovimientos([$fi, $ff, $tipo, $tipo]);
+        $ls   = $this->listMovimientos([$fi, $ff, $tipo, $tipo]);
         $rows = [];
 
         foreach ($ls as $item) {
@@ -60,17 +60,17 @@ class ctrl extends mdl {
     }
 
     function addMovimiento() {
-        $status = 500;
-        $message = 'Error al crear movimiento';
+        $status      = 500;
+        $message     = 'Error al crear movimiento';
 
-        $maxFolio = $this->getMaxFolio();
+        $maxFolio    = $this->getMaxFolio();
         $nuevoNumero = $maxFolio + 1;
-        $folio = formatFolio($nuevoNumero);
+        $folio       = formatFolio($nuevoNumero);
 
-        $_POST['folio'] = $folio;
-        $_POST['total_productos'] = 0;
-        $_POST['total_unidades'] = 0;
-        $_POST['estado'] = 'Activa';
+        $_POST['folio']            = $folio;
+        $_POST['total_productos']  = 0;
+        $_POST['total_unidades']   = 0;
+        $_POST['estado']           = 'Activa';
 
         $create = $this->createMovimiento($this->util->sql($_POST));
 
@@ -88,10 +88,10 @@ class ctrl extends mdl {
     }
 
     function getMovimiento() {
-        $id = $_POST['id'];
-        $status = 404;
+        $id      = $_POST['id'];
+        $status  = 404;
         $message = 'Movimiento no encontrado';
-        $data = null;
+        $data    = null;
 
         $movimiento = $this->getMovimientoById($id);
 
@@ -109,11 +109,11 @@ class ctrl extends mdl {
     }
 
     function editMovimiento() {
-        $id = $_POST['id'];
-        $status = 500;
+        $id      = $_POST['id'];
+        $status  = 500;
         $message = 'Error al editar movimiento';
 
-        $edit = $this->updateMovimiento($this->util->sql($_POST, 1));
+        $edit    = $this->updateMovimiento($this->util->sql($_POST, 1));
 
         if ($edit) {
             $status = 200;
@@ -127,8 +127,8 @@ class ctrl extends mdl {
     }
 
     function cancelMovimiento() {
-        $id = $_POST['id'];
-        $status = 500;
+        $id      = $_POST['id'];
+        $status  = 500;
         $message = 'Error al cancelar movimiento';
 
         $movimiento = $this->getMovimientoById($id);
@@ -164,8 +164,8 @@ class ctrl extends mdl {
 
     function lsDetalleMovimiento() {
         $idMovimiento = $_POST['id_movimiento'];
-        $ls = $this->listDetalleMovimiento([$idMovimiento]);
-        $rows = [];
+        $ls           = $this->listDetalleMovimiento([$idMovimiento]);
+        $rows         = [];
 
         foreach ($ls as $item) {
             $rows[] = [
@@ -195,12 +195,12 @@ class ctrl extends mdl {
     }
 
     function addProductoMovimiento() {
-        $status = 500;
+        $status  = 500;
         $message = 'Error al agregar producto';
 
         $idMovimiento = $_POST['id_movimiento'];
-        $idProducto = $_POST['id_producto'];
-        $cantidad = intval($_POST['cantidad']);
+        $idProducto   = $_POST['id_producto'];
+        $cantidad     = intval($_POST['cantidad']);
 
         if ($cantidad <= 0) {
             return [
@@ -209,15 +209,15 @@ class ctrl extends mdl {
             ];
         }
 
-        $stockActual = $this->getStockProducto($idProducto);
-        $movimiento = $this->getMovimientoById($idMovimiento);
-        $tipoMovimiento = $movimiento['tipo_movimiento'];
+        $stockActual     = $this->getStockProducto($idProducto);
+        $movimiento      = $this->getMovimientoById($idMovimiento);
+        $tipoMovimiento  = $movimiento['tipo_movimiento'];
 
         $stockResultante = ($tipoMovimiento == 'Entrada') 
             ? $stockActual + $cantidad 
             : $stockActual - $cantidad;
 
-        $_POST['stock_anterior'] = $stockActual;
+        $_POST['stock_anterior']   = $stockActual;
         $_POST['stock_resultante'] = $stockResultante;
 
         $create = $this->createDetalleMovimiento($this->util->sql($_POST));
@@ -237,10 +237,10 @@ class ctrl extends mdl {
 
     function deleteProductoMovimiento() {
         $idDetalle = $_POST['id_detalle'];
-        $status = 500;
-        $message = 'Error al eliminar producto';
+        $status    = 500;
+        $message   = 'Error al eliminar producto';
 
-        $delete = $this->deleteDetalleMovimientoById($idDetalle);
+        $delete    = $this->deleteDetalleMovimientoById($idDetalle);
 
         if ($delete) {
             $status = 200;
@@ -255,8 +255,8 @@ class ctrl extends mdl {
 
     function guardarMovimiento() {
         $idMovimiento = $_POST['id_movimiento'];
-        $status = 500;
-        $message = 'Error al guardar movimiento';
+        $status       = 500;
+        $message      = 'Error al guardar movimiento';
 
         $detalles = $this->listDetalleMovimiento([$idMovimiento]);
 
@@ -267,11 +267,11 @@ class ctrl extends mdl {
             ];
         }
 
-        $movimiento = $this->getMovimientoById($idMovimiento);
-        $tipoMovimiento = $movimiento['tipo_movimiento'];
+        $movimiento      = $this->getMovimientoById($idMovimiento);
+        $tipoMovimiento  = $movimiento['tipo_movimiento'];
 
-        $totalProductos = count($detalles);
-        $totalUnidades = 0;
+        $totalProductos  = count($detalles);
+        $totalUnidades   = 0;
 
         foreach ($detalles as $detalle) {
             $totalUnidades += $detalle['cantidad'];
@@ -306,20 +306,20 @@ class ctrl extends mdl {
 function renderEstado($estado) {
     switch ($estado) {
         case 'Activa':
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#014737] text-[#3FC189]">Activa</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activa</span>';
         case 'Cancelada':
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#721c24] text-[#ba464d]">Cancelada</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Cancelada</span>';
         default:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-gray-500 text-white">Desconocido</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-gray-100 text-gray-700 min-w-[100px] text-center">Desconocido</span>';
     }
 }
 
 function renderTipoMovimiento($tipo) {
     switch ($tipo) {
         case 'Entrada':
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#1e3a5f] text-[#60a5fa]">↑ Entrada</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-blue-100 text-blue-700 min-w-[100px] text-center">↑ Entrada</span>';
         case 'Salida':
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#7c2d12] text-[#fb923c]">↓ Salida</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-orange-100 text-orange-700 min-w-[100px] text-center">↓ Salida</span>';
         default:
             return $tipo;
     }

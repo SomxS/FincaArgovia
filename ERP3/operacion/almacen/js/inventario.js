@@ -30,19 +30,14 @@ class Inventario extends Templates {
         this.primaryLayout({
             parent: "root",
             id: this.PROJECT_NAME,
-            class: "w-full",
+            class: "w-full p-3",
             card: {
-                filterBar: { class: "w-full mb-3", id: `filterBar${this.PROJECT_NAME}` },
+                filterBar: { class: "w-full mb-3 border rounded p-3", id: `filterBar${this.PROJECT_NAME}` },
                 container: { class: "w-full h-full", id: `container${this.PROJECT_NAME}` }
             }
         });
 
-        $(`#filterBar${this.PROJECT_NAME}`).prepend(`
-            <div class="px-4 pt-3 pb-3">
-                <h2 class="text-2xl font-semibold">📦 Módulo de Inventario</h2>
-                <p class="text-gray-400">Gestión de movimientos de entrada y salida</p>
-            </div>
-        `);
+     
     }
 
     filterBar() {
@@ -139,7 +134,7 @@ class Inventario extends Templates {
         });
     }
 
-    cancelMovimiento(id) {
+    cancelMovimiento(id, event) {
         const row = event.target.closest('tr');
         const folio = row.querySelectorAll('td')[0]?.innerText || '';
 
@@ -195,12 +190,7 @@ class Inventario extends Templates {
                 text: "valor",
                 value: "id"
             },
-            {
-                opc: "btn-submit",
-                text: "Crear Lista",
-                class: "col-12",
-                color_btn: "primary"
-            }
+    
         ];
     }
 }
