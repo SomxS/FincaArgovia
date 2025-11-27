@@ -42,7 +42,7 @@ class ctrl extends mdl {
             }
 
             $rows[] = [
-                'id_movimiento'   => $item['id_movimiento'],
+                'id'   => $item['id_movimiento'],
                 'Folio'           => $item['folio'],
                 'Fecha'           => $item['fecha'],
                 'Tipo'            => renderTipoMovimiento($item['tipo_movimiento']),

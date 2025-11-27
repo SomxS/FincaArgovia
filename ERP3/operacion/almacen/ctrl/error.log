@@ -1,3 +1,73 @@
+[ 2025-11-26 22:46:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                idArea as id,
+                Nombre_Area as valor
+            FROM rfwsmqex_mtto.mtto_almacen_area
+            WHERE Estado = 1
+            ORDER BY Nombre_Area ASC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Estado' in 'where clause'
+
+
+[ 2025-11-26 22:46:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                idArea as id,
+                Nombre_Area as valor
+            FROM rfwsmqex_mtto.mtto_almacen_area
+            WHERE Estado = 1
+            ORDER BY Nombre_Area ASC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Estado' in 'where clause'
+
+
+[ 2025-11-26 22:45:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                idArea as id,
+                Nombre_Area as valor
+            FROM rfwsmqex_mtto.mtto_almacen_area
+            WHERE Estado = 1
+            ORDER BY Nombre_Area ASC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Estado' in 'where clause'
+
+
+[ 2025-11-26 22:44:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                idArea as id,
+                Nombre_Area as valor
+            FROM rfwsmqex_mtto.mtto_almacen_area
+            WHERE Estado = 1
+            ORDER BY Nombre_Area ASC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Estado' in 'where clause'
+
+
+[ 2025-11-26 22:43:41 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                idArea as id,
+                Nombre_Area as valor
+            FROM rfwsmqex_mtto.mtto_almacen_area
+            WHERE Estado = 1
+            ORDER BY Nombre_Area ASC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Estado' in 'where clause'
+
+
 [ 2025-11-26 14:35:20 ]
 [ UNIX_USR ] :: nt authority\system
 [ WINDOWS_USR ] :: DESKTOP-FHJB2CN$

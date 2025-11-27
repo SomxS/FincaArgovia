@@ -45,22 +45,23 @@ class Inventario extends Templates {
             parent: `filterBar${this.PROJECT_NAME}`,
             data: [
                 {
+                    opc: "input-calendar",
+                    id: "calendar",
+                    lbl: "Rango de Fechas",
+                    class: "col-12 col-md-3"
+                },
+                {
                     opc: "select",
                     id: "tipo_movimiento",
                     lbl: "Tipo de Movimiento",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: [
                         { id: "Todos", valor: "Todos" },
                         ...tipoMovimiento
                     ],
                     onchange: "inventario.lsMovimientos()"
                 },
-                {
-                    opc: "input-calendar",
-                    id: "calendar",
-                    lbl: "Rango de Fechas",
-                    class: "col-12 col-md-4"
-                },
+              
                 {
                     opc: "button",
                     id: "btnNuevaLista",
