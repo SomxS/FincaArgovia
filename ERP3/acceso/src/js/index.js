@@ -20,7 +20,8 @@ function storage(data) {
         const HASH = HREF.pathname.split("/").filter(Boolean);
         const ERP = HASH[0];
     
-        window.location.href = HREF.origin + "/" + ERP + "/"+data.ruta;
+        // window.location.href = HREF.origin + "/" + ERP + "/"+data.ruta;
+        window.location.href = HREF.origin + "/" + ERP + "/operacion/almacen/";
     } else {
         alert({icon:'error',title:'Usuario y/o clave incorrectos.',btn1:true});
     }

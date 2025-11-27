@@ -7,13 +7,15 @@ function sql($arreglo,$slice = 0){
         $sqlArray = [];
 
         
-        if (is_array($arreglo) && is_array($arreglo[0])) {
+        if (is_array($arreglo) && isset($arreglo[0]) && is_array($arreglo[0])) {
             $sqlArray['values'] = array_keys(current($arreglo));
-            foreach ($arreglo as $row) $sqlArray['data'][] = array_values($row);
+            foreach ($arreglo as $row) {
+                $sqlArray['data'][] = array_values($row);
+            }
         } else {
             foreach ($arreglo as $key => $value) {
-                $sqlArray['values'][] = $key; // Obtenemos los index y los guardamos como values
-                $sqlArray['data'][] =  ($value == '') ? null : $value; // Obtenemos los values que usamos para cada ?
+                $sqlArray['values'][] = $key;
+                $sqlArray['data'][]   = ($value == '') ? null : $value;
             }
         }
 
