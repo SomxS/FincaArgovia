@@ -9,7 +9,7 @@ class mdl extends CRUD {
 
     public function __construct() {
         $this->util = new Utileria;
-        $this->bd = "rfwsmqex_contabilidad.";
+        $this->bd = "rfwsmqex_gvsl_finanzas3.";
     }
 
     // Cash Concepts
@@ -21,9 +21,7 @@ class mdl extends CRUD {
                 id,
                 name,
                 operation_type,
-                description,
-                active,
-                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation
+                active
             ",
             'where'  => 'udn_id = ? AND active = ?',
             'order'  => ['DESC' => 'id'],
@@ -31,13 +29,14 @@ class mdl extends CRUD {
         ]);
     }
 
-    function getConceptoById($id) {
-        return $this->_Select([
-            'table'  => $this->bd . 'cash_concept',
-            'values' => '*',
-            'where'  => 'id = ?',
-            'data'   => [$id]
-        ])[0];
+    function getConceptoById($array) {
+        $query = "
+            SELECT *
+            FROM {$this->bd}cash_concept
+            WHERE id = ?
+        ";
+        $result = $this->_Read($query, $array);
+        return $result[0] ?? null;
     }
 
     function createConcepto($array) {
@@ -97,13 +96,14 @@ class mdl extends CRUD {
         ]);
     }
 
-    function getMovimientoById($id) {
-        return $this->_Select([
-            'table'  => $this->bd . 'cash_movement',
-            'values' => '*',
-            'where'  => 'id = ?',
-            'data'   => [$id]
-        ])[0];
+    function getMovimientoById($array) {
+        $query = "
+            SELECT *
+            FROM {$this->bd}cash_movement
+            WHERE id = ?
+        ";
+        $result = $this->_Read($query, $array);
+        return $result[0] ?? null;
     }
 
     function createMovimiento($array) {

@@ -12822,3 +12822,17 @@
         
 [ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'field list'
 
+[ 2025-11-29 12:47:50 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END) as total_consumos,
+                SUM(CASE WHEN dcc.movement_type != 'consumo' AND dcc.method_pay = 'efectivo' THEN dcc.amount ELSE 0 END) as total_pagos_efectivo,
+                SUM(CASE WHEN dcc.movement_type != 'consumo' AND dcc.method_pay = 'banco' THEN dcc.amount ELSE 0 END) as total_pagos_banco
+            FROM rfwsmqex_gvsl_finanzas2.daily_closure dc
+            INNER JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON dcc.daily_closure_id = dc.id
+            WHERE dc.operation_date = ? and dcc.active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dcc.active' in 'where clause'
+

@@ -35,6 +35,7 @@ class PaymentMethod extends Templates {
                 {
                     id: "conceptos",
                     tab: "Efectivo",
+                    icon: "icon-dollar-1",
                     class: "mb-1",
                     active: true,
                     onClick: () => formasPago.lsConceptos()
@@ -42,22 +43,17 @@ class PaymentMethod extends Templates {
                 {
                     id: "moneda",
                     tab: "Moneda extranjera",
+                    icon: "icon-dollar",
                     class: "mb-1",
-                    // active: true,
                     onClick: () => moneda.lsCurrencies()
                 },
                 {
                     id: "banco",
                     tab: "Bancos",
+                    icon: "icon-bank",
                     class: "mb-1",
-               
                     onClick: () => banco.lsBankAccounts()
                 },
-                // {
-                //     id: "movimientos",
-                //     tab: "Movimientos",
-                //     onClick: () => cashMovement.lsMovimientos()
-                // }
             ]
         });
 
@@ -110,7 +106,7 @@ class PaymentMethod extends Templates {
             attr: {
                 id: "tbConceptos",
                 theme: 'light',
-                center: [2, 4],
+                center: [2, 3],
                 right: [6]
             },
         });
@@ -216,13 +212,13 @@ class PaymentMethod extends Templates {
                 ],
 
             },
-            {
-                opc: "textarea",
-                id: "description",
-                lbl: "Descripción (opcional)",
-                class: "col-12 mb-3",
-                required: false
-            }
+            // {
+            //     opc: "textarea",
+            //     id: "description",
+            //     lbl: "Descripción (opcional)",
+            //     class: "col-12 mb-3",
+            //     required: false
+            // }
         ];
     }
     
@@ -422,13 +418,13 @@ class CashMovement extends App {
                 class: "col-12 mb-3",
                 onkeyup: "validationInputForNumber('#amount')"
             },
-            {
-                opc: "textarea",
-                id: "description",
-                lbl: "Descripción o Comentario",
-                class: "col-12 mb-3",
-                required: false
-            }
+            // {
+            //     opc: "textarea",
+            //     id: "description",
+            //     lbl: "Descripción o Comentario",
+            //     class: "col-12 mb-3",
+            //     required: false
+            // }
         ];
     }
 }

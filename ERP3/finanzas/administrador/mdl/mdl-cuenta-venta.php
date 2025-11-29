@@ -9,7 +9,7 @@ class mdl extends CRUD {
 
     public function __construct() {
         $this->util = new Utileria;
-        $this->bd   = "rfwsmqex_finanzas2.";
+        $this->bd   = "rfwsmqex_finanzas3.";
     }
 
     function listSalesAccount($array) {

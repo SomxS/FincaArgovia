@@ -54,9 +54,7 @@ class ctrl extends mdl {
                 'id'          => $item['id'],
                 'Concepto'    => $item['name'],
                 'Tipo'        => renderOperationType($item['operation_type']),
-                'Descripción' => $item['description'],
                 'Estado'      => renderStatus($item['active']),
-                // 'Fecha'       => $item['date_creation'],
                 'a'           => $a
             ];
         }
@@ -73,7 +71,7 @@ class ctrl extends mdl {
         $message = 'Concepto no encontrado';
         $data    = null;
 
-        $concepto = $this->getConceptoById($id);
+        $concepto = $this->getConceptoById([$id]);
 
         if ($concepto) {
             $status  = 200;
@@ -92,7 +90,6 @@ class ctrl extends mdl {
         $status  = 500;
         $message = 'No se pudo agregar el concepto';
         
-        $_POST['date_creation'] = date('Y-m-d H:i:s');
         $_POST['active']        = 1;
 
         $exists = $this->existsConceptoByName([$_POST['name'], $_POST['udn_id']]);
@@ -193,7 +190,7 @@ class ctrl extends mdl {
         $message = 'Movimiento no encontrado';
         $data    = null;
 
-        $movimiento = $this->getMovimientoById($id);
+        $movimiento = $this->getMovimientoById([$id]);
 
         if ($movimiento) {
             $status  = 200;
@@ -315,22 +312,22 @@ class ctrl extends mdl {
 function renderStatus($status) {
     switch ($status) {
         case 1:
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activo</span>';
         case 0:
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Inactivo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Inactivo</span>';
         default:
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-gray-100 text-gray-700 min-w-[100px] text-center">Desconocido</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-gray-100 text-gray-700 min-w-[100px] text-center">Desconocido</span>';
     }
 }
 
 function renderOperationType($type) {
     switch ($type) {
         case 'suma':
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-green-100 text-green-800">Suma</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-medium bg-teal-100 text-teal-600">Suma</span>';
         case 'resta':
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-red-100 text-red-800">Resta</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-medium bg-red-100 text-red-500">Resta</span>';
         default:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-gray-100 text-gray-800">N/A</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-medium bg-gray-100 text-gray-500">N/A</span>';
     }
 }
 
