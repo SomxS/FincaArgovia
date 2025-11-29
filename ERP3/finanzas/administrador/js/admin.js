@@ -121,7 +121,7 @@ class App extends Templates {
         const currentDate = moment().format('dddd, D [de] MMMM [del] YYYY');
 
         const header = $(`
-            <div class="bg-white  py-2 mb-3">
+            <div class="py-2 mb-3">
                 <div class="flex justify-between items-center">
                     <div>
                         <button onclick="window.location.href='../index.php'" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition flex items-center gap-2">
@@ -161,22 +161,24 @@ class App extends Templates {
                 {
                     id: "payment",
                     tab: "Formas de pago",
+                    active: true,
                 },
                 {
                     id: "client",
                     tab: "Clientes",
-
+                 
                     onClick: () => client.lsClientes()
                 },
                 {
                     id: "compras",
                     tab: "Compras",
-                    active: true,
+                  
                     onClick: () => console.log("Compras")
                 },
                 {
                     id: "proveedores",
                     tab: "Proveedores",
+                 
                     onClick: () => supplier.lsSuppliers()
                 }
             ]

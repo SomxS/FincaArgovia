@@ -44,7 +44,7 @@ class AdminBankAccounts extends Templates {
                     opc: "select",
                     id: "udn",
                     lbl: "Unidad de negocio",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: lsudn,
                     onchange: 'bankAccounts.lsBankAccounts()'
                 },

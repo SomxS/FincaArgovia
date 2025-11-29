@@ -79,7 +79,7 @@ class MayorAccount extends Templates {
             parent: `container-cuentaMayor`,
             id: this.PROJECT_NAME,
             card: {
-                filterBar: { class: 'w-full border-b pb-2', id: `filterBar${this.PROJECT_NAME}` },
+                filterBar: { class: 'w-full  ', id: `filterBar${this.PROJECT_NAME}` },
                 container: { class: 'w-full my-2 h-full', id: `container${this.PROJECT_NAME}` }
             }
         });
@@ -99,7 +99,8 @@ class MayorAccount extends Templates {
                 },
                 {
                     opc: "button",
-                    class: "col-sm-3 col-lg-3",
+                    class: "col-sm-2 col-lg-2",
+                    className:'w-100',
                     id: "btnNewMayorAccount",
                     text: "Agregar cuenta",
                     onClick: () => this.addMayorAccount(),
@@ -117,7 +118,7 @@ class MayorAccount extends Templates {
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: `tb${this.PROJECT_NAME}`,
-                theme: 'corporativo',
+                theme: 'light',
                 center: [2],
                 striped:true
             },
@@ -178,14 +179,16 @@ class MayorAccount extends Templates {
             data: { opc: 'editMayorAccount', id: id },
             bootbox: {
                 title: 'Editar cuenta de mayor',
+                size: 'small',
             },
             autofill: data,
             json: [
                 {
-                    opc: "label",
-                    id: "lblUdn",
-                    text: `Unidad de negocio: ${data.udn_name}`,
-                    class: "col-12 mb-2 text-gray-600"
+                    opc: "select",
+                    id: "udn_id",
+                    lbl: "Unidad de negocio",
+                    class: "col-12 mb-3",
+                    data: lsudn
                 },
                 {
                     opc: "input",
@@ -270,14 +273,15 @@ class SubAccount extends Templates {
                     opc: "select",
                     id: "udn",
                     lbl: "Unidad de negocio",
-                    class: "col-sm-3",
+                    class: "col-sm-2",
                     data: lsudn,
                     onchange: `subAccount.lsSubAccount()`,
                 },
                 {
                     opc: "button",
-                    class: "col-sm-3",
+                    class: "col-sm-2 col-12",
                     id: "btnNewSubAccount",
+                    className: 'w-100',
                     text: "Agregar subcuenta",
                     onClick: () => this.addSubAccount(),
                 },
@@ -294,15 +298,14 @@ class SubAccount extends Templates {
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: `tb${this.PROJECT_NAME}`,
-                theme: 'corporativo',
-                center: [1]
+                theme: 'light',
+                center: [3]
             },
         });
     }
 
     async addSubAccount() {
         const udn = $(`#filterBar${this.PROJECT_NAME} #udn`).val();
-        const udnText = $(`#filterBar${this.PROJECT_NAME} #udn option:selected`).text();
 
         const request = await useFetch({
             url: this._link,
@@ -316,16 +319,20 @@ class SubAccount extends Templates {
 
         this.createModalForm({
             id: 'formSubAccountAdd',
-            data: { opc: 'addSubAccount', udn_id: udn },
+            data: { opc: 'addSubAccount' },
             bootbox: {
                 title: 'Nueva subcuenta de mayor',
+                size: 'small',
             },
             json: [
                 {
-                    opc: "label",
-                    id: "lblUdn",
-                    text: `Unidad de negocio: ${udnText}`,
-                    class: "col-12 mb-2 text-gray-600"
+                    opc: "select",
+                    id: "udn_id",
+                    lbl: "Unidad de negocio",
+                    class: "col-12 mb-3",
+                    data: lsudn,
+                    value: udn,
+                    onchange: "subAccount.updateMayorAccountSelect()"
                 },
                 {
                     opc: "select",
@@ -356,6 +363,26 @@ class SubAccount extends Templates {
         });
     }
 
+    async updateMayorAccountSelect() {
+        const udn = $('#formSubAccountAdd #udn_id').val() || $('#formSubAccountEdit #udn_id').val();
+        
+        const request = await useFetch({
+            url: this._link,
+            data: {
+                opc: "lsMayorAccountByUdn",
+                udn: udn
+            }
+        });
+
+        const mayorAccounts = request.data || [];
+        const selectMayor = $('#formSubAccountAdd #product_class_id, #formSubAccountEdit #product_class_id');
+        
+        selectMayor.empty();
+        mayorAccounts.forEach(item => {
+            selectMayor.append(`<option value="${item.id}">${item.valor}</option>`);
+        });
+    }
+
     async editSubAccount(id) {
         const request = await useFetch({
             url: this._link,
@@ -382,14 +409,16 @@ class SubAccount extends Templates {
             data: { opc: 'editSubAccount', id: id },
             bootbox: {
                 title: 'Editar subcuenta de mayor',
+                size: 'small',
             },
             autofill: data,
             json: [
                 {
-                    opc: "label",
-                    id: "lblUdn",
-                    text: `Unidad de negocio: ${data.udn_name}`,
-                    class: "col-12 mb-2 text-gray-600"
+                    opc: "input",
+                    id: "udn_name",
+                    lbl: "Unidad de negocio",
+                    class: "col-12 mb-3",
+                    disabled: true
                 },
                 {
                     opc: "select",
@@ -469,7 +498,7 @@ class TipoCompras extends Templates {
         this.primaryLayout({
             parent: 'container-tiposCompra',
             id: this.PROJECT_NAME,
-            class: 'w-full',
+            class: 'w-full p-2',
             card: {
                 filterBar: { class: 'w-full mb-3', id: `filterBar${this.PROJECT_NAME}` },
                 container: { class: 'w-full my-2 h-full', id: `container${this.PROJECT_NAME}` }
@@ -524,8 +553,8 @@ class TipoCompras extends Templates {
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: `tb${this.PROJECT_NAME}`,
-                theme: 'corporativo',
-                center: [1],
+                theme: 'light',
+                center: [2],
                 right: []
             }
         });
@@ -539,6 +568,7 @@ class TipoCompras extends Templates {
             data: { opc: 'addTipoCompra'},
             bootbox: {
                 title: 'NUEVO TIPO DE COMPRA',
+                size: 'small',
                 closeButton: true
             },
             json: this.jsonTipoCompra(),
@@ -586,6 +616,7 @@ class TipoCompras extends Templates {
             data: { opc: 'editTipoCompra', id: tipoCompra.id },
             bootbox: {
                 title: 'EDITAR TIPO DE COMPRA',
+                size: 'small',
                 closeButton: true
             },
             autofill: tipoCompra,
@@ -741,7 +772,7 @@ class FormasPago extends Templates {
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: "tbFormasPago",
-                theme: 'corporativo',
+                theme: 'light',
                 // title: '📋 Lista de Formas de Pago',
                 // subtitle: 'Métodos de pago registrados en el sistema',
                 center: [2, 3],
@@ -756,6 +787,7 @@ class FormasPago extends Templates {
             data: { opc: 'addFormaPago' },
             bootbox: {
                 title: 'Nueva forma de pago',
+                size: 'small',
                 closeButton: true
             },
             json: this.jsonFormaPago(),
@@ -797,6 +829,7 @@ class FormasPago extends Templates {
             data: { opc: 'editFormaPago', id: formaPago.id },
             bootbox: {
                 title: 'Editar forma de pago',
+                size: 'small',
                 closeButton: true
             },
             autofill: formaPago,

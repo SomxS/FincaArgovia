@@ -24,8 +24,9 @@
 
     <!--PERSONALIZADO-->
     <link rel="stylesheet" href="../../src/css/navbar.css">
+    <!-- Compact Styles -->
     <link rel="stylesheet" href="../../src/css/compact.css">
-   
+  
     <!-- CDN TAILWIND -->
     <script src="https://cdn.tailwindcss.com"></script>
    

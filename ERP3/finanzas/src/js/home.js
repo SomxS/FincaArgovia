@@ -194,52 +194,52 @@ class App extends Templates {
             },
             {
                 icon: "icon-folder-open",
-                color: "bg-gray-50",
-                textColor: "text-gray-600",
+                color: "bg-green-50",
+                textColor: "text-green-600",
                 titulo: "Archivos",
                 descripcion: "Concentrado de archivos",
-                enlace: "../captura/index.php"
+                enlace: "../finanzas/captura/archivos.php"
             },
             // {
             //     icon: "icon-basket",
-            //     color: "bg-green-50",
-            //     textColor: "text-green-600",
+            //     color: "bg-gray-50",
+            //      textColor: "text-gray-600",
             //     titulo: "Ventas",
             //     descripcion: "Concentrado de ventas",
             //     enlace: "../captura/index.php"
             // },
-            // {
-            //     icon: "icon-users",
-            //     color: "bg-orange-50",
-            //     textColor: "text-orange-600",
-            //     titulo: "Clientes",
-            //     descripcion: "Concentrado de consumos y pagos a créditos",
-            //     enlace: "../finanzas/captura/clientes.php"
-            // },
-            // {
-            //     icon: "icon-basket",
-            //     color: "bg-orange-50",
-            //     textColor: "text-orange-600",
-            //     titulo: "Compras",
-            //     descripcion: "Concentrado de compras",
-            //     enlace: "../finanzas/captura/compras.php"
-            // },
-            // {
-            //     icon: "icon-box",
-            //     color: "bg-orange-50",
-            //     textColor: "text-orange-600",
-            //     titulo: "Almacén",
-            //     descripcion: "Concentrado de entradas y salidas de almacén",
-            //     enlace: "../finanzas/captura/almacen.php"
-            // },
-            // {
-            //     icon: "icon-calculator",
-            //     color: "bg-green-50",
-            //     textColor: "text-green-600",
-            //     titulo: "Costos",
-            //     descripcion: "Concentrado de costos",
-            //     enlace: "../captura/index.php"
-            // },
+            {
+                icon: "icon-users",
+                color: "bg-gray-50",
+                textColor: "text-gray-600",
+                titulo: "Clientes",
+                descripcion: "Concentrado de consumos y pagos a créditos",
+                enlace: "../finanzas/captura/clientes.php"
+            },
+            {
+                icon: "icon-basket",
+                color: "bg-gray-50",
+                textColor: "text-gray-600",
+                titulo: "Compras",
+                descripcion: "Concentrado de compras",
+                enlace: "../finanzas/captura/compras.php"
+            },
+            {
+                icon: "icon-box",
+                color: "bg-gray-50",
+                textColor: "text-gray-600",
+                titulo: "Almacén",
+                descripcion: "Concentrado de entradas y salidas de almacén",
+                enlace: "../finanzas/captura/almacen.php"
+            },
+            {
+                icon: "icon-calculator",
+                color: "bg-gray-50",
+                textColor: "text-gray-600",
+                titulo: "Costos",
+                descripcion: "Concentrado de costos",
+                enlace: "../captura/index.php"
+            },
             // {
             //     icon: "icon-briefcase",
             //     color: "bg-green-50",

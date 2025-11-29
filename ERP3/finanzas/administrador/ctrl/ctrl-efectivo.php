@@ -56,7 +56,7 @@ class ctrl extends mdl {
                 'Tipo'        => renderOperationType($item['operation_type']),
                 'Descripción' => $item['description'],
                 'Estado'      => renderStatus($item['active']),
-                'Fecha'       => $item['date_creation'],
+                // 'Fecha'       => $item['date_creation'],
                 'a'           => $a
             ];
         }
@@ -315,11 +315,11 @@ class ctrl extends mdl {
 function renderStatus($status) {
     switch ($status) {
         case 1:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#014737] text-[#3FC189]">Activo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activo</span>';
         case 0:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#721c24] text-[#ba464d]">Inactivo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Inactivo</span>';
         default:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-gray-500 text-white">Desconocido</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-gray-100 text-gray-700 min-w-[100px] text-center">Desconocido</span>';
     }
 }
 

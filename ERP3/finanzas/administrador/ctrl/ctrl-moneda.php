@@ -55,13 +55,14 @@ class ctrl extends mdl {
                 'id' => $item['id'],
                 'Moneda extranjera' => $item['name'],
                 'Símbolo' => [
-                    'html' => '<span class="badge bg-info">' . $item['code'] . '</span>',
+                    'html' => renderCurrencyBadge($item['code']),
                     'class' => 'text-center'
                 ],
                 'Tipo de cambio (MXN)' => [
                     'html' => '$ ' . number_format($item['conversion_value'], 2),
                     'class' => 'text-end'
                 ],
+                'Estado' => renderStatus($item['active']),
                 'a' => $a
             ];
         }
@@ -192,14 +193,18 @@ class ctrl extends mdl {
     }
 }
 
+function renderCurrencyBadge($code) {
+    return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-blue-100 text-blue-700 min-w-[60px] text-center">' . $code . '</span>';
+}
+
 function renderStatus($status) {
     switch ($status) {
         case 1:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#014737] text-[#3FC189]">Activo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activo</span>';
         case 0:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#721c24] text-[#ba464d]">Inactivo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Inactivo</span>';
         default:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-gray-500 text-white">Desconocido</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-gray-100 text-gray-700 min-w-[100px] text-center">Desconocido</span>';
     }
 }
 

@@ -12408,3 +12408,417 @@
         
 [ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dcc.active' in 'where clause'
 
+[ 2025-11-29 05:28:53 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                m.name AS module_name,
+                COUNT(f.id) AS count
+            FROM rfwsmqex_gvsl_finanzas3.module m
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.file f ON m.id = f.module_id
+            WHERE m.active = 1
+            GROUP BY m.id, m.name
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'on clause'
+
+[ 2025-11-29 05:28:53 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                f.id,
+                f.udn_id,
+                f.user_id,
+                f.file_name,
+                f.upload_date,
+                f.size_bytes,
+                f.path,
+                f.extension,
+                DATE_FORMAT(f.operation_date, '%d/%m/%Y') AS operation_date,
+                f.module_id,
+                m.name AS module_name,
+                u.usser AS uploaded_by,
+                udn.UDN AS udn_name
+            FROM rfwsmqex_gvsl_finanzas3.file f
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.module m ON f.module_id = m.id
+            LEFT JOIN usuarios u ON f.user_id = u.idUser
+            LEFT JOIN udn ON f.udn_id = udn.idUDN
+            WHERE 1=1 AND f.operation_date BETWEEN ? AND ?
+            ORDER BY f.upload_date DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'field list'
+
+[ 2025-11-29 05:29:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                m.name AS module_name,
+                COUNT(f.id) AS count
+            FROM rfwsmqex_gvsl_finanzas3.module m
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.file f ON m.id = f.module_id
+            WHERE m.active = 1
+            GROUP BY m.id, m.name
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'on clause'
+
+[ 2025-11-29 05:29:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                f.id,
+                f.udn_id,
+                f.user_id,
+                f.file_name,
+                f.upload_date,
+                f.size_bytes,
+                f.path,
+                f.extension,
+                DATE_FORMAT(f.operation_date, '%d/%m/%Y') AS operation_date,
+                f.module_id,
+                m.name AS module_name,
+                u.usser AS uploaded_by,
+                udn.UDN AS udn_name
+            FROM rfwsmqex_gvsl_finanzas3.file f
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.module m ON f.module_id = m.id
+            LEFT JOIN usuarios u ON f.user_id = u.idUser
+            LEFT JOIN udn ON f.udn_id = udn.idUDN
+            WHERE 1=1 AND f.operation_date BETWEEN ? AND ?
+            ORDER BY f.upload_date DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'field list'
+
+[ 2025-11-29 05:30:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                m.name AS module_name,
+                COUNT(f.id) AS count
+            FROM rfwsmqex_gvsl_finanzas3.module m
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.file f ON m.id = f.module_id
+            WHERE m.active = 1
+            GROUP BY m.id, m.name
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'on clause'
+
+[ 2025-11-29 05:30:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                f.id,
+                f.udn_id,
+                f.user_id,
+                f.file_name,
+                f.upload_date,
+                f.size_bytes,
+                f.path,
+                f.extension,
+                DATE_FORMAT(f.operation_date, '%d/%m/%Y') AS operation_date,
+                f.module_id,
+                m.name AS module_name,
+                u.usser AS uploaded_by,
+                udn.UDN AS udn_name
+            FROM rfwsmqex_gvsl_finanzas3.file f
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.module m ON f.module_id = m.id
+            LEFT JOIN usuarios u ON f.user_id = u.idUser
+            LEFT JOIN udn ON f.udn_id = udn.idUDN
+            WHERE 1=1 AND f.operation_date BETWEEN ? AND ?
+            ORDER BY f.upload_date DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'field list'
+
+[ 2025-11-29 05:31:44 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                m.name AS module_name,
+                COUNT(f.id) AS count
+            FROM rfwsmqex_gvsl_finanzas3.module m
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.file f ON m.id = f.module_id
+            WHERE m.active = 1
+            GROUP BY m.id, m.name
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'on clause'
+
+[ 2025-11-29 05:31:44 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                f.id,
+                f.udn_id,
+                f.user_id,
+                f.file_name,
+                f.upload_date,
+                f.size_bytes,
+                f.path,
+                f.extension,
+                DATE_FORMAT(f.operation_date, '%d/%m/%Y') AS operation_date,
+                f.module_id,
+                m.name AS module_name,
+                u.usser AS uploaded_by,
+                udn.UDN AS udn_name
+            FROM rfwsmqex_gvsl_finanzas3.file f
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.module m ON f.module_id = m.id
+            LEFT JOIN usuarios u ON f.user_id = u.idUser
+            LEFT JOIN udn ON f.udn_id = udn.idUDN
+            WHERE 1=1 AND f.operation_date BETWEEN ? AND ?
+            ORDER BY f.upload_date DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'field list'
+
+[ 2025-11-29 06:28:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                m.name AS module_name,
+                COUNT(f.id) AS count
+            FROM rfwsmqex_gvsl_finanzas3.module m
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.file f ON m.id = f.module_id
+            WHERE m.active = 1
+            GROUP BY m.id, m.name
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'on clause'
+
+[ 2025-11-29 06:28:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                f.id,
+                f.udn_id,
+                f.user_id,
+                f.file_name,
+                f.upload_date,
+                f.size_bytes,
+                f.path,
+                f.extension,
+                DATE_FORMAT(f.operation_date, '%d/%m/%Y') AS operation_date,
+                f.module_id,
+                m.name AS module_name,
+                u.usser AS uploaded_by,
+                udn.UDN AS udn_name
+            FROM rfwsmqex_gvsl_finanzas3.file f
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.module m ON f.module_id = m.id
+            LEFT JOIN usuarios u ON f.user_id = u.idUser
+            LEFT JOIN udn ON f.udn_id = udn.idUDN
+            WHERE 1=1 AND f.operation_date BETWEEN ? AND ?
+            ORDER BY f.upload_date DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'field list'
+
+[ 2025-11-29 06:39:13 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                m.name AS module_name,
+                COUNT(f.id) AS count
+            FROM rfwsmqex_gvsl_finanzas3.module m
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.file f ON m.id = f.module_id
+            WHERE m.active = 1
+            GROUP BY m.id, m.name
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'on clause'
+
+[ 2025-11-29 06:39:13 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                f.id,
+                f.udn_id,
+                f.user_id,
+                f.file_name,
+                f.upload_date,
+                f.size_bytes,
+                f.path,
+                f.extension,
+                DATE_FORMAT(f.operation_date, '%d/%m/%Y') AS operation_date,
+                f.module_id,
+                m.name AS module_name,
+                u.usser AS uploaded_by,
+                udn.UDN AS udn_name
+            FROM rfwsmqex_gvsl_finanzas3.file f
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.module m ON f.module_id = m.id
+            LEFT JOIN usuarios u ON f.user_id = u.idUser
+            LEFT JOIN udn ON f.udn_id = udn.idUDN
+            WHERE 1=1 AND f.operation_date BETWEEN ? AND ?
+            ORDER BY f.upload_date DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'field list'
+
+[ 2025-11-29 06:43:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                c.id as cliente_id,
+                c.name as cliente_nombre,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date < ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_inicial,
+                COALESCE(SUM(CASE WHEN dcc.movement_type = 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_consumos,
+                COALESCE(SUM(CASE WHEN dcc.movement_type != 'consumo' THEN dcc.amount ELSE 0 END), 0) as total_pagos,
+                COALESCE(
+                    (SELECT new_debt 
+                     FROM rfwsmqex_gvsl_finanzas2.detail_credit_customer 
+                     WHERE customer_id = c.id 
+                     AND daily_closure_id IN (
+                         SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                         WHERE operation_date <= ?
+                     )
+                     ORDER BY id DESC 
+                     LIMIT 1),
+                    0
+                ) as saldo_final
+            FROM rfwsmqex_gvsl_finanzas2.customer c
+            LEFT JOIN rfwsmqex_gvsl_finanzas2.detail_credit_customer dcc ON c.id = dcc.customer_id 
+                AND dcc.daily_closure_id IN (
+                    SELECT id FROM rfwsmqex_gvsl_finanzas2.daily_closure 
+                    WHERE operation_date BETWEEN ? AND ?
+                )
+            WHERE c.active = 1  AND c.udn_id = ?
+            GROUP BY c.id, c.name
+            ORDER BY c.name
+        
+[ ERROR READ] :: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+[ 2025-11-29 06:43:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                m.name AS module_name,
+                COUNT(f.id) AS count
+            FROM rfwsmqex_gvsl_finanzas3.module m
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.file f ON m.id = f.module_id
+            WHERE m.active = 1
+            GROUP BY m.id, m.name
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'on clause'
+
+[ 2025-11-29 06:43:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                f.id,
+                f.udn_id,
+                f.user_id,
+                f.file_name,
+                f.upload_date,
+                f.size_bytes,
+                f.path,
+                f.extension,
+                DATE_FORMAT(f.operation_date, '%d/%m/%Y') AS operation_date,
+                f.module_id,
+                m.name AS module_name,
+                u.usser AS uploaded_by,
+                udn.UDN AS udn_name
+            FROM rfwsmqex_gvsl_finanzas3.file f
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.module m ON f.module_id = m.id
+            LEFT JOIN usuarios u ON f.user_id = u.idUser
+            LEFT JOIN udn ON f.udn_id = udn.idUDN
+            WHERE 1=1 AND f.operation_date BETWEEN ? AND ?
+            ORDER BY f.upload_date DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'field list'
+
+[ 2025-11-29 06:44:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                m.name AS module_name,
+                COUNT(f.id) AS count
+            FROM rfwsmqex_gvsl_finanzas3.module m
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.file f ON m.id = f.module_id
+            WHERE m.active = 1
+            GROUP BY m.id, m.name
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'on clause'
+
+[ 2025-11-29 06:44:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                f.id,
+                f.udn_id,
+                f.user_id,
+                f.file_name,
+                f.upload_date,
+                f.size_bytes,
+                f.path,
+                f.extension,
+                DATE_FORMAT(f.operation_date, '%d/%m/%Y') AS operation_date,
+                f.module_id,
+                m.name AS module_name,
+                u.usser AS uploaded_by,
+                udn.UDN AS udn_name
+            FROM rfwsmqex_gvsl_finanzas3.file f
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.module m ON f.module_id = m.id
+            LEFT JOIN usuarios u ON f.user_id = u.idUser
+            LEFT JOIN udn ON f.udn_id = udn.idUDN
+            WHERE 1=1 AND f.operation_date BETWEEN ? AND ?
+            ORDER BY f.upload_date DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'field list'
+
+[ 2025-11-29 06:44:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                m.name AS module_name,
+                COUNT(f.id) AS count
+            FROM rfwsmqex_gvsl_finanzas3.module m
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.file f ON m.id = f.module_id
+            WHERE m.active = 1
+            GROUP BY m.id, m.name
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'on clause'
+
+[ 2025-11-29 06:44:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                f.id,
+                f.udn_id,
+                f.user_id,
+                f.file_name,
+                f.upload_date,
+                f.size_bytes,
+                f.path,
+                f.extension,
+                DATE_FORMAT(f.operation_date, '%d/%m/%Y') AS operation_date,
+                f.module_id,
+                m.name AS module_name,
+                u.usser AS uploaded_by,
+                udn.UDN AS udn_name
+            FROM rfwsmqex_gvsl_finanzas3.file f
+            LEFT JOIN rfwsmqex_gvsl_finanzas3.module m ON f.module_id = m.id
+            LEFT JOIN usuarios u ON f.user_id = u.idUser
+            LEFT JOIN udn ON f.udn_id = udn.idUDN
+            WHERE 1=1 AND f.operation_date BETWEEN ? AND ?
+            ORDER BY f.upload_date DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.module_id' in 'field list'
+

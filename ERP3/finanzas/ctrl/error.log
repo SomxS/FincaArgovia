@@ -3760,3 +3760,1615 @@
         
 [ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
 
+[ 2025-11-28 23:27:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-28 23:27:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-28 23:27:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-28 23:27:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-28 23:27:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-28 23:27:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-28 23:27:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-28 23:27:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-28 23:27:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-28 23:27:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-28 23:27:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-28 23:27:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 05:16:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 05:16:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 05:16:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 05:16:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 05:17:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 05:17:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 05:17:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 05:17:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 05:27:53 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 05:27:54 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 05:27:54 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 05:27:54 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 05:29:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 05:29:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 05:29:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 05:29:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 05:29:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 05:29:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 05:29:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 05:29:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 05:30:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 05:30:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 05:30:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 05:30:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 05:30:23 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 05:30:23 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 05:30:23 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 05:30:23 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 05:31:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 05:31:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 05:31:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 05:31:39 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 05:31:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 05:31:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 05:31:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 05:31:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:06:16 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:06:16 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:06:17 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:06:17 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:28:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:28:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:28:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:28:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:28:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:28:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:28:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:28:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:39:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:39:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:39:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:39:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:39:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:39:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:39:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:39:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:40:29 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:40:29 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:40:29 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:40:29 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:40:31 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:40:31 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:40:31 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:40:31 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:40:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:40:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:40:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:40:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:41:16 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:41:17 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:41:17 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:41:17 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:41:25 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:41:25 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:41:25 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:41:25 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:43:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:43:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:43:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:43:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:43:45 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:43:45 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:43:45 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:43:45 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:43:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:43:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:43:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:43:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:43:55 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:43:55 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:43:55 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:43:55 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:44:08 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:44:08 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:44:08 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:44:08 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:44:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:44:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:44:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:44:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:44:25 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:44:25 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:44:25 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:44:25 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:44:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:44:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:44:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:44:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+
+[ 2025-11-29 06:44:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.sales
+            WHERE date_sale BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.sales' doesn't exist
+
+[ 2025-11-29 06:44:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(total), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.purchases
+            WHERE date_purchase BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.purchases' doesn't exist
+
+[ 2025-11-29 06:44:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COUNT(*) as count
+            FROM rfwsmqex_gvsl_finanzas2.files
+            WHERE date_upload BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.files' doesn't exist
+
+[ 2025-11-29 06:44:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                COALESCE(SUM(amount), 0) as total
+            FROM rfwsmqex_gvsl_finanzas2.withdrawals
+            WHERE date_withdrawal BETWEEN ? AND ?
+            AND udn_id = ?
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.withdrawals' doesn't exist
+

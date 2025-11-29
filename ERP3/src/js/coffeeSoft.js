@@ -2057,8 +2057,8 @@ class Components extends Complements {
     navBar(options) {
         const defaults = {
             id: "navBar",
-            theme: "light", // "light" | "dark" (Huubie)
-            class: "h-[56px] px-4 shadow-md",
+            theme: "light",
+            class: "h-[44px] px-3 shadow-sm",
             logoFull: "https://erp-varoch.com/ERP24/src/img/logos/logo_row_wh.png",
             logoMini: "https://erp-varoch.com/ERP24/src/img/logos/logo_icon_wh.png",
             user: {
@@ -2082,10 +2082,9 @@ class Components extends Complements {
 
         const opts = Object.assign({}, defaults, options);
 
-        // ===== THEME: Huubie Dark =====
         const isDark = String(opts.theme).toLowerCase() === "dark";
         const colors = {
-            navbar: isDark ? "bg-[#1F2A37] text-white" : "bg-[#0A2B4B] text-white", // Huubie dark / Light azul prof.
+            navbar: isDark ? "bg-[#1F2A37] text-white" : "bg-[#0A2B4B] text-white",
             dropdownBg: isDark ? "bg-[#1F2A37] text-white" : "bg-white text-gray-800",
             hoverText: isDark ? "hover:text-blue-300" : "hover:text-blue-200",
             userHover: isDark ? "" : "hover:bg-blue-100",
@@ -2094,104 +2093,57 @@ class Components extends Complements {
             chipBg: isDark ? "bg-gray-700" : "bg-gray-100"
         };
 
-        // NAVBAR
         const header = $("<header>", {
             id: opts.id,
             class: `${colors.navbar} ${opts.class} flex justify-between items-center w-full fixed top-0 left-0 z-40`
         });
 
-        const left = $("<div>", { class: "flex items-center gap-4" }).append(
+        const left = $("<div>", { class: "flex items-center gap-3" }).append(
             $("<button>", {
                 id: "btnSidebar",
-                class: "text-white hover:text-blue-400 transition-colors duration-200 p-2 rounded focus:outline-none",
-                html: `<i class="icon-menu text-2xl"></i>`,
+                class: "text-white hover:text-blue-400 transition-colors duration-200 p-1.5 rounded focus:outline-none",
+                html: `<i class="icon-menu text-lg"></i>`,
                 click: () => {
-                    if (typeof opts.onToggle === "function") {
-                        opts.onToggle(); // Evento externo personalizado
-                    } else {
-                        // Comportamiento por defecto: toggle de clase .active
-                        $("#sidebar").toggleClass("active");
-                    }
+                    if (typeof opts.onToggle === "function") opts.onToggle();
+                    else $("#sidebar").toggleClass("active");
                 }
             }),
-            $("<img>", {
-                src: opts.logoFull,
-                class: "h-8 hidden sm:block cursor-pointer",
-                click: () => location.reload()
-            }),
-            $("<img>", {
-                src: opts.logoMini,
-                class: "h-8 block sm:hidden cursor-pointer",
-                click: () => location.reload()
-            })
+            $("<img>", { src: opts.logoFull, class: "h-6 hidden sm:block cursor-pointer", click: () => location.reload() }),
+            $("<img>", { src: opts.logoMini, class: "h-6 block sm:hidden cursor-pointer", click: () => location.reload() })
         );
 
         const launcherButton = $("<div>", {
             id: "launcherBtn",
-            class: `relative ${colors.hoverText} text-xl cursor-pointer`,
+            class: `relative ${colors.hoverText} text-lg cursor-pointer`,
             html: `<i class="icon-th-3"></i>`,
-            click: (e) => {
-                e.stopPropagation();
-                $("#appsLauncher").toggleClass("hidden");
-            }
+            click: (e) => { e.stopPropagation(); $("#appsLauncher").toggleClass("hidden"); }
         });
 
-        // USER (click para abrir menú)
-        const user = $("<div>", {
-            class: "flex items-center gap-2 ml-4 cursor-pointer relative",
-            id: "userDropdown"
-        }).append(
-            $("<img>", {
-                src: opts.user.photo,
-                class: "w-9 h-9 rounded-full border-2 border-white shadow"
-            }),
-            $("<span>", {
-                class: "hidden sm:block font-medium text-sm",
-                text: opts.user.name
-            }),
-            $("<ul>", {
-                id: "userMenu",
-                class: `hidden fixed top-16 right-4 w-[280px] ${colors.dropdownBg} rounded-lg ${colors.border} shadow p-2 z-50`
-            }).append(
-                $("<li>", {
-                    class: `px-3 py-2 rounded ${colors.userHover} cursor-pointer flex items-center gap-2`,
-                    html: `<i class="icon-user"></i><span>Mi perfil</span>`,
-                    click: opts.user.onProfile
-                }),
+        const user = $("<div>", { class: "flex items-center gap-2 ml-3 cursor-pointer relative", id: "userDropdown" }).append(
+            $("<img>", { src: opts.user.photo, class: "w-7 h-7 rounded-full border border-white shadow" }),
+            $("<span>", { class: "hidden sm:block font-medium text-xs", text: opts.user.name }),
+            $("<ul>", { id: "userMenu", class: `hidden fixed top-12 right-4 w-[240px] ${colors.dropdownBg} rounded-lg ${colors.border} shadow p-2 z-50` }).append(
+                $("<li>", { class: `px-3 py-1.5 rounded text-sm ${colors.userHover} cursor-pointer flex items-center gap-2`, html: `<i class="icon-user"></i><span>Mi perfil</span>`, click: opts.user.onProfile }),
                 $("<li>", { class: `my-1 ${colors.border}` }),
-                $("<li>", {
-                    class: `px-3 py-2 rounded ${colors.userHover} cursor-pointer flex items-center gap-2`,
-                    html: `<i class="icon-off"></i><span>Cerrar sesión</span>`,
-                    click: opts.user.onLogout
-                })
+                $("<li>", { class: `px-3 py-1.5 rounded text-sm ${colors.userHover} cursor-pointer flex items-center gap-2`, html: `<i class="icon-off"></i><span>Cerrar sesión</span>`, click: opts.user.onLogout })
             )
         );
 
-        const right = $("<div>", {
-            class: "flex items-center gap-3 relative"
-        }).append(launcherButton, user);
-
+        const right = $("<div>", { class: "flex items-center gap-2 relative" }).append(launcherButton, user);
         header.append(left, right);
         $("body").prepend(header);
 
-        // APPS LAUNCHER (Huubie dark)
         const launcher = $("<div>", {
             id: "appsLauncher",
-            class: `hidden fixed top-16 right-4 w-[320px] ${colors.dropdownBg} rounded-lg ${colors.border} shadow p-4 z-50`
+            class: `hidden fixed top-12 right-4 w-[280px] ${colors.dropdownBg} rounded-lg ${colors.border} shadow p-3 z-50`
         }).append(
-            $("<div>", { class: "mb-3 flex items-center justify-between" }).append(
-                $("<h3>", { class: "text-sm font-semibold", text: "Módulos ERP" }),
-                $("<span>", { class: `text-[10px] px-2 py-1 rounded ${colors.chipBg} opacity-80`, text: "" })
+            $("<div>", { class: "mb-2 flex items-center justify-between" }).append(
+                $("<h3>", { class: "text-xs font-semibold", text: "Módulos ERP" })
             ),
-            $("<div>", { class: "grid grid-cols-3 gap-3" }).append(
+            $("<div>", { class: "grid grid-cols-3 gap-2" }).append(
                 ...opts.apps.map(app =>
-                    $("<button>", {
-                        type: "button",
-                        class: `flex flex-col items-center gap-2 text-xs px-2 pt-2 pb-3 rounded hover:scale-105 transition ${colors.userHover}`
-                    }).append(
-                        $("<div>", {
-                            class: `w-12 h-12 rounded-lg flex items-center justify-center text-xl ${app.color} ${colors.chipBg}`
-                        }).append($("<i>", { class: app.icon })),
+                    $("<button>", { type: "button", class: `flex flex-col items-center gap-1 text-[10px] px-1 py-2 rounded hover:scale-105 transition ${colors.userHover}` }).append(
+                        $("<div>", { class: `w-9 h-9 rounded-lg flex items-center justify-center text-base ${app.color} ${colors.chipBg}` }).append($("<i>", { class: app.icon })),
                         $("<span>", { class: "opacity-90", text: app.name })
                     )
                 )
@@ -2200,20 +2152,10 @@ class Components extends Complements {
 
         $("body").append(launcher);
 
-        // Eventos de toggle/cierre (user & launcher)
-        $("#userDropdown").on("click", function (e) {
-            e.stopPropagation();
-            $("#userMenu").toggleClass("hidden");
-            $("#appsLauncher").addClass("hidden");
-        });
-
+        $("#userDropdown").on("click", function (e) { e.stopPropagation(); $("#userMenu").toggleClass("hidden"); $("#appsLauncher").addClass("hidden"); });
         $(document).on("click", (e) => {
-            if (!$(e.target).closest("#launcherBtn").length && !$(e.target).closest("#appsLauncher").length) {
-                $("#appsLauncher").addClass("hidden");
-            }
-            if (!$(e.target).closest("#userDropdown").length && !$(e.target).closest("#userMenu").length) {
-                $("#userMenu").addClass("hidden");
-            }
+            if (!$(e.target).closest("#launcherBtn").length && !$(e.target).closest("#appsLauncher").length) $("#appsLauncher").addClass("hidden");
+            if (!$(e.target).closest("#userDropdown").length && !$(e.target).closest("#userMenu").length) $("#userMenu").addClass("hidden");
         });
     }
 

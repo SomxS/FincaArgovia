@@ -36,6 +36,7 @@ class PaymentMethod extends Templates {
                     id: "conceptos",
                     tab: "Efectivo",
                     class: "mb-1",
+                    active: true,
                     onClick: () => formasPago.lsConceptos()
                 },
                 {
@@ -49,7 +50,7 @@ class PaymentMethod extends Templates {
                     id: "banco",
                     tab: "Bancos",
                     class: "mb-1",
-                    active: true,
+               
                     onClick: () => banco.lsBankAccounts()
                 },
                 // {
@@ -73,7 +74,7 @@ class PaymentMethod extends Templates {
                     opc: "select",
                     id: "udn",
                     lbl: "Unidad de Negocio",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: udn,
                     onchange: 'formasPago.lsConceptos()'
                 },
@@ -81,7 +82,7 @@ class PaymentMethod extends Templates {
                     opc: "select",
                     id: "active",
                     lbl: "Estado",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: [
                         { id: "1", valor: "Activos" },
                         { id: "0", valor: "Inactivos" }
@@ -90,7 +91,7 @@ class PaymentMethod extends Templates {
                 },
                 {
                     opc: "button",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     id: "btnNuevoConcepto",
                     text: "Nuevo Concepto",
                     onClick: () => this.addConcepto(),
@@ -108,7 +109,7 @@ class PaymentMethod extends Templates {
             conf: { datatable: true, pag: 10 },
             attr: {
                 id: "tbConceptos",
-                theme: 'corporativo',
+                theme: 'light',
                 center: [2, 4],
                 right: [6]
             },
@@ -120,7 +121,8 @@ class PaymentMethod extends Templates {
             id: 'formConceptoAdd',
             data: { opc: 'addConcepto' },
             bootbox: {
-                title: 'Agregar Concepto de Efectivo',
+                title: 'Concepto de efectivo',
+                size:'small'
             },
             json: this.jsonConcepto(),
             success: (response) => {
@@ -150,6 +152,7 @@ class PaymentMethod extends Templates {
             data: { opc: 'editConcepto', id: concepto.id },
             bootbox: {
                 title: 'Editar Concepto de Efectivo',
+                size: 'small'
             },
             autofill: concepto,
             json: this.jsonConcepto(),

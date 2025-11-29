@@ -34,13 +34,13 @@ class ctrl extends mdl {
                 $a[] = [
                     'class' => 'btn btn-sm btn-primary me-1',
                     'html' => '<i class="icon-pencil"></i>',
-                    'onclick' => 'tipoCompras.editTipoCompra(' . $item['id'] . ')'
+                    'onclick' => 'purchaseType.editTipoCompra(' . $item['id'] . ')'
                 ];
 
                 $a[] = [
                     'class' => 'btn btn-sm btn-danger',
                     'html' => '<i class="icon-toggle-on"></i>',
-                    'onclick' => 'tipoCompras.toggleStatusTipoCompra(' . $item['id'] . ', ' . $item['active'] . ')'
+                    'onclick' => 'purchaseType.toggleStatusTipoCompra(' . $item['id'] . ', ' . $item['active'] . ')'
                 ];
             } else {
                 $a[] = [

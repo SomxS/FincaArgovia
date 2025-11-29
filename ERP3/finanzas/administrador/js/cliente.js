@@ -16,7 +16,7 @@ class Clientes extends Templates {
             id: this.PROJECT_NAME,
             class: '',
             card: {
-                filterBar: { class: 'w-full border-b pb-2', id: `filterBar${this.PROJECT_NAME}` },
+                filterBar: { class: 'w-full ', id: `filterBar${this.PROJECT_NAME}` },
                 container: { class: 'w-full my-2 h-full rounded-lg p-3', id: `container${this.PROJECT_NAME}` }
             }
         });
@@ -39,7 +39,7 @@ class Clientes extends Templates {
                     opc     : "select",
                     id      : "udn",
                     lbl     : "Unidad de negocio",
-                    class   : "col-12 col-md-3",
+                    class   : "col-12 col-md-2",
                     data    : lsudn,
                     text    : "valor",
                     value   : "id",
@@ -50,7 +50,7 @@ class Clientes extends Templates {
                     opc  : "select",
                     id   : "active",
                     lbl  : "Estado",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data : [
                         { id: "1", valor: "Activos" },
                         { id: "0", valor: "Inactivos" }
@@ -62,7 +62,7 @@ class Clientes extends Templates {
                     opc    : "button",
                     class  : "col-12 col-md-3",
                     id     : "btnNuevoCliente",
-                    text   : "+ Agregar nuevo cliente",
+                    text   : "Agregar cliente",
                     onClick: () => this.addCliente(),
                 },
             ],
@@ -78,7 +78,8 @@ class Clientes extends Templates {
             conf: { datatable: true, pag: 10 },
             attr: {
                 id: `tbClientes`,
-                theme: 'corporativo',
+                theme: 'light',
+                striped:true,
                 center: [2]
             },
         });
@@ -92,6 +93,7 @@ class Clientes extends Templates {
             data: { opc: 'addCliente' },
             bootbox: {
                 title: 'Agregar Cliente',
+                size:'small'
             },
             json: [
                 {
@@ -143,6 +145,8 @@ class Clientes extends Templates {
             data: { opc: 'editCliente', id: cliente.id },
             bootbox: {
                 title: 'Editar Cliente',
+                size: 'small'
+
             },
             autofill: cliente,
             json: [

@@ -22,12 +22,19 @@
     "folder-color.pathColors": [
         {
             "folderPath": "ERP3\\finanzas\\",
-            "color": "foldercolorizer.color_0066ff",
+            "color": "foldercolorizer.color_FB923C",
             "isFolderOnly": true
         },
         {
             "folderPath": "ERP3\\contabilidad\\captura\\",
-            "color": "foldercolorizer.color_000066",
+            "color": "foldercolorizer.color_D9EDF7",
+            "badge": "-"
+        },
+        {
+            "folderPath": "ERP3\\finanzas\\"
+        },
+        {
+            "folderPath": "ERP3\\finanzas\\administrador\\",
             "badge": "-"
         }
     ]

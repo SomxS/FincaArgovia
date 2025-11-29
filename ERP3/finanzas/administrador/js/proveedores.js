@@ -21,12 +21,7 @@ class AdminSupplier extends Templates {
             }
         });
 
-        $(`#container${this.PROJECT_NAME}`).prepend(`
-            <div class="px-4 pt-3 pb-3">
-                <h2 class="text-2xl font-semibold">🏢 Proveedores</h2>
-                <p class="text-gray-400">Gestiona los proveedores por unidad de negocio.</p>
-            </div>
-        `);
+     
     }
 
     filterBar() {
@@ -37,7 +32,7 @@ class AdminSupplier extends Templates {
                     opc: "select",
                     id: "udn",
                     lbl: "Unidad de negocio",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: lsudn,
                     onchange: 'supplier.lsSuppliers()'
                 },
@@ -45,7 +40,7 @@ class AdminSupplier extends Templates {
                     opc: "select",
                     id: "active",
                     lbl: "Estado",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: [
                         { id: "1", valor: "Activos" },
                         { id: "0", valor: "Inactivos" }
@@ -54,9 +49,9 @@ class AdminSupplier extends Templates {
                 },
                 {
                     opc: "button",
-                    class: "col-12 col-md-4",
+                    class: "col-12 col-md-2",
                     id: "btnAddSupplier",
-                    text: "+ Agregar nuevo proveedor",
+                    text: "Agregar proveedor",
                     color_btn: "primary",
                     onClick: () => this.addSupplier()
                 }
@@ -76,8 +71,9 @@ class AdminSupplier extends Templates {
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: `tb${this.PROJECT_NAME}`,
-                theme: 'corporativo',
-                center: [1],
+                theme: 'light',
+                striped:true,
+                center: [3],
                 right: []
             }
         });
@@ -85,16 +81,16 @@ class AdminSupplier extends Templates {
 
     addSupplier() {
         const currentUdn = $(`#filterBar${this.PROJECT_NAME} #udn`).val();
-        const udnName = $(`#filterBar${this.PROJECT_NAME} #udn option:selected`).text();
 
         this.createModalForm({
             id: 'formSupplierAdd',
-            data: { opc: 'addSupplier', udn_id: currentUdn },
+            data: { opc: 'addSupplier' },
             bootbox: {
                 title: '🏢 Agregar Nuevo Proveedor',
+                size: 'small',
                 closeButton: true
             },
-            json: this.jsonSupplier(udnName),
+            json: this.jsonSupplierAdd(currentUdn),
             success: (response) => {
                 if (response.status === 200) {
                     alert({
@@ -114,6 +110,28 @@ class AdminSupplier extends Templates {
                 }
             }
         });
+    }
+
+    jsonSupplierAdd(currentUdn) {
+        return [
+            {
+                opc: "select",
+                id: "udn_id",
+                lbl: "Unidad de negocio",
+                class: "col-12 mb-3",
+                data: lsudn,
+                value: currentUdn
+            },
+            {
+                opc: "input",
+                id: "name",
+                lbl: "Nombre del proveedor",
+                tipo: "texto",
+                class: "col-12 mb-3",
+                placeholder: "Ej.: Marina Chiapas, American Express, etc.",
+                required: true
+            }
+        ];
     }
 
     async editSupplier(id) {
@@ -139,10 +157,11 @@ class AdminSupplier extends Templates {
             data: { opc: 'editSupplier', id: supplier.id },
             bootbox: {
                 title: '✏️ Editar Proveedor',
+                size: 'small',
                 closeButton: true
             },
             autofill: supplier,
-            json: this.jsonSupplier(supplier.udn_name, true),
+            json: this.jsonSupplierAdd(supplier.udn_id),
             success: (response) => {
                 if (response.status === 200) {
                     alert({
