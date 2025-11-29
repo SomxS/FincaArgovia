@@ -18,5 +18,17 @@
         "titleBar.inactiveBackground": "#20202099",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#202020"
+    "peacock.color": "#202020",
+    "folder-color.pathColors": [
+        {
+            "folderPath": "ERP3\\finanzas\\",
+            "color": "foldercolorizer.color_0066ff",
+            "isFolderOnly": true
+        },
+        {
+            "folderPath": "ERP3\\contabilidad\\captura\\",
+            "color": "foldercolorizer.color_000066",
+            "badge": "-"
+        }
+    ]
 }

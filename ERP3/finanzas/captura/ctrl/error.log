@@ -1,3 +1,27 @@
+[ 2025-11-28 08:47:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT DISTINCT id, name AS valor
+            FROM rfwsmqex_gvsl_finanzas2.usuarios
+            WHERE active = 1 AND nivel IN (2, 3)
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.usuarios' doesn't exist
+
+
+[ 2025-11-28 08:47:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT DISTINCT id, name AS valor
+            FROM rfwsmqex_gvsl_finanzas2.usuarios
+            WHERE active = 1 AND nivel IN (2, 3)
+            ORDER BY name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_gvsl_finanzas2.usuarios' doesn't exist
+
+
 [ 2025-11-17 23:04:42 ]
 [ UNIX_USR ] :: nt authority\system
 [ WINDOWS_USR ] :: DESKTOP-O7AOGR9$

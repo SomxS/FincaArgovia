@@ -3,7 +3,7 @@
     require_once('layout/core-libraries.php');
 ?>
 
-<?php require_once('../../layout/navbar.php'); ?>
+   <?php require_once('../../layout/navbar.php'); ?>
 
 
 <!-- CoffeeSoft Framework -->
@@ -21,6 +21,6 @@
         </div>
     </main>
    
-    <script src="js/archivos.js"></script>
+    <script src="js/clientes.js"></script>
 </body>
 </html>

@@ -21,6 +21,6 @@
         </div>
     </main>
    
-    <script src="js/archivos.js"></script>
+    <script src="js/compras.js"></script>
 </body>
 </html>
