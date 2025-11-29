@@ -53,14 +53,6 @@ class mdl extends CRUD {
         ]);
     }
 
-    function deleteCategoryById($array) {
-        return $this->_Delete([
-            'table' => "{$this->bd}mtto_categoria",
-            'where' => 'idcategoria = ?',
-            'data'  => $array
-        ]);
-    }
-
     function existsCategoryByName($array) {
         $query = "
             SELECT COUNT(*) as total
@@ -71,6 +63,8 @@ class mdl extends CRUD {
         $result = $this->_Read($query, $array);
         return $result[0]['total'] ?? 0;
     }
+
+    // Area --
 
     function listArea($array) {
         $query = "
@@ -113,13 +107,7 @@ class mdl extends CRUD {
         ]);
     }
 
-    function deleteAreaById($array) {
-        return $this->_Delete([
-            'table' => "{$this->bd}mtto_almacen_area",
-            'where' => 'idArea = ?',
-            'data'  => $array
-        ]);
-    }
+
 
     function existsAreaByName($array) {
         $query = "
@@ -173,13 +161,7 @@ class mdl extends CRUD {
         ]);
     }
 
-    function deleteZoneById($array) {
-        return $this->_Delete([
-            'table' => "{$this->bd}mtto_almacen_zona",
-            'where' => 'id_zona = ?',
-            'data'  => $array
-        ]);
-    }
+
 
     function existsZoneByName($array) {
         $query = "

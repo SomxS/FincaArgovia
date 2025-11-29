@@ -27,8 +27,8 @@
     
     <!--PERSONALIZADO-->
     <link rel="stylesheet" href="../../src/css/navbar.css">
+    <link rel="stylesheet" href="../../src/css/compact.css">
    
     <!-- CDN TAILWIND -->
     <script src="https://cdn.tailwindcss.com"></script>
-   
    

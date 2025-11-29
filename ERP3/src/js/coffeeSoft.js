@@ -1639,7 +1639,7 @@ class Components extends Complements {
             color_th: "bg-[#003360] text-gray-100",
             color_row: "bg-white hover:bg-gray-50",
             color_group: "bg-gray-200",
-            class: "w-full table-auto text-sm text-gray-800",
+            class: "w-full table-auto text-sm text-gray-800 capitalize",
             onEdit: () => { },
             onDelete: () => { },
             extends: true,
@@ -1705,7 +1705,7 @@ class Components extends Complements {
             container.append(titleRow);
         }
 
-        const table = $("<table>", { id: opts.id, class: ` border-separate border-spacing-0 ${opts.border_table} ${opts.class}` });
+        const table = $("<table>", { id: opts.id, class: `capitalize border-separate border-spacing-0 ${opts.border_table} ${opts.class}` });
         const thead = $("<thead>");
 
         if (opts.theadGroups && Array.isArray(opts.theadGroups)) {
@@ -1970,8 +1970,8 @@ class Components extends Complements {
                 inactive: "text-gray-600 hover:bg-white"
             },
             button: {
-                base: "bg-gray-100  p-1 rounded-lg inline-flex shadow-blue-500/50",
-                active: "bg-blue-600 text-white",
+                base: "bg-gray-200  p-1 rounded-lg inline-flex shadow-blue-500/50",
+                active: "bg-gray-50 ",
                 inactive: " text-gray-600 hover:bg-gray-50"
             }
         };
@@ -2063,7 +2063,7 @@ class Components extends Complements {
             logoMini: "https://erp-varoch.com/ERP24/src/img/logos/logo_icon_wh.png",
             user: {
                 name: "Rosy Dev",
-                photo: "https://huubie.com.mx/alpha/src/img/perfil/fotoUser26_20250803_120920.png",
+                photo: "https://huubie.com.mx/alpha/src/img/perfil/fotoUser25_20250616_133753.png",
                 onProfile: () => redireccion('perfil/perfil.php'),
                 onLogout: () => cerrar_sesion()
             },

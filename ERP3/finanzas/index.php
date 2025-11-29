@@ -26,6 +26,9 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../src/plugin/bootstrap-5/css/bootstrap.min.css">
     
+    <!-- Compact Styles -->
+    <link rel="stylesheet" href="../src/css/compact.css">
+    
     <!-- CoffeeSoft Framework -->
     <script src="../src/js/coffeeSoft.js"></script>
     <script src="https://rawcdn.githack.com/SomxS/Grupo-Varoch/refs/heads/main/src/js/plugins.js"></script>

@@ -1,3 +1,2330 @@
+[ 2025-11-28 07:01:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 07:01:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 07:01:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 07:00:54 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 07:00:54 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 07:00:54 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:24:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:24:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:24:57 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:24:29 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:24:29 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:24:29 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:24:14 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:24:14 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:24:13 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:24:03 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:24:03 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:24:03 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:22:30 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:22:30 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:22:30 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:22:14 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:22:13 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:22:13 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:21:50 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:21:50 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:21:50 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:20:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:20:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:20:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:17:24 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:17:24 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:17:24 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:17:23 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:17:23 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:17:23 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:17:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:17:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:17:22 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:16:55 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:16:55 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:16:55 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:16:54 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:16:54 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:16:53 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:16:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:16:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:16:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:16:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:16:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:16:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:14:37 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:14:37 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:14:37 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:09:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:09:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:09:49 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:08:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:08:43 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:08:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:08:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:08:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:08:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:07:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:07:35 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:07:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:07:16 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:07:16 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:07:16 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:06:47 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:06:46 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:06:46 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:06:36 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:06:36 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:06:36 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:06:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:06:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:06:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:06:32 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:06:32 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:06:32 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:03:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:03:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:03:51 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:03:29 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:03:29 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:03:29 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:02:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 06:02:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 06:02:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 00:11:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-28 00:11:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-28 00:11:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-27 23:53:17 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-27 23:53:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
+[ 2025-11-27 23:53:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                bank_accounts.id,
+                bank_accounts.udn_id,
+                bank_accounts.bank_id,
+                bank_accounts.account_alias,
+                bank_accounts.last_four_digits,
+                bank_accounts.payment_method_id,
+                bank_accounts.active,
+                banks.name as bank_name,
+                udn.UDN as udn_name,
+                payment_methods.name as payment_method_name,
+                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
+            FROM rfwsmqex_contabilidad.bank_accounts
+            INNER JOIN rfwsmqex_contabilidad.banks ON bank_accounts.bank_id = banks.id
+            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
+            LEFT JOIN rfwsmqex_contabilidad.payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+            WHERE bank_accounts.active = ? AND bank_accounts.udn_id = ?
+            ORDER BY bank_accounts.id DESC
+        
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bank_accounts.account_alias' in 'field list'
+
+
+[ 2025-11-27 23:53:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas2.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas2'
+
+
 [ 2025-11-19 06:25:20 ]
 [ UNIX_USR ] :: nt authority\system
 [ WINDOWS_USR ] :: DESKTOP-O7AOGR9$

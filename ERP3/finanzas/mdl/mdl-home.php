@@ -1,5 +1,5 @@
 <?php
-require_once '../../conf/_CRUD.php';
+require_once '../../conf/_CRUD3.php';
 require_once '../../conf/_Utileria.php';
 
 class mdl extends CRUD {
@@ -10,6 +10,18 @@ class mdl extends CRUD {
         $this->util = new Utileria;
         $this->bd = "rfwsmqex_gvsl_finanzas2.";
     }
+
+   function lsUDN() {
+        $query = "
+            SELECT idUDN AS id, UDN AS valor
+            FROM udn
+            WHERE Stado = 1 AND idUDN NOT IN (8, 10, 7)
+            ORDER BY UDN DESC
+        ";
+        return $this->_Read($query, null);
+    }
+
+
 
     function getVentasPeriodo($array) {
         $query = "

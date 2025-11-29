@@ -32,8 +32,14 @@ class ctrl extends mdl {
                 ];
                 $a[] = [
                     'class'   => 'btn btn-sm btn-danger',
-                    'html'    => '<i class="icon-trash"></i>',
-                    'onclick' => 'category.deleteCategory(' . $item['id'] . ')'
+                    'html'    => '<i class="icon-toggle-on"></i>',
+                    'onclick' => 'category.statusCategory(' . $item['id'] . ', ' . $item['active'] . ')'
+                ];
+            } else {
+                $a[] = [
+                    'class'   => 'btn btn-sm btn-outline-success',
+                    'html'    => '<i class="icon-toggle-off"></i>',
+                    'onclick' => 'category.statusCategory(' . $item['id'] . ', ' . $item['active'] . ')'
                 ];
             }
 
@@ -107,7 +113,8 @@ class ctrl extends mdl {
         $status  = 500;
         $message = 'Error al editar categoría';
 
-        $edit    = $this->updateCategory($this->util->sql($_POST, 1));
+        $values  = $this->util->sql($_POST, 1);
+        $edit    = $this->updateCategory($values);
 
         if ($edit) {
             $status  = 200;
@@ -116,20 +123,20 @@ class ctrl extends mdl {
 
         return [
             'status'  => $status,
-            'message' => $message
+            'message' => $message,
+        
         ];
     }
 
-    function deleteCategory() {
-        $id      = $_POST['id'];
+    function statusCategory() {
         $status  = 500;
-        $message = 'Error al eliminar categoría';
+        $message = 'Error al cambiar el estado de la categoría';
 
-        $delete  = $this->deleteCategoryById([$id]);
+        $update = $this->updateCategory($this->util->sql($_POST, 1));
 
-        if ($delete) {
+        if ($update) {
             $status  = 200;
-            $message = 'Categoría eliminada correctamente';
+            $message = 'Estado de la categoría actualizado correctamente';
         }
 
         return [
@@ -137,6 +144,9 @@ class ctrl extends mdl {
             'message' => $message
         ];
     }
+
+    // Area --
+
 
     function lsArea() {
         $active = $_POST['active'] ?? 1;
@@ -154,8 +164,14 @@ class ctrl extends mdl {
                 ];
                 $a[] = [
                     'class'   => 'btn btn-sm btn-danger',
-                    'html'    => '<i class="icon-trash"></i>',
-                    'onclick' => 'area.deleteArea(' . $item['id'] . ')'
+                    'html'    => '<i class="icon-toggle-on"></i>',
+                    'onclick' => 'area.statusArea(' . $item['id'] . ', ' . $item['active'] . ')'
+                ];
+            } else {
+                $a[] = [
+                    'class'   => 'btn btn-sm btn-outline-success',
+                    'html'    => '<i class="icon-toggle-off"></i>',
+                    'onclick' => 'area.statusArea(' . $item['id'] . ', ' . $item['active'] . ')'
                 ];
             }
 
@@ -242,16 +258,15 @@ class ctrl extends mdl {
         ];
     }
 
-    function deleteArea() {
-        $id      = $_POST['id'];
+    function statusArea() {
         $status  = 500;
-        $message = 'Error al eliminar área';
+        $message = 'Error al cambiar el estado del área';
 
-        $delete  = $this->deleteAreaById([$id]);
+        $update = $this->updateArea($this->util->sql($_POST, 1));
 
-        if ($delete) {
+        if ($update) {
             $status  = 200;
-            $message = 'Área eliminada correctamente';
+            $message = 'Estado del área actualizado correctamente';
         }
 
         return [
@@ -276,8 +291,14 @@ class ctrl extends mdl {
                 ];
                 $a[] = [
                     'class'   => 'btn btn-sm btn-danger',
-                    'html'    => '<i class="icon-trash"></i>',
-                    'onclick' => 'zone.deleteZone(' . $item['id'] . ')'
+                    'html'    => '<i class="icon-toggle-on"></i>',
+                    'onclick' => 'zone.statusZone(' . $item['id'] . ', ' . $item['active'] . ')'
+                ];
+            } else {
+                $a[] = [
+                    'class'   => 'btn btn-sm btn-outline-success',
+                    'html'    => '<i class="icon-toggle-off"></i>',
+                    'onclick' => 'zone.statusZone(' . $item['id'] . ', ' . $item['active'] . ')'
                 ];
             }
 
@@ -364,16 +385,15 @@ class ctrl extends mdl {
         ];
     }
 
-    function deleteZone() {
-        $id      = $_POST['id'];
+    function statusZone() {
         $status  = 500;
-        $message = 'Error al eliminar zona';
+        $message = 'Error al cambiar el estado de la zona';
 
-        $delete  = $this->deleteZoneById([$id]);
+        $update = $this->updateZone($this->util->sql($_POST, 1));
 
-        if ($delete) {
+        if ($update) {
             $status  = 200;
-            $message = 'Zona eliminada correctamente';
+            $message = 'Estado de la zona actualizado correctamente';
         }
 
         return [
@@ -388,11 +408,11 @@ class ctrl extends mdl {
 function renderStatus($active) {
     switch ($active) {
         case 1:
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activo</span>';
         case 0:
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Inactivo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Inactivo</span>';
         default:
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-gray-100 text-gray-700 min-w-[100px] text-center">Desconocido</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-gray-100 text-gray-700 min-w-[100px] text-center">Desconocido</span>';
     }
 }
 

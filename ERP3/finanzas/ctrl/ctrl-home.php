@@ -13,7 +13,8 @@ class ctrl extends mdl {
 
     function init() {
         return [
-            'user' => $_SESSION['user'] ?? 'Usuario'
+            'user' => $_SESSION['user'] ?? 'Usuario',
+            'udn'  => $this-> lsUDN()
         ];
     }
 

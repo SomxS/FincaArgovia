@@ -93,7 +93,7 @@ class MayorAccount extends Templates {
                     opc: "select",
                     id: "udn",
                     lbl: "Unidad de negocio",
-                    class: "col-sm-2 col-lg-3 ",
+                    class: "col-sm-2 col-lg-2 ",
                     data: lsudn,
                     onchange: `mayorAccount.lsMayorAccount()`,
                 },
@@ -118,28 +118,31 @@ class MayorAccount extends Templates {
             attr: {
                 id: `tb${this.PROJECT_NAME}`,
                 theme: 'corporativo',
-                center: [2]
+                center: [2],
+                striped:true
             },
         });
     }
 
     addMayorAccount() {
 
-        const udn     = $(`#filterBar${this.PROJECT_NAME} #udn`).val();
-        const udnText = $(`#filterBar${this.PROJECT_NAME} #udn option:selected`).text();
+        const udn = $(`#filterBar${this.PROJECT_NAME} #udn`).val();
 
         this.createModalForm({
             id: 'formMayorAccountAdd',
-            data: { opc: 'addMayorAccount', udn_id: udn },
+            data: { opc: 'addMayorAccount' },
             bootbox: {
                 title: 'Nueva cuenta de mayor',
+                size:'small',
             },
             json: [
                 {
-                    opc: "label",
-                    id: "lblUdn",
-                    text: `Unidad de negocio: ${udnText}`,
-                    class: "col-12 mb-2 text-gray-600"
+                    opc: "select",
+                    id: "udn_id",
+                    lbl: "Unidad de negocio",
+                    class: "col-12 mb-3",
+                    data: lsudn,
+                    value: udn
                 },
                 {
                     opc: "input",

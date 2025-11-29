@@ -33,18 +33,13 @@ class App extends Templates {
             }
         });
 
-        $(`#filterBar${this.PROJECT_NAME}`).html(`
-            <div class="px-4 pt-3 pb-3">
-                <h2 class="text-2xl font-semibold">📦 Catálogo</h2>
-                <p class="text-gray-400">Administra la estructura base del almacén: Categorías, Áreas y Zonas</p>
-            </div>
-        `);
+       
 
         this.tabLayout({
             parent: `container${this.PROJECT_NAME}`,
             id: `tabs${this.PROJECT_NAME}`,
             theme: "light",
-            type: "short",
+            type: "button",
             json: [
                 {
                     id: "categorias",
@@ -91,7 +86,7 @@ class Category extends Templates {
                     opc: "select",
                     id: "active",
                     lbl: "Estado",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: [
                         { id: "1", valor: "Activos" },
                         { id: "0", valor: "Inactivos" }
@@ -167,7 +162,7 @@ class Category extends Templates {
 
             this.createModalForm({
                 id: "formCategoryEdit",
-                data: { opc: "editCategory", id: id },
+                data: { opc: "editCategory", idcategoria: id },
                 bootbox: {
                     title: "Editar Categoría",
                     closeButton: true
@@ -196,16 +191,21 @@ class Category extends Templates {
         }
     }
 
-    deleteCategory(id) {
+    statusCategory(id, active) {
+        const action = active === 1 ? "desactivar" : "activar";
+        const actionTitle = active === 1 ? "Desactivar" : "Activar";
+
         this.swalQuestion({
             opts: {
-                title: "¿Eliminar Categoría?",
-                text: "Esta acción no se puede deshacer",
+                title: `¿${actionTitle} Categoría?`,
+                text: `Esta acción ${action}á la categoría`,
                 icon: "warning"
             },
             data: {
-                opc: "deleteCategory",
-                id: id
+                opc: "statusCategory",
+              
+                active: active === 1 ? 0 : 1,
+                idcategoria: id,
             },
             methods: {
                 send: (response) => {
@@ -364,16 +364,20 @@ class Area extends Templates {
         }
     }
 
-    deleteArea(id) {
+    statusArea(id, active) {
+        const action = active === 1 ? "desactivar" : "activar";
+        const actionTitle = active === 1 ? "Desactivar" : "Activar";
+
         this.swalQuestion({
             opts: {
-                title: "¿Eliminar Área?",
-                text: "Esta acción no se puede deshacer",
+                title: `¿${actionTitle} Área?`,
+                text: `Esta acción ${action}á el área`,
                 icon: "warning"
             },
             data: {
-                opc: "deleteArea",
-                id: id
+                opc: "statusArea",
+                idArea: id,
+                active: active === 1 ? 0 : 1
             },
             methods: {
                 send: (response) => {
@@ -532,16 +536,20 @@ class Zone extends Templates {
         }
     }
 
-    deleteZone(id) {
+    statusZone(id, active) {
+        const action = active === 1 ? "desactivar" : "activar";
+        const actionTitle = active === 1 ? "Desactivar" : "Activar";
+
         this.swalQuestion({
             opts: {
-                title: "¿Eliminar Zona?",
-                text: "Esta acción no se puede deshacer",
+                title: `¿${actionTitle} Zona?`,
+                text: `Esta acción ${action}á la zona`,
                 icon: "warning"
             },
             data: {
-                opc: "deleteZone",
-                id: id
+                opc: "statusZone",
+                id_zona: id,
+                active: active === 1 ? 0 : 1
             },
             methods: {
                 send: (response) => {

@@ -34,11 +34,8 @@ require_once('layout/core-libraries.php');
             <!-- Main Container -->
             <div class="main-container" id="root"></div>
 
-            <!-- Módulo de Almacén -->
-            <!-- <script src="js/almacen.js?t=<?php echo time(); ?>"></script> -->
-            
-            <!-- Módulo de Inventario -->
-            <script src="js/inventario.js?t=<?php echo time(); ?>"></script>
+            <!-- Módulo de Almacén Principal -->
+            <script src="js/almacen-main.js?t=<?php echo time(); ?>"></script>
         </div>
     </main>
 </body>
