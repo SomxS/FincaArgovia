@@ -1,327 +1,392 @@
 # Implementation Plan - Módulo de Costos
 
-## Task List
+## Overview
 
-- [x] 1. Setup project structure and database schema
+Este plan de implementación detalla las tareas necesarias para desarrollar el módulo de Costos, un sistema de consulta financiera de solo lectura que consolida información de costos directos y salidas de almacén. El desarrollo sigue la arquitectura MVC de CoffeeSoft y se enfoca en la corrección mediante property-based testing.
 
+---
 
-  - Create directory structure for module files
-  - Verify existing database tables (purchases, warehouse_output, product, product_class)
-  - Add database indexes for performance optimization
-  - _Requirements: 1.1, 5.1, 5.2, 6.3_
+## Tasks
 
+- [x] 1. Configurar estructura base del módulo
 
 
 
-- [ ] 2. Implement backend model (mdl-costos.php)
-- [ ] 2.1 Create base model structure
-  - Extend CRUD class
-  - Configure database connection ($this->bd)
+  - Crear estructura de carpetas en `finanzas/consulta/`
+  - Crear archivos base: `costos.php` (index), `ctrl-costos.php`, `mdl-costos.php`, `costos.js`
+  - Configurar rutas y permisos de acceso
 
-  - Initialize utility class ($this->util)
-  - _Requirements: 6.3, 6.4_
 
-- [x] 2.2 Implement filter data methods
+  - _Requirements: 8.1, 8.5_
 
-  - Code `lsUDN()` method to get business units list
-  - Return data in format compatible with frontend selects
-  - _Requirements: 3.1, 3.5_
+- [ ] 2. Implementar modelo de datos (mdl-costos.php)
+  - Extender clase CRUD y configurar conexión a base de datos
 
-- [ ] 2.3 Implement main query method
-  - Code `listCostos()` method with date range and UDN parameters
+  - Implementar `lsUDN()` para obtener lista de unidades de negocio
+  - _Requirements: 3.1_
 
-  - Join purchases and warehouse_output tables
-  - Group by product_class and date
-  - Calculate daily totals and grand totals
-  - _Requirements: 1.2, 5.1, 5.2, 5.3, 5.4_
+- [ ] 2.1 Implementar consultas de costos directos
+  - Crear método `listCostosDirectos($params)` que consulte tabla `compras`
 
+  - Filtrar por rango de fechas (fi, ff) y UDN opcional
+  - Agrupar por fecha de operación y categoría
+  - _Requirements: 5.1, 5.3_
 
+- [x] 2.2 Implementar consultas de salidas de almacén
 
+  - Crear método `listSalidasAlmacen($params)` que consulte tabla `warehouse_output`
+  - Hacer JOIN con `product` y `product_class` para obtener categorías
+  - Filtrar por rango de fechas y UDN opcional
+  - _Requirements: 5.2, 5.3_
 
-- [ ] 2.4 Implement supporting query methods
-  - Code `getCostosDirectos()` to query purchases module
-  - Code `getSalidasAlmacen()` to query warehouse module
-  - Use prepared statements with _Read() method
+- [ ] 2.3 Implementar consolidación de datos
+  - Crear método `consolidateCostos($costosDirectos, $salidas)` 
 
-  - _Requirements: 5.1, 5.2, 7.5_
+  - Consolidar ambas fuentes por fecha
+  - Organizar por categorías: Alimentos, Bebidas, Diversos
+  - Calcular subtotales por categoría y día
+  - Calcular totales generales
+  - _Requirements: 5.4, 5.5, 6.1, 6.2, 6.4_
 
-- [ ] 3. Implement backend controller (ctrl-costos.php)
-- [ ] 3.1 Create base controller structure
-  - Extend mdl class
+- [ ] 2.4 Implementar sistema de auditoría
+  - Crear método `createAuditLog($data)` para registrar operaciones
+  - Registrar consultas, exportaciones y errores
+  - Incluir user_id, udn_id, action y detalles en JSON
+  - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5_
 
-  - Implement session validation
-  - Add security headers
-  - _Requirements: 4.2, 6.1_
+- [ ]* 2.5 Escribir property test para consolidación de datos
+  - **Property 4: Total Calculation Accuracy**
+  - **Validates: Requirements 5.4, 7.3**
+  - Generar conjuntos aleatorios de costos y verificar que totales = suma de individuales
+  - Configurar 100 iteraciones mínimas
 
-- [ ] 3.2 Implement init() method
-  - Load UDN list for filter
-  - Return user level for conditional rendering
+- [ ]* 2.6 Escribir property test para agrupación por fecha
+  - **Property 2: Data Grouping by Date**
 
-  - Format response for frontend consumption
-  - _Requirements: 3.1, 3.2, 6.4_
 
-- [ ] 3.3 Implement ls() method
-  - Receive date range and UDN from POST
-  - Validate user permissions for UDN filter
-  - Call model's listCostos() method
+  - **Validates: Requirements 1.2, 5.3**
+  - Generar rangos de fechas aleatorios y verificar agrupación sin duplicados
 
-  - Format data for table rendering (grouped rows, totals)
-  - Return JSON response with row array
-  - _Requirements: 1.2, 1.3, 3.3, 3.5, 5.5_
+- [x]* 2.7 Escribir property test para estructura de categorías
 
-- [x] 3.4 Implement exportExcel() method
+  - **Property 11: Category Structure Preservation**
+  - **Validates: Requirements 5.5, 6.1**
+  - Verificar que siempre existan las tres categorías: Alimentos, Bebidas, Diversos
 
-
-
-  - Validate date range and UDN parameters
-  - Query data using listCostos()
-  - Generate Excel file with PHPSpreadsheet
-  - Include headers, filters applied, and formatted data
-  - Return file download response
-
-  - _Requirements: 2.2, 2.3, 2.4, 3.4_
-
-- [ ] 3.5 Implement security validations
-  - Validate allowed operations (init, ls, exportExcel only)
-  - Check user authentication
-
-  - Validate user level for UDN filter access
-  - Sanitize all input parameters
-  - _Requirements: 4.2, 4.4, 7.5_
-
-- [ ] 4. Implement frontend module (costos.js)
-- [x] 4.1 Create App class structure
-
-  - Extend Templates class from CoffeeSoft
-  - Define PROJECT_NAME = "costos"
-  - Implement constructor with link and div_modulo parameters
-  - _Requirements: 6.1, 6.5_
-
-- [ ] 4.2 Implement render() method
-  - Call layout() to create UI structure
-
-  - Call filterBar() to setup filters
-  - Call ls() to load initial data
-  - _Requirements: 1.1, 1.5_
-
-- [ ] 4.3 Implement layout() method
-  - Use primaryLayout() component
-  - Create filterBar section with ID
-  - Create container section for table
-  - Apply responsive classes
-  - _Requirements: 1.1, 1.5, 6.5_
-
-
-- [ ] 4.4 Implement filterBar() method
-  - Use createfilterBar() component
-  - Add date range picker (dataPicker)
-  - Add UDN select (conditional based on user level from init())
-  - Add "Exportar a Excel" button
-  - Wire onchange events to ls() method
-
-  - _Requirements: 1.2, 2.1, 3.1, 3.2, 7.1_
-
-- [ ] 4.5 Implement ls() method
-  - Get date range from dataPicker using getDataRangePicker()
-
-
-
-  - Get UDN value from select (if visible)
-  - Validate date range (start <= end, max 12 months)
-  - Call backend with useFetch({ opc: 'ls', fi, ff, udn })
-  - Use createTable() to render results
-  - Configure table with theme 'corporativo', no action buttons (opc: 0)
-  - Group rows by product_class
-
-  - Display daily totals and grand totals
-  - _Requirements: 1.2, 1.3, 1.4, 3.3, 4.1, 7.1, 7.2, 7.3_
-
-- [ ] 4.6 Implement exportExcel() method
-  - Validate date range is selected
-
-
-
-  - Get current filter values (fi, ff, udn)
-  - Call backend with useFetch({ opc: 'exportExcel', fi, ff, udn })
-  - Handle file download response
-  - Show success/error messages
-  - _Requirements: 2.1, 2.2, 2.5, 3.4_
-
-
-- [ ] 4.7 Implement read-only mode enforcement
-  - Ensure no edit/delete buttons in table
-  - Set opc: 0 in table configuration
-  - Disable any modification actions
-  - _Requirements: 1.4, 4.1, 4.3_
-
-
-
-
-- [ ] 5. Implement data validation
-- [ ] 5.1 Frontend validations
-  - Validate date range (start <= end)
-
-  - Validate max range (12 months)
-  - Show descriptive error messages
-  - Prevent invalid queries
-  - _Requirements: 7.1, 7.2, 7.3_
-
-- [ ] 5.2 Backend validations
-  - Validate date format
-
-  - Validate UDN exists in database
-  - Validate user permissions for UDN filter
-  - Sanitize all input parameters
-  - _Requirements: 7.4, 7.5_
-
-
-
-
-- [ ] 6. Implement error handling
-- [ ] 6.1 Frontend error handling
-  - Handle network errors
-  - Handle backend error responses
-  - Display user-friendly error messages
-
-  - Log errors to console for debugging
-  - _Requirements: 7.3_
-
-- [ ] 6.2 Backend error handling
-  - Return standardized error responses
-  - Log security violations
-  - Handle database query errors
-  - Return appropriate HTTP status codes
-  - _Requirements: 4.4, 7.5_
-
-- [ ] 7. Implement Excel export functionality
-- [ ] 7.1 Setup PHPSpreadsheet library
-  - Install PHPSpreadsheet via Composer
-  - Configure autoloader
-  - _Requirements: 2.2_
-
-- [ ] 7.2 Create Excel generation method
-  - Format headers with applied filters
-
-
-
-
-  - Add data rows with proper formatting
-  - Apply currency formatting to amount columns
-  - Add totals row
-  - Set column widths
-  - _Requirements: 2.2, 2.3, 2.4_
-
-
-- [ ] 7.3 Implement file download
-  - Set proper headers for Excel download
-  - Generate unique filename with timestamp
-  - Stream file to browser
-  - Clean up temporary files
-  - _Requirements: 2.5_
-
-
-- [ ] 8. Implement permission-based features
-- [ ] 8.1 Conditional UDN filter rendering
-  - Check user level in init() response
-  - Show UDN select only for level 3 users
-  - Hide UDN select for level 2 users
+- [ ] 3. Implementar controlador (ctrl-costos.php)
+  - Extender clase mdl y configurar manejo de $_POST['opc']
+  - Implementar método `init()` que retorne UDNs y nivel de usuario
   - _Requirements: 3.1, 3.2_
 
-- [ ] 8.2 Backend permission validation
-  - Validate user level before applying UDN filter
-  - Return 403 error if unauthorized
-  - Log unauthorized access attempts
-  - _Requirements: 3.5, 4.4_
 
-- [ ] 9. Optimize database queries
-- [ ]* 9.1 Add database indexes
-  - Create index on purchases.operation_date
-  - Create index on purchases.udn_id
-  - Create index on warehouse_output.operation_date
-  - Create index on product.product_class_id
-  - _Requirements: 5.5_
+- [ ] 3.1 Implementar consulta principal lsCostos()
+  - Recibir parámetros: fi, ff, udn (opcional)
+  - Validar rango de fechas (fi <= ff)
+  - Llamar a `listCostosDirectos()` y `listSalidasAlmacen()`
+  - Consolidar datos con `consolidateCostos()`
+  - Formatear respuesta para tabla CoffeeSoft
+  - Registrar consulta en audit_log
 
-- [ ]* 9.2 Optimize SQL queries
-  - Use LEFT JOIN for consolidation
-  - Aggregate data in SQL (SUM, GROUP BY)
-  - Limit result set to date range
-  - _Requirements: 5.3, 5.4_
+  - Manejar errores y retornar códigos de estado apropiados
+  - _Requirements: 1.2, 1.3, 1.4, 9.2, 10.1_
 
-- [-] 10. Implement UI components and styling
+- [ ] 3.2 Implementar exportación a Excel
+  - Crear método `exportExcel()` que genere archivo Excel
+  - Usar datos filtrados actuales (mismo query que lsCostos)
 
-- [ ] 10.1 Configure table theme
-  - Use 'corporativo' theme from CoffeeSoft
-  - Set title "Concentrado Diario de Costos"
-  - Set subtitle with date range
-  - Configure column alignment (center, right)
-  - _Requirements: 1.5_
+  - Mantener formato de tabla y encabezados
+  - Generar nombre de archivo con patrón: `Costos_[fi]_[ff]_[UDN].xlsx`
+  - Registrar exportación en audit_log
+  - _Requirements: 2.2, 2.3, 2.4, 10.2_
+
+- [ ] 3.3 Implementar validación de solo lectura
+  - Crear método `validateReadOnly()` que valide operaciones permitidas
+  - Permitir solo: init, lsCostos, exportExcel
+  - Rechazar cualquier intento de modificación con status 403
+  - Registrar intentos de modificación en audit_log
+  - _Requirements: 4.2, 4.3_
+
+- [ ] 3.4 Implementar funciones auxiliares de formato
+  - Crear función `formatCurrency($amount)` para formatear montos
+  - Crear función `generateDayColumns($fi, $ff)` para generar columnas dinámicas
+  - Crear función `formatDateHeader($date)` para encabezados de días
+  - _Requirements: 1.3, 7.5, 9.5_
+
+- [ ]* 3.5 Escribir property test para validación de solo lectura
+  - **Property 5: Read-Only Enforcement**
+  - **Validates: Requirements 4.2, 4.3**
+  - Generar operaciones aleatorias de modificación y verificar rechazo con 403
+
+- [x]* 3.6 Escribir property test para validación de fechas
+
+
+  - **Property 1: Date Range Validation**
+  - **Validates: Requirements 9.2**
+  - Generar pares de fechas aleatorios donde fi > ff y verificar rechazo
+
+- [x]* 3.7 Escribir property test para filtrado por UDN
+
+  - **Property 9: UDN Filter Application**
+  - **Validates: Requirements 3.3, 3.4**
+  - Generar UDNs aleatorias y verificar que solo aparezcan datos de esa UDN
+
+- [x]* 3.8 Escribir property test para recálculo de totales
+
+  - **Property 10: Total Recalculation on Filter Change**
+  - **Validates: Requirements 3.5**
+  - Cambiar filtro UDN y verificar que totales se recalculen correctamente
+
+- [ ] 4. Implementar frontend (costos.js)
+  - Crear clase `App extends Templates` con PROJECT_NAME = "costos"
+  - Implementar constructor con link y div_modulo
+
+  - Implementar método `render()` que inicialice el módulo
+  - _Requirements: 8.5_
+
+- [ ] 4.1 Implementar layout principal
+  - Crear método `layout()` usando `primaryLayout`
+  - Configurar filterBar y container
+  - Aplicar tema corporativo de CoffeeSoft
+
+  - _Requirements: 8.2, 8.3, 8.5_
+
+- [ ] 4.2 Implementar barra de filtros
+  - Crear método `filterBar()` usando `createfilterBar`
+  - Agregar selector de rango de fechas con `dataPicker`
+  - Agregar filtro de UDN (condicional según nivel de usuario)
+  - Configurar período actual como valor por defecto
+
+  - Validar rango de fechas antes de consultar
+  - _Requirements: 1.1, 3.1, 3.2, 9.1, 9.4_
+
+- [ ] 4.3 Implementar consulta y visualización de concentrado
+  - Crear método `lsCostos()` que consulte backend
+  - Usar `createTable` con tema corporativo
+  - Configurar columnas dinámicas por día
+  - Aplicar formato a filas de totales
+  - Manejar estados vacíos y errores
+  - _Requirements: 1.2, 1.3, 1.4, 7.1, 7.2, 7.3, 7.5_
+
+- [ ] 4.4 Implementar exportación a Excel
+  - Crear método `exportExcel()` que llame al backend
+  - Agregar botón "Exportar a Excel" visible cuando hay datos
+  - Mostrar indicador de carga durante generación
+  - Descargar archivo automáticamente al completar
+  - Mostrar notificación de éxito/error
+  - _Requirements: 2.1, 2.2, 2.5_
 
 
 
-- [ ] 10.2 Style filter bar
-  - Apply responsive grid layout
-  - Style date picker component
-  - Style UDN select dropdown
-  - Style export button with icon
-  - _Requirements: 1.1, 1.5_
+- [ ] 4.5 Implementar actualización automática de tabla
+  - Configurar eventos onChange en filtros
+  - Actualizar tabla automáticamente al cambiar fechas o UDN
+  - Mantener estado de filtros durante la sesión
+  - _Requirements: 9.3_
 
-- [ ] 10.3 Implement grouped table rows
-  - Group rows by product_class
-  - Add visual separators between groups
-  - Highlight total rows
-  - Apply alternating row colors
-  - _Requirements: 1.3_
+- [ ]* 4.6 Escribir unit tests para validación de UI
+  - Test: Verificar que UDN filter se muestre solo para nivel 3
+  - Test: Verificar validación de fechas en frontend
+  - Test: Verificar presencia de botón exportar cuando hay datos
 
-- [ ] 11. Integration with existing modules
-- [ ] 11.1 Verify purchases module integration
-  - Confirm purchases table structure
-  - Test query for direct costs
-  - Validate data consistency
-  - _Requirements: 5.1_
+- [ ]* 4.7 Escribir property test para columnas dinámicas
+  - **Property 15: Daily Column Generation**
+  - **Validates: Requirements 7.5**
+  - Generar rangos de fechas aleatorios y verificar número correcto de columnas
 
-- [ ] 11.2 Verify warehouse module integration
-  - Confirm warehouse_output table structure
-  - Test query for warehouse outputs
-  - Validate data consistency
-  - _Requirements: 5.2_
+- [ ]* 4.8 Escribir property test para formato de fechas
+  - **Property 17: Date Format Display**
+  - **Validates: Requirements 9.5**
+  - Generar fechas aleatorias y verificar formato DD/MM/YYYY
 
-- [ ] 11.3 Test data consolidation
-  - Verify JOIN operations work correctly
-  - Validate totals calculation
-  - Test with various date ranges
-  - _Requirements: 5.3, 5.4, 5.5_
+- [ ] 5. Crear página index (costos.php)
+  - Seguir estructura del PIVOTE INDEX
+  - Incluir validación de sesión con cookie IDU
+  - Cargar layouts: head.php y core-libraries.php
+  - Incluir CoffeeSoft Framework (coffeSoft.js, plugins.js)
+  - Agregar breadcrumb: Finanzas > Costos
+  - Incluir script costos.js con cache busting
+  - _Requirements: 8.1_
 
-- [ ] 12. Create module entry point
-- [ ] 12.1 Update navigation menu
-  - Add "Costos" link in Finanzas section
-  - Set proper permissions (level 2 and 3)
-  - Configure route to costos module
+- [ ] 6. Implementar funcionalidad de categorías expandibles
+  - Agregar lógica para expandir/colapsar categorías en tabla
+  - Mostrar detalle de items dentro de cada categoría
+  - Mantener estado de expansión durante filtrado
+  - _Requirements: 6.5_
+
+- [ ]* 6.1 Escribir unit test para expansión de categorías
+  - Test: Verificar que categorías se expandan/colapsen correctamente
+  - Test: Verificar que estado se mantenga al filtrar
+
+- [ ] 7. Implementar cálculos de subtotales por categoría
+  - Calcular subtotal de Alimentos por día
+  - Calcular subtotal de Bebidas por día
+  - Calcular subtotal de Diversos por día
+  - Mostrar subtotales en filas correspondientes
+  - _Requirements: 6.2, 6.3_
+
+- [ ]* 7.1 Escribir property test para subtotales de categorías
+  - **Property 12: Category Subtotal Accuracy**
+  - **Validates: Requirements 6.2**
+  - Generar datos aleatorios por categoría y verificar suma correcta
+
+- [ ] 8. Implementar filas de totales consolidados
+  - Agregar fila "Total en compras (costo directo)" con formato destacado
+  - Agregar fila "Total en salidas de almacén" con formato destacado
+  - Agregar fila "Costo total" con formato destacado
+  - Aplicar estilos diferenciados (bg-yellow-100, bg-blue-100, bg-green-100)
+  - _Requirements: 7.1, 7.2, 7.3, 7.4_
+
+- [ ]* 8.1 Escribir property test para presencia de filas de totales
+  - **Property 13: Total Rows Presence**
+  - **Validates: Requirements 7.1, 7.2**
+  - Verificar que siempre existan las tres filas de totales cuando hay datos
+
+- [ ]* 8.2 Escribir property test para cálculo de total general
+  - **Property 14: Grand Total Calculation**
+  - **Validates: Requirements 7.3**
+  - Verificar que Costo total = Total compras + Total salidas
+
+- [ ] 9. Implementar sistema de auditoría completo
+  - Registrar todas las consultas con parámetros
+  - Registrar todas las exportaciones con detalles
+  - Registrar errores con stack trace
+  - Incluir timestamp, usuario, UDN en todos los logs
+  - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5_
+
+- [ ]* 9.1 Escribir property test para creación de logs
+  - **Property 18: Audit Log Creation on Query**
+  - **Property 19: Audit Log Creation on Export**
+  - **Validates: Requirements 10.1, 10.2**
+  - Verificar que cada operación genere su log correspondiente
+
+- [ ]* 9.2 Escribir property test para campos requeridos en logs
+  - **Property 20: Audit Log Required Fields**
+  - **Validates: Requirements 10.3, 10.4**
+  - Verificar que todos los logs tengan campos obligatorios no nulos
+
+- [ ]* 9.3 Escribir property test para logging de errores
+  - **Property 21: Error Logging**
+  - **Validates: Requirements 10.5**
+  - Generar errores aleatorios y verificar que se registren en audit_log
+
+- [ ] 10. Implementar exportación a Excel con formato
+  - Usar librería PHPExcel o PhpSpreadsheet
+  - Mantener estructura de tabla (encabezados, categorías, totales)
+  - Aplicar formato de moneda a columnas numéricas
+  - Aplicar estilos a filas de totales (negrita, colores)
+  - Ajustar ancho de columnas automáticamente
+  - _Requirements: 2.3_
+
+- [ ]* 10.1 Escribir property test para consistencia de exportación
+  - **Property 6: Excel Export Data Consistency**
+  - **Validates: Requirements 2.2, 2.3**
+  - Verificar que datos en Excel coincidan exactamente con tabla mostrada
+
+- [ ]* 10.2 Escribir property test para nombre de archivo Excel
+  - **Property 7: Excel Filename Metadata**
+  - **Validates: Requirements 2.4**
+  - Verificar patrón de nombre: Costos_[fi]_[ff]_[UDN].xlsx
+
+- [ ] 11. Implementar manejo de permisos por nivel de usuario
+  - Obtener nivel de usuario desde sesión
+  - Mostrar/ocultar filtro UDN según nivel
+  - Validar permisos en backend para operaciones sensibles
+  - _Requirements: 3.1, 3.2_
+
+- [ ]* 11.1 Escribir property test para visibilidad de filtro UDN
+  - **Property 8: UDN Filter Visibility by User Level**
+  - **Validates: Requirements 3.1, 3.2**
+  - Verificar que filtro se muestre solo para nivel 3
+
+- [ ] 12. Implementar validaciones de entrada
+  - Validar formato de fechas (YYYY-MM-DD)
+  - Validar que fi <= ff
+  - Validar que UDN exista en base de datos
+  - Sanitizar inputs para prevenir SQL injection
+  - _Requirements: 9.2_
+
+- [ ]* 12.1 Escribir unit tests para validaciones
+  - Test: Validar rechazo de fechas inválidas
+  - Test: Validar rechazo de UDN inexistente
+  - Test: Validar sanitización de inputs
+
+- [ ] 13. Implementar manejo de estados de UI
+  - Mostrar loader durante consultas
+  - Mostrar mensaje cuando no hay datos
+  - Mostrar mensaje de error en caso de fallo
+  - Deshabilitar botones durante operaciones
   - _Requirements: 1.1_
 
-- [ ] 12.2 Create index.php for module
-  - Include CoffeeSoft framework files
-  - Add module-specific scripts
-  - Initialize App class
-  - _Requirements: 6.2_
+- [ ]* 13.1 Escribir unit tests para estados de UI
+  - Test: Verificar loader durante consulta
+  - Test: Verificar mensaje de tabla vacía
+  - Test: Verificar mensaje de error
 
-- [ ] 13. Documentation and deployment
-- [ ]* 13.1 Create user documentation
-  - Document how to use date range filter
-  - Document UDN filter (for level 3 users)
-  - Document Excel export feature
-  - Include screenshots
-  - _Requirements: 1.1, 2.1, 3.1_
+- [ ] 14. Implementar optimizaciones de rendimiento
+  - Agregar índices en columnas de fecha en tablas
+  - Implementar caché de consultas frecuentes
+  - Limitar rango máximo de fechas (ej: 1 año)
+  - Paginar resultados si exceden límite (ej: 1000 registros)
+  - _Requirements: Performance_
 
-- [ ]* 13.2 Create technical documentation
-  - Document API endpoints
-  - Document database schema
-  - Document security considerations
-  - Document deployment steps
-  - _Requirements: 6.1, 6.2, 6.3, 6.4_
+- [ ] 15. Checkpoint - Verificar integración completa
+  - Ejecutar todos los property tests (mínimo 100 iteraciones cada uno)
+  - Ejecutar todos los unit tests
+  - Verificar cobertura de código (objetivo: 80% líneas, 90% funciones)
+  - Probar flujo completo: consulta → filtrado → exportación
+  - Verificar auditoría de todas las operaciones
+  - Validar que no existan opciones de edición en UI
+  - Probar con diferentes niveles de usuario
+  - Verificar consistencia visual con otros módulos
+  - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 13.3 Deploy to production
-  - Upload files to server
-  - Run database migrations (indexes)
-  - Configure permissions
-  - Test in production environment
-  - _Requirements: All_
+- [ ] 16. Documentación y deployment
+  - Crear documentación de usuario del módulo
+  - Documentar API endpoints (init, lsCostos, exportExcel)
+  - Crear guía de troubleshooting
+  - Preparar scripts de migración de base de datos
+  - Configurar permisos de acceso en producción
+  - _Requirements: Documentation_
+
+---
+
+## Notes
+
+### Dependencias Externas
+
+- **PHPExcel o PhpSpreadsheet**: Para generación de archivos Excel
+- **PHPUnit + Eris**: Para property-based testing
+- **CoffeeSoft Framework**: coffeSoft.js, plugins.js (ya disponibles)
+
+### Orden de Implementación
+
+1. **Fase 1 (Tasks 1-3)**: Backend - Modelo y Controlador
+2. **Fase 2 (Tasks 4-5)**: Frontend - Interfaz y Consultas
+3. **Fase 3 (Tasks 6-8)**: Funcionalidades Avanzadas - Categorías y Totales
+4. **Fase 4 (Tasks 9-11)**: Auditoría y Permisos
+5. **Fase 5 (Tasks 12-14)**: Validaciones y Optimizaciones
+6. **Fase 6 (Task 15)**: Testing y Verificación
+7. **Fase 7 (Task 16)**: Documentación y Deployment
+
+### Property Tests Prioritarios
+
+Los siguientes property tests son críticos y deben implementarse primero:
+
+1. **Property 4**: Total Calculation Accuracy (Task 2.5)
+2. **Property 5**: Read-Only Enforcement (Task 3.5)
+3. **Property 9**: UDN Filter Application (Task 3.7)
+4. **Property 14**: Grand Total Calculation (Task 8.2)
+
+### Consideraciones de Seguridad
+
+- Todas las operaciones de modificación deben ser rechazadas con 403
+- Validar nivel de usuario en backend, no solo en frontend
+- Sanitizar todos los inputs para prevenir SQL injection
+- Registrar intentos de modificación en audit_log
+
+### Integración con Módulos Existentes
+
+- **Compras**: Tabla `compras` para costos directos
+- **Almacén**: Tabla `warehouse_output` para salidas
+- **Usuarios**: Tabla `usuarios` para permisos y UDN
+- **Auditoría**: Tabla `audit_log` para registro de operaciones

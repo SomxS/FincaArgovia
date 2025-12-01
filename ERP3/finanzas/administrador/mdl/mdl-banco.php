@@ -9,12 +9,12 @@ class mdl extends CRUD {
 
     public function __construct() {
         $this->util = new Utileria;
-        $this->bd = "rfwsmqex_contabilidad3.";
+        $this->bd = "rfwsmqex_gvsl_finanzas3.";
     }
 
     function listBanks($array) {
         return $this->_Select([
-            'table' => $this->bd . 'banks',
+            'table' => $this->bd . 'bank',
             'values' => 'id, name as valor, active',
             'where' => 'active = ?',
             'order' => ['ASC' => 'name'],
@@ -23,38 +23,29 @@ class mdl extends CRUD {
     }
 
     function listBankAccounts($array) {
-        $where = 'bank_accounts.active = ?';
+        $where = 'bank_account.active = ?';
         $data = [$array['active']];
 
         if (!empty($array['udn_id'])) {
-            $where .= ' AND bank_accounts.udn_id = ?';
+            $where .= ' AND bank_account.udn_id = ?';
             $data[] = $array['udn_id'];
-        }
-
-        if (!empty($array['payment_method_id'])) {
-            $where .= ' AND bank_accounts.payment_method_id = ?';
-            $data[] = $array['payment_method_id'];
         }
 
         $query = "
             SELECT 
-                bank_accounts.id,
-                bank_accounts.udn_id,
-                bank_accounts.bank_id,
-                bank_accounts.account_alias,
-                bank_accounts.last_four_digits,
-                bank_accounts.payment_method_id,
-                bank_accounts.active,
-                banks.name as bank_name,
-                udn.UDN as udn_name,
-                payment_methods.name as payment_method_name,
-                DATE_FORMAT(bank_accounts.created_at, '%d/%m/%Y') as created_date
-            FROM {$this->bd}bank_accounts
-            INNER JOIN {$this->bd}banks ON bank_accounts.bank_id = banks.id
-            LEFT JOIN udn ON bank_accounts.udn_id = udn.idUDN
-            LEFT JOIN {$this->bd}payment_methods ON bank_accounts.payment_method_id = payment_methods.id
+                bank_account.id,
+                bank_account.name,
+                bank_account.account,
+                bank_account.udn_id,
+                bank_account.bank_id,
+                bank_account.active,
+                bank.name as bank_name,
+                udn.UDN as udn_name
+            FROM {$this->bd}bank_account
+            INNER JOIN {$this->bd}bank ON bank_account.bank_id = bank.id
+            LEFT JOIN udn ON bank_account.udn_id = udn.idUDN
             WHERE {$where}
-            ORDER BY bank_accounts.id DESC
+            ORDER BY bank_account.id DESC
         ";
 
         return $this->_Read($query, $data);
@@ -62,7 +53,7 @@ class mdl extends CRUD {
 
     function getBankById($array) {
         return $this->_Select([
-            'table' => $this->bd . 'banks',
+            'table' => $this->bd . 'bank',
             'values' => '*',
             'where' => 'id = ?',
             'data' => $array
@@ -71,7 +62,7 @@ class mdl extends CRUD {
 
     function getBankAccountById($array) {
         return $this->_Select([
-            'table' => $this->bd . 'bank_accounts',
+            'table' => $this->bd . 'bank_account',
             'values' => '*',
             'where' => 'id = ?',
             'data' => $array
@@ -80,7 +71,7 @@ class mdl extends CRUD {
 
     function createBank($array) {
         return $this->_Insert([
-            'table' => $this->bd . 'banks',
+            'table' => $this->bd . 'bank',
             'values' => $array['values'],
             'data' => $array['data']
         ]);
@@ -88,7 +79,7 @@ class mdl extends CRUD {
 
     function createBankAccount($array) {
         return $this->_Insert([
-            'table' => $this->bd . 'bank_accounts',
+            'table' => $this->bd . 'bank_account',
             'values' => $array['values'],
             'data' => $array['data']
         ]);
@@ -96,7 +87,7 @@ class mdl extends CRUD {
 
     function updateBank($array) {
         return $this->_Update([
-            'table' => $this->bd . 'banks',
+            'table' => $this->bd . 'bank',
             'values' => $array['values'],
             'where' => $array['where'],
             'data' => $array['data']
@@ -105,7 +96,7 @@ class mdl extends CRUD {
 
     function updateBankAccount($array) {
         return $this->_Update([
-            'table' => $this->bd . 'bank_accounts',
+            'table' => $this->bd . 'bank_account',
             'values' => $array['values'],
             'where' => $array['where'],
             'data' => $array['data']
@@ -115,7 +106,7 @@ class mdl extends CRUD {
     function existsBankByName($array) {
         $query = "
             SELECT id
-            FROM {$this->bd}banks
+            FROM {$this->bd}bank
             WHERE LOWER(name) = LOWER(?)
             AND active = 1
         ";

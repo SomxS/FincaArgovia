@@ -1,14 +1,14 @@
 
-let  lsPaymentMethods, lsBanks;
+// let  lsPaymentMethods, lsBanks;
 
-$(async () => {
-    const data = await useFetch({ url: api, data: { opc: "init" } });
-//     lsudn = data.udn;
-    lsPaymentMethods = data.paymentMethods;
-    lsBanks = data.banks;
+// $(async () => {
+//     const data = await useFetch({ url: api, data: { opc: "init" } });
+// //     lsudn = data.udn;
+//     lsPaymentMethods = data.paymentMethods;
+//     lsBanks = data.banks;
 
 
-});
+// });
 
 class AdminBankAccounts extends Templates {
     constructor(link, div_modulo) {
@@ -46,7 +46,7 @@ class AdminBankAccounts extends Templates {
                     lbl: "Unidad de negocio",
                     class: "col-12 col-md-2",
                     data: lsudn,
-                    onchange: 'bankAccounts.lsBankAccounts()'
+                    onchange: 'banco.lsBankAccounts()'
                 },
                
                 {
@@ -58,11 +58,11 @@ class AdminBankAccounts extends Templates {
                         { id: "1", valor: "Activas" },
                         { id: "0", valor: "Inactivas" }
                     ],
-                    onchange: 'bankAccounts.lsBankAccounts()'
+                    onchange: 'banco.lsBankAccounts()'
                 },
                 {
                     opc: "button",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     id: "btnAddBank",
                     className:'w-100',
                     text: "+  nuevo banco",
@@ -71,10 +71,10 @@ class AdminBankAccounts extends Templates {
                 },
                 {
                     opc: "button",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     id: "btnAddBankAccount",
                     className: 'w-100',
-                    text: "+  nueva cuenta de banco",
+                    text: "+  nueva cuenta",
                     color_btn: "primary",
                     onClick: () => this.addBankAccount()
                 }
@@ -83,8 +83,7 @@ class AdminBankAccounts extends Templates {
     }
 
     lsBankAccounts() {
-        const udn = $(`#filterBar${this.PROJECT_NAME} #udn`).val();
-        const payment_method = $(`#filterBar${this.PROJECT_NAME} #payment_method`).val();
+  
         const active = $(`#filterBar${this.PROJECT_NAME} #active`).val();
 
         this.createTable({
@@ -92,8 +91,6 @@ class AdminBankAccounts extends Templates {
             idFilterBar: `filterBar${this.PROJECT_NAME}`,
             data: { 
                 opc: 'lsBankAccounts', 
-                udn: udn, 
-                payment_method: payment_method,
                 active: active 
             },
             coffeesoft: true,
@@ -112,7 +109,8 @@ class AdminBankAccounts extends Templates {
             id: 'formBankAdd',
             data: { opc: 'addBank' },
             bootbox: {
-                title: '🏦 Nuevo Banco',
+                title: 'Nuevo Banco',
+                size:'small',
                 closeButton: true
             },
             json: this.jsonBank(),
@@ -147,7 +145,7 @@ class AdminBankAccounts extends Templates {
             id: 'formBankAccountAdd',
             data: { opc: 'addBankAccount', udn_id: udn },
             bootbox: {
-                title: '💳 Nueva Cuenta Bancaria',
+                title: 'Nueva Cuenta Bancaria',
                 closeButton: true
             },
             json: this.jsonBankAccount(),
@@ -277,12 +275,7 @@ class AdminBankAccounts extends Templates {
 
     jsonBankAccount() {
         return [
-            {
-                opc: "label",
-                id: "lblInfo",
-                text: "Información de la cuenta bancaria",
-                class: "col-12 fw-bold text-lg mb-2 border-b pb-2"
-            },
+           
             {
                 opc: "select",
                 id: "bank_id",
@@ -291,17 +284,10 @@ class AdminBankAccounts extends Templates {
                 data: lsBanks,
                 required: true
             },
+          
             {
                 opc: "input",
-                id: "account_alias",
-                lbl: "Nombre o alias de la cuenta (opcional)",
-                tipo: "texto",
-                class: "col-12 mb-3",
-                placeholder: "Ej.: JG, Nómina, etc."
-            },
-            {
-                opc: "input",
-                id: "last_four_digits",
+                id: "account",
                 lbl: "Últimos 4 dígitos de la cuenta",
                 tipo: "texto",
                 class: "col-12 mb-3",
@@ -311,13 +297,17 @@ class AdminBankAccounts extends Templates {
                 required: true,
                 onkeyup: "this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
             },
+
             {
-                opc: "select",
-                id: "payment_method_id",
-                lbl: "Forma de pago (opcional)",
+                opc: "input",
+                id: "name",
+                lbl: "Nombre o alias de la cuenta (opcional)",
+                tipo: "texto",
                 class: "col-12 mb-3",
-                data: lsPaymentMethods
-            }
+                placeholder: "Ej.: JG, Nómina, etc.",
+                required:false
+            },
+          
         ];
     }
 }

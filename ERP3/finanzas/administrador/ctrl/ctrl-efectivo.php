@@ -312,7 +312,7 @@ class ctrl extends mdl {
 function renderStatus($status) {
     switch ($status) {
         case 1:
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-green-100 text-green-700 min-w-[100px] text-center"> Activo</span>';
         case 0:
             return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Inactivo</span>';
         default:
@@ -323,9 +323,9 @@ function renderStatus($status) {
 function renderOperationType($type) {
     switch ($type) {
         case 'suma':
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-medium bg-teal-100 text-teal-600">Suma</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-medium bg-teal-100 text-teal-600">  <i class="icon-plus"></i> Suma</span>';
         case 'resta':
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-medium bg-red-100 text-red-500">Resta</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-medium bg-red-100 text-red-500">  <i class="icon-minus"></i> Resta</span>';
         default:
             return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-medium bg-gray-100 text-gray-500">N/A</span>';
     }

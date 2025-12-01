@@ -12,6 +12,16 @@ class mdl extends CRUD {
         $this->bd = "rfwsmqex_gvsl_finanzas3.";
     }
 
+     function listBanks() {
+        return $this->_Select([
+            'table' => $this->bd . 'bank',
+            'values' => 'id, name as valor, active',
+            'where' => 'active = 1',
+            'order' => ['ASC' => 'name'],
+            // 'data' => $array
+        ]);
+    }
+
     // Módulos Desbloqueados
 
     function listModulesUnlocked($array) {

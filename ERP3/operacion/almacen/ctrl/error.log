@@ -1,3 +1,27 @@
+[ 2025-11-30 19:26:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                a.idAlmacen as id,
+                a.CodigoEquipo,
+                a.Equipo,
+                a.cantidad,
+                a.Costo,
+                a.Estado,
+                a.rutaImagen,
+                ar.Nombre_Area as area,
+                c.nombreCategoria as categoria,
+                z.Nombre_Area as zona
+            FROM rfwsmqex_mtto.mtto_almacen a
+            LEFT JOIN rfwsmqex_mtto.mtto_almacen_area ar ON a.Area = ar.idArea
+            LEFT JOIN rfwsmqex_mtto.mtto_categoria c ON a.id_categoria = c.idcategoria
+            LEFT JOIN rfwsmqex_mtto.mtto_almacen_area z ON a.id_zona = z.idArea
+          
+         AND a.id_zona = ? AND a.id_categoria = ? AND a.Area = ? ORDER BY a.idAlmacen DESC
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'a.id_zona' in 'on clause'
+
+
 [ 2025-11-27 23:50:45 ]
 [ UNIX_USR ] :: nt authority\system
 [ WINDOWS_USR ] :: DESKTOP-O7AOGR9$

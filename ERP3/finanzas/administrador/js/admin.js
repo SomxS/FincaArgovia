@@ -20,7 +20,7 @@ let api_compra = 'ctrl/ctrl-cta.php';
 // Formas de Pago
 let formasPago;
 let api_formasPago = 'ctrl/ctrl-formasPago.php';
-
+let lsBanks;
 // Cuentas de Ventas
 let salesAccount;
 let api_cta = 'ctrl/ctrl-cuenta-venta.php';
@@ -43,6 +43,7 @@ let api_banco    = 'ctrl/ctrl-banco.php';
     lsudn     = data.udn;
     udn       = data.udn;
     lsmodules = data.modules;
+    lsBanks = data.banks;
 
     // 🔵 Aplicación principal
     app = new App(api, "root");

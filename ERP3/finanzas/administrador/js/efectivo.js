@@ -104,10 +104,11 @@ class PaymentMethod extends Templates {
             coffeesoft: true,
             conf: { datatable: true, pag: 10 },
             attr: {
-                id: "tbConceptos",
-                theme: 'light',
-                center: [2, 3],
-                right: [6]
+                id     : "tbConceptos",
+                theme  : 'light',
+                striped: true,
+                center : [2, 3],
+                right  : [6]
             },
         });
     }

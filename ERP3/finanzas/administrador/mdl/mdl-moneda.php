@@ -9,39 +9,28 @@ class mdl extends CRUD {
 
     public function __construct() {
         $this->util = new Utileria;
-        $this->bd = "rfwsmqex_finanzas3.";
+        $this->bd = "rfwsmqex_gvsl_finanzas3.";
     }
 
     function listCurrencies($array) {
-        $where = 'foreign_currency.active = ?';
-        $data = [$array['active']];
-
-        if (!empty($array['udn_id'])) {
-            $where .= ' AND foreign_currency.udn_id = ?';
-            $data[] = $array['udn_id'];
-        }
-
         $query = "
             SELECT 
-                foreign_currency.id,
-                foreign_currency.name,
-                foreign_currency.code,
-                foreign_currency.conversion_value,
-                foreign_currency.active,
-                udn.UDN as udn_name,
-                DATE_FORMAT(foreign_currency.created_at, '%d/%m/%Y') as created_date
-            FROM {$this->bd}foreign_currency
-            LEFT JOIN udn ON foreign_currency.udn_id = udn.idUDN
-            WHERE {$where}
-            ORDER BY foreign_currency.id DESC
+                id,
+                name,
+                symbol,
+                exchange_rate,
+                active
+            FROM {$this->bd}foreing_currency
+            WHERE active = ?
+            ORDER BY id DESC
         ";
 
-        return $this->_Read($query, $data);
+        return $this->_Read($query, [$array['active']]);
     }
 
     function getCurrencyById($array) {
         return $this->_Select([
-            'table' => $this->bd . 'foreign_currency',
+            'table' => $this->bd . 'foreing_currency',
             'values' => '*',
             'where' => 'id = ?',
             'data' => $array
@@ -50,7 +39,7 @@ class mdl extends CRUD {
 
     function createCurrency($array) {
         return $this->_Insert([
-            'table' => $this->bd . 'foreign_currency',
+            'table' => $this->bd . 'foreing_currency',
             'values' => $array['values'],
             'data' => $array['data']
         ]);
@@ -58,7 +47,7 @@ class mdl extends CRUD {
 
     function updateCurrency($array) {
         return $this->_Update([
-            'table' => $this->bd . 'foreign_currency',
+            'table' => $this->bd . 'foreing_currency',
             'values' => $array['values'],
             'where' => $array['where'],
             'data' => $array['data']
@@ -68,12 +57,11 @@ class mdl extends CRUD {
     function existsCurrencyByName($array) {
         $query = "
             SELECT id
-            FROM {$this->bd}foreign_currency
+            FROM {$this->bd}foreing_currency
             WHERE LOWER(name) = LOWER(?)
-            AND udn_id = ?
             AND active = 1
         ";
-        $exists = $this->_Read($query, $array);
+        $exists = $this->_Read($query, [$array[0]]);
         return count($exists) > 0;
     }
 

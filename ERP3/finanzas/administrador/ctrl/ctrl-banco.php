@@ -2,9 +2,6 @@
 
 if (empty($_POST['opc'])) exit(0);
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 
 require_once '../mdl/mdl-banco.php';
 
@@ -12,21 +9,19 @@ class ctrl extends mdl {
 
     function init() {
         return [
-            'udn' => $this->lsUDN(),
+            'udn'            => $this->lsUDN(),
             'paymentMethods' => $this->lsPaymentMethods(),
-            'banks' => $this->listBanks([1])
+            'banks'          => $this->listBanks([1])
         ];
     }
 
     function lsBankAccounts() {
         $active = $_POST['active'] ?? 1;
         $udn_id = $_POST['udn'] ?? null;
-        $payment_method_id = $_POST['payment_method'] ?? null;
         
         $data = $this->listBankAccounts([
             'active' => $active,
-            'udn_id' => $udn_id,
-            'payment_method_id' => $payment_method_id
+            'udn_id' => $udn_id
         ]);
         
         $rows = [];
@@ -38,34 +33,28 @@ class ctrl extends mdl {
                 $a[] = [
                     'class' => 'btn btn-sm btn-primary me-1',
                     'html' => '<i class="icon-pencil"></i>',
-                    'onclick' => 'bankAccounts.editBankAccount(' . $item['id'] . ')'
+                    'onclick' => 'banco.editBankAccount(' . $item['id'] . ')'
                 ];
 
                 $a[] = [
                     'class' => 'btn btn-sm btn-danger',
                     'html' => '<i class="icon-toggle-on"></i>',
-                    'onclick' => 'bankAccounts.toggleStatusAccount(' . $item['id'] . ', ' . $item['active'] . ')'
+                    'onclick' => 'banco.toggleStatusAccount(' . $item['id'] . ', ' . $item['active'] . ')'
                 ];
             } else {
                 $a[] = [
-                    'class' => 'btn btn-sm btn-outline-success',
+                    'class' => 'btn btn-sm btn-outline-danger',
                     'html' => '<i class="icon-toggle-off"></i>',
-                    'onclick' => 'bankAccounts.toggleStatusAccount(' . $item['id'] . ', ' . $item['active'] . ')'
+                    'onclick' => 'banco.toggleStatusAccount(' . $item['id'] . ', ' . $item['active'] . ')'
                 ];
             }
 
-            $accountName = !empty($item['account_alias']) ? $item['account_alias'] : 'Sin alias';
+            $last4 = substr($item['account'], -4);
+            $accountDisplay = $item['bank_name'] . '(' . $last4 . ')';
 
             $rows[] = [
                 'id' => $item['id'],
-                'Banco' => $item['bank_name'],
-                'Nombre de la cuenta' => $accountName,
-                'Últimos 4 dígitos' => [
-                    'html' => '<span class="badge bg-secondary">****' . $item['last_four_digits'] . '</span>',
-                    'class' => 'text-center'
-                ],
-                'Unidad de negocio' => $item['udn_name'],
-                'Forma de pago' => $item['payment_method_name'] ?? 'N/A',
+                'Cuenta bancaria' => $accountDisplay,
                 'Estado' => renderStatus($item['active']),
                 'a' => $a
             ];
@@ -123,15 +112,8 @@ class ctrl extends mdl {
         $status = 500;
         $message = 'Error al agregar banco';
 
-        if (empty($_POST['name'])) {
-            return [
-                'status' => 400,
-                'message' => 'El nombre del banco es obligatorio'
-            ];
-        }
 
         $_POST['active'] = 1;
-        $_POST['created_at'] = date('Y-m-d H:i:s');
 
         $exists = $this->existsBankByName([$_POST['name']]);
 
@@ -151,7 +133,8 @@ class ctrl extends mdl {
 
         return [
             'status' => $status,
-            'message' => $message
+            'message' => $message,
+            'end-point' => $this->util->sql($_POST)
         ];
     }
 
@@ -159,22 +142,8 @@ class ctrl extends mdl {
         $status = 500;
         $message = 'Error al agregar cuenta bancaria';
 
-        if (empty($_POST['bank_id']) || empty($_POST['last_four_digits'])) {
-            return [
-                'status' => 400,
-                'message' => 'El banco y los últimos 4 dígitos son obligatorios'
-            ];
-        }
-
-        if (!preg_match('/^\d{4}$/', $_POST['last_four_digits'])) {
-            return [
-                'status' => 400,
-                'message' => 'Los últimos 4 dígitos deben ser numéricos'
-            ];
-        }
-
+       
         $_POST['active'] = 1;
-        $_POST['created_at'] = date('Y-m-d H:i:s');
 
         $create = $this->createBankAccount($this->util->sql($_POST));
 
@@ -185,8 +154,9 @@ class ctrl extends mdl {
 
         return [
             'status' => $status,
-            'message' => $message
-        ];
+            'message' => $message,
+            'values'  =>$this->util->sql($_POST)
+                ];
     }
 
     function editBankAccount() {
@@ -194,17 +164,10 @@ class ctrl extends mdl {
         $status = 500;
         $message = 'Error al editar cuenta bancaria';
 
-        if (empty($_POST['bank_id']) || empty($_POST['last_four_digits'])) {
+        if (empty($_POST['bank_id']) || empty($_POST['account']) || empty($_POST['name'])) {
             return [
                 'status' => 400,
-                'message' => 'El banco y los últimos 4 dígitos son obligatorios'
-            ];
-        }
-
-        if (!preg_match('/^\d{4}$/', $_POST['last_four_digits'])) {
-            return [
-                'status' => 400,
-                'message' => 'Los últimos 4 dígitos deben ser numéricos'
+                'message' => 'Todos los campos son obligatorios'
             ];
         }
 
@@ -248,11 +211,11 @@ class ctrl extends mdl {
 function renderStatus($status) {
     switch ($status) {
         case 1:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#014737] text-[#3FC189]">Activa</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activo</span>';
         case 0:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-[#721c24] text-[#ba464d]">Inactiva</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Inactivo</span>';
         default:
-            return '<span class="px-2 py-1 rounded-md text-sm font-semibold bg-gray-500 text-white">Desconocido</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-gray-100 text-gray-700 min-w-[100px] text-center">Desconocido</span>';
     }
 }
 

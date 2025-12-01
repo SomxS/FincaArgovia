@@ -19,13 +19,8 @@ class ctrl extends mdl {
 
     function lsCurrencies() {
         $active = $_POST['active'] ?? 1;
-        $udn_id = $_POST['udn'] ?? null;
         
-        $data = $this->listCurrencies([
-            'active' => $active,
-            'udn_id' => $udn_id
-        ]);
-        
+        $data = $this->listCurrencies(['active' => $active]);
         $rows = [];
 
         foreach ($data as $item) {
@@ -55,12 +50,12 @@ class ctrl extends mdl {
                 'id' => $item['id'],
                 'Moneda extranjera' => $item['name'],
                 'Símbolo' => [
-                    'html' => renderCurrencyBadge($item['code']),
-                    'class' => 'text-center'
+                    'html' => renderCurrencyBadge($item['symbol']),
+                    'class' => 'text-center '
                 ],
                 'Tipo de cambio (MXN)' => [
-                    'html' => '$ ' . number_format($item['conversion_value'], 2),
-                    'class' => 'text-end'
+                    'html' => '$ ' . number_format($item['exchange_rate'], 2),
+                    'class' => 'text-end '
                 ],
                 'Estado' => renderStatus($item['active']),
                 'a' => $a
@@ -98,14 +93,9 @@ class ctrl extends mdl {
         $status = 500;
         $message = 'Error al agregar moneda';
 
-        if (empty($_POST['name']) || empty($_POST['code']) || empty($_POST['conversion_value'])) {
-            return [
-                'status' => 400,
-                'message' => 'Todos los campos son obligatorios'
-            ];
-        }
+     
 
-        if ($_POST['conversion_value'] <= 0) {
+        if ($_POST['exchange_rate'] <= 0) {
             return [
                 'status' => 400,
                 'message' => 'El tipo de cambio debe ser mayor a cero'
@@ -113,16 +103,8 @@ class ctrl extends mdl {
         }
 
         $_POST['active'] = 1;
-        $_POST['created_at'] = date('Y-m-d H:i:s');
-
-        $exists = $this->existsCurrencyByName([$_POST['name'], $_POST['udn_id']]);
-
-        if ($exists) {
-            return [
-                'status' => 409,
-                'message' => 'Ya existe una moneda con ese nombre para esta unidad de negocio'
-            ];
-        }
+     
+     
 
         $create = $this->createCurrency($this->util->sql($_POST));
 
@@ -142,14 +124,14 @@ class ctrl extends mdl {
         $status = 500;
         $message = 'Error al editar moneda';
 
-        if (empty($_POST['name']) || empty($_POST['code']) || empty($_POST['conversion_value'])) {
+        if (empty($_POST['name']) || empty($_POST['symbol']) || empty($_POST['exchange_rate'])) {
             return [
                 'status' => 400,
                 'message' => 'Todos los campos son obligatorios'
             ];
         }
 
-        if ($_POST['conversion_value'] <= 0) {
+        if ($_POST['exchange_rate'] <= 0) {
             return [
                 'status' => 400,
                 'message' => 'El tipo de cambio debe ser mayor a cero'
@@ -193,18 +175,18 @@ class ctrl extends mdl {
     }
 }
 
-function renderCurrencyBadge($code) {
-    return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-blue-100 text-blue-700 min-w-[60px] text-center">' . $code . '</span>';
+function renderCurrencyBadge($symbol) {
+    return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-blue-100 text-blue-700 min-w-[60px] text-center">' . htmlspecialchars($symbol) . '</span>';
 }
 
 function renderStatus($status) {
     switch ($status) {
         case 1:
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">Activo</span>';
         case 0:
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Inactivo</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">Inactivo</span>';
         default:
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-gray-100 text-gray-700 min-w-[100px] text-center">Desconocido</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-xs font-semibold bg-gray-100 text-gray-700 min-w-[100px] text-center">Desconocido</span>';
     }
 }
 

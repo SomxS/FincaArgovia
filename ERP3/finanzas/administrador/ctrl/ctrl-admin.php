@@ -13,7 +13,8 @@ class ctrl extends mdl {
     function init() {
         return [
             'udn' => $this->lsUDN(),
-            'modules' => $this->lsModules()
+            'modules' => $this->lsModules(),
+            'banks' => $this->listBanks(),
         ];
     }
 

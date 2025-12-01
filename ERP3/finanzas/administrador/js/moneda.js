@@ -34,19 +34,12 @@ class AdminForeignCurrency extends Templates {
         this.createfilterBar({
             parent: `filterBar${this.PROJECT_NAME}`,
             data: [
-                {
-                    opc: "select",
-                    id: "udn",
-                    lbl: "Unidad de negocio",
-                    class: "col-12 col-md-3",
-                    data: lsudn,
-                    onchange: 'moneda.lsCurrencies()'
-                },
+               
                 {
                     opc: "select",
                     id: "active",
                     lbl: "Estado",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: [
                         { id: "1", valor: "Activas" },
                         { id: "0", valor: "Inactivas" }
@@ -70,16 +63,17 @@ class AdminForeignCurrency extends Templates {
         const active = $(`#filterBar${this.PROJECT_NAME} #active`).val();
 
         this.createTable({
-            parent: `containerForeignCurrency`,
+            parent     : `containerForeignCurrency`,
             idFilterBar: `filterBar${this.PROJECT_NAME}`,
-            data: { opc: 'lsCurrencies', udn: udn, active: active },
-            coffeesoft: true,
+            data       : { opc: 'lsCurrencies', udn: udn, active: active },
+            coffeesoft : true,
             conf: { datatable: true, pag: 15 },
             attr: {
-                id: `tb${this.PROJECT_NAME}`,
-                theme: 'corporativo',
-                  center: [1, 3],
-                right: [2]
+                id     : `tb${this.PROJECT_NAME}`,
+                theme  : 'light',
+                striped: true,
+                center : [1, 2, 4],
+                right  : [3]
             }
         });
     }
@@ -87,9 +81,10 @@ class AdminForeignCurrency extends Templates {
     addCurrency() {
         this.createModalForm({
             id: 'formCurrencyAdd',
-            data: { opc: 'addCurrency', udn_id: $(`#filterBar${this.PROJECT_NAME} #udn`).val() },
+            data: { opc: 'addCurrency'},
             bootbox: {
-                title: '💱 Agregar Nueva Moneda Extranjera',
+                title: 'Agregar Nueva Moneda Extranjera',
+                size:'small',
                 closeButton: true
             },
             json: this.jsonCurrency(),
@@ -215,7 +210,7 @@ class AdminForeignCurrency extends Templates {
             },
             {
                 opc: "input",
-                id: "code",
+                id: "symbol",
                 lbl: "Símbolo de la moneda",
                 tipo: "texto",
                 class: "col-12 mb-3",
@@ -223,7 +218,7 @@ class AdminForeignCurrency extends Templates {
             },
             {
                 opc: "input",
-                id: "conversion_value",
+                id: "exchange_rate",
                 lbl: "Tipo de cambio (MXN)",
                 tipo: "cifra",
                 class: "col-12 mb-3",
