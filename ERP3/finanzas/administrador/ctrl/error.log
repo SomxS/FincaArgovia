@@ -1,3 +1,118 @@
+[ 2025-12-01 13:40:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_finanzas3.sale_category' doesn't exist
+
+
+[ 2025-12-01 13:40:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_finanzas3.sale_category' doesn't exist
+
+
+[ 2025-12-01 12:46:53 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_finanzas3.sale_category' doesn't exist
+
+
+[ 2025-12-01 12:45:03 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_finanzas3.sale_category' doesn't exist
+
+
+[ 2025-12-01 12:45:03 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-FHJB2CN$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_finanzas3.sale_category' doesn't exist
+
+
 [ 2025-12-01 06:56:41 ]
 [ UNIX_USR ] :: nt authority\system
 [ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
