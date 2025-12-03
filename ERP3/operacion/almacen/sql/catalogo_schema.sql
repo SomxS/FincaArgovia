@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `mtto_almacen_area` (
 CREATE TABLE IF NOT EXISTS `mtto_almacen_zona` (
     `id_zona` INT(11) NOT NULL AUTO_INCREMENT,
     `nombre_zona` VARCHAR(255) NOT NULL,
-    `active` TINYINT(1) DEFAULT 1,
+    `active` INT(1) DEFAULT 1,
     `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id_zona`),
     INDEX `idx_nombre_zona` (`nombre_zona`),

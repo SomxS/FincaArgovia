@@ -26,30 +26,30 @@ class ctrl extends mdl {
         $rows = [];
 
         foreach ($ls as $item) {
-            $dropdown = [];
+            $a = [];
 
             if ($item['estado'] == 'Activa') {
-                $dropdown[] = [
-                    'icon'    => 'icon-pencil',
-                    'text'    => 'Editar',
-                    'onclick' => 'inventario.editMovimiento(' . $item['id_movimiento'] . ')'
+                $a[] = [
+                    'class'   => 'btn btn-sm btn-primary me-1',
+                    'html'    => '<i class="icon-pencil"></i>',
+                    'onclick' => 'captura.render(' . $item['id_movimiento'] . ')'
                 ];
-                $dropdown[] = [
-                    'icon'    => 'icon-cancel',
-                    'text'    => 'Cancelar',
+                $a[] = [
+                    'class'   => 'btn btn-sm btn-danger',
+                    'html'    => '<i class="icon-cancel"></i>',
                     'onclick' => 'inventario.cancelMovimiento(' . $item['id_movimiento'] . ')'
                 ];
             }
 
             $rows[] = [
-                'id'   => $item['id_movimiento'],
+                'id'              => $item['id_movimiento'],
                 'Folio'           => $item['folio'],
                 'Fecha'           => $item['fecha'],
                 'Tipo'            => renderTipoMovimiento($item['tipo_movimiento']),
                 'Total Productos' => $item['total_productos'],
                 'Total Unidades'  => $item['total_unidades'],
                 'Estado'          => renderEstado($item['estado']),
-                'dropdown'        => $dropdown
+                'a'               => $a
             ];
         }
 

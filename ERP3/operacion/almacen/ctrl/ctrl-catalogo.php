@@ -106,7 +106,6 @@ class ctrl extends mdl {
     }
 
     function editCategory() {
-        $id      = $_POST['id'];
         $status  = 500;
         $message = 'Error al editar categoría';
 
@@ -214,7 +213,7 @@ class ctrl extends mdl {
         $_POST['date_creation'] = date('Y-m-d H:i:s');
         $_POST['active']        = 1;
 
-        $exists = $this->existsAreaByName([$_POST['Nombre_Area']]);
+        $exists = $this->existsAreaByName([$_POST['nombre_area']]);
 
         if ($exists > 0) {
             return [
@@ -237,7 +236,6 @@ class ctrl extends mdl {
     }
 
     function editArea() {
-        $id      = $_POST['id'];
         $status  = 500;
         $message = 'Error al editar área';
 
@@ -364,9 +362,10 @@ class ctrl extends mdl {
     }
 
     function editZone() {
-        $id      = $_POST['id'];
         $status  = 500;
         $message = 'Error al editar zona';
+
+     
 
         $edit    = $this->updateZone($this->util->sql($_POST, 1));
 
@@ -377,7 +376,7 @@ class ctrl extends mdl {
 
         return [
             'status'  => $status,
-            'message' => $message
+            'message' => $message, 
         ];
     }
 

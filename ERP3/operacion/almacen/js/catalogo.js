@@ -345,6 +345,7 @@ class Area extends Templates {
         if (request.status === 200) {
             const data = request.data;
 
+            console.log(data);
             this.createModalForm({
                 id: "formAreaEdit",
                 data: { opc: "editArea", idArea: id },
@@ -417,7 +418,7 @@ class Area extends Templates {
         return [
             {
                 opc: "input",
-                id: "Nombre_Area",
+                id: "nombre_area",
                 lbl: "Nombre del Área",
                 tipo: "texto",
                 class: "col-12 mb-3",
@@ -525,6 +526,7 @@ class Zone extends Templates {
                 data: { opc: "editZone", id_zona: id },
                 bootbox: {
                     title: "Editar Zona",
+                    size: 'small',
                     closeButton: true
                 },
                 autofill: data,

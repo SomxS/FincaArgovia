@@ -1,12 +1,14 @@
 let api = 'ctrl/ctrl-almacen.php';
 let app;
-let zones, categories, areas;
+let zonas, categorias, areas, departamentos, proveedores;
 
 $(async () => {
-    const data       = await useFetch({ url: api, data: { opc: "init" } });
-          zones      = data.zones;
-          categories = data.categories;
-          areas      = data.areas;
+    const data     = await useFetch({ url: api, data: { opc: "init" } });
+    zonas          = data.zonas;
+    categorias     = data.categorias;
+    areas          = data.areas;
+    departamentos  = data.departamentos;
+    proveedores    = data.proveedores;
 
     app = new App(api, "root");
     app.render();
@@ -49,18 +51,18 @@ class App extends Templates {
             data: [
                 {
                     opc: "select",
-                    id: "zone",
-                    lbl: "Departamento",
+                    id: "zona",
+                    lbl: "Negocio",
                     class: "col-12 col-md-2",
-                    data: zones,
+                    data: zonas,
                     onchange: 'app.lsMateriales()'
                 },
                 {
                     opc: "select",
-                    id: "category",
-                    lbl: "Presentación",
+                    id: "categoria",
+                    lbl: "Categoría",
                     class: "col-12 col-md-2",
-                    data: categories,
+                    data: categorias,
                     onchange: 'app.lsMateriales()'
                 },
                 {
@@ -71,18 +73,10 @@ class App extends Templates {
                     data: areas,
                     onchange: 'app.lsMateriales()'
                 },
-                // {
-                //     opc: "input",
-                //     id: "search",
-                //     lbl: "Buscar",
-                //     placeholder: "Código o nombre...",
-                //     class: "col-12 col-md-2",
-                //     onkeyup: 'app.lsMateriales()'
-                // },
                 {
                     opc: "button",
                     id: "btnNuevoMaterial",
-                    text: "+ Nuevo Material",
+                    text: "Nuevo Producto",
                     class: "col-12 col-md-3",
                     color_btn: "primary",
                     onClick: () => this.addMaterial()
@@ -92,28 +86,21 @@ class App extends Templates {
     }
 
     lsMateriales() {
-
-        const zone     = $(`#filterBar${this.PROJECT_NAME} #zone`).val() || '';
-        const category = $(`#filterBar${this.PROJECT_NAME} #category`).val() || '';
-        const area     = $(`#filterBar${this.PROJECT_NAME} #area`).val() || '';
-     
         this.createTable({
             parent: `container${this.PROJECT_NAME}`,
             idFilterBar: `filterBar${this.PROJECT_NAME}`,
-            data: { 
-                opc: 'lsMateriales',
-            },
+            data: { opc: 'lsMateriales' },
             coffeesoft: true,
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: 'tbMateriales',
                 theme: 'shadcdn',
                 title: 'Lista de productos',
-                class:'w-100 lowercase',
+                class: 'w-100 lowercase',
                 subtitle: 'Productos registrados en el sistema',
-                center: [1, 6, 7, 8],
-                right: [9],
-                f_size:12,
+                center: [1, 6, 7, 8, 9],
+                right: [10],
+                f_size: 12
             },
             success: (response) => {
                 if (response.total_value) {
@@ -131,25 +118,6 @@ class App extends Templates {
 
     jsonMaterial() {
         return [
-            // {
-            //     opc: "label",
-            //     id: "lblFoto",
-            //     text: "Foto del Material",
-            //     class: "col-12 fw-bold text-sm mb-2"
-            // },
-            // {
-            //     opc: "input-file",
-            //     id: "rutaImagen",
-            //     lbl: "Seleccionar archivo",
-            //     class: "col-12 mb-3",
-            //     accept: "image/jpeg,image/png,image/gif"
-            // },
-            // {
-            //     opc: "label",
-            //     id: "lblInfo",
-            //     text: "Formatos: JPG, PNG, GIF. Máximo 5MB",
-            //     class: "col-12 text-xs text-gray-500 mb-3"
-            // },
             {
                 opc: "input",
                 id: "CodigoEquipo",
@@ -159,27 +127,27 @@ class App extends Templates {
                 required: true
             },
             {
-                opc: "select",
-                id: "id_zona",
-                lbl: "Departamento *",
-                class: "col-12 col-md-6 mb-3",
-                data: zones,
-                required: true
-            },
-            {
                 opc: "input",
                 id: "Equipo",
                 lbl: "Nombre del Equipo/Material *",
                 placeholder: "Ej: MARCADORES DE COLOR",
-                class: "col-12 mb-3",
+                class: "col-12 col-md-6 mb-3",
+                required: true
+            },
+            {
+                opc: "select",
+                id: "id_zona",
+                lbl: "Zona *",
+                class: "col-12 col-md-6 mb-3",
+                data: zonas,
                 required: true
             },
             {
                 opc: "select",
                 id: "id_categoria",
-                lbl: "Presentación *",
+                lbl: "Categoría *",
                 class: "col-12 col-md-6 mb-3",
-                data: categories,
+                data: categorias,
                 required: true
             },
             {
@@ -189,6 +157,20 @@ class App extends Templates {
                 class: "col-12 col-md-6 mb-3",
                 data: areas,
                 required: true
+            },
+            {
+                opc: "select",
+                id: "id_dpto",
+                lbl: "Departamento",
+                class: "col-12 col-md-6 mb-3",
+                data: departamentos
+            },
+            {
+                opc: "select",
+                id: "id_Proveedor",
+                lbl: "Proveedor",
+                class: "col-12 col-md-6 mb-3",
+                data: proveedores
             },
             {
                 opc: "input",
@@ -205,6 +187,27 @@ class App extends Templates {
                 tipo: "cifra",
                 class: "col-12 col-md-6 mb-3",
                 required: true
+            },
+            {
+                opc: "input",
+                id: "PrecioVenta",
+                lbl: "Precio de Venta",
+                tipo: "cifra",
+                class: "col-12 col-md-6 mb-3"
+            },
+            {
+                opc: "input",
+                id: "inventario_min",
+                lbl: "Inventario Mínimo",
+                tipo: "numero",
+                class: "col-12 col-md-6 mb-3"
+            },
+            {
+                opc: "textarea",
+                id: "Descripcion",
+                lbl: "Descripción",
+                class: "col-12 mb-3",
+                rows: 3
             }
         ];
     }
@@ -242,10 +245,7 @@ class App extends Templates {
     async editMaterial(id) {
         const request = await useFetch({
             url: this._link,
-            data: {
-                opc: "getMaterial",
-                id: id
-            }
+            data: { opc: "getMaterial", id: id }
         });
 
         if (request.status === 200) {
@@ -281,20 +281,13 @@ class App extends Templates {
     }
 
     deleteMaterial(id) {
-        const row = event.target.closest('tr');
-        const codigo = row.querySelectorAll('td')[1]?.innerText || '';
-        const nombre = row.querySelectorAll('td')[3]?.innerText || '';
-
         this.swalQuestion({
             opts: {
                 title: "¿Está seguro?",
-                html: `Esta acción eliminará permanentemente el material <strong>${codigo} - ${nombre}</strong>. Esta acción no se puede deshacer.`,
+                html: "Esta acción eliminará permanentemente el material. Esta acción no se puede deshacer.",
                 icon: "warning"
             },
-            data: {
-                opc: "deleteMaterial",
-                id: id
-            },
+            data: { opc: "deleteMaterial", id: id },
             methods: {
                 send: (response) => {
                     if (response.status === 200) {

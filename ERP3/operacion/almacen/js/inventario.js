@@ -48,7 +48,7 @@ class Inventario extends Templates {
                     opc: "input-calendar",
                     id: "calendar",
                     lbl: "Rango de Fechas",
-                    class: "col-12 col-md-3"
+                    class: "col-12 col-md-2"
                 },
                 {
                     opc: "select",
@@ -66,7 +66,8 @@ class Inventario extends Templates {
                     opc: "button",
                     id: "btnNuevaLista",
                     text: "Nueva Lista",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
+                    className:'w-100',
                     icono: "icon-plus",
                     color_btn: "primary",
                     onClick: () => this.addMovimiento()
@@ -95,7 +96,7 @@ class Inventario extends Templates {
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: `tb${this.PROJECT_NAME}`,
-                theme: "corporativo",
+                theme: "light",
                 title: "Lista de Movimientos de Inventario",
                 subtitle: "Historial de entradas y salidas",
                 center: [1, 2, 3, 4, 5, 6]
@@ -109,6 +110,7 @@ class Inventario extends Templates {
             data: { opc: "addMovimiento" },
             bootbox: {
                 title: "Nueva Lista de Movimiento",
+                size:'small',
                 closeButton: true
             },
             json: this.jsonMovimiento(),
@@ -121,6 +123,8 @@ class Inventario extends Templates {
                         btn1: true,
                         btn1Text: "Aceptar"
                     });
+
+                    console.log('RESPONSE:',response)
                     
                     captura.render(response.id_movimiento);
                 } else {
@@ -274,7 +278,7 @@ class CapturaMovimiento extends Templates {
 
     renderSeccionAgregar() {
         const seccion = $("<div>", {
-            class: "bg-white p-4 rounded-lg shadow mb-4"
+            class: "border p-4 rounded-lg  mb-4"
         }).html(`
             <h3 class="text-lg font-semibold mb-3">➕ Agregar Producto</h3>
             <div class="row">
@@ -298,9 +302,9 @@ class CapturaMovimiento extends Templates {
         $("#seccionAgregarProducto").html(seccion);
 
         $("#selectProducto").option_select({
-            data: productos,
+            data       : productos,
             placeholder: "Seleccionar producto",
-            select2: true
+            select2    : true
         });
 
         $("#btnAgregarProducto").on("click", () => this.addProducto());
@@ -428,7 +432,7 @@ class CapturaMovimiento extends Templates {
             : '↓';
 
         const resumen = $("<div>", {
-            class: "bg-white p-4 rounded-lg shadow sticky top-4"
+            class: " p-4 rounded-lg border sticky top-4"
         }).html(`
             <h3 class="text-lg font-semibold mb-4">📋 Resumen</h3>
             <div class="space-y-3">
@@ -502,5 +506,26 @@ class CapturaMovimiento extends Templates {
                 }
             }
         });
+    }
+
+    async editMovimiento(idMovimiento) {
+        this.idMovimiento = idMovimiento;
+        
+        const movimiento = await useFetch({
+            url: this._link,
+            data: { opc: "getMovimiento", id: idMovimiento }
+        });
+
+        if (movimiento.status === 200) {
+            this.movimientoData = movimiento.data;
+            this.layout();
+            this.lsDetalleMovimiento();
+        } else {
+            alert({
+                icon: "error",
+                text: movimiento.message || "No se pudo cargar el movimiento",
+                btn1: true
+            });
+        }
     }
 }

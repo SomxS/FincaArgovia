@@ -10,17 +10,20 @@ class ctrl extends mdl {
 
     function init() {
         return [
-            'zones'      => $this->lsZones(),
-            'categories' => $this->lsCategories(),
-            'areas'      => $this->lsAreas()
+            'zonas'        => $this->lsZonas(),
+            'categorias'   => $this->lsCategories(),
+            'areas'        => $this->lsAreas(),
+            'departamentos'=> $this->lsDepartamentos(),
+            'proveedores'  => $this->lsProveedores()
         ];
     }
 
     function lsMateriales() {
         $filters = [
-            'zone'     => $_POST['zone'] ?? '',
-            'category' => $_POST['category'] ?? '',
-            'area'     => $_POST['area'] ?? '',
+            'zona'      => $_POST['zona'] ?? '',
+            'categoria' => $_POST['categoria'] ?? '',
+            'area'      => $_POST['area'] ?? '',
+            'estado'    => $_POST['estado'] ?? ''
         ];
 
         $data = $this->listMateriales($filters);
@@ -45,23 +48,25 @@ class ctrl extends mdl {
             ];
 
             $rows[] = [
-                'id'       => $item['id'],
-                'Foto'     => [
+                'id'           => $item['id'],
+                'Foto'         => [
                     'class' => 'justify-start px-2 py-2',
                     'html'  => renderProductImage($item['rutaImagen'], $item['Equipo'])
                 ],
-                'Código'   => $item['CodigoEquipo'],
-                'Departamento' => $item['zona'] ?? '-',
-                'Equipo'   => $item['Equipo'],
-                'Presentación' => $item['categoria'] ?? '-',
-                'Área'     => $item['area'] ?? '-',
-                'Cantidad' => $item['cantidad'],
-                'Costo'    => [
+                'Código'       => $item['CodigoEquipo'],
+                'Zona'         => $item['zona'] ?? '-',
+                'Equipo'       => $item['Equipo'],
+                'Categoría'    => $item['categoria'] ?? '-',
+                'Área'         => $item['area'] ?? '-',
+                'Departamento' => $item['departamento'] ?? '-',
+                'Proveedor'    => $item['proveedor'] ?? '-',
+                'Cantidad'     => $item['cantidad'],
+                'Costo'        => [
                     'html'  => '$' . number_format($item['Costo'], 2),
                     'class' => 'text-end'
                 ],
-                'Estado'   => renderStatus($item['Estado']),
-                'a'        => $a
+                'Estado'       => renderStatus($item['Estado']),
+                'a'            => $a
             ];
         }
 
@@ -72,17 +77,17 @@ class ctrl extends mdl {
     }
 
     function getMaterial() {
-        $id = $_POST['id'];
-        $status = 404;
+        $id      = $_POST['id'];
+        $status  = 404;
         $message = 'Material no encontrado';
-        $data = null;
+        $data    = null;
 
         $material = $this->getMaterialById($id);
 
         if ($material) {
-            $status = 200;
+            $status  = 200;
             $message = 'Material encontrado';
-            $data = $material;
+            $data    = $material;
         }
 
         return [
@@ -93,7 +98,7 @@ class ctrl extends mdl {
     }
 
     function addMaterial() {
-        $status = 500;
+        $status  = 500;
         $message = 'No se pudo agregar el material';
         
         $_POST['FechaIngreso'] = date('Y-m-d H:i:s');
@@ -104,11 +109,11 @@ class ctrl extends mdl {
         if (!$exists) {
             $create = $this->createMaterial($this->util->sql($_POST));
             if ($create) {
-                $status = 200;
+                $status  = 200;
                 $message = 'Material agregado correctamente';
             }
         } else {
-            $status = 409;
+            $status  = 409;
             $message = 'Ya existe un material con ese código';
         }
 
@@ -119,13 +124,13 @@ class ctrl extends mdl {
     }
 
     function editMaterial() {
-        $status = 500;
+        $status  = 500;
         $message = 'Error al editar material';
 
         $edit = $this->updateMaterial($this->util->sql($_POST, 1));
 
         if ($edit) {
-            $status = 200;
+            $status  = 200;
             $message = 'Material editado correctamente';
         }
 
@@ -136,14 +141,31 @@ class ctrl extends mdl {
     }
 
     function deleteMaterial() {
-        $status = 500;
+        $status  = 500;
         $message = 'No se pudo eliminar el material';
 
         $delete = $this->deleteMaterialById($_POST['id']);
 
         if ($delete) {
-            $status = 200;
+            $status  = 200;
             $message = 'Material eliminado correctamente';
+        }
+
+        return [
+            'status'  => $status,
+            'message' => $message
+        ];
+    }
+
+    function statusMaterial() {
+        $status  = 500;
+        $message = 'No se pudo actualizar el estado';
+
+        $update = $this->updateMaterial($this->util->sql($_POST, 1));
+
+        if ($update) {
+            $status  = 200;
+            $message = 'Estado actualizado correctamente';
         }
 
         return [
