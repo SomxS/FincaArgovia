@@ -253,6 +253,170 @@ class ctrl extends mdl {
         ];
     }
 
+    function getResumenInventario() {
+        $resumen = $this->getResumenStock();
+        
+        return [
+            'status'           => 200,
+            'total_productos'  => $resumen['total_productos'] ?? 0,
+            'total_unidades'   => $resumen['total_unidades'] ?? 0,
+            'productos_bajos'  => $resumen['productos_bajos'] ?? 0,
+            'valor_inventario' => $resumen['valor_inventario'] ?? 0
+        ];
+    }
+
+    function lsProductosBajoStock() {
+        $minimo = $_POST['stock_minimo'] ?? 5;
+        $ls     = $this->listProductosBajoStock([$minimo]);
+        $rows   = [];
+
+        foreach ($ls as $item) {
+            $rows[] = [
+                'id'       => $item['id'],
+                'Producto' => $item['nombre'],
+                'Stock'    => [
+                    'html'  => '<span class="text-red-600 font-bold">' . $item['stock_actual'] . '</span>',
+                    'class' => 'text-center'
+                ],
+                'Mínimo'   => $minimo,
+                'Estado'   => '<span class="px-2 py-1 rounded-md text-xs font-semibold bg-red-100 text-red-700">Bajo Stock</span>'
+            ];
+        }
+
+        return [
+            'row' => $rows,
+            'ls'  => $ls
+        ];
+    }
+
+    function lsHistorialProducto() {
+        $idProducto = $_POST['id_producto'];
+        $ls         = $this->listHistorialProducto([$idProducto]);
+        $rows       = [];
+
+        foreach ($ls as $item) {
+            $cantidadHtml = $item['tipo_movimiento'] == 'Entrada'
+                ? '<span class="text-green-600 font-bold">+' . $item['cantidad'] . '</span>'
+                : '<span class="text-red-600 font-bold">-' . $item['cantidad'] . '</span>';
+
+            $rows[] = [
+                'id'               => $item['id_detalle'],
+                'Fecha'            => $item['fecha'],
+                'Folio'            => $item['folio'],
+                'Tipo'             => renderTipoMovimiento($item['tipo_movimiento']),
+                'Cantidad'         => [
+                    'html'  => $cantidadHtml,
+                    'class' => 'text-center'
+                ],
+                'Stock Anterior'   => $item['stock_anterior'],
+                'Stock Resultante' => $item['stock_resultante']
+            ];
+        }
+
+        return [
+            'row' => $rows,
+            'ls'  => $ls
+        ];
+    }
+
+    function editMovimientoDetalle() {
+        $idDetalle = $_POST['id_detalle'];
+        $cantidad  = intval($_POST['cantidad']);
+        $status    = 500;
+        $message   = 'Error al actualizar cantidad';
+
+        if ($cantidad <= 0) {
+            return [
+                'status'  => 400,
+                'message' => 'La cantidad debe ser mayor a cero'
+            ];
+        }
+
+        $detalle    = $this->getDetalleById($idDetalle);
+        $movimiento = $this->getMovimientoById($detalle['id_movimiento']);
+
+        if ($movimiento['estado'] != 'Activa') {
+            return [
+                'status'  => 400,
+                'message' => 'No se puede editar un movimiento cerrado'
+            ];
+        }
+
+        $stockActual     = $this->getStockProducto($detalle['id_producto']);
+        $tipoMovimiento  = $movimiento['tipo_movimiento'];
+
+        $stockResultante = ($tipoMovimiento == 'Entrada')
+            ? $stockActual + $cantidad
+            : $stockActual - $cantidad;
+
+        $update = $this->updateDetalleMovimiento([
+            'values' => 'cantidad = ?, stock_resultante = ?',
+            'where'  => 'id_detalle = ?',
+            'data'   => [$cantidad, $stockResultante, $idDetalle]
+        ]);
+
+        if ($update) {
+            $status = 200;
+            $message = 'Cantidad actualizada correctamente';
+        }
+
+        return [
+            'status'           => $status,
+            'message'          => $message,
+            'stock_resultante' => $stockResultante
+        ];
+    }
+
+    function getDetalleMovimiento() {
+        $idDetalle = $_POST['id_detalle'];
+        $status    = 404;
+        $message   = 'Detalle no encontrado';
+        $data      = null;
+
+        $detalle = $this->getDetalleById($idDetalle);
+
+        if ($detalle) {
+            $status = 200;
+            $message = 'Detalle encontrado';
+            $data = $detalle;
+        }
+
+        return [
+            'status'  => $status,
+            'message' => $message,
+            'data'    => $data
+        ];
+    }
+
+    function validarStock() {
+        $idProducto     = $_POST['id_producto'];
+        $cantidad       = intval($_POST['cantidad']);
+        $tipoMovimiento = $_POST['tipo_movimiento'];
+
+        $stockActual = $this->getStockProducto($idProducto);
+
+        if ($tipoMovimiento == 'Salida' && $cantidad > $stockActual) {
+            return [
+                'status'       => 400,
+                'message'      => 'Stock insuficiente. Disponible: ' . $stockActual,
+                'stock_actual' => $stockActual,
+                'valido'       => false
+            ];
+        }
+
+        $stockResultante = ($tipoMovimiento == 'Entrada')
+            ? $stockActual + $cantidad
+            : $stockActual - $cantidad;
+
+        return [
+            'status'           => 200,
+            'message'          => 'Stock válido',
+            'stock_actual'     => $stockActual,
+            'stock_resultante' => $stockResultante,
+            'valido'           => true
+        ];
+    }
+
     function guardarMovimiento() {
         $idMovimiento = $_POST['id_movimiento'];
         $status       = 500;

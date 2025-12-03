@@ -3,10 +3,10 @@ let app;
 let zones, categories, areas;
 
 $(async () => {
-    const data = await useFetch({ url: api, data: { opc: "init" } });
-    zones = data.zones;
-    categories = data.categories;
-    areas = data.areas;
+    const data       = await useFetch({ url: api, data: { opc: "init" } });
+          zones      = data.zones;
+          categories = data.categories;
+          areas      = data.areas;
 
     app = new App(api, "root");
     app.render();

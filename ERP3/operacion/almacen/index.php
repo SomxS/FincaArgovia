@@ -11,6 +11,8 @@ require_once('layout/head.php');
 require_once('layout/core-libraries.php');
 ?>
 
+    <link rel="stylesheet" href="../../src/css/compact.css">
+
 <!-- CoffeeSoft Framework -->
 <script src="../../src/js/coffeeSoft.js"></script>
 <script src="https://rawcdn.githack.com/SomxS/Grupo-Varoch/refs/heads/main/src/js/plugins.js"></script>
@@ -35,7 +37,7 @@ require_once('layout/core-libraries.php');
             <div class="main-container" id="root"></div>
 
             <!-- Módulo de Almacén Principal -->
-            <script src="js/almacen-main.js?t=<?php echo time(); ?>"></script>
+            <script src="js/almacen.js?t=<?php echo time(); ?>"></script>
         </div>
     </main>
 </body>

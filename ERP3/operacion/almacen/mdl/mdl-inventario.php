@@ -142,4 +142,70 @@ class mdl extends CRUD {
         ";
         return $this->_Read($query, []);
     }
+
+    function getResumenStock() {
+        $query = "
+            SELECT 
+                COUNT(*) as total_productos,
+                COALESCE(SUM(cantidad), 0) as total_unidades,
+                COALESCE(SUM(cantidad * Costo), 0) as valor_inventario,
+                (SELECT COUNT(*) FROM {$this->bd}mtto_almacen WHERE cantidad <= 5 AND Estado = 1) as productos_bajos
+            FROM {$this->bd}mtto_almacen
+            WHERE Estado = 1
+        ";
+        $result = $this->_Read($query, []);
+        return $result[0] ?? null;
+    }
+
+    function listProductosBajoStock($array) {
+        $query = "
+            SELECT 
+                idAlmacen as id,
+                Equipo as nombre,
+                cantidad as stock_actual,
+                Costo
+            FROM {$this->bd}mtto_almacen
+            WHERE cantidad <= ? AND Estado = 1
+            ORDER BY cantidad ASC
+        ";
+        return $this->_Read($query, $array);
+    }
+
+    function listHistorialProducto($array) {
+        $query = "
+            SELECT 
+                d.id_detalle,
+                d.cantidad,
+                d.stock_anterior,
+                d.stock_resultante,
+                m.folio,
+                m.tipo_movimiento,
+                DATE_FORMAT(m.fecha, '%d/%m/%Y') as fecha
+            FROM {$this->bd}mtto_inventario_detalle d
+            INNER JOIN {$this->bd}mtto_inventario_movimientos m ON d.id_movimiento = m.id_movimiento
+            WHERE d.id_producto = ?
+            AND m.estado = 'Activa'
+            ORDER BY m.fecha DESC, d.id_detalle DESC
+        ";
+        return $this->_Read($query, $array);
+    }
+
+    function getDetalleById($id) {
+        $query = "
+            SELECT *
+            FROM {$this->bd}mtto_inventario_detalle
+            WHERE id_detalle = ?
+        ";
+        $result = $this->_Read($query, [$id]);
+        return $result[0] ?? null;
+    }
+
+    function updateDetalleMovimiento($array) {
+        return $this->_Update([
+            'table'  => "{$this->bd}mtto_inventario_detalle",
+            'values' => $array['values'],
+            'where'  => $array['where'],
+            'data'   => $array['data']
+        ]);
+    }
 }
