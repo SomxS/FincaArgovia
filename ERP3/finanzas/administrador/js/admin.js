@@ -224,8 +224,21 @@ class Modules extends Templates{
             parent: "filterbar-desbloqueo",
             data: [
                 {
+                    opc: "select",
+                    id: "filter-udn",
+                    lbl: "Filtrar por udn:",
+                    class: "col-12 col-md-2",
+                    data: [
+                        { id: "all", valor: "Quinta Tabachines" },
+                        ...lsudn
+                    ],
+                    text: "valor",
+                    value: "id",
+                    onchange: "modules.lsModulesUnlocked()"
+                },
+                {
                     opc: "button",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     id: "btnDesbloquear",
                     className: 'w-full',
                     text: "Desbloquear módulo",
@@ -234,10 +247,9 @@ class Modules extends Templates{
                 },
                 {
                     opc: "button",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     id: "btnHorarios",
                     className: 'w-full bg-orange-400 hover:bg-orange-700 text-white',
-
                     text: "Horario de cierre mensual",
                     color_btn: " ",
                     onClick: () => this.lsCloseTime()
@@ -247,16 +259,24 @@ class Modules extends Templates{
     }
 
     lsModulesUnlocked() {
+        const filterUdn = $('#filter-udn').val() || 'all';
+        
         this.createTable({
             parent: "table-desbloqueo",
             idFilterBar: "filterbar-desbloqueo",
-            data: { opc: "lsModulesUnlocked", active: 1 },
+            data: { 
+                opc: "lsModulesUnlocked", 
+                active: 1,
+                filter_udn: filterUdn
+            },
             coffeesoft: true,
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: "tbModulesUnlocked",
-                theme: 'corporativo',
-                center: [1, 2, 5, 6],
+                theme: 'light',
+                title: '',
+                subtitle: '',
+                center: [1, 3, 4],
                 right: []
             }
         });

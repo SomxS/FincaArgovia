@@ -1,3 +1,187 @@
+[ 2025-12-01 21:45:10 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas3'
+
+
+[ 2025-12-01 21:45:10 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas3'
+
+
+[ 2025-12-01 21:27:57 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas3'
+
+
+[ 2025-12-01 21:27:56 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas3'
+
+
+[ 2025-12-01 21:27:23 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas3'
+
+
+[ 2025-12-01 21:27:23 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas3'
+
+
+[ 2025-12-01 21:26:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas3'
+
+
+[ 2025-12-01 21:26:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                sale_category.id,
+                sale_category.udn_id,
+                sale_category.name,
+                sale_category.tax_iva,
+                sale_category.tax_ieps,
+                sale_category.tax_hospedaje,
+                sale_category.discount,
+                sale_category.courtesy,
+                sale_category.active,
+                udn.UDN AS udn_nombre
+            FROM rfwsmqex_finanzas3.sale_category
+            LEFT JOIN udn ON sale_category.udn_id = udn.idUDN
+            WHERE sale_category.udn_id = ?
+            ORDER BY sale_category.name ASC
+        
+[ ERROR READ] :: SQLSTATE[42000]: Syntax error or access violation: 1049 Unknown database 'rfwsmqex_finanzas3'
+
+
 [ 2025-12-01 06:56:41 ]
 [ UNIX_USR ] :: nt authority\system
 [ WINDOWS_USR ] :: DESKTOP-O7AOGR9$

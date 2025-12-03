@@ -11,6 +11,9 @@ require_once('layout/head.php');
 require_once('layout/core-libraries.php');
 ?>
 
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
 <!-- CoffeeSoft Framework -->
 <script src="../../src/js/coffeeSoft.js"></script>
 <script src="https://rawcdn.githack.com/SomxS/Grupo-Varoch/refs/heads/main/src/js/plugins.js"></script>
@@ -34,8 +37,11 @@ require_once('layout/core-libraries.php');
             <!-- Main Container -->
             <div class="main-container" id="root"></div>
 
-            <!-- Módulo de Almacén Principal -->
-            <script src="js/almacen-main.js?t=<?php echo time(); ?>"></script>
+            <!-- Componente tabLayout -->
+            <script src="../../src/js/components/tabLayout.js?t=<?php echo time(); ?>"></script>
+            
+            <!-- Módulo de Catálogo -->
+            <script src="js/catalogo.js?t=<?php echo time(); ?>"></script>
         </div>
     </main>
 </body>

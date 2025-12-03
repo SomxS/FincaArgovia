@@ -1,3 +1,623 @@
+[ 2025-12-02 23:47:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  INSERT INTO rfwsmqex_mtto.mtto_almacen_zona (nombre_zona,date_creation,active) VALUES (?,?,?)
+[ ERROR C.U.D. ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:47:40 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT COUNT(*) as total
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE LOWER(nombre_zona) = LOWER(?)
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:47:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:47:06 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:46:30 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  INSERT INTO rfwsmqex_mtto.mtto_almacen_zona (nombre_zona,date_creation,active) VALUES (?,?,?)
+[ ERROR C.U.D. ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:46:30 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT COUNT(*) as total
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE LOWER(nombre_zona) = LOWER(?)
+            AND active = 1
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:46:21 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:46:07 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:45:54 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:44:36 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:44:30 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:44:27 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:43:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:43:42 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:43:18 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:43:12 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:42:12 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:41:13 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:40:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:39:56 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:37:50 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  UPDATE rfwsmqex_mtto.mtto_almacen_area SET Nombre_Area = ? WHERE id = ?
+[ ERROR C.U.D. ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+
+
+[ 2025-12-02 23:36:39 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:34:20 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:32:34 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:30:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:26:59 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:26:02 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  UPDATE rfwsmqex_mtto.mtto_almacen_area SET Nombre_Area = ? WHERE id = ?
+[ ERROR C.U.D. ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+
+
+[ 2025-12-02 23:22:19 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:17:02 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:16:58 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:13:33 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:09:11 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:01:24 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:01:09 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 23:01:05 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 22:59:15 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 22:09:52 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                id_zona as id,
+                nombre_zona as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
+                active
+            FROM rfwsmqex_mtto.mtto_almacen_zona
+            WHERE active = ?
+            ORDER BY id_zona DESC
+        
+[ ERROR READ] :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'rfwsmqex_mtto.mtto_almacen_zona' doesn't exist
+
+
+[ 2025-12-02 22:09:38 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                a.idAlmacen as id,
+                a.CodigoEquipo,
+                a.Equipo,
+                a.cantidad,
+                a.Costo,
+                a.Estado,
+                a.rutaImagen,
+                ar.Nombre_Area as area,
+                c.nombreCategoria as categoria,
+                z.Nombre_Area as zona
+            FROM rfwsmqex_mtto.mtto_almacen a
+            LEFT JOIN rfwsmqex_mtto.mtto_almacen_area ar ON a.Area = ar.idArea
+            LEFT JOIN rfwsmqex_mtto.mtto_categoria c ON a.id_categoria = c.idcategoria
+            LEFT JOIN rfwsmqex_mtto.mtto_almacen_area z ON a.id_zona = z.idArea
+          
+         AND a.id_zona = ? AND a.id_categoria = ? AND a.Area = ? ORDER BY a.idAlmacen DESC
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'a.id_zona' in 'on clause'
+
+
+[ 2025-12-01 22:02:48 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                a.idAlmacen as id,
+                a.CodigoEquipo,
+                a.Equipo,
+                a.cantidad,
+                a.Costo,
+                a.Estado,
+                a.rutaImagen,
+                ar.Nombre_Area as area,
+                c.nombreCategoria as categoria,
+                z.Nombre_Area as zona
+            FROM rfwsmqex_mtto.mtto_almacen a
+            LEFT JOIN rfwsmqex_mtto.mtto_almacen_area ar ON a.Area = ar.idArea
+            LEFT JOIN rfwsmqex_mtto.mtto_categoria c ON a.id_categoria = c.idcategoria
+            LEFT JOIN rfwsmqex_mtto.mtto_almacen_area z ON a.id_zona = z.idArea
+          
+         AND a.id_zona = ? AND a.id_categoria = ? AND a.Area = ? ORDER BY a.idAlmacen DESC
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'a.id_zona' in 'on clause'
+
+
+[ 2025-12-01 21:25:50 ]
+[ UNIX_USR ] :: nt authority\system
+[ WINDOWS_USR ] :: DESKTOP-O7AOGR9$
+[ INFO ] ::  
+            SELECT 
+                a.idAlmacen as id,
+                a.CodigoEquipo,
+                a.Equipo,
+                a.cantidad,
+                a.Costo,
+                a.Estado,
+                a.rutaImagen,
+                ar.Nombre_Area as area,
+                c.nombreCategoria as categoria,
+                z.Nombre_Area as zona
+            FROM rfwsmqex_mtto.mtto_almacen a
+            LEFT JOIN rfwsmqex_mtto.mtto_almacen_area ar ON a.Area = ar.idArea
+            LEFT JOIN rfwsmqex_mtto.mtto_categoria c ON a.id_categoria = c.idcategoria
+            LEFT JOIN rfwsmqex_mtto.mtto_almacen_area z ON a.id_zona = z.idArea
+          
+         AND a.id_zona = ? AND a.id_categoria = ? AND a.Area = ? ORDER BY a.idAlmacen DESC
+[ ERROR READ] :: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'a.id_zona' in 'on clause'
+
+
 [ 2025-11-30 19:26:18 ]
 [ UNIX_USR ] :: nt authority\system
 [ WINDOWS_USR ] :: DESKTOP-O7AOGR9$

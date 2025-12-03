@@ -20,6 +20,7 @@ class App extends Templates {
 
     render() {
         this.layout();
+        zone.lsZone();
     }
 
     layout() {
@@ -38,26 +39,31 @@ class App extends Templates {
         this.tabLayout({
             parent: `container${this.PROJECT_NAME}`,
             id: `tabs${this.PROJECT_NAME}`,
-            theme: "light",
+            theme: "dark",
             type: "button",
             json: [
                 {
+                    id: "zonas",
+                    tab: "Negocio",
+                    lucideIcon: "building-2",
+                    active: true,
+                    onClick: () => zone.lsZone()
+                },
+                {
                     id: "categorias",
                     tab: "Categorías",
+                    lucideIcon: "folder-tree",
                     class: "mb-1",
-                    active: true,
+                   
                     onClick: () => category.lsCategory()
                 },
                 {
                     id: "areas",
                     tab: "Áreas",
+                    lucideIcon: "map-pin",
                     onClick: () => area.lsArea()
                 },
-                {
-                    id: "zonas",
-                    tab: "Zonas",
-                    onClick: () => zone.lsZone()
-                }
+              
             ]
         });
 
@@ -114,9 +120,10 @@ class Category extends Templates {
             attr: {
                 id: "tbCategory",
                 theme: "light",
+                striped:true,
                 title: "Lista de Categorías",
                 subtitle: "Clasificación de materiales e insumos",
-                center: [1, 2, 3]
+                center: [ 2, 3]
             }
         });
     }
@@ -127,6 +134,7 @@ class Category extends Templates {
             data: { opc: "addCategory" },
             bootbox: {
                 title: "Agregar Categoría",
+                size:'small',
                 closeButton: true
             },
             json: this.jsonCategory(),
@@ -165,6 +173,7 @@ class Category extends Templates {
                 data: { opc: "editCategory", idcategoria: id },
                 bootbox: {
                     title: "Editar Categoría",
+                    size: 'small',
                     closeButton: true
                 },
                 autofill: data,
@@ -267,11 +276,12 @@ class Area extends Templates {
                     onchange: "area.lsArea()"
                 },
                 {
-                    opc: "button",
-                    class: "col-12 col-md-3",
-                    id: "btnNewArea",
-                    text: "Nueva Área",
-                    onClick: () => this.addArea()
+                    opc      : "button",
+                    class    : "col-12 col-md-2",
+                    className: 'w-100',
+                    id       : "btnNewArea",
+                    text     : "Nueva Área",
+                    onClick  : () => this.addArea()
                 }
             ]
         });
@@ -287,9 +297,10 @@ class Area extends Templates {
             attr: {
                 id: "tbArea",
                 theme: "light",
+               
                 title: "Lista de Áreas",
                 subtitle: "Espacios físicos del almacén",
-                center: [1, 2, 3]
+                center: [2, 3]
             }
         });
     }
@@ -300,6 +311,7 @@ class Area extends Templates {
             data: { opc: "addArea" },
             bootbox: {
                 title: "Agregar Área",
+                size: 'small',
                 closeButton: true
             },
             json: this.jsonArea(),
@@ -335,9 +347,10 @@ class Area extends Templates {
 
             this.createModalForm({
                 id: "formAreaEdit",
-                data: { opc: "editArea", id: id },
+                data: { opc: "editArea", idArea: id },
                 bootbox: {
                     title: "Editar Área",
+                    size: 'small',
                     closeButton: true
                 },
                 autofill: data,
@@ -376,8 +389,8 @@ class Area extends Templates {
             },
             data: {
                 opc: "statusArea",
+                active: active === 1 ? 0 : 1,
                 idArea: id,
-                active: active === 1 ? 0 : 1
             },
             methods: {
                 send: (response) => {
@@ -431,7 +444,7 @@ class Zone extends Templates {
                     opc: "select",
                     id: "active",
                     lbl: "Estado",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: [
                         { id: "1", valor: "Activos" },
                         { id: "0", valor: "Inactivos" }
@@ -440,9 +453,10 @@ class Zone extends Templates {
                 },
                 {
                     opc: "button",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
+                    className:'w-100',
                     id: "btnNewZone",
-                    text: "Nueva Zona",
+                    text: "Nuevo negocio",
                     onClick: () => this.addZone()
                 }
             ]
@@ -459,8 +473,8 @@ class Zone extends Templates {
             attr: {
                 id: "tbZone",
                 theme: "light",
-                title: "Lista de Zonas",
-                subtitle: "Subdivisiones internas del almacén",
+                // title: "Lista de Zonas",
+                // subtitle: "Subdivisiones internas del almacén",
                 center: [1, 2, 3]
             }
         });
@@ -471,7 +485,8 @@ class Zone extends Templates {
             id: "formZoneAdd",
             data: { opc: "addZone" },
             bootbox: {
-                title: "Agregar Zona",
+                title: "Agregar Negocio",
+                size:'small',
                 closeButton: true
             },
             json: this.jsonZone(),
@@ -507,7 +522,7 @@ class Zone extends Templates {
 
             this.createModalForm({
                 id: "formZoneEdit",
-                data: { opc: "editZone", id: id },
+                data: { opc: "editZone", id_zona: id },
                 bootbox: {
                     title: "Editar Zona",
                     closeButton: true
@@ -548,8 +563,8 @@ class Zone extends Templates {
             },
             data: {
                 opc: "statusZone",
+                active: active === 1 ? 0 : 1,
                 id_zona: id,
-                active: active === 1 ? 0 : 1
             },
             methods: {
                 send: (response) => {
@@ -577,7 +592,179 @@ class Zone extends Templates {
             {
                 opc: "input",
                 id: "nombre_zona",
-                lbl: "Nombre de la Zona",
+                lbl: "Nombre",
+                tipo: "texto",
+                class: "col-12 mb-3",
+                required: true
+            }
+        ];
+    }
+}
+
+class Negocio extends Templates {
+    constructor(link, div_modulo) {
+        super(link, div_modulo);
+        this.PROJECT_NAME = "negocio";
+    }
+
+    filterBarNegocio() {
+        const container = $("#container-negocios");
+        container.html('<div id="filterbar-negocio" class="mb-2"></div><div id="table-negocio"></div>');
+
+        this.createfilterBar({
+            parent: "filterbar-negocio",
+            data: [
+                {
+                    opc: "select",
+                    id: "active",
+                    lbl: "Estado",
+                    class: "col-12 col-md-3",
+                    data: [
+                        { id: "1", valor: "Activos" },
+                        { id: "0", valor: "Inactivos" }
+                    ],
+                    onchange: "negocio.lsNegocio()"
+                },
+                {
+                    opc: "button",
+                    class: "col-12 col-md-3",
+                    id: "btnNewNegocio",
+                    text: "Nuevo Negocio",
+                    onClick: () => this.addNegocio()
+                }
+            ]
+        });
+    }
+
+    lsNegocio() {
+        this.createTable({
+            parent: "table-negocio",
+            idFilterBar: "filterbar-negocio",
+            data: { opc: "lsZone" },
+            coffeesoft: true,
+            conf: { datatable: true, pag: 15 },
+            attr: {
+                id: "tbNegocio",
+                theme: "light",
+                title: "Lista de Negocios",
+                subtitle: "Unidades de negocio del sistema",
+                center: [1, 2, 3]
+            }
+        });
+    }
+
+    addNegocio() {
+        this.createModalForm({
+            id: "formNegocioAdd",
+            data: { opc: "addZone" },
+            bootbox: {
+                title: "Agregar Negocio",
+                closeButton: true
+            },
+            json: this.jsonNegocio(),
+            success: (response) => {
+                if (response.status === 200) {
+                    alert({
+                        icon: "success",
+                        text: response.message,
+                        btn1: true,
+                        btn1Text: "Aceptar"
+                    });
+                    this.lsNegocio();
+                } else {
+                    alert({
+                        icon: "error",
+                        text: response.message,
+                        btn1: true,
+                        btn1Text: "Ok"
+                    });
+                }
+            }
+        });
+    }
+
+    async editNegocio(id) {
+        const request = await useFetch({
+            url: this._link,
+            data: { opc: "getZone", id: id }
+        });
+
+        if (request.status === 200) {
+            const data = request.data;
+
+            this.createModalForm({
+                id: "formNegocioEdit",
+                data: { opc: "editZone", id: id },
+                bootbox: {
+                    title: "Editar Negocio",
+                    closeButton: true
+                },
+                autofill: data,
+                json: this.jsonNegocio(),
+                success: (response) => {
+                    if (response.status === 200) {
+                        alert({
+                            icon: "success",
+                            text: response.message,
+                            btn1: true,
+                            btn1Text: "Aceptar"
+                        });
+                        this.lsNegocio();
+                    } else {
+                        alert({
+                            icon: "error",
+                            text: response.message,
+                            btn1: true,
+                            btn1Text: "Ok"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    statusNegocio(id, active) {
+        const action = active === 1 ? "desactivar" : "activar";
+        const actionTitle = active === 1 ? "Desactivar" : "Activar";
+
+        this.swalQuestion({
+            opts: {
+                title: `¿${actionTitle} Negocio?`,
+                text: `Esta acción ${action}á el negocio`,
+                icon: "warning"
+            },
+            data: {
+                opc: "statusZone",
+                id_zona: id,
+                active: active === 1 ? 0 : 1
+            },
+            methods: {
+                send: (response) => {
+                    if (response.status === 200) {
+                        alert({
+                            icon: "success",
+                            text: response.message,
+                            btn1: true
+                        });
+                        this.lsNegocio();
+                    } else {
+                        alert({
+                            icon: "error",
+                            text: response.message,
+                            btn1: true
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    jsonNegocio() {
+        return [
+            {
+                opc: "input",
+                id: "nombre_zona",
+                lbl: "Nombre del Negocio",
                 tipo: "texto",
                 class: "col-12 mb-3",
                 required: true

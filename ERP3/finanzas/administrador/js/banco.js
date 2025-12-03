@@ -97,7 +97,7 @@ class AdminBankAccounts extends Templates {
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: `tb${this.PROJECT_NAME}`,
-                theme: 'corporativo',
+                theme: 'light',
                 center: [2, 5],
                 right: []
             }

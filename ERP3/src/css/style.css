@@ -90,8 +90,28 @@
 }
 
 .bg-primary-1592{
- background: #0F243E;
+ background: #2563EB;
  color: white;
+}
+
+.bg-primary {
+ background: #2563EB !important;
+ color: white !important;
+}
+
+.bg-secondary {
+ background: #0F172A !important;
+ color: white !important;
+}
+
+.bg-success {
+ background: #22C55E !important;
+ color: white !important;
+}
+
+.bg-danger {
+ background: #EF4444 !important;
+ color: white !important;
 }
 
 
