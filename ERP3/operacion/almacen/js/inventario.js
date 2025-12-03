@@ -230,43 +230,48 @@ class CapturaMovimiento extends Templates {
         });
 
         const header = $("<div>", {
-            class: "mb-4 pb-4 border-b"
+            class: "mb-4 pb-4 border-b flex justify-between items-center"
         }).html(`
-            <div class="flex justify-between items-center">
-                <div>
-                    <h2 class="text-2xl font-semibold">📝 Captura de Productos</h2>
-                    <p class="text-gray-400">Folio: ${this.movimientoData.folio} | Tipo: ${this.movimientoData.tipo_movimiento}</p>
-                </div>
-                <div class="flex gap-2">
-                    <button id="btnGuardarMovimiento" class="btn btn-success">
-                        <i class="icon-floppy"></i> Guardar Lista
-                    </button>
-                    <button id="btnCancelarCaptura" class="btn btn-secondary">
-                        <i class="icon-cancel"></i> Cancelar
-                    </button>
-                </div>
+            <div>
+                <h2 class="text-xl font-semibold flex items-center gap-2">
+                    <span>📦</span> Captura de Productos
+                </h2>
+                <p class="text-gray-400 text-sm">Folio: ${this.movimientoData.folio} | Tipo: ${this.movimientoData.tipo_movimiento}</p>
+            </div>
+            <div class="flex gap-2">
+                <button id="btnGuardarMovimiento" class="btn btn-success">
+                    <i class="icon-floppy"></i> Guardar Lista
+                </button>
+                <button id="btnCancelarCaptura" class="btn btn-dark">
+                    <i class="icon-cancel"></i> Cancelar
+                </button>
             </div>
         `);
 
         const mainContent = $("<div>", {
-            class: "grid grid-cols-1 lg:grid-cols-3 gap-4"
+            class: "flex flex-col lg:flex-row gap-4 mb-4"
         });
 
         const leftSection = $("<div>", {
-            class: "lg:col-span-2"
+            class: "flex-1"
         }).html(`
-            <div id="seccionAgregarProducto" class="mb-4"></div>
-            <div id="tablaProductos"></div>
+            <div id="seccionAgregarProducto"></div>
         `);
 
         const rightSection = $("<div>", {
-            class: "lg:col-span-1"
+            class: "w-full lg:w-72"
         }).html(`
             <div id="resumenMovimiento"></div>
         `);
 
         mainContent.append(leftSection, rightSection);
-        container.append(header, mainContent);
+
+        const tableSection = $("<div>", {
+            id: "tablaProductos",
+            class: "w-full"
+        });
+
+        container.append(header, mainContent, tableSection);
         $("#root").html(container);
 
         $("#btnGuardarMovimiento").on("click", () => this.guardarMovimiento());
@@ -278,21 +283,22 @@ class CapturaMovimiento extends Templates {
 
     renderSeccionAgregar() {
         const seccion = $("<div>", {
-            class: "border p-4 rounded-lg  mb-4"
+            class: "border p-4 rounded-lg"
         }).html(`
-            <h3 class="text-lg font-semibold mb-3">➕ Agregar Producto</h3>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                    <label class="form-label">Producto</label>
+            <h3 class="text-md font-semibold mb-3 flex items-center gap-2">
+                <span class="text-blue-600">+</span> Agregar Producto
+            </h3>
+            <div class="flex flex-wrap items-end gap-3">
+                <div class="flex-1 min-w-[200px]">
+                    <label class="form-label text-sm text-gray-600">Producto</label>
                     <select id="selectProducto" class="form-control"></select>
                 </div>
-                <div class="col-12 col-md-4 mb-3">
-                    <label class="form-label">Cantidad</label>
-                    <input type="number" id="inputCantidad" class="form-control" min="1" value="1">
+                <div class="w-24">
+                    <label class="form-label text-sm text-gray-600">Cantidad</label>
+                    <input type="number" id="inputCantidad" class="form-control text-center" min="1" value="1">
                 </div>
-                <div class="col-12 col-md-2 mb-3">
-                    <label class="form-label">&nbsp;</label>
-                    <button id="btnAgregarProducto" class="btn btn-primary w-full">
+                <div>
+                    <button id="btnAgregarProducto" class="btn btn-primary">
                         <i class="icon-plus"></i> Agregar
                     </button>
                 </div>
@@ -302,9 +308,9 @@ class CapturaMovimiento extends Templates {
         $("#seccionAgregarProducto").html(seccion);
 
         $("#selectProducto").option_select({
-            data       : productos,
+            data: productos,
             placeholder: "Seleccionar producto",
-            select2    : true
+            select2: true
         });
 
         $("#btnAgregarProducto").on("click", () => this.addProducto());
@@ -346,7 +352,8 @@ class CapturaMovimiento extends Templates {
             alert({
                 icon: "success",
                 text: "Producto agregado",
-                btn1: true
+                timer: 1500,
+                showConfirmButton: false
             });
 
             $("#selectProducto").val(null).trigger("change");
@@ -366,6 +373,8 @@ class CapturaMovimiento extends Templates {
     lsDetalleMovimiento() {
         this.createTable({
             parent: "tablaProductos",
+            idFilterBar: `filterBar`,
+
             data: { 
                 opc: "lsDetalleMovimiento", 
                 id_movimiento: this.idMovimiento 
@@ -375,8 +384,9 @@ class CapturaMovimiento extends Templates {
             attr: {
                 id: "tbDetalleMovimiento",
                 theme: "light",
+                striped:true,
                 title: "Productos Agregados",
-                center: [0, 1, 2, 3, 4]
+                center: [ 1, 3, 4,5]
             },
             success: () => {
                 this.updateResumen();
@@ -432,25 +442,33 @@ class CapturaMovimiento extends Templates {
             : '↓';
 
         const resumen = $("<div>", {
-            class: " p-4 rounded-lg border sticky top-4"
+            class: "p-3 rounded-2xl border sticky top-4"
         }).html(`
-            <h3 class="text-lg font-semibold mb-4">📋 Resumen</h3>
-            <div class="space-y-3">
-                <div class="flex justify-between items-center pb-2 border-b">
-                    <span class="text-gray-600">Folio:</span>
-                    <span class="font-bold">${this.movimientoData.folio}</span>
+            <h3 class="text-lg font-semibold text-gray-800 mb-6">Resumen</h3>
+            
+            <div class="space-y-5">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Folio:</span>
+                    <span class="font-bold text-gray-900">${this.movimientoData.folio}</span>
                 </div>
-                <div class="flex justify-between items-center pb-2 border-b">
-                    <span class="text-gray-600">Tipo:</span>
-                    <span class="font-bold ${tipoColor}">${tipoIcon} ${this.movimientoData.tipo_movimiento}</span>
+                
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Tipo:</span>
+                    <span class="font-semibold ${tipoColor}">${tipoIcon} ${this.movimientoData.tipo_movimiento}</span>
                 </div>
-                <div class="flex justify-between items-center pb-2 border-b">
-                    <span class="text-gray-600">Productos:</span>
-                    <span class="font-bold text-2xl">${totalProductos}</span>
+            </div>
+            
+            <hr class="my-5 border-gray-200">
+            
+            <div class="space-y-5">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Productos:</span>
+                    <span class="font-bold text-2xl text-gray-900">${totalProductos}</span>
                 </div>
-                <div class="flex justify-between items-center pb-2 border-b">
-                    <span class="text-gray-600">Total Unidades:</span>
-                    <span class="font-bold text-2xl">${totalUnidades}</span>
+                
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Total unidades:</span>
+                    <span class="font-bold text-2xl text-gray-900">${totalUnidades}</span>
                 </div>
             </div>
         `);

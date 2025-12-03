@@ -162,6 +162,8 @@ class ctrl extends mdl {
         ];
     }
 
+    // Capture Details 
+
     function lsDetalleMovimiento() {
         $idMovimiento = $_POST['id_movimiento'];
         $ls           = $this->listDetalleMovimiento([$idMovimiento]);
@@ -169,13 +171,13 @@ class ctrl extends mdl {
 
         foreach ($ls as $item) {
             $rows[] = [
-                'id_detalle'       => $item['id_detalle'],
+                'id'       => $item['id_detalle'],
                 '#'                => count($rows) + 1,
                 'Producto'         => $item['nombre_producto'],
                 'Stock Actual'     => $item['stock_actual'],
                 'Cantidad'         => [
                     'html'  => '<span class="text-green-600 font-bold">+' . $item['cantidad'] . '</span>',
-                    'class' => 'text-center'
+                    'class' => 'text-center '
                 ],
                 'Stock Resultante' => $item['stock_resultante'],
                 'a'                => [

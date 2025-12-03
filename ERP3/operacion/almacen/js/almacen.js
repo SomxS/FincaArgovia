@@ -62,7 +62,7 @@ class App extends Templates {
                     id: "categoria",
                     lbl: "Categoría",
                     class: "col-12 col-md-2",
-                    data: categorias,
+                    data: [{ id: '', valor: 'Todos' }, ...categorias],
                     onchange: 'app.lsMateriales()'
                 },
                 {
@@ -70,7 +70,7 @@ class App extends Templates {
                     id: "area",
                     lbl: "Área",
                     class: "col-12 col-md-2",
-                    data: areas,
+                    data: [{ id: '', valor: 'Todos' }, ...areas],
                     onchange: 'app.lsMateriales()'
                 },
                 {
@@ -94,12 +94,13 @@ class App extends Templates {
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: 'tbMateriales',
-                theme: 'shadcdn',
+                theme: 'light',
                 title: 'Lista de productos',
                 class: 'w-100 lowercase',
                 subtitle: 'Productos registrados en el sistema',
-                center: [1, 6, 7, 8, 9],
-                right: [10],
+                striped:true,
+                center: [1,4,5,7],
+                right: [6],
                 f_size: 12
             },
             success: (response) => {
@@ -119,35 +120,32 @@ class App extends Templates {
     jsonMaterial() {
         return [
             {
-                opc: "input",
-                id: "CodigoEquipo",
-                lbl: "Código *",
-                placeholder: "AR-01-29-XXX",
-                class: "col-12 col-md-6 mb-3",
-                required: true
-            },
-            {
-                opc: "input",
-                id: "Equipo",
-                lbl: "Nombre del Equipo/Material *",
-                placeholder: "Ej: MARCADORES DE COLOR",
-                class: "col-12 col-md-6 mb-3",
-                required: true
-            },
-            {
                 opc: "select",
                 id: "id_zona",
-                lbl: "Zona *",
+                lbl: "Negocio: *",
                 class: "col-12 col-md-6 mb-3",
                 data: zonas,
                 required: true
             },
             {
-                opc: "select",
-                id: "id_categoria",
-                lbl: "Categoría *",
+                opc: "input",
+                id: "CodigoEquipo",
+                lbl: "Código *",
+                placeholder: "AR-01-29-XXX",
                 class: "col-12 col-md-6 mb-3",
-                data: categorias,
+                // required: true
+            },
+            {
+                opc: "label",
+                id: "lblMaterial",
+                text: "Información del Material",
+                class: "col-12 fw-bold text-lg mb-2  p-1"
+            },
+            {
+                opc: "input",
+                id: "Equipo",
+                lbl: "Nombre del Equipo/Material *",
+                class: "col-12 col-md-6 mb-3",
                 required: true
             },
             {
@@ -158,20 +156,11 @@ class App extends Templates {
                 data: areas,
                 required: true
             },
-            {
-                opc: "select",
-                id: "id_dpto",
-                lbl: "Departamento",
-                class: "col-12 col-md-6 mb-3",
-                data: departamentos
-            },
-            {
-                opc: "select",
-                id: "id_Proveedor",
-                lbl: "Proveedor",
-                class: "col-12 col-md-6 mb-3",
-                data: proveedores
-            },
+         
+          
+         
+          
+          
             {
                 opc: "input",
                 id: "cantidad",
@@ -180,6 +169,15 @@ class App extends Templates {
                 class: "col-12 col-md-6 mb-3",
                 required: true
             },
+            {
+                opc: "select",
+                id: "id_categoria",
+                lbl: "Categoría *",
+                class: "col-12 col-md-6 mb-3",
+                data: categorias,
+                required: true
+            },
+
             {
                 opc: "input",
                 id: "Costo",

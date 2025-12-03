@@ -1664,7 +1664,7 @@ class Components extends Complements {
             defaults.color_row_alt = "bg-[#111827]";
         } else if (options.theme === 'corporativo') {
             defaults.color_th = "bg-[#003360] text-white";
-            defaults.color_row = "bg-white ";
+            defaults.color_row = "",
             defaults.color_group = "bg-gray-100 ";
             defaults.class = "w-full text-sm ";
             defaults.border_table = "border rounded-lg  border-gray-300";
@@ -1683,7 +1683,7 @@ class Components extends Complements {
         }
         else {
             defaults.color_th = "bg-[#F2F5F9] text-gray-400 uppercase text-xs font-semibold tracking-wider";
-            defaults.color_row = "bg-white hover:bg-gray-50";
+            defaults.color_row = " hover:bg-gray-50";
             defaults.color_group = "bg-gray-200";
             defaults.class = "w-full table-auto text-sm text-gray-800";
             defaults.border_table = "border rounded-lg border-gray-300";
@@ -1836,7 +1836,7 @@ class Components extends Complements {
                 let cellAttributes = {
                     id: `${key}_${data.id}`,
                     style: `font-size:${opts.f_size}px;`,
-                    class: `${align} ${opts.border_row} px-2 py-2 truncate ${colorBg}`,
+                    class: `${align} ${opts.border_row} px-2 py-2 truncate ${colorBg} `,
                     html: tdText
                 };
 
@@ -1854,7 +1854,7 @@ class Components extends Complements {
             let actions = '';
 
             if (data.a?.length) {
-                actions = $("<td>", { class: `px-2 py-2 flex justify-center items-center ${colorBg} ${opts.border_row}` });
+                actions = $("<td>", { class: `px-2 py-2 relative justify-center items-center ${colorBg} ${opts.border_row} ` });
                 data.a.forEach(atributos => {
 
                     const button_a = $("<a>", atributos);
@@ -1864,7 +1864,7 @@ class Components extends Complements {
             }
 
             if (data.dropdown) {
-                actions = $("<td>", { class: `px-2 py-2 relative justify-center items-center ${colorBg} ${opts.border_row}` });
+                actions = $("<td>", { class: `px-2 py-2 relative justify-center items-center ${colorBg} ${opts.border_row} ` });
 
                 const wrapper = $("<div>", {
                     class: "relative"
