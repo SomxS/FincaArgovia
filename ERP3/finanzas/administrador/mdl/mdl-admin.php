@@ -25,6 +25,17 @@ class mdl extends CRUD {
     // Módulos Desbloqueados
 
     function listModulesUnlocked($array) {
+        $active = $array[0];
+        $filterUdn = isset($array[1]) ? $array[1] : 'all';
+        
+        $whereClause = "module_unlock.active = ?";
+        $params = [$active];
+        
+        if ($filterUdn !== 'all') {
+            $whereClause .= " AND module_unlock.udn_id = ?";
+            $params[] = $filterUdn;
+        }
+        
         $query = "
           SELECT 
                 module_unlock.id,
@@ -40,11 +51,11 @@ class mdl extends CRUD {
             FROM {$this->bd}module_unlock
             LEFT JOIN udn ON module_unlock.udn_id = udn.idUDN
             LEFT JOIN {$this->bd}module ON module_unlock.module_id = module.id
-            WHERE module_unlock.active = 1
+            WHERE $whereClause
             ORDER BY module_unlock.unlock_date DESC
         ";
         
-        return $this->_Read($query, null);
+        return $this->_Read($query, $params);
     }
 
     function getUnlockRequestById($id) {

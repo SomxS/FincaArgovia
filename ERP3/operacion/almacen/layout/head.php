@@ -27,4 +27,9 @@
    
     <!-- CDN TAILWIND -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
    
+  <!-- Compact Styles -->
+    <link rel="stylesheet" href="../../src/css/compact.css">

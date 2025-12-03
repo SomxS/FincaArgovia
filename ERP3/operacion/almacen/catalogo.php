@@ -12,6 +12,8 @@ require_once('layout/core-libraries.php');
 ?>
 
 <!-- CoffeeSoft Framework -->
+   <!-- Compact Styles -->
+
 <script src="../../src/js/coffeeSoft.js"></script>
 <script src="https://rawcdn.githack.com/SomxS/Grupo-Varoch/refs/heads/main/src/js/plugins.js"></script>
 <script src="https://www.plugins.erp-varoch.com/ERP/JS/complementos.js"></script>

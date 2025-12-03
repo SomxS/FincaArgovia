@@ -21,24 +21,33 @@ class ctrl extends mdl {
     function lsModulesUnlocked() {
         $__row = [];
         $active = isset($_POST['active']) ? $_POST['active'] : 1;
+        $filterUdn = isset($_POST['filter_udn']) ? $_POST['filter_udn'] : 'all';
         
-        $ls = $this->listModulesUnlocked([$active]);
+        $ls = $this->listModulesUnlocked([$active, $filterUdn]);
 
         foreach ($ls as $key) {
-            $lockIcon = $key['active'] == 1 
-                ? '<i class="icon-lock-open text-green-500 cursor-pointer text-lg" onclick="app.toggleLockStatus(' . $key['id'] . ', ' . $key['active'] . ')"></i>'
-                : '<i class="icon-lock text-red-500 cursor-pointer text-lg" onclick="app.toggleLockStatus(' . $key['id'] . ', ' . $key['active'] . ')"></i>';
+            $moduleBadge = renderModuleBadge($key['module_name']);
+            
+            $lockButton = $key['active'] == 1 
+                ? '<button class="bg-red-100 hover:bg-red-200 text-red-600 p-2 rounded-lg transition" onclick="modules.toggleLockStatus(' . $key['id'] . ', ' . $key['active'] . ')">
+                    <i class="icon-lock text-lg"></i>
+                   </button>'
+                : '<button class="bg-green-100 hover:bg-green-200 text-green-600 p-2 rounded-lg transition" onclick="modules.toggleLockStatus(' . $key['id'] . ', ' . $key['active'] . ')">
+                    <i class="icon-lock-open text-lg"></i>
+                   </button>';
 
             $__row[] = [
-                
-                'id'               => $key['id'],
-                'UDN'              => $key['udn_name'],
-                'Fecha solicitada' => formatSpanishDate($key['unlock_date']),
-                'Módulo'           => $key['module_name'],
-                'Motivo'           => $key['lock_reason'],
-                'Bloquear' => [
-                    'html' => $lockIcon,
-                    'class' => 'text-center '
+                'id'      => $key['id'],
+                'udn'     => $key['udn_name'],
+                'Fecha'   => formatSpanishDate($key['unlock_date']),
+                'Motivo'  => $key['lock_reason'],
+                'Módulos' => [
+                    'html' => $moduleBadge,
+                    'class' => 'text-center'
+                ],
+                'options' => [
+                    'html' => $lockButton,
+                    'class' => 'text-center'
                 ]
             ];
         }
@@ -206,6 +215,21 @@ class ctrl extends mdl {
             'message' => $message
         ];
     }
+}
+
+// Complements
+
+function renderModuleBadge($moduleName) {
+    $badges = [
+        'Ventas' => '<span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700 border border-green-300">Ventas</span>',
+        'Clientes' => '<span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-orange-100 text-orange-700 border border-orange-300">Clientes</span>',
+        'Almacén' => '<span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-700 border border-blue-300">Almacén</span>',
+        'Compras' => '<span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-red-100 text-red-700 border border-red-300">Compras</span>',
+        'Inventario' => '<span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-purple-100 text-purple-700 border border-purple-300">Inventario</span>',
+        'Proveedores' => '<span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-700 border border-yellow-300">Proveedores</span>'
+    ];
+
+    return $badges[$moduleName] ?? '<span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 border border-gray-300">' . htmlspecialchars($moduleName) . '</span>';
 }
 
 $obj = new ctrl();

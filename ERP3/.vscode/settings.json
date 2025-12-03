@@ -36,6 +36,10 @@
         {
             "folderPath": "ERP3\\finanzas\\administrador\\",
             "badge": "-"
+        },
+        {
+            "folderPath": "ERP3\\operacion\\",
+            "badge": "-"
         }
     ]
 }

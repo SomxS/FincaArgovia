@@ -1643,7 +1643,7 @@ class Components extends Complements {
             onEdit: () => { },
             onDelete: () => { },
             extends: true,
-            f_size: 12,
+            f_size: 11,
             includeColumnForA: false,
             border_table: "border border-gray-300",
             border_row: "border-t border-gray-200",
@@ -1682,11 +1682,11 @@ class Components extends Complements {
             defaults.color_row_alt = "bg-[#F8FAFC]";
         }
         else {
-            defaults.color_th = "bg-[#F2F5F9] text-[#003360]";
-            defaults.color_row = "bg-white hover:bg-gray-600";
+            defaults.color_th = "bg-[#F2F5F9] text-gray-400 uppercase text-xs font-semibold tracking-wider";
+            defaults.color_row = "bg-white hover:bg-gray-50";
             defaults.color_group = "bg-gray-200";
             defaults.class = "w-full table-auto text-sm text-gray-800";
-            defaults.border_table = "border rounded-lg  border-gray-300";
+            defaults.border_table = "border rounded-lg border-gray-300";
             defaults.border_row = "border-t border-gray-200";
             defaults.color_row_alt = "bg-gray-50";
         }
@@ -1970,8 +1970,8 @@ class Components extends Complements {
                 inactive: "text-gray-600 hover:bg-white"
             },
             button: {
-                base: "bg-gray-200  p-1 rounded-lg inline-flex shadow-blue-500/50",
-                active: "bg-gray-50 ",
+                base: "bg-gray-100  p-1 rounded-lg inline-flex shadow-blue-500/50",
+                active: "bg-blue-600 text-white",
                 inactive: " text-gray-600 hover:bg-gray-50"
             }
         };
@@ -1999,9 +1999,16 @@ class Components extends Complements {
                 : `transition text-sm font-medium rounded px-3 py-2 
                    ${isActive ? themeStyle.active : themeStyle.inactive}`;
 
+            let iconHtml = '';
+            if (tab.lucideIcon) {
+                iconHtml = `<i data-lucide="${tab.lucideIcon}" class="w-4 h-4 inline-block mr-2"></i>`;
+            } else if (tab.icon) {
+                iconHtml = `<i class='${tab.icon} mr-2'></i>`;
+            }
+
             const tabButton = $("<button>", {
                 id: `tab-${tab.id}`,
-                html: tab.icon ? `<i class='${tab.icon} mr-2 h-4 w-4'></i>${tab.tab}` : tab.tab,
+                html: iconHtml + tab.tab,
                 class: buttonClass,
                 "data-state": isActive ? "active" : "inactive",
                 click: () => {
@@ -2028,6 +2035,12 @@ class Components extends Complements {
         });
 
         $(`#${opts.parent}`).html(container);
+
+        setTimeout(() => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }, 50);
 
         if (opts.renderContainer) {
             const contentContainer = $("<div>", {
