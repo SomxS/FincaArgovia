@@ -32,10 +32,12 @@ require_once('layout/core-libraries.php');
             <div class="" id="root"></div>
         </div>
     </main>
-
+    
+    <!-- Importación navbar y sidebar -->
     <script src="../../acceso/src/js/navbar.js"></script>
     <script src="../../acceso/src/js/sidebar.js"></script>
-     <!-- Módulo de Catálogo -->
+
+    <!-- Módulo de Catálogo -->
     <script src="js/catalogo.js?t=<?php echo time(); ?>"></script>
 
 </body>

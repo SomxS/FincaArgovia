@@ -2,6 +2,16 @@ let api = 'ctrl/ctrl-almacen.php';
 let main,products;
 let zonas, categorias, areas, departamentos, proveedores;
 
+// Inventario.
+let api_inventario = 'ctrl/ctrl-inventario.php';
+let inventario, captura;
+
+let tipoMovimiento, productos;
+
+// Catalogo
+let api_catalogo = 'ctrl/ctrl-catalogo.php';
+let  cataloge, category, area, zone;
+
 $(async () => {
     const data     = await useFetch({ url: api, data: { opc: "init" } });
     zonas          = data.zonas;
@@ -16,6 +26,25 @@ $(async () => {
     // Productos.
     products = new Productos(api, "root");
     products.render();
+
+    // Inventario.
+    const invt           = await useFetch({ url: api_inventario, data: { opc: "init" } });
+          tipoMovimiento = invt.tipoMovimiento;
+          productos      = invt.productos;
+
+    inventario = new Inventario(api, "root");
+    captura    = new CapturaMovimiento(api, "root");
+    inventario.render();
+
+
+
+    // Catalogo
+    cataloge = new Catalogo(api_catalogo, "root");
+    category = new Category(api_catalogo, "root");
+    area     = new Area(api_catalogo, "root");
+    zone     = new Zone(api_catalogo, "root");
+
+    cataloge.render();
 
 });
 
@@ -53,7 +82,7 @@ class Main extends Templates {
                     tab: "Productos",
                     lucideIcon: "package",
                     class: "mb-1",
-                    active: true,
+                    
                     onClick: () => products.render()
                 },
                 {
@@ -72,6 +101,7 @@ class Main extends Templates {
                     id: "catalogo",
                     tab: "Catálogo",
                     lucideIcon: "book-open",
+                    active: true,
                     onClick: () => catalogo.render()
                 }
             ]

@@ -17,7 +17,7 @@ require_once('layout/core-libraries.php');
 <script src="https://www.plugins.erp-varoch.com/ERP/JS/complementos.js"></script>
 
 <body>
-   <div id="menu-navbar"></div>
+     <div id="menu-navbar"></div>
     <div id="menu-sidebar"></div>
     <main>
         <div id="main__content">
@@ -32,13 +32,18 @@ require_once('layout/core-libraries.php');
             <div class="" id="root"></div>
         </div>
     </main>
+
+    <!-- Importación navbar y sidebar -->
     <script src="../../acceso/src/js/navbar.js"></script>
     <script src="../../acceso/src/js/sidebar.js"></script>
+
     <!-- Componente tabLayout -->
     <script src="../../src/js/components/tabLayout.js?t=<?php echo time(); ?>"></script>
     
     <!-- Módulo de Catálogo -->
     <script src="js/almacen.js?t=<?php echo time(); ?>"></script>
+    <script src="js/catalogo.js?t=<?php echo time(); ?>"></script>
+    <script src="js/catalogo.js?t=<?php echo time(); ?>"></script>
 
 </body>
 </html>
