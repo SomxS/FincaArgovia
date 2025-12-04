@@ -162,6 +162,8 @@ class ctrl extends mdl {
         ];
     }
 
+    // Capture Details 
+
     function lsDetalleMovimiento() {
         $idMovimiento = $_POST['id_movimiento'];
         $ls           = $this->listDetalleMovimiento([$idMovimiento]);
@@ -169,13 +171,13 @@ class ctrl extends mdl {
 
         foreach ($ls as $item) {
             $rows[] = [
-                'id_detalle'       => $item['id_detalle'],
+                'id'       => $item['id_detalle'],
                 '#'                => count($rows) + 1,
                 'Producto'         => $item['nombre_producto'],
                 'Stock Actual'     => $item['stock_actual'],
                 'Cantidad'         => [
                     'html'  => '<span class="text-green-600 font-bold">+' . $item['cantidad'] . '</span>',
-                    'class' => 'text-center'
+                    'class' => 'text-center '
                 ],
                 'Stock Resultante' => $item['stock_resultante'],
                 'a'                => [
@@ -483,7 +485,7 @@ function renderTipoMovimiento($tipo) {
         case 'Entrada':
             return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-blue-100 text-blue-700 min-w-[100px] text-center">↑ Entrada</span>';
         case 'Salida':
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-orange-100 text-orange-700 min-w-[100px] text-center">↓ Salida</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">↓ Salida</span>';
         default:
             return $tipo;
     }

@@ -49,21 +49,18 @@ class ctrl extends mdl {
 
             $rows[] = [
                 'id'           => $item['id'],
-                'Foto'         => [
-                    'class' => 'justify-start px-2 py-2',
+                'Producto'     => [
+                    'class' => 'justify-center px-2 py-2',
                     'html'  => renderProductImage($item['rutaImagen'], $item['Equipo'])
                 ],
-                'Código'       => $item['CodigoEquipo'],
-                'Zona'         => $item['zona'] ?? '-',
-                'Equipo'       => $item['Equipo'],
-                'Categoría'    => $item['categoria'] ?? '-',
+                // 'Código'       => $item['CodigoEquipo'],
+                // 'Equipo'       => $item['Equipo'],
                 'Área'         => $item['area'] ?? '-',
-                'Departamento' => $item['departamento'] ?? '-',
-                'Proveedor'    => $item['proveedor'] ?? '-',
                 'Cantidad'     => $item['cantidad'],
+                'Categoría'    => $item['categoria'] ?? '-',
                 'Costo'        => [
                     'html'  => '$' . number_format($item['Costo'], 2),
-                    'class' => 'text-end'
+                    'class' => 'text-end '
                 ],
                 'Estado'       => renderStatus($item['Estado']),
                 'a'            => $a
@@ -182,12 +179,12 @@ function renderProductImage($foto, $nombre) {
 
     $img = !empty($src)
         ? '<img src="' . htmlspecialchars($src) . '" alt="Imagen Material" class="w-8 h-8 bg-gray-500 rounded-md object-cover" />'
-        : '<div class="w-10 h-10 bg-blue-100 rounded flex items-center justify-center">
-                <i class="icon-box text-blue-600"></i>
+        : '<div class="w-12 h-12 bg-blue-100 rounded-sm flex items-center justify-center">
+                <i class="icon-picture-5 text-blue-600"></i>
            </div>';
 
     return '
-        <div class="flex items-center justify-start gap-2 py-1">
+        <div class="flex items-center justify-start gap-2 py-1 text-center">
             ' . $img . '
             <div class="text-xs">' . htmlspecialchars($nombre) . '</div>
         </div>';
