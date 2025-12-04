@@ -11,9 +11,6 @@ require_once('layout/head.php');
 require_once('layout/core-libraries.php');
 ?>
 
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
 <!-- CoffeeSoft Framework -->
 <script src="../../src/js/coffeeSoft.js"></script>
 <script src="https://rawcdn.githack.com/SomxS/Grupo-Varoch/refs/heads/main/src/js/plugins.js"></script>
@@ -25,8 +22,6 @@ require_once('layout/core-libraries.php');
      ?>
 
     <main>
-        <section id="sidebar"></section>
-
         <div id="main__content">
             <!-- Breadcrumb Navigation -->
             <nav aria-label="breadcrumb">
@@ -49,5 +44,13 @@ require_once('layout/core-libraries.php');
             <script src="js/catalogo.js?t=<?php echo time(); ?>"></script>
         </div>
     </main>
+    <script src="../../acceso/src/js/navbar.js"></script>
+    <script src="../../acceso/src/js/sidebar.js"></script>
+    <!-- Componente tabLayout -->
+    <script src="../../src/js/components/tabLayout.js?t=<?php echo time(); ?>"></script>
+    
+    <!-- Módulo de Catálogo -->
+    <script src="js/almacen.js?t=<?php echo time(); ?>"></script>
+
 </body>
 </html>
