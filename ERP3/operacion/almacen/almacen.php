@@ -30,6 +30,8 @@ require_once('layout/core-libraries.php');
         z-index: 9999 !important;
     }
 </style>
+<link rel="stylesheet" href="../../src/css/dark-mode.css">
+
 <!-- CoffeeSoft Framework -->
 <script src="../../src/js/coffeeSoft.js"></script>
 <script src="https://rawcdn.githack.com/SomxS/Grupo-Varoch/refs/heads/main/src/js/plugins.js"></script>
@@ -44,8 +46,8 @@ require_once('layout/core-libraries.php');
             <!-- Breadcrumb Navigation -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item text-uppercase text-muted">Operación</li>
-                    <li class="breadcrumb-item fw-bold active">Almacén</li>
+                    <li class="breadcrumb-item text-uppercase parent">Operación</li>
+                    <li class="breadcrumb-item fw-bold child">Almacén</li>
                 </ol>
             </nav>
             <!-- Contenedor principal -->

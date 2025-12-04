@@ -36,7 +36,7 @@ main > #main__content > form,
 main > #main__content > div {
     background-color: var(--aliceblue);
     margin: 0;
-    padding: 10px;
+    padding: 10px; 
     border-radius: 10px;
 }
 

@@ -19,12 +19,12 @@ class Navbar {
         this.parent = $(this.settings.parent);
 
         const navbarHtml = `
-            <nav class="bg-[#FAFCFF] border-bottom  w-full px-4 py-3 h-16  flex items-center justify-between">
+            <nav class="navbar-main border-bottom w-full px-4 py-3 h-16 flex items-center justify-between">
                 <div class="flex items-center space-x-2">
-                    <button id="toggleSidebar" class="text-2xl">☰</button>
-                    <span class='text-dark text-2xl font-bold'>Inventario</span>
+                    <!-- <button id="toggleSidebar" class="text-2xl">☰</button> -->
+                    <span class='navbar-title text-2xl font-bold'>Inventario</span>
                 </div>
-                <ul class="hidden md:flex flex-1 justify-end space-x-6">
+                <!-- <ul class="d-none md:flex flex-1 justify-end space-x-6">
                     <li class="invisible"><a href="#" class="hover:text-gray-400">Inicio</a></li>
                     <li class="invisible"><a href="#" class="hover:text-gray-400">Servicios</a></li>
                     <li>
@@ -32,9 +32,8 @@ class Navbar {
                             <i class="icon-th-large-3 text-xl"></i>
                         </button>
                     </li>
-
-                </ul>
-                <button id="btnUserMenu" class="ml-2 flex items-center justify-center border-l border-gray-500 pl-2">
+                </ul> -->
+                <button id="btnUserMenu" class="ml-2 flex items-center justify-center pl-2">
                     <img src="${this.settings.imgPerfil}" alt="Usuario" class="w-10 h-10 rounded-full border-2 border-white" />
                 </button>
             </nav>
@@ -79,9 +78,9 @@ class Navbar {
                         </a>
                     </div>
                 </div>
-                <div id="userMenuDropdown" class="absolute right-0 w-64 bg-white rounded-2xl shadow-lg opacity-0 scale-95 invisible transition-all duration-500 ease-out">
+                <div id="userMenuDropdown" class="user-menu-dropdown absolute right-0 w-64 rounded-2xl shadow-lg opacity-0 scale-95 invisible transition-all duration-500 ease-out">
                     
-                    <div class="relative flex flex-col items-center bg-[#7C5031]  h-20 rounded-t-2xl">
+                    <div class="relative flex flex-col items-center user-menu-header h-20 rounded-t-2xl">
                         <button id="btnCloseUserMenu" class="btn btn-sm p-1 absolute top-2 right-3 text-gray-400 hover:text-white focus:outline-none">
                             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -95,8 +94,8 @@ class Navbar {
                         <p class=" font-semibold text-lg mt-3">${this.settings.username}</p>
                     </div>
                     <div class="w-full space-y-2 px-4 mt-2 mb-3">
-                        <button class="w-full font-medium hover:bg-gray-100 border shadow-sm px-3 py-2 rounded-lg cursor-pointer text-left" id="btn_perfil"><i class="icon-user"></i> Mi Perfil</button>
-                        <button class="w-full font-medium hover:bg-gray-100 border shadow-sm px-3 py-2 rounded-lg cursor-pointer text-left" id="btn_admin"><i class="icon-cog"></i> Configuración</button>
+                        <button class="user-menu-btn w-full font-medium border shadow-sm px-3 py-2 rounded-lg cursor-pointer text-left" id="btn_perfil"><i class="icon-user"></i> Mi Perfil</button>
+                        <button class="user-menu-btn w-full font-medium border shadow-sm px-3 py-2 rounded-lg cursor-pointer text-left" id="btn_admin"><i class="icon-cog"></i> Configuración</button>
                     </div>
                     <div class="w-full px-4 mt-2 mb-3">
                         <button id="btnLogout" class="w-full px-3 py-2 bg-red-600 text-white hover:bg-red-700 rounded-lg transition-all duration-300">Cerrar sesión</button>
