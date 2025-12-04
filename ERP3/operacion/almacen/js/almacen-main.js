@@ -1,6 +1,8 @@
 let api = 'ctrl/ctrl-almacen.php';
-let app, materiales, inventario, movimientos, catalogo;
+let app, materiales, inventario, movimientos, existencias, catalogo;
 let zones, categories, areas, tipoMovimiento, productos, meses, anios;
+let apiExistencias = 'ctrl/ctrl-existencias.php';
+
 
 $(async () => {
     const data = await useFetch({ url: api, data: { opc: "init" } });
@@ -16,6 +18,7 @@ $(async () => {
     materiales = new Materiales(api, "root");
     inventario = new Inventario(api, "root");
     movimientos = new Movimientos(api, "root");
+    existencias = new Existencias(api, "root");
     catalogo = new Catalogo(api, "root");
 
     app.render();
@@ -57,11 +60,18 @@ class App extends Templates {
             type: "short",
             json: [
                 {
+                    id: "existencias",
+                    tab: "Existencias",
+                    icon: "icon-archive",
+                    active: true,
+                    onClick: () => existencias.render()
+                },
+                {
                     id: "materiales",
                     tab: "Materiales",
                     icon: "icon-box",
                     class: "mb-1",
-                    active: true,
+              
                     onClick: () => materiales.render()
                 },
                 {
@@ -76,6 +86,7 @@ class App extends Templates {
                     icon: "icon-exchange",
                     onClick: () => movimientos.render()
                 },
+                
                 {
                     id: "catalogo",
                     tab: "Catálogo",

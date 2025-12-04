@@ -12,21 +12,34 @@ class mdl extends CRUD {
         $this->bd = "rfwsmqex_mtto.";
     }
 
-    /*
-     * Índices recomendados para optimización:
-     * 
-     * ALTER TABLE mtto_almacen ADD INDEX idx_categoria (id_categoria);
-     * ALTER TABLE mtto_inventario_movimientos ADD INDEX idx_fecha_estado (fecha, estado);
-     * ALTER TABLE mtto_inventario_detalle ADD INDEX idx_movimiento_producto (id_movimiento, id_producto);
-     */
 
     function listMovimientos($array) {
+        
         $mes       = $array[0];
         $anio      = $array[1];
-        $categoria = $array[2];
+        $zona      = $array[2];
+        $area      = $array[3];
+        $categoria = $array[4];
 
-        $whereCategoria = ($categoria == 'Todos') ? '' : 'AND a.id_categoria = ?';
-        $params = ($categoria == 'Todos') ? [$mes, $anio] : [$mes, $anio, $categoria];
+        $whereConditions = [];
+        $params = [$mes, $anio];
+
+        if ($zona != 'Todos') {
+            $whereConditions[] = 'a.id_zona = ?';
+            $params[] = $zona;
+        }
+
+        if ($area != 'Todos') {
+            $whereConditions[] = 'a.Area = ?';
+            $params[] = $area;
+        }
+
+        if ($categoria != 'Todos') {
+            $whereConditions[] = 'a.id_categoria = ?';
+            $params[] = $categoria;
+        }
+
+        $whereExtra = count($whereConditions) > 0 ? 'AND ' . implode(' AND ', $whereConditions) : '';
 
         $query = "
             SELECT 
@@ -34,26 +47,34 @@ class mdl extends CRUD {
                 m.folio,
                 DATE_FORMAT(m.fecha, '%d/%m/%Y') as fecha,
                 m.tipo_movimiento,
-                d.id_producto,
-                a.Equipo as nombre_producto,
-                d.cantidad,
-                a.id_categoria as categoria_id,
-                COALESCE(cat.nombre_categoria, 'Sin categoría') AS nombre_grupo,
-                area.Nombre_Area as nombre_area,
-                u.user as responsable,
-                u.usr_estado as responsable_estado,
+                m.total_productos,
+                m.total_unidades,
+                m.estado,
                 m.fecha_creacion,
-                m.estado
+                m.user_id,
+                d.id_detalle,
+                d.id_producto,
+                d.cantidad,
+                d.stock_anterior,
+                d.stock_resultante,
+                a.idAlmacen,
+                a.CodigoEquipo,
+                a.Equipo as nombre_producto,
+                a.id_categoria,
+                a.id_zona,
+                a.Area,
+                COALESCE(cat.nombreCategoria, 'Sin categoría') AS nombre_grupo,
+                COALESCE(z.nombre_zona, 'Sin zona') AS nombre_zona,
+                COALESCE(ar.nombre_area, 'Sin área') AS nombre_area
             FROM {$this->bd}mtto_inventario_movimientos m
             INNER JOIN {$this->bd}mtto_inventario_detalle d ON m.id_movimiento = d.id_movimiento
             INNER JOIN {$this->bd}mtto_almacen a ON d.id_producto = a.idAlmacen
-            LEFT JOIN {$this->bd}mtto_almacen_area area ON a.Area = area.idArea
-            LEFT JOIN {$this->bd}categorias cat ON a.id_categoria = cat.id
-            LEFT JOIN {$this->bd}usuarios u ON m.user_id = u.idUser
+            LEFT JOIN {$this->bd}mtto_categoria cat ON a.id_categoria = cat.idcategoria
+            LEFT JOIN {$this->bd}mtto_almacen_zona z ON a.id_zona = z.id_zona
+            LEFT JOIN {$this->bd}mtto_almacen_area ar ON a.Area = ar.idArea
             WHERE MONTH(m.fecha) = ? 
             AND YEAR(m.fecha) = ?
-            $whereCategoria
-            AND m.estado = 'Activa'
+            $whereExtra
             ORDER BY m.fecha DESC, m.id_movimiento DESC
         ";
         
@@ -63,10 +84,29 @@ class mdl extends CRUD {
     function getResumenMovimientos($array) {
         $mes       = $array[0];
         $anio      = $array[1];
-        $categoria = $array[2];
+        $zona      = $array[2];
+        $area      = $array[3];
+        $categoria = $array[4];
 
-        $whereCategoria = ($categoria == 'Todos') ? '' : 'AND a.id_categoria = ?';
-        $params = ($categoria == 'Todos') ? [$mes, $anio] : [$mes, $anio, $categoria];
+        $whereConditions = [];
+        $params = [$mes, $anio];
+
+        if ($zona != 'Todos') {
+            $whereConditions[] = 'a.id_zona = ?';
+            $params[] = $zona;
+        }
+
+        if ($area != 'Todos') {
+            $whereConditions[] = 'a.Area = ?';
+            $params[] = $area;
+        }
+
+        if ($categoria != 'Todos') {
+            $whereConditions[] = 'a.id_categoria = ?';
+            $params[] = $categoria;
+        }
+
+        $whereExtra = count($whereConditions) > 0 ? 'AND ' . implode(' AND ', $whereConditions) : '';
 
         $query = "
             SELECT 
@@ -76,10 +116,12 @@ class mdl extends CRUD {
             FROM {$this->bd}mtto_inventario_movimientos m
             INNER JOIN {$this->bd}mtto_inventario_detalle d ON m.id_movimiento = d.id_movimiento
             INNER JOIN {$this->bd}mtto_almacen a ON d.id_producto = a.idAlmacen
+            LEFT JOIN {$this->bd}mtto_categoria cat ON a.id_categoria = cat.idcategoria
+            LEFT JOIN {$this->bd}mtto_almacen_zona z ON a.id_zona = z.id_zona
+            LEFT JOIN {$this->bd}mtto_almacen_area ar ON a.Area = ar.idArea
             WHERE MONTH(m.fecha) = ? 
             AND YEAR(m.fecha) = ?
-            $whereCategoria
-            AND m.estado = 'Activa'
+            $whereExtra
             GROUP BY m.tipo_movimiento
         ";
         

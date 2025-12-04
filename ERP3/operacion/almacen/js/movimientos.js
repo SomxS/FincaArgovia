@@ -8,8 +8,7 @@ class Movimientos extends Templates {
     render() {
         this.layout();
         this.filterBar();
-        // this.showCards();
-        // this.lsMovimientos();
+      
     }
 
     layout() {
@@ -18,14 +17,17 @@ class Movimientos extends Templates {
             id: this.PROJECT_NAME,
             class: "w-full p-3",
             card: {
-                filterBar: { class: "w-full mb-3", id: `filterBar${this.PROJECT_NAME}` },
+                filterBar: { class: "w-full mb-3", id: `containerFilterBar${this.PROJECT_NAME}` },
                 container: { class: "w-full h-full", id: `container${this.PROJECT_NAME}` }
             }
         });
 
-        $(`#container${this.PROJECT_NAME}`).prepend(`
-           
+        $(`#containerFilterBar${this.PROJECT_NAME}`).prepend(`
             <div id="summaryCards${this.PROJECT_NAME}" class="mb-4"></div>
+            <div class="border rounded p-3" id="filterBar${this.PROJECT_NAME}" class="mb-4"></div>
+        `);
+
+        $(`#container${this.PROJECT_NAME}`).prepend(`            
             <div id="tableContainer${this.PROJECT_NAME}"></div>
         `);
     }
@@ -48,7 +50,29 @@ class Movimientos extends Templates {
                     lbl: "Año",
                     class: "col-12 col-md-2",
                     data: anios,
-                    onchange: "movimientos.lsMovimientos()"
+                    onchange: "movimientos.renderMovimiento()"
+                },
+                {
+                    opc: "select",
+                    id: "zona",
+                    lbl: "Zona",
+                    class: "col-12 col-md-2",
+                    data: [
+                        { id: "Todos", valor: "Todas las zonas" },
+                        ...zonas
+                    ],
+                    onchange: "movimientos.renderMovimiento()"
+                },
+                {
+                    opc: "select",
+                    id: "area",
+                    lbl: "Área",
+                    class: "col-12 col-md-2",
+                    data: [
+                        { id: "Todos", valor: "Todas las áreas" },
+                        ...areas
+                    ],
+                    onchange: "movimientos.renderMovimiento()"
                 },
                 {
                     opc: "select",
@@ -57,7 +81,7 @@ class Movimientos extends Templates {
                     class: "col-12 col-md-2",
                     data: [
                         { id: "Todos", valor: "Todas las categorías" },
-                        ...categorias_movimientos
+                        ...categorias
                     ],
                     onchange: "movimientos.renderMovimiento()"
                 }
@@ -65,12 +89,9 @@ class Movimientos extends Templates {
         });
 
         const mesActual = moment().month() + 1;
-        const anioActual = moment().year();
         
         setTimeout(() => {
             $(`#filterBar${this.PROJECT_NAME} #mes`).val(mesActual).trigger("change");
-            // $(`#filterBar${this.PROJECT_NAME} #anio`).val(anioActual).trigger("change");
-            // $(`#filterBar${this.PROJECT_NAME} #categoria`).val("Todos").trigger("change");
         }, 100);
     }
 
@@ -83,6 +104,8 @@ class Movimientos extends Templates {
 
         const mes       = $(`#filterBar${this.PROJECT_NAME} #mes`).val();
         const anio      = $(`#filterBar${this.PROJECT_NAME} #anio`).val();
+        const zona      = $(`#filterBar${this.PROJECT_NAME} #zona`).val();
+        const area      = $(`#filterBar${this.PROJECT_NAME} #area`).val();
         const categoria = $(`#filterBar${this.PROJECT_NAME} #categoria`).val();
 
 
@@ -92,6 +115,8 @@ class Movimientos extends Templates {
                 opc: "getResumen",
                 mes: mes,
                 anio: anio,
+                zona: zona,
+                area: area,
                 categoria: categoria
             }
         });
@@ -150,25 +175,28 @@ class Movimientos extends Templates {
             parent: `tableContainer${this.PROJECT_NAME}`,
             idFilterBar: `filterBar${this.PROJECT_NAME}`,
             data: {
-                opc: "lsMovimientos",
+                opc: "lsProducts",
               
             },
             coffeesoft: true,
             conf: { datatable: true, pag: 15 },
             attr: {
                 id: `tb${this.PROJECT_NAME}`,
-                theme: "corporativo",
+                theme: "light",
+                striped:true,
                 title: "Historial de Movimientos",
                 subtitle: "Mostrando movimientos por categoría",
-                center: [1, 2, 3, 5, 6, 7]
+                center: [1, 2, 3, 5, 6, 7,8]
             }
         });
     }
 
 
     async renderCards(){
-        const mes = $(`#filterBar${this.PROJECT_NAME} #mes`).val();
-        const anio = $(`#filterBar${this.PROJECT_NAME} #anio`).val();
+        const mes       = $(`#filterBar${this.PROJECT_NAME} #mes`).val();
+        const anio      = $(`#filterBar${this.PROJECT_NAME} #anio`).val();
+        const zona      = $(`#filterBar${this.PROJECT_NAME} #zona`).val();
+        const area      = $(`#filterBar${this.PROJECT_NAME} #area`).val();
         const categoria = $(`#filterBar${this.PROJECT_NAME} #categoria`).val();
 
         try {
@@ -178,6 +206,8 @@ class Movimientos extends Templates {
                     opc: "lsMovimientos",
                     mes: mes,
                     anio: anio,
+                    zona: zona,
+                    area: area,
                     categoria: categoria
                 }
             });
@@ -228,13 +258,13 @@ class Movimientos extends Templates {
 
         const cardBase = isDark
             ? "bg-[#1F2A37] text-white rounded-lg border border-gray-700"
-            : "bg-white text-gray-800 rounded-lg border";
+            : " text-gray-800 rounded-lg border";
 
         const titleColor = isDark ? "text-gray-300" : "text-gray-600";
 
         const container = $("<div>", {
             id: opts.id,
-            class: `grid grid-cols-1 md:grid-cols-4 gap-4 px-2 ${opts.class}`
+            class: `grid grid-cols-1 md:grid-cols-4 gap-4 ${opts.class}`
         });
 
         let hasLucideIcons = false;

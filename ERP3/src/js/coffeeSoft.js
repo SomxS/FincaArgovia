@@ -1919,7 +1919,6 @@ class Components extends Complements {
         `).appendTo("head");
     }
 
-  
 
     setupExpandableConcentrado(tableId) {
         $(`#${tableId} .expandable-row`).on('click', function() {

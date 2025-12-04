@@ -113,7 +113,7 @@ class Main extends Templates {
                     lucideIcon: "arrow-left-right",
                     active: true,
 
-                    // onClick: () => movimientos.render()
+                    onClick: () => movimientos.renderMovimiento()
                 },
                 {
                     id: "catalogo",
@@ -126,8 +126,6 @@ class Main extends Templates {
         });
     }
 }
-
-
 
 class Productos extends Templates {
     constructor(link, div_modulo) {

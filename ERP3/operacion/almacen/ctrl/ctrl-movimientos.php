@@ -7,7 +7,7 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 
 require_once '../mdl/mdl-movimientos.php';
-
+require_once '../../../conf/coffeSoft.php';
 class ctrl extends mdl {
 
     function init() {
@@ -15,6 +15,41 @@ class ctrl extends mdl {
             'categorias' => $this->lsCategorias(),
             'meses'      => $this->lsMeses(),
             'anios'      => $this->lsAnios()
+        ];
+    }
+
+    function lsProducts(){
+
+        $mes       = $_POST['mes'] ?? date('n');
+        $anio      = $_POST['anio'] ?? date('Y');
+        $zona      = $_POST['zona'] ?? 'Todos';
+        $area      = $_POST['area'] ?? 'Todos';
+        $categoria = $_POST['categoria'] ?? 'Todos';
+
+        $ls   = $this->listMovimientos([$mes, $anio, $zona, $area, $categoria]);
+        $__row = [];
+
+        foreach ($ls as $item) {
+            $__row[] = [
+                'id'          => $item['id_movimiento'],
+                'Folio'       => $item['folio'],
+                'Fecha'       => formatSpanishDate($item['fecha_creacion']),
+                'Tipo'        => renderTipoMovimiento($item['tipo_movimiento']),
+                'Producto'    => $item['nombre_producto'],
+               
+                'Área'         => $item['nombre_area'] ?? 'N/A',
+                'Cantidad'     => renderCantidad($item['cantidad'], $item['tipo_movimiento']),
+                'Inicial'      => $item['stock_anterior'],
+                'Stock'        => $item['stock_resultante'],
+                'Responsable'  => $item['user_id'] ?? 'N/A',
+                'Departamento' => $item['nombre_zona'] ?? 'N/A',
+
+                'opc'         => 0
+            ];
+        }
+
+        return [
+            'row' => $__row,
         ];
     }
 
@@ -95,7 +130,13 @@ class ctrl extends mdl {
     }
 
     function getResumen() {
-        $data = $this->getResumenMovimientos([ $_POST['mes'],  $_POST['anio'],  $_POST['categoria']]);
+        $mes       = $_POST['mes'] ?? date('n');
+        $anio      = $_POST['anio'] ?? date('Y');
+        $zona      = $_POST['zona'] ?? 'Todos';
+        $area      = $_POST['area'] ?? 'Todos';
+        $categoria = $_POST['categoria'] ?? 'Todos';
+
+        $data = $this->getResumenMovimientos([$mes, $anio, $zona, $area, $categoria]);
         
         $totalMovimientos = 0;
         $entradas         = 0;
@@ -114,7 +155,6 @@ class ctrl extends mdl {
         $balance = $entradas - $salidas;
 
         return [
-            $data,
             'total'    => $totalMovimientos,
             'entradas' => $entradas,
             'salidas'  => $salidas,
@@ -128,9 +168,9 @@ class ctrl extends mdl {
 function renderTipoMovimiento($tipo) {
     switch ($tipo) {
         case 'Entrada':
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-green-100 text-green-700 min-w-[100px] text-center">↑ Entrada</span>';
+            return '<span class="inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-green-100 text-green-700  min-w-[80px] text-center">↑ Entrada</span>';
         case 'Salida':
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">↓ Salida</span>';
+            return '<span class="inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-red-100 text-red-700 min-w-[80px] text-center">↓ Salida</span>';
         default:
             return $tipo;
     }
@@ -138,11 +178,11 @@ function renderTipoMovimiento($tipo) {
 
 function renderCantidad($cantidad, $tipo) {
     $color = ($tipo == 'Entrada') ? 'text-green-600' : 'text-red-600';
-    $signo = ($cantidad >= 0) ? '+' : '';
+    $signo = ($tipo == 'Entrada') ?  '+' : '-';
     
     return [
         'html'  => '<span class="' . $color . ' font-bold">' . $signo . $cantidad . '</span>',
-        'class' => 'text-center'
+        'class' => 'text-center '
     ];
 }
 
