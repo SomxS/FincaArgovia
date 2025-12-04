@@ -12,7 +12,7 @@
 /* --------------------------
 > TARJETA POS
 ----------------------------*/
-.grid-container {
+/* .grid-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -68,9 +68,10 @@
   cursor: not-allowed;
   pointer-events: none;
   opacity: 0.5;
-  filter: grayscale(100%);
+  filter: grayscale(100%); 
 }
-/**/
+  */
+
 
 
 
@@ -100,7 +101,7 @@
 }
 
 .bg-secondary {
- background: #0F172A !important;
+ background: #636363 !important;
  color: white !important;
 }
 
@@ -120,7 +121,7 @@
    background: #F8F9FA;
 } 
 */
-
+/* 
 .bg-default-gv {
    background: #F2F2F2;
    color: #200004;
@@ -150,7 +151,7 @@
 .bg-default-3 {
     color: #828282;
     background: #EBEBEB;
-}
-.line-d{
+} */
+/* .line-d{
        border: 2px dashed #D6A8FD;
-}
+} */
