@@ -19,15 +19,16 @@ class Navbar {
         this.parent = $(this.settings.parent);
 
         const navbarHtml = `
-            <nav class="bg-[#7C5031] fixed top-0 left-0 w-full px-4 py-3 h-16 z-50 shadow flex items-center justify-between">
+            <nav class="bg-[#FAFCFF] border-bottom  w-full px-4 py-3 h-16  flex items-center justify-between">
                 <div class="flex items-center space-x-2">
-                    <button id="toggleSidebar" class="text-white text-2xl">☰</button>
+                    <button id="toggleSidebar" class="text-2xl">☰</button>
+                    <span class='text-dark text-2xl font-bold'>Inventario</span>
                 </div>
                 <ul class="hidden md:flex flex-1 justify-end space-x-6">
                     <li class="invisible"><a href="#" class="hover:text-gray-400">Inicio</a></li>
                     <li class="invisible"><a href="#" class="hover:text-gray-400">Servicios</a></li>
                     <li>
-                        <button id="btnAppsMenu" class="text-white hover:bg-white/10 p-2 rounded-full transition-all duration-200" title="Aplicaciones">
+                        <button id="btnAppsMenu" class=" p-2 rounded-full transition-all duration-200" title="Aplicaciones">
                             <i class="icon-th-large-3 text-xl"></i>
                         </button>
                     </li>
@@ -37,7 +38,7 @@ class Navbar {
                     <img src="${this.settings.imgPerfil}" alt="Usuario" class="w-10 h-10 rounded-full border-2 border-white" />
                 </button>
             </nav>
-            <div class="relative mt-16 z-50">
+            <div class="relative mt-16 z-50 d-none">
                 <div id="appsMenuDropdown" class="absolute right-16 w-80 bg-white rounded-2xl shadow-2xl opacity-0 scale-95 invisible transition-all duration-200 ease-out p-6">
                     <div class="grid grid-cols-3 gap-3">
                         <a href="/dev/finanzas/" class="flex flex-col items-center p-1 hover:bg-gray-100 rounded-xl transition-all duration-200 group">
