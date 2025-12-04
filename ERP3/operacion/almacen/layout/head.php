@@ -23,8 +23,15 @@
     <link rel="stylesheet" href="../../src/plugin/select2/bootstrap/select2-bootstrap-5-theme.min.css">
 
     <!--PERSONALIZADO-->
-    <link rel="stylesheet" href="../../src/css/navbar.css">
-   
+    <link rel="stylesheet" href="../../src/css/general.css">
+    <link rel="stylesheet" href="../../src/css/colors.css">
+    <link rel="stylesheet" href="../../src/css/table.css">
+    <link rel="stylesheet" href="../../src/css/buttons.css">
+    <link rel="stylesheet" href="../../src/css/background.css">
+    <link rel="stylesheet" href="../../src/css/text.css">
+    <link rel="stylesheet" href="../../src/css/style.css">
+    <link rel="stylesheet" href="../../src/css/sidebar.css">
+
     <!-- CDN TAILWIND -->
     <script src="https://cdn.tailwindcss.com"></script>
 

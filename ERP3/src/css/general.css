@@ -11,10 +11,47 @@ body {
   /* font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; */
 }
 
+
+
+main {
+    height: calc(100vh - 50px);
+    display: flex;
+}
+
+main > #main__content {
+    flex: 1;
+    max-height: 100%;
+    padding: 20px;
+    transition: all 0.5s ease;
+    overflow-y: scroll;
+}
+
+main > #main__content > form,
+main > #main__content > div {
+    background-color: var(--aliceblue);
+    margin: 0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+@media (max-width: 500px) {
+    main > #main__content.active {
+        flex: 0;
+        display: none;
+    }
+    main > #main__content {
+        padding: 0;
+    }
+    main > #main__content > form,
+    main > #main__content > div {
+        padding: 0;
+    }
+} 
+
+
 #root{
  min-height: calc(100vh - calc(4rem + 1px) - calc(4rem + 1px));
 }
-
 
 .pointer {
   cursor: pointer;
@@ -43,14 +80,6 @@ span.select2-container {
 .line {
   border: 1.5px solid #e3ebf6;
   border-radius: 0.25rem;
-  padding: 1rem 1rem;
-}
-
-.block {
-  border: 1px solid #dbe0e4;
-  margin-bottom: 15px;
-  border-radius: 0.25rem;
-  float: left;
   padding: 1rem 1rem;
 }
 
