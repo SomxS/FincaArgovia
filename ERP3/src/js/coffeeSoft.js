@@ -1672,6 +1672,16 @@ class Components extends Complements {
             defaults.color_row_alt = "bg-gray-100";
         }
 
+        else if(options.theme === 'light') {
+            defaults.color_th      = "text-gray-600";
+            defaults.color_row     = "",
+            defaults.color_group   = "bg-gray-100 ";
+            defaults.class         = "w-full text-sm ";
+            defaults.border_table  = "border rounded-lg  border-gray-300";
+            defaults.border_row    = "border-t border-gray-300";
+            defaults.color_row_alt = "bg-gray-50";
+        }
+
         else if (options.theme === 'shadcdn') {
             defaults.color_th = "bg-[#111827] text-white";
             defaults.color_row = "bg-white text-[#111827]";
