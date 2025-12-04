@@ -91,7 +91,7 @@ class Category extends Templates {
                     opc: "button",
                     class: "col-12 col-md-3",
                     id: "btnNewCategory",
-                    text: "Nueva Categoría",
+                    text: "Nueva Presentación",
                     onClick: () => this.addCategory()
                 }
             ]

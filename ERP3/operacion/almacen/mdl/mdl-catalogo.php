@@ -17,12 +17,13 @@ class mdl extends CRUD {
             SELECT 
                 idcategoria as id,
                 nombreCategoria as valor,
+                DATE_FORMAT(date_creation, '%d/%m/%Y') as date_creation,
                 active
             FROM {$this->bd}mtto_categoria
-            WHERE active = 1
+            WHERE active = ?
             ORDER BY idcategoria DESC
         ";
-        return $this->_Read(null, $array);
+        return $this->_Read($query, $array);
     }
 
     function getCategoryById($array) {
