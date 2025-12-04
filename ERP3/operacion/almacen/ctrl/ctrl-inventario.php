@@ -47,8 +47,6 @@ class ctrl extends mdl {
                 ]; 
             }
 
-
-
             $rows[] = [
                 'id'              => $item['id_movimiento'],
                 'Folio'           => $item['folio'],

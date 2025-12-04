@@ -29,3 +29,24 @@
 <!-- Layout Components -->
 <script src="../../src/js/navbar.js"></script>
 <script src="../../src/js/sidebar.js"></script>
+
+<style>
+    /* Select2 detrás de modales */
+    .select2-container,
+    .select2-dropdown {
+        z-index: 1 !important;
+    }
+    
+    /* Modales siempre encima */
+    .modal-backdrop,
+    .bootbox-backdrop,
+    .swal2-container {
+        z-index: 9998 !important;
+    }
+    
+    .modal,
+    .bootbox-modal,
+    .swal2-popup {
+        z-index: 9999 !important;
+    }
+</style>
