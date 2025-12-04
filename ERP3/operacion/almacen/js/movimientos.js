@@ -1,19 +1,5 @@
-let api = 'ctrl/ctrl-movimientos.php';
-let app;
 
-let almacenes, meses, anios;
-
-$(async () => {
-    const data = await useFetch({ url: api, data: { opc: "init" } });
-    almacenes = data.almacenes;
-    meses = data.meses;
-    anios = data.anios;
-
-    app = new App(api, "root");
-    app.render();
-});
-
-class App extends Templates {
+class Movimientos extends Templates {
     constructor(link, div_modulo) {
         super(link, div_modulo);
         this.PROJECT_NAME = "movimientos";
@@ -22,13 +8,13 @@ class App extends Templates {
     render() {
         this.layout();
         this.filterBar();
-        this.summaryCards();
-        this.lsMovimientos();
+        // this.showCards();
+        // this.lsMovimientos();
     }
 
     layout() {
         this.primaryLayout({
-            parent: "root",
+            parent: "container-movimientos",
             id: this.PROJECT_NAME,
             class: "w-full p-3",
             card: {
@@ -52,9 +38,9 @@ class App extends Templates {
                     opc: "select",
                     id: "mes",
                     lbl: "Mes",
-                    class: "col-12 col-md-3",
+                    class: "col-12 col-md-2",
                     data: meses,
-                    onchange: "app.lsMovimientos()"
+                    onchange: "movimientos.renderMovimiento()"
                 },
                 {
                     opc: "select",
@@ -62,18 +48,18 @@ class App extends Templates {
                     lbl: "Año",
                     class: "col-12 col-md-2",
                     data: anios,
-                    onchange: "app.lsMovimientos()"
+                    onchange: "movimientos.lsMovimientos()"
                 },
                 {
                     opc: "select",
-                    id: "almacen",
-                    lbl: "Almacén",
-                    class: "col-12 col-md-3",
+                    id: "categoria",
+                    lbl: "Categoría",
+                    class: "col-12 col-md-2",
                     data: [
-                        { id: "Todos", valor: "Todos los almacenes" },
-                        ...almacenes
+                        { id: "Todos", valor: "Todas las categorías" },
+                        ...categorias_movimientos
                     ],
-                    onchange: "app.lsMovimientos()"
+                    onchange: "movimientos.renderMovimiento()"
                 }
             ]
         });
@@ -83,115 +69,214 @@ class App extends Templates {
         
         setTimeout(() => {
             $(`#filterBar${this.PROJECT_NAME} #mes`).val(mesActual).trigger("change");
-            $(`#filterBar${this.PROJECT_NAME} #anio`).val(anioActual).trigger("change");
+            // $(`#filterBar${this.PROJECT_NAME} #anio`).val(anioActual).trigger("change");
+            // $(`#filterBar${this.PROJECT_NAME} #categoria`).val("Todos").trigger("change");
         }, 100);
     }
 
-    summaryCards() {
-        const container = $("<div>", {
-            id: `cards${this.PROJECT_NAME}`,
-            class: "grid grid-cols-1 md:grid-cols-4 gap-4 px-2"
-        });
-
-        const cards = [
-            {
-                id: "cardTotal",
-                title: "Total Movimientos",
-                value: "0",
-                icon: "icon-box",
-                color: "text-blue-600"
-            },
-            {
-                id: "cardEntradas",
-                title: "Entradas",
-                value: "0",
-                icon: "icon-up-circled",
-                color: "text-green-600"
-            },
-            {
-                id: "cardSalidas",
-                title: "Salidas",
-                value: "0",
-                icon: "icon-down-circled",
-                color: "text-red-600"
-            },
-            {
-                id: "cardBalance",
-                title: "Balance",
-                value: "0",
-                icon: "icon-chart-line",
-                color: "text-purple-600"
-            }
-        ];
-
-        cards.forEach(card => {
-            const cardElement = $("<div>", {
-                class: "bg-white rounded-lg border p-4"
-            }).html(`
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-gray-600 mb-1">${card.title}</p>
-                        <p id="${card.id}" class="text-2xl font-bold ${card.color}">0</p>
-                    </div>
-                    <div class="text-3xl ${card.color}">
-                        <i class="${card.icon}"></i>
-                    </div>
-                </div>
-            `);
-            container.append(cardElement);
-        });
-
-        $(`#summaryCards${this.PROJECT_NAME}`).html(container);
+    renderMovimiento(){
+        this.showCards()
+        this.lsMovimientos()
     }
 
-    async lsMovimientos() {
-        const mes = $(`#filterBar${this.PROJECT_NAME} #mes`).val();
-        const anio = $(`#filterBar${this.PROJECT_NAME} #anio`).val();
-        const almacen = $(`#filterBar${this.PROJECT_NAME} #almacen`).val();
+    async showCards() {
+
+        const mes       = $(`#filterBar${this.PROJECT_NAME} #mes`).val();
+        const anio      = $(`#filterBar${this.PROJECT_NAME} #anio`).val();
+        const categoria = $(`#filterBar${this.PROJECT_NAME} #categoria`).val();
+
 
         const response = await useFetch({
             url: this._link,
             data: {
-                opc: "lsMovimientos",
+                opc: "getResumen",
                 mes: mes,
                 anio: anio,
-                almacen: almacen
+                categoria: categoria
             }
         });
 
-        if (response.resumen) {
-            $("#cardTotal").text(response.resumen.total);
-            $("#cardEntradas").text(response.resumen.entradas);
-            $("#cardSalidas").text(response.resumen.salidas);
-            
-            const balance = response.resumen.balance;
-            const balanceColor = balance >= 0 ? "text-green-600" : "text-red-600";
-            const balanceSign = balance >= 0 ? "+" : "";
-            
-            $("#cardBalance")
-                .text(balanceSign + balance)
-                .removeClass("text-green-600 text-red-600 text-purple-600")
-                .addClass(balanceColor);
-        }
+
+
+        this.infoCards({
+            parent: `summaryCards${this.PROJECT_NAME}`,
+            json: [
+                {
+                    id: "cardTotal",
+                    title: "Total Movimientos",
+                    data: {
+                        value: response.total,
+                        color: "text-blue-600"
+                    },
+                    lucideIcon: "package"
+                },
+                {
+                    id: "cardEntradas",
+                    title: "Entradas",
+                    lucideIcon: "trending-up",
+                 
+                    data: {
+                        value: response.entradas,
+                        color: "text-green-600"
+                    }
+                },
+                {
+                    id: "cardSalidas",
+                    title: "Salidas",
+                    data: {
+                        value: response.salidas,
+                        color: "text-red-600"
+                    },
+                    lucideIcon: "trending-down"
+                },
+                // {
+                //     id: "cardBalance",
+                //     title: "Balance",
+                //     data: {
+                //         // value: balanceSign + balance,
+                //         // color: balanceColor
+                //     },
+                //     lucideIcon: "activity"
+                // }
+            ]
+
+        });
+    }
+
+    async lsMovimientos() {
+      
 
         this.createTable({
             parent: `tableContainer${this.PROJECT_NAME}`,
             idFilterBar: `filterBar${this.PROJECT_NAME}`,
             data: {
                 opc: "lsMovimientos",
-                mes: mes,
-                anio: anio,
-                almacen: almacen
+              
             },
             coffeesoft: true,
-            conf: { datatable: true, pag: 5 },
+            conf: { datatable: true, pag: 15 },
             attr: {
                 id: `tb${this.PROJECT_NAME}`,
                 theme: "corporativo",
                 title: "Historial de Movimientos",
-                subtitle: "Mostrando máximo 5 movimientos inicialmente",
-                center: [1, 2, 3, 5, 6]
+                subtitle: "Mostrando movimientos por categoría",
+                center: [1, 2, 3, 5, 6, 7]
             }
         });
+    }
+
+
+    async renderCards(){
+        const mes = $(`#filterBar${this.PROJECT_NAME} #mes`).val();
+        const anio = $(`#filterBar${this.PROJECT_NAME} #anio`).val();
+        const categoria = $(`#filterBar${this.PROJECT_NAME} #categoria`).val();
+
+        try {
+            const response = await useFetch({
+                url: this._link,
+                data: {
+                    opc: "lsMovimientos",
+                    mes: mes,
+                    anio: anio,
+                    categoria: categoria
+                }
+            });
+
+            if (response.resumen) {
+                $("#cardTotal").text(response.resumen.total);
+                $("#cardEntradas").text(response.resumen.entradas);
+                $("#cardSalidas").text(response.resumen.salidas);
+
+                const balance = response.resumen.balance;
+                const balanceColor = balance >= 0 ? "text-green-600" : "text-red-600";
+                const balanceSign = balance >= 0 ? "+" : "";
+
+                $("#cardBalance")
+                    .text(balanceSign + balance)
+                    .removeClass("text-green-600 text-red-600 text-purple-600")
+                    .addClass(balanceColor);
+            }
+        } catch (error) {
+            console.error('Error al cargar movimientos:', error);
+            alert({
+                icon: 'error',
+                title: 'Error de conexión',
+                text: 'No se pudieron cargar los movimientos. Intente nuevamente.'
+            });
+
+            $("#cardTotal").text("0");
+            $("#cardEntradas").text("0");
+            $("#cardSalidas").text("0");
+            $("#cardBalance").text("0").removeClass("text-green-600 text-red-600").addClass("text-gray-600");
+            return;
+        }
+    }
+
+    // Componente.
+    infoCards(options) {
+        const defaults = {
+            parent: "root",
+            id: "infoCards",
+            class: "",
+            theme: "light",
+            json: [],
+            onClick: () => { }
+        };
+
+        const opts = Object.assign({}, defaults, options);
+        const isDark = opts.theme === "dark";
+
+        const cardBase = isDark
+            ? "bg-[#1F2A37] text-white rounded-lg border border-gray-700"
+            : "bg-white text-gray-800 rounded-lg border";
+
+        const titleColor = isDark ? "text-gray-300" : "text-gray-600";
+
+        const container = $("<div>", {
+            id: opts.id,
+            class: `grid grid-cols-1 md:grid-cols-4 gap-4 px-2 ${opts.class}`
+        });
+
+        let hasLucideIcons = false;
+
+        opts.json.forEach(card => {
+            let iconHtml = '';
+
+            if (card.lucideIcon) {
+                iconHtml = `<i data-lucide="${card.lucideIcon}" class="w-8 h-8"></i>`;
+                hasLucideIcons = true;
+            } else if (card.icon) {
+                iconHtml = `<i class="${card.icon}"></i>`;
+            } else {
+                iconHtml = `<i class="icon-chart-line"></i>`;
+            }
+
+            const cardElement = $("<div>", {
+                class: `${cardBase} p-4 hover:shadow-lg transition-shadow cursor-pointer`
+            }).html(`
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm ${titleColor} mb-1">${card.title}</p>
+                        <p id="${card.id || ''}" class="text-2xl font-bold ${card.data?.color || 'text-gray-800'}">${card.data?.value || '0'}</p>
+                        ${card.data?.description ? `<p class="text-xs mt-1 ${card.data?.color || 'text-gray-500'}">${card.data.description}</p>` : ''}
+                    </div>
+                    <div class="text-3xl ${card.data?.color || 'text-gray-400'}">
+                        ${iconHtml}
+                    </div>
+                </div>
+            `);
+
+            if (typeof opts.onClick === "function") {
+                cardElement.on("click", () => opts.onClick(card));
+            }
+
+            container.append(cardElement);
+        });
+
+        $(`#${opts.parent}`).html(container);
+
+        if (hasLucideIcons && typeof lucide !== 'undefined' && lucide.createIcons) {
+            lucide.createIcons();
+        }
     }
 }

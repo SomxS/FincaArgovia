@@ -12,18 +12,36 @@ class ctrl extends mdl {
 
     function init() {
         return [
-            'almacenes' => $this->lsAlmacenes(),
-            'meses'     => $this->lsMeses(),
-            'anios'     => $this->lsAnios()
+            'categorias' => $this->lsCategorias(),
+            'meses'      => $this->lsMeses(),
+            'anios'      => $this->lsAnios()
         ];
     }
 
     function lsMovimientos() {
-        $mes     = $_POST['mes'] ?? date('n');
-        $anio    = $_POST['anio'] ?? date('Y');
-        $almacen = $_POST['almacen'] ?? 'Todos';
+        $mes       = $this->util->sql(['mes' => $_POST['mes'] ?? date('n')])['data'][0];
+        $anio      = $this->util->sql(['anio' => $_POST['anio'] ?? date('Y')])['data'][0];
+        $categoria = $this->util->sql(['categoria' => $_POST['categoria'] ?? 'Todos'])['data'][0];
 
-        $ls   = $this->listMovimientos([$mes, $anio, $almacen]);
+        if (!is_numeric($mes) || $mes < 1 || $mes > 12) {
+            return [
+                'status' => 400,
+                'message' => 'Mes inválido',
+                'row' => [],
+                'resumen' => ['total' => 0, 'entradas' => 0, 'salidas' => 0, 'balance' => 0]
+            ];
+        }
+
+        if (!is_numeric($anio) || $anio < 2000 || $anio > 2100) {
+            return [
+                'status' => 400,
+                'message' => 'Año inválido',
+                'row' => [],
+                'resumen' => ['total' => 0, 'entradas' => 0, 'salidas' => 0, 'balance' => 0]
+            ];
+        }
+
+        $ls   = $this->listMovimientos([$mes, $anio, $categoria]);
         $rows = [];
 
         $movimientosAgrupados = [];
@@ -36,7 +54,8 @@ class ctrl extends mdl {
                     'folio'            => $item['folio'],
                     'fecha'            => $item['fecha'],
                     'tipo_movimiento'  => $item['tipo_movimiento'],
-                    'nombre_almacen'   => $item['nombre_almacen'],
+                    'nombre_categoria' => $item['nombre_grupo'],
+                    'responsable'      => $item['responsable'] ?? 'N/A',
                     'productos'        => [],
                     'total_cantidad'   => 0
                 ];
@@ -55,27 +74,28 @@ class ctrl extends mdl {
             }
 
             $rows[] = [
-                'id'       => $mov['id_movimiento'],
-                'Folio'    => $mov['folio'],
-                'Fecha'    => $mov['fecha'],
-                'Tipo'     => renderTipoMovimiento($mov['tipo_movimiento']),
-                'Producto' => $productos,
-                'Cantidad' => renderCantidad($cantidad, $mov['tipo_movimiento']),
-                'Almacén'  => $mov['nombre_almacen'] ?? 'N/A',
-                'opc'      => 0
+                'id'         => $mov['id_movimiento'],
+                'Folio'      => $mov['folio'],
+                'Fecha'      => $mov['fecha'],
+                'Tipo'       => renderTipoMovimiento($mov['tipo_movimiento']),
+                'Producto'   => $productos,
+                'Cantidad'   => renderCantidad($cantidad, $mov['tipo_movimiento']),
+                'Categoría'  => $mov['nombre_categoria'],
+                'Responsable' => $mov['responsable'],
+                'opc'        => 0
             ];
         }
 
-        $resumen = $this->getResumen([$mes, $anio, $almacen]);
+        // $resumen = $this->getResumen([$mes, $anio, $categoria]);
 
         return [
             'row'     => $rows,
-            'resumen' => $resumen
+            // 'resumen' => $resumen
         ];
     }
 
-    function getResumen($params) {
-        $data = $this->getResumenMovimientos($params);
+    function getResumen() {
+        $data = $this->getResumenMovimientos([ $_POST['mes'],  $_POST['anio'],  $_POST['categoria']]);
         
         $totalMovimientos = 0;
         $entradas         = 0;
@@ -94,6 +114,7 @@ class ctrl extends mdl {
         $balance = $entradas - $salidas;
 
         return [
+            $data,
             'total'    => $totalMovimientos,
             'entradas' => $entradas,
             'salidas'  => $salidas,

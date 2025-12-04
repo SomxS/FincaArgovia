@@ -8,6 +8,12 @@ let inventario, captura;
 
 let tipoMovimiento, productos;
 
+// Movimientos.
+let api_movimientos = 'ctrl/ctrl-movimientos.php';
+let movimientos;
+
+let categorias_movimientos, meses, anios;
+
 // Catalogo
 let api_catalogo = 'ctrl/ctrl-catalogo.php';
 let  cataloge, category, area, zone;
@@ -35,6 +41,16 @@ $(async () => {
     inventario = new Inventario(api_inventario, "root");
     captura = new CapturaMovimiento(api_inventario, "root");
     inventario.render();
+    
+    // Movimientos.
+
+    const req = await useFetch({ url: api_movimientos, data: { opc: "init" } });
+    categorias_movimientos = req.categorias;
+    meses = req.meses;
+    anios = req.anios;
+
+    movimientos = new Movimientos(api_movimientos, "root");
+    movimientos.render();
 
 
 
@@ -89,13 +105,14 @@ class Main extends Templates {
                     id: "inventario",
                     tab: "Inventario",
                     lucideIcon: "clipboard-list",
-                    active: true,
                     onClick: () => inventario.render()
                 },
                 {
                     id: "movimientos",
                     tab: "Movimientos",
                     lucideIcon: "arrow-left-right",
+                    active: true,
+
                     // onClick: () => movimientos.render()
                 },
                 {
@@ -115,7 +132,7 @@ class Main extends Templates {
 class Productos extends Templates {
     constructor(link, div_modulo) {
         super(link, div_modulo);
-        this.PROJECT_NAME = "almacen";
+        this.PROJECT_NAME = "Products";
     }
 
     render() {

@@ -90,7 +90,8 @@ class mdl extends CRUD {
             LEFT JOIN {$this->bd}mtto_almacen_zona z ON a.id_zona = z.id_zona
             LEFT JOIN {$this->bd}departamento d ON a.id_dpto = d.id
             LEFT JOIN {$this->bd}mtto_proveedores p ON a.id_Proveedor = p.idProveedor
-            WHERE 1=1
+            WHERE 1 = 1
+            
         ";
 
         $params = [];

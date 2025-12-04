@@ -38,12 +38,12 @@ class ctrl extends mdl {
                 [
                     'class'   => 'btn btn-sm btn-primary me-1',
                     'html'    => '<i class="icon-pencil"></i>',
-                    'onclick' => 'app.editMaterial(' . $item['id'] . ')'
+                    'onclick' => 'products.editMaterial(' . $item['id'] . ')'
                 ],
                 [
                     'class'   => 'btn btn-sm btn-danger',
                     'html'    => '<i class="icon-trash"></i>',
-                    'onclick' => 'app.deleteMaterial(' . $item['id'] . ')'
+                    'onclick' => 'products.deleteMaterial(' . $item['id'] . ')'
                 ]
             ];
 
@@ -179,8 +179,8 @@ function renderProductImage($foto, $nombre) {
 
     $img = !empty($src)
         ? '<img src="' . htmlspecialchars($src) . '" alt="Imagen Material" class="w-8 h-8 bg-gray-500 rounded-md object-cover" />'
-        : '<div class="w-12 h-12 bg-blue-100 rounded-sm flex items-center justify-center">
-                <i class="icon-picture-5 text-blue-600"></i>
+        : '<div class="w-10 h-10 bg-gray-200 rounded-sm flex items-center justify-center">
+                <i class="icon-picture-5 text-gray-600"></i>
            </div>';
 
     return '

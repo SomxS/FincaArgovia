@@ -63,6 +63,7 @@ require_once('layout/core-libraries.php');
     <script src="js/almacen.js?t=<?php echo time(); ?>"></script>
     <script src="js/inventario.js?t=<?php echo time(); ?>"></script>
     <script src="js/catalogo.js?t=<?php echo time(); ?>"></script>
+    <script src="js/movimientos.js?t=<?php echo time(); ?>"></script>
 
 </body>
 </html>

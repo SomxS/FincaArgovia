@@ -39,7 +39,15 @@ class ctrl extends mdl {
                     'html'    => '<i class="icon-cancel"></i>',
                     'onclick' => 'inventario.cancelMovimiento(' . $item['id_movimiento'] . ')'
                 ];
+            }else{
+               $a[] = [
+                    'class'   => 'btn btn-sm btn-primary disabled me-1',
+                    'html'    => '<i class="icon-pencil"></i>',
+                    // 'onclick' => 'captura.render(' . $item['id_movimiento'] . ')'
+                ]; 
             }
+
+
 
             $rows[] = [
                 'id'              => $item['id_movimiento'],

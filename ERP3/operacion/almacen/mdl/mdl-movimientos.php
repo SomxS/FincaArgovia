@@ -12,13 +12,21 @@ class mdl extends CRUD {
         $this->bd = "rfwsmqex_mtto.";
     }
 
-    function listMovimientos($array) {
-        $mes = $array[0];
-        $anio = $array[1];
-        $almacen = $array[2];
+    /*
+     * Índices recomendados para optimización:
+     * 
+     * ALTER TABLE mtto_almacen ADD INDEX idx_categoria (id_categoria);
+     * ALTER TABLE mtto_inventario_movimientos ADD INDEX idx_fecha_estado (fecha, estado);
+     * ALTER TABLE mtto_inventario_detalle ADD INDEX idx_movimiento_producto (id_movimiento, id_producto);
+     */
 
-        $whereAlmacen = ($almacen == 'Todos') ? '' : 'AND area.idArea = ?';
-        $params = ($almacen == 'Todos') ? [$mes, $anio] : [$mes, $anio, $almacen];
+    function listMovimientos($array) {
+        $mes       = $array[0];
+        $anio      = $array[1];
+        $categoria = $array[2];
+
+        $whereCategoria = ($categoria == 'Todos') ? '' : 'AND a.id_categoria = ?';
+        $params = ($categoria == 'Todos') ? [$mes, $anio] : [$mes, $anio, $categoria];
 
         $query = "
             SELECT 
@@ -29,16 +37,22 @@ class mdl extends CRUD {
                 d.id_producto,
                 a.Equipo as nombre_producto,
                 d.cantidad,
-                area.Nombre_Area as nombre_almacen,
+                a.id_categoria as categoria_id,
+                COALESCE(cat.nombre_categoria, 'Sin categoría') AS nombre_grupo,
+                area.Nombre_Area as nombre_area,
+                u.user as responsable,
+                u.usr_estado as responsable_estado,
                 m.fecha_creacion,
                 m.estado
             FROM {$this->bd}mtto_inventario_movimientos m
             INNER JOIN {$this->bd}mtto_inventario_detalle d ON m.id_movimiento = d.id_movimiento
             INNER JOIN {$this->bd}mtto_almacen a ON d.id_producto = a.idAlmacen
             LEFT JOIN {$this->bd}mtto_almacen_area area ON a.Area = area.idArea
+            LEFT JOIN {$this->bd}categorias cat ON a.id_categoria = cat.id
+            LEFT JOIN {$this->bd}usuarios u ON m.user_id = u.idUser
             WHERE MONTH(m.fecha) = ? 
             AND YEAR(m.fecha) = ?
-            $whereAlmacen
+            $whereCategoria
             AND m.estado = 'Activa'
             ORDER BY m.fecha DESC, m.id_movimiento DESC
         ";
@@ -47,12 +61,12 @@ class mdl extends CRUD {
     }
 
     function getResumenMovimientos($array) {
-        $mes = $array[0];
-        $anio = $array[1];
-        $almacen = $array[2];
+        $mes       = $array[0];
+        $anio      = $array[1];
+        $categoria = $array[2];
 
-        $whereAlmacen = ($almacen == 'Todos') ? '' : 'AND area.idArea = ?';
-        $params = ($almacen == 'Todos') ? [$mes, $anio] : [$mes, $anio, $almacen];
+        $whereCategoria = ($categoria == 'Todos') ? '' : 'AND a.id_categoria = ?';
+        $params = ($categoria == 'Todos') ? [$mes, $anio] : [$mes, $anio, $categoria];
 
         $query = "
             SELECT 
@@ -62,10 +76,9 @@ class mdl extends CRUD {
             FROM {$this->bd}mtto_inventario_movimientos m
             INNER JOIN {$this->bd}mtto_inventario_detalle d ON m.id_movimiento = d.id_movimiento
             INNER JOIN {$this->bd}mtto_almacen a ON d.id_producto = a.idAlmacen
-            LEFT JOIN {$this->bd}mtto_almacen_area area ON a.Area = area.idArea
             WHERE MONTH(m.fecha) = ? 
             AND YEAR(m.fecha) = ?
-            $whereAlmacen
+            $whereCategoria
             AND m.estado = 'Activa'
             GROUP BY m.tipo_movimiento
         ";
@@ -73,14 +86,12 @@ class mdl extends CRUD {
         return $this->_Read($query, $params);
     }
 
-    function lsAlmacenes() {
+    function lsCategorias() {
         $query = "
-            SELECT 
-                idArea as id,
-                Nombre_Area as valor
-            FROM {$this->bd}mtto_almacen_area
-            WHERE Estado = 1
-            ORDER BY Nombre_Area ASC
+            SELECT  
+                idcategoria AS id,
+                nombreCategoria as valor
+            FROM {$this->bd}mtto_categoria  
         ";
         return $this->_Read($query, []);
     }

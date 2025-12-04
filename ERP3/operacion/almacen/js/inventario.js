@@ -125,13 +125,13 @@ class Inventario extends Templates {
     }
 
     cancelMovimiento(id, event) {
-        const row = event.target.closest('tr');
-        const folio = row.querySelectorAll('td')[0]?.innerText || '';
+        // const row = event.target.closest('tr');
+        // const folio = row.querySelectorAll('td')[0]?.innerText || '';
 
         this.swalQuestion({
             opts: {
                 title: "¿Cancelar Movimiento?",
-                html: `¿Deseas cancelar el movimiento con folio <strong>${folio}</strong>?<br>
+                html: `¿?<br>
                        Esta acción revertirá los cambios de stock realizados.`,
                 icon: "warning"
             },
@@ -339,12 +339,12 @@ class CapturaMovimiento extends Templates {
         });
 
         if (response.status === 200) {
-            alert({
-                icon: "success",
-                text: "Producto agregado",
-                timer: 1500,
-                showConfirmButton: false
-            });
+            // alert({
+            //     icon: "success",
+            //     text: "Producto agregado",
+            //     timer: 1500,
+            //     showConfirmButton: false
+            // });
 
             $("#selectProducto").val(null).trigger("change");
             $("#inputCantidad").val(1);
