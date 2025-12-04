@@ -225,10 +225,10 @@ class CapturaMovimiento extends Templates {
                 </div>
             </div>
             <div class="flex gap-2">
-                <button id="btnGuardarMovimiento" class="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition">
+                <button id="btnGuardarMovimiento" class="px-6 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-sm font-medium transition">
                     Guardar
                 </button>
-                <button id="btnCancelarCaptura" class="px-6 py-2 bg-red-400 hover:bg-red-500 text-white rounded-lg font-medium transition">
+                <button id="btnCancelarCaptura" class="px-6 py-1 bg-red-400 hover:bg-red-500 text-white rounded-sm font-medium transition">
                     Salir
                 </button>
             </div>
@@ -258,7 +258,7 @@ class CapturaMovimiento extends Templates {
         mainContent.append(leftSection, rightSection);
 
         container.append(header, mainContent);
-        $("#root").html(container);
+        $("#container-inventario").html(container);
 
         $("#btnGuardarMovimiento").on("click", () => this.guardarMovimiento());
         $("#btnCancelarCaptura").on("click", () => this.cancelarCaptura());
@@ -420,12 +420,14 @@ class CapturaMovimiento extends Templates {
             }
         });
 
+        console.log('details',detalles)
+
         const totalProductos = detalles.ls ? detalles.ls.length : 0;
         const totalUnidades = detalles.ls ? detalles.ls.reduce((sum, item) => sum + parseInt(item.cantidad), 0) : 0;
 
         const tipoColor = this.movimientoData.tipo_movimiento === 'Entrada' 
             ? 'text-green-600' 
-            : 'text-orange-600';
+            : 'text-red-600';
 
         const tipoIcon = this.movimientoData.tipo_movimiento === 'Entrada' 
             ? '↑' 
@@ -495,23 +497,18 @@ class CapturaMovimiento extends Templates {
     }
 
     cancelarCaptura() {
-        bootbox.confirm({
+        Swal.fire({
             title: "¿Cancelar Captura?",
-            message: "¿Deseas regresar sin guardar los cambios?",
-            buttons: {
-                confirm: {
-                    label: "Sí, Cancelar",
-                    className: "btn-danger"
-                },
-                cancel: {
-                    label: "No, Continuar",
-                    className: "btn-secondary"
-                }
-            },
-            callback: (result) => {
-                if (result) {
-                    inventario.render();
-                }
+            text: "¿Deseas regresar sin guardar los cambios?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "Sí, Cancelar",
+            cancelButtonText: "No, Continuar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                inventario.render();
             }
         });
     }

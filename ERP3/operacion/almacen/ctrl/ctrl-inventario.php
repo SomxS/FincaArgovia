@@ -172,7 +172,8 @@ class ctrl extends mdl {
         foreach ($ls as $item) {
             $rows[] = [
                 'id'       => $item['id_detalle'],
-                '#'                => count($rows) + 1,
+                // '#'                => count($rows) + 1,
+                '#'                => $item['id_detalle'],
                 'Producto'         => $item['nombre_producto'],
                 'Stock Actual'     => $item['stock_actual'],
                 'Cantidad'         => [
@@ -243,7 +244,9 @@ class ctrl extends mdl {
         $message   = 'Error al eliminar producto';
         
 
-        $delete    = $this->deleteDetalleMovimientoById($this->util->sql(['id_detalle' => $idDetalle], 1));
+        $values = $this->util->sql(['id_detalle' => $idDetalle], 1);
+
+        $delete    = $this->deleteDetalleMovimientoById($values);
 
         if ($delete) {
             $status = 200;
@@ -252,7 +255,9 @@ class ctrl extends mdl {
 
         return [
             'status'  => $status,
-            'message' => $message
+            'message' => $message,
+             $values,
+             $delete
         ];
     }
 

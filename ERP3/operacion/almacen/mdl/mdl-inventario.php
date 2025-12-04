@@ -94,7 +94,7 @@ class mdl extends CRUD {
         ]);
     }
 
-    function deleteDetalleMovimientoById($id) {
+    function deleteDetalleMovimientoById($array) {
         return $this->_Delete([
             'table' => "{$this->bd}mtto_inventario_detalle",
             'where' => $array['where'],

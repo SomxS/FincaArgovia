@@ -9,6 +9,10 @@ if (empty($_COOKIE["IDU"])) {
 
 require_once('layout/head.php');
 require_once('layout/core-libraries.php');
+
+
+
+
 ?>
 
 <!-- Lucide Icons -->

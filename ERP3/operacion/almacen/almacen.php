@@ -10,7 +10,26 @@ if (empty($_COOKIE["IDU"])) {
 require_once('layout/head.php');
 require_once('layout/core-libraries.php');
 ?>
-
+<style>
+    /* Select2 detrás de modales */
+    .select2-container,
+    .select2-dropdown {
+        z-index: 1 !important;
+    }
+    
+    /* Modales siempre encima */
+    .modal-backdrop,
+    .bootbox-backdrop,
+    .swal2-container {
+        z-index: 9998 !important;
+    }
+    
+    .modal,
+    .bootbox-modal,
+    .swal2-popup {
+        z-index: 9999 !important;
+    }
+</style>
 <!-- CoffeeSoft Framework -->
 <script src="../../src/js/coffeeSoft.js"></script>
 <script src="https://rawcdn.githack.com/SomxS/Grupo-Varoch/refs/heads/main/src/js/plugins.js"></script>
