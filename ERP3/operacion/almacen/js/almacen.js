@@ -54,7 +54,7 @@ class Main extends Templates {
                     lucideIcon: "package",
                     class: "mb-1",
                     active: true,
-                    onClick: () => materiales.render()
+                    onClick: () => products.render()
                 },
                 {
                     id: "inventario",
@@ -119,26 +119,26 @@ class Productos extends Templates {
                 {
                     opc: "select",
                     id: "zona",
-                    lbl: "Negocio",
+                    lbl: "Departamento",
                     class: "col-12 col-md-2",
-                    data: zonas,
-                    onchange: 'app.lsMateriales()'
+                    data: [{ id: '', valor: 'Todos' }, ...zonas],
+                    onchange: 'products.lsMateriales()'
                 },
                 {
                     opc: "select",
                     id: "categoria",
-                    lbl: "Categoría",
+                    lbl: "Presentación",
                     class: "col-12 col-md-2",
                     data: [{ id: '', valor: 'Todos' }, ...categorias],
-                    onchange: 'app.lsMateriales()'
+                    onchange: 'products.lsMateriales()'
                 },
                 {
                     opc: "select",
                     id: "area",
-                    lbl: "Área",
+                    lbl: "Grupo",
                     class: "col-12 col-md-2",
                     data: [{ id: '', valor: 'Todos' }, ...areas],
-                    onchange: 'app.lsMateriales()'
+                    onchange: 'products.lsMateriales()'
                 },
                 {
                     opc: "button",

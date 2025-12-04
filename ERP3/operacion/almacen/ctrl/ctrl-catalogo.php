@@ -298,8 +298,8 @@ class ctrl extends mdl {
 
             $rows[] = [
                 'id'              => $item['id'],
-                'Zona'            => $item['valor'],
-                'Fecha Creación'  => $item['date_creation'],
+                'Departamento'            => $item['valor'],
+                'Fecha de creación'  => $item['date_creation'],
                 'Estado'          => renderStatus($item['active']),
                 'a'               => $a
             ];

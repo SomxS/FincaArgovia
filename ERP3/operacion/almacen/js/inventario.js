@@ -230,48 +230,49 @@ class CapturaMovimiento extends Templates {
         });
 
         const header = $("<div>", {
-            class: "mb-4 pb-4 border-b flex justify-between items-center"
+            class: "mb-4 pb-4 border-b flex justify-between items-center rounded-lg p-4 "
         }).html(`
-            <div>
-                <h2 class="text-xl font-semibold flex items-center gap-2">
-                    <span>📦</span> Captura de Productos
-                </h2>
-                <p class="text-gray-400 text-sm">Folio: ${this.movimientoData.folio} | Tipo: ${this.movimientoData.tipo_movimiento}</p>
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">📦</span>
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-800">Captura de Productos</h2>
+                    <p class="text-gray-500 text-sm">Folio: ${this.movimientoData.folio} | Tipo: ${this.movimientoData.tipo_movimiento}</p>
+                </div>
             </div>
             <div class="flex gap-2">
-                <button id="btnGuardarMovimiento" class="btn btn-success">
-                    <i class="icon-floppy"></i> Guardar Lista
+                <button id="btnGuardarMovimiento" class="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition">
+                    Guardar
                 </button>
-                <button id="btnCancelarCaptura" class="btn btn-dark">
-                    <i class="icon-cancel"></i> Cancelar
+                <button id="btnCancelarCaptura" class="px-6 py-2 bg-red-400 hover:bg-red-500 text-white rounded-lg font-medium transition">
+                    Salir
                 </button>
             </div>
         `);
 
         const mainContent = $("<div>", {
-            class: "flex flex-col lg:flex-row gap-4 mb-4"
+            class: "grid grid-cols-1 lg:grid-cols-12 gap-4 mb-4"
         });
 
         const leftSection = $("<div>", {
-            class: "flex-1"
+            class: "lg:col-span-3"
         }).html(`
-            <div class="border rounded-lg p-3" id="seccionAgregarProducto"></div>
+            <div class="bg-white border rounded-lg p-4  h-full">
+                <div id="resumenMovimiento"></div>
+            </div>
         `);
 
         const rightSection = $("<div>", {
-            class: "w-full lg:w-72"
+            class: "lg:col-span-9"
         }).html(`
-            <div id="resumenMovimiento"></div>
+            <div class=" border rounded-lg p-4 ">
+            <div id="seccionAgregarProducto"></div>
+            <div id="tablaProductos"></div>
+            </div>
         `);
 
         mainContent.append(leftSection, rightSection);
 
-        const tableSection = $("<div>", {
-            id: "tablaProductos",
-            class: "w-full"
-        });
-
-        container.append(header, mainContent, tableSection);
+        container.append(header, mainContent);
         $("#root").html(container);
 
         $("#btnGuardarMovimiento").on("click", () => this.guardarMovimiento());
@@ -383,7 +384,7 @@ class CapturaMovimiento extends Templates {
                 id: "tbDetalleMovimiento",
                 theme: "light",
                 striped:true,
-                title: "Productos Agregados",
+                // title: "Productos Agregados",
                 center: [ 1, 3, 4,5]
             },
             success: () => {
@@ -440,33 +441,33 @@ class CapturaMovimiento extends Templates {
             : '↓';
 
         const resumen = $("<div>", {
-            class: "p-3 rounded-lg border sticky top-4 text-xs"
+            class: "sticky top-4"
         }).html(`
-            <h3 class="text-xs font-semibold text-gray-800 mb-2">Resumen</h3>
+            <h3 class="font-semibold text-gray-700 mb-3 pb-2 border-b">Resumen</h3>
             
-            <div class="space-y-1">
+            <div class="space-y-2">
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500 text-xs">Folio:</span>
-                    <span class="font-bold text-gray-900 text-xs">${this.movimientoData.folio}</span>
+                    <span class="text-gray-600 text-sm">Folio:</span>
+                    <span class="font-bold text-gray-900">${this.movimientoData.folio}</span>
                 </div>
                 
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500 text-xs">Tipo:</span>
-                    <span class="font-semibold text-xs ${tipoColor}">${tipoIcon} ${this.movimientoData.tipo_movimiento}</span>
+                    <span class="text-gray-600 text-sm">Tipo:</span>
+                    <span class="font-semibold ${tipoColor}">${tipoIcon} ${this.movimientoData.tipo_movimiento}</span>
                 </div>
             </div>
             
-            <hr class="my-2 border-gray-200">
+            <hr class="my-3 border-gray-200">
             
-            <div class="space-y-1">
+            <div class="space-y-2">
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500 text-xs">Productos:</span>
-                    <span class="font-bold text-sm text-gray-900">${totalProductos}</span>
+                    <span class="text-gray-600 text-sm">Productos:</span>
+                    <span class="font-bold text-lg text-gray-900">${totalProductos}</span>
                 </div>
                 
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500 text-xs">Total unidades:</span>
-                    <span class="font-bold text-sm text-gray-900">${totalUnidades}</span>
+                    <span class="text-gray-600 text-sm">Total unidades:</span>
+                    <span class="font-bold text-lg text-gray-900">${totalUnidades}</span>
                 </div>
             </div>
         `);

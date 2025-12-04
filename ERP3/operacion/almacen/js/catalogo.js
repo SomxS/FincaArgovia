@@ -44,14 +44,14 @@ class App extends Templates {
             json: [
                 {
                     id: "zonas",
-                    tab: "Negocio",
+                    tab: "Departamento",
                     lucideIcon: "building-2",
                     active: true,
                     onClick: () => zone.lsZone()
                 },
                 {
                     id: "categorias",
-                    tab: "Categorías",
+                    tab: "Presentación",
                     lucideIcon: "folder-tree",
                     class: "mb-1",
                    
@@ -59,7 +59,7 @@ class App extends Templates {
                 },
                 {
                     id: "areas",
-                    tab: "Áreas",
+                    tab: "Grupos",
                     lucideIcon: "map-pin",
                     onClick: () => area.lsArea()
                 },
@@ -457,7 +457,7 @@ class Zone extends Templates {
                     class: "col-12 col-md-2",
                     className:'w-100',
                     id: "btnNewZone",
-                    text: "Nuevo negocio",
+                    text: "Nuevo departamento",
                     onClick: () => this.addZone()
                 }
             ]
@@ -476,7 +476,7 @@ class Zone extends Templates {
                 theme: "light",
                 // title: "Lista de Zonas",
                 // subtitle: "Subdivisiones internas del almacén",
-                center: [1, 2, 3]
+                center: [ 2, 3]
             }
         });
     }
@@ -486,7 +486,7 @@ class Zone extends Templates {
             id: "formZoneAdd",
             data: { opc: "addZone" },
             bootbox: {
-                title: "Agregar Negocio",
+                title: "Agregar departamento",
                 size:'small',
                 closeButton: true
             },
@@ -559,8 +559,8 @@ class Zone extends Templates {
 
         this.swalQuestion({
             opts: {
-                title: `¿${actionTitle} Zona?`,
-                text: `Esta acción ${action}á la zona`,
+                title: `¿${actionTitle} Departamento?`,
+                text: `Esta acción ${action}á la Departamento`,
                 icon: "warning"
             },
             data: {

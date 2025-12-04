@@ -1854,10 +1854,10 @@ class Components extends Complements {
             let actions = '';
 
             if (data.a?.length) {
-                actions = $("<td>", { class: `px-2 py-2 relative justify-center items-center ${colorBg} ${opts.border_row} ` });
+                actions = $("<td>", { class: ` px-2 py-2 relative text-center items-center w-24 ${colorBg} ${opts.border_row} ` });
                 data.a.forEach(atributos => {
 
-                    const button_a = $("<a>", atributos);
+                    const button_a = $("<a>", { ...atributos, class: `${atributos.class || ''} mx-1 ` });
                     actions.append(button_a);
                 });
                 tr.append(actions);
