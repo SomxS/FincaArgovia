@@ -11,11 +11,11 @@ class Sidebar {
             parent: "#menu-sidebar",
             logo: "../../src/img/logos/coffee_icon.png",
             menuItems: [
-                { icon: "icon-home",  active: true, url: "/ERP3/operacion/almacen/almacen.php", title: "Inicio" },
-                { icon: "icon-chart-bar", url: "/ERP3/operacion/reportes/", title: "Reportes" },
-                { icon: "icon-gauge", url: "/ERP3/operacion/dashboard/", title: "Dashboard" },
-                { icon: "icon-clock", url: "/ERP3/operacion/historial/", title: "Historial" },
-                { icon: "icon-heart", url: "/ERP3/operacion/favoritos/", title: "Favoritos" },
+                { icon: "icon-home",   url: "/ERP3/operacion/almacen/index.php", title: "Inicio" },
+                { icon: "icon-chart-line-1", url: "/ERP3/operacion/almacen/reporte.php", title: "Reportes" },
+                { icon: "icon-gauge", url: "/ERP3/finanzas/administrador/", title: "Dashboard" },
+                // { icon: "icon-clock", url: "/ERP3/operacion/historial/", title: "Historial" },
+                // { icon: "icon-heart", url: "/ERP3/operacion/favoritos/", title: "Favoritos" },
             ],
         };
 

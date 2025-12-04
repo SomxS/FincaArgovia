@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../src/img/logos/logo_icon.png" type="image/x-icon">
-    <title>Grupo Varoch</title>
+    <title>Coffee Inventory</title>
     <!--FONTELLO-->
     <link rel="stylesheet" href="../../src/plugin/fontello/css/fontello.css">
     <link rel="stylesheet" href="../../src/plugin/fontello/css/animation.css">

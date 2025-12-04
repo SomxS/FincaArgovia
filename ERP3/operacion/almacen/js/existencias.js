@@ -1,5 +1,3 @@
-
-
 class Existencias extends Templates {
     constructor(link, div_modulo) {
         super(link, div_modulo);
@@ -15,7 +13,7 @@ class Existencias extends Templates {
 
     layout() {
         this.primaryLayout({
-            parent: "container-existencias",
+            parent: "root",
             id: this.PROJECT_NAME,
             class: "w-full p-3",
             card: {
@@ -41,10 +39,10 @@ class Existencias extends Templates {
                 {
                     opc: "select",
                     id: "zona",
-                    lbl: "Zona/Departamento",
+                    lbl: "Departamento",
                     class: "col-12 col-md-2",
                     data: [
-                        { id: "Todos", valor: "Todas las zonas" },
+                        { id: "Todos", valor: "Todas los departamentos" },
                         ...zones
                     ],
                     onchange: "existencias.renderExistencias()"
@@ -112,51 +110,52 @@ class Existencias extends Templates {
 
         this.infoCards({
             parent: `summaryCards${this.PROJECT_NAME}`,
+            cols: 5,
             json: [
                 {
                     id: "cardTotalProductos",
                     title: "Total Productos",
                     data: {
                         value: response.totalProductos || 0,
-                        color: "text-blue-600"
+                        color: "text-sky-500"
                     },
-                    icon: "icon-box"
+                    lucideIcon: "package"
                 },
                 {
                     id: "cardDisponibles",
                     title: "Disponibles",
                     data: {
                         value: response.disponibles || 0,
-                        color: "text-green-600"
+                        color: "text-emerald-500"
                     },
-                    icon: "icon-ok-circled"
+                    lucideIcon: "circle-check"
                 },
                 {
                     id: "cardStockBajo",
                     title: "Stock Bajo",
                     data: {
                         value: response.stockBajo || 0,
-                        color: "text-yellow-600"
+                        color: "text-amber-500"
                     },
-                    icon: "icon-attention"
+                    lucideIcon: "triangle-alert"
                 },
                 {
                     id: "cardAgotados",
                     title: "Agotados",
                     data: {
                         value: response.agotados || 0,
-                        color: "text-red-600"
+                        color: "text-rose-500"
                     },
-                    icon: "icon-cancel-circled"
+                    lucideIcon: "circle-x"
                 },
                 {
                     id: "cardValorTotal",
                     title: "Valor Inventario",
                     data: {
                         value: response.valorTotal || '$0.00',
-                        color: "text-purple-600"
+                        color: "text-violet-500"
                     },
-                    icon: "icon-money"
+                    lucideIcon: "wallet"
                 }
             ]
         });
@@ -173,9 +172,9 @@ class Existencias extends Templates {
                 id: `tb${this.PROJECT_NAME}`,
                 theme: "light",
                 striped: true,
-                title: "📦 Control de Existencias",
+                title: "📦 Reporte de Existencias",
                 subtitle: "Inventario actual de productos",
-                center: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                center: [ 2, 3,  5, 6, 7, 8, 9],
                 right: [10, 11]
             }
         });
@@ -185,31 +184,50 @@ class Existencias extends Templates {
         const defaults = {
             parent: "root",
             id: "infoCards",
+            cols: 5, 
             class: "",
             theme: "light",
             json: [],
-            onClick: () => {}
+            onClick: () => { }
         };
 
         const opts = Object.assign({}, defaults, options);
-        const cardBase = "text-gray-800 rounded-lg border bg-white";
-        const titleColor = "text-gray-600";
+        const isDark = opts.theme === "dark";
 
+        const cardBase = isDark
+            ? "bg-[#1F2A37] text-white rounded-lg border border-gray-700"
+            : " text-gray-800 rounded-lg border";
+
+        const titleColor = isDark ? "text-gray-300" : "text-gray-600";
+
+        const cols = opts.cols || 4;
         const container = $("<div>", {
             id: opts.id,
-            class: `grid grid-cols-1 md:grid-cols-5 gap-4 ${opts.class}`
+            class: `grid grid-cols-1 md:grid-cols-${cols} gap-4 ${opts.class}`
         });
 
+        let hasLucideIcons = false;
+
         opts.json.forEach(card => {
-            let iconHtml = card.icon ? `<i class="${card.icon}"></i>` : '<i class="icon-chart-line"></i>';
+            let iconHtml = '';
+
+            if (card.lucideIcon) {
+                iconHtml = `<i data-lucide="${card.lucideIcon}" class="w-8 h-8"></i>`;
+                hasLucideIcons = true;
+            } else if (card.icon) {
+                iconHtml = `<i class="${card.icon}"></i>`;
+            } else {
+                iconHtml = `<i class="icon-chart-line"></i>`;
+            }
 
             const cardElement = $("<div>", {
-                class: `${cardBase} p-4 hover:shadow-lg transition-shadow`
+                class: `${cardBase} p-4 hover:shadow-lg transition-shadow cursor-pointer`
             }).html(`
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm ${titleColor} mb-1">${card.title}</p>
                         <p id="${card.id || ''}" class="text-2xl font-bold ${card.data?.color || 'text-gray-800'}">${card.data?.value || '0'}</p>
+                        ${card.data?.description ? `<p class="text-xs mt-1 ${card.data?.color || 'text-gray-500'}">${card.data.description}</p>` : ''}
                     </div>
                     <div class="text-3xl ${card.data?.color || 'text-gray-400'}">
                         ${iconHtml}
@@ -217,10 +235,18 @@ class Existencias extends Templates {
                 </div>
             `);
 
+            if (typeof opts.onClick === "function") {
+                cardElement.on("click", () => opts.onClick(card));
+            }
+
             container.append(cardElement);
         });
 
         $(`#${opts.parent}`).html(container);
+
+        if (hasLucideIcons && typeof lucide !== 'undefined' && lucide.createIcons) {
+            lucide.createIcons();
+        }
     }
 
     async solicitarProducto(id) {

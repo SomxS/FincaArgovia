@@ -39,15 +39,14 @@ class ctrl extends mdl {
                 'id'             => $item['id'],
                 'Producto'       => $item['producto'],
                 'Presentación'   => $item['presentacion'] ?? '-',
-                'Precio Menudeo' => [
-                    'html'  => '$' . number_format($item['Costo'], 2),
-                    'class' => 'text-end'
-                ],
+              
                 'Min Cantidad'   => $item['inventario_min'] ?? 0,
-                'Precio Mayoreo' => [
+                'Precio' => [
                     'html'  => '$' . number_format($item['PrecioVenta'] ?? 0, 2),
                     'class' => 'text-end'
                 ],
+
+
                 'Fecha'          => $item['fecha_mayoreo'] ? date('Y-m-d', strtotime($item['fecha_mayoreo'])) : '-',
                 'Inicial'        => $item['stock_inicial'] ?? 0,
                 'Mínimo'         => $item['inventario_min'] ?? 0,
