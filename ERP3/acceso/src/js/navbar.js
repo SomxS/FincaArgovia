@@ -27,9 +27,9 @@ class Navbar {
                     <li class="invisible"><a href="#" class="hover:text-gray-400">Inicio</a></li>
                     <li class="invisible"><a href="#" class="hover:text-gray-400">Servicios</a></li>
                     <li>
-                        <a href="/dev/menu/" class="text-white hover:text-gray-400" title="Ir a Menús">
-                            <i class="icon-th-large-3"></i>
-                        </a>
+                        <button id="btnAppsMenu" class="text-white hover:bg-white/10 p-2 rounded-full transition-all duration-200" title="Aplicaciones">
+                            <i class="icon-th-large-3 text-xl"></i>
+                        </button>
                     </li>
 
                 </ul>
@@ -38,6 +38,46 @@ class Navbar {
                 </button>
             </nav>
             <div class="relative mt-16 z-50">
+                <div id="appsMenuDropdown" class="absolute right-16 w-80 bg-white rounded-2xl shadow-2xl opacity-0 scale-95 invisible transition-all duration-200 ease-out p-6">
+                    <div class="grid grid-cols-3 gap-3">
+                        <a href="/dev/finanzas/" class="flex flex-col items-center p-1 hover:bg-gray-100 rounded-xl transition-all duration-200 group">
+                            <div class="w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mb-2 transition-transform">
+                                <i class="icon-dollar text-white text-2xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-700 font-medium">Finanzas</span>
+                        </a>
+                        <a href="/dev/contabilidad/" class="flex flex-col items-center p-1 hover:bg-gray-100 rounded-xl transition-all duration-200 group">
+                            <div class="w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mb-2 transition-transform">
+                                <i class="icon-calculator text-white text-2xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-700 font-medium">Contabilidad</span>
+                        </a>
+                        <a href="/dev/operacion/" class="flex flex-col items-center p-1 hover:bg-gray-100 rounded-xl transition-all duration-200 group">
+                            <div class="w-14 h-14 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mb-2 transition-transform">
+                                <i class="icon-cog text-white text-2xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-700 font-medium">Operación</span>
+                        </a>
+                        <a href="/dev/almacen/" class="flex flex-col items-center p-1 hover:bg-gray-100 rounded-xl transition-all duration-200 group">
+                            <div class="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mb-2 transition-transform">
+                                <i class="icon-box text-white text-2xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-700 font-medium">Almacén</span>
+                        </a>
+                        <a href="/dev/tics/" class="flex flex-col items-center p-1 hover:bg-gray-100 rounded-xl transition-all duration-200 group">
+                            <div class="w-14 h-14 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mb-2 transition-transform">
+                                <i class="icon-laptop text-white text-2xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-700 font-medium">TICs</span>
+                        </a>
+                        <a href="/dev/reportes/" class="flex flex-col items-center p-1 hover:bg-gray-100 rounded-xl transition-all duration-200 group">
+                            <div class="w-14 h-14 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mb-2 transition-transform">
+                                <i class="icon-chart-bar text-white text-2xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-700 font-medium">Reportes</span>
+                        </a>
+                    </div>
+                </div>
                 <div id="userMenuDropdown" class="absolute right-0 w-64 bg-white rounded-2xl shadow-lg opacity-0 scale-95 invisible transition-all duration-500 ease-out">
                     
                     <div class="relative flex flex-col items-center bg-[#7C5031]  h-20 rounded-t-2xl">
@@ -69,23 +109,35 @@ class Navbar {
     }
 
     initEvents() {
-        // Evento para abrir el menu del usuario
         $("#btnUserMenu, #btnCloseUserMenu").on("click", () =>
             this.toggleUserMenu(),
         );
-        // Evento para cerrar sesión
+        $("#btnAppsMenu").on("click", () => this.toggleAppsMenu());
         $("#btnLogout").on("click", () => this.logout());
-        // Evento para abrir/cerrar sidebar
         $("#toggleSidebar").on("click", () => this.toggleSidebar());
         $("#btn_perfil").on("click", () => window.location.href = "/dev/perfil/");
         $("#btn_admin").on("click", () => window.location.href = "/dev/admin/");
         $("#btn_pqts").on("click", () => window.location.href = "/dev/catalogos/");
+        
+        $(document).on("click", (e) => {
+            if (!$(e.target).closest("#btnAppsMenu, #appsMenuDropdown").length) {
+                $("#appsMenuDropdown").addClass("opacity-0 scale-95 invisible");
+            }
+            if (!$(e.target).closest("#btnUserMenu, #userMenuDropdown").length) {
+                $("#userMenuDropdown").addClass("opacity-0 scale-95 invisible");
+            }
+        });
     }
 
     toggleUserMenu() {
+        $("#appsMenuDropdown").addClass("opacity-0 scale-95 invisible");
         $("#userMenuDropdown").toggleClass("opacity-0 scale-95 invisible");
     }
 
+    toggleAppsMenu() {
+        $("#userMenuDropdown").addClass("opacity-0 scale-95 invisible");
+        $("#appsMenuDropdown").toggleClass("opacity-0 scale-95 invisible");
+    }
 
     toggleSidebar() {
         $("#sidebar").removeAttr("style").toggleClass("-translate-x-full");
