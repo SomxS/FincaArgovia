@@ -23,13 +23,14 @@ if(isset($_COOKIE['IDU'])){
     <link rel="stylesheet" href="src/plugin/bootstrap-5/css/bootstrap.min.css">
     <link rel="stylesheet" href="src/plugin/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="src/css/index.css">
+       <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
     <div class="login-container">
         <div class="left-panel">
             <div class="brand">
-                <i class="icon-coffee"></i>
+                <img  class='w-14 h-14' src='src/img/logos/coffee_icon.png' />
                 <span>CoffeeInventory</span>
             </div>
             <div class="left-content">

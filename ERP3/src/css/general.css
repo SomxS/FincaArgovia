@@ -5,25 +5,31 @@
 }
 body {
   display: flex;
-  flex-direction: column;
-  background-color: var(--disabled2);
+  flex-direction: row;
+  background-color: #E5E7EB;
   font-size: 1rem;
+  min-height: 100vh;
+
   /* font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; */
 }
 
-
+#content-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
 
 main {
-    height: calc(100vh - 50px);
+    flex: 1;
     display: flex;
+    flex-direction: column;
 }
 
 main > #main__content {
     flex: 1;
-    max-height: 100%;
     padding: 20px;
     transition: all 0.5s ease;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 main > #main__content > form,
@@ -48,6 +54,16 @@ main > #main__content > div {
     }
 } 
 
+#menu-sidebar {
+   width: 80px;
+   height: 100vh;
+   position: fixed;
+   left: 0;
+}
+
+body {
+  padding-left: 80px;
+}
 
 #root{
  min-height: calc(100vh - calc(4rem + 1px) - calc(4rem + 1px));

@@ -22,7 +22,7 @@ body {
 
 .left-panel {
     flex: 1;
-    background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+    background: linear-gradient(135deg, #2C1B18  0%, #8B5A3C 100%);
     color: white;
     padding: 60px;
     display: flex;
@@ -40,6 +40,11 @@ body {
 
 .brand i {
     font-size: 28px;
+}
+
+.brand-logo {
+    max-width: 200px;
+    height: auto;
 }
 
 .left-content {
@@ -169,7 +174,8 @@ body {
     font-size: 16px;
     font-weight: 600;
     color: white;
-    background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+    background: #2C1B18;
+    /* linear-gradient(135deg,  0%, #8B5A3C 100%); */
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -179,6 +185,7 @@ body {
 
 .btn-login:hover {
     transform: translateY(-1px);
+    background-color: #563731;
     box-shadow: 0 4px 12px rgba(107, 68, 35, 0.3);
 }
 

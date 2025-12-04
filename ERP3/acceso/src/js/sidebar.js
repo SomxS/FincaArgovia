@@ -2,97 +2,120 @@ class Sidebar {
     init(options) {
         this.render(options);
         this.initEvents();
-        this.highlightCurrentRoute(); // Resalta la ruta actual al iniciar
+        this.highlightCurrentRoute();
     }
 
     render(options) {
         const defaults = {
-            parent: "body",
+            parent: "#menu-sidebar",
+            logo: "../../src/img/logos/coffee_icon.png",
             menuItems: [
-                {
-                    text: "Ventas",
-                    submenu: [
-                        { text: "Eventos", url: "/dev/eventos/" },
-                        { text: "Pedidos", url: "/dev/pedidos/" },
-                    ],
-                },
+                { icon: "icon-search", active: true, action: "search" },
+                { icon: "icon-home", url: "/dev/home/" },
+                { icon: "icon-chart-bar", url: "/dev/reportes/" },
+                { icon: "icon-bell", action: "notifications" },
+                { icon: "icon-clock", url: "/dev/historial/" },
+                { icon: "icon-heart", url: "/dev/favoritos/" },
+                { icon: "icon-credit-card", url: "/dev/pagos/" },
             ],
         };
 
         this.settings = Object.assign({}, defaults, options);
         this.parent = $(this.settings.parent);
 
-        const sidebarHtml =
-            `<div id="sidebar" class="mt-14 fixed top-0 left-0 h-[calc(100vh-3.5rem)] bg-[#1F2A37] w-full md:w-72 transform -translate-x-full transition-transform duration-500 ease-in-out z-40 overflow-y-auto" style="transform: translateX(-100%);">
-                <h5 class="text-white pt-4 font-semibold ps-7">Huubie</h5>
-            <ul class="space-y-4 p-6" id="menuSidebar">
-                    ${this.createMenuItems(this.settings.menuItems)}
-                </ul>
-            </div>`
-            ;
-        this.parent.prepend(sidebarHtml);
+        const sidebarHtml = `
+            <div class="py-2">
+                <img class='w-14 h-14' src='${this.settings.logo}' alt="Logo" />
+            </div>
+            ${this.createMenuItems(this.settings.menuItems)}
+            <div class="flex-1"></div>
+            <button class="w-12 h-12 hover:bg-[#4A3733] rounded-xl flex items-center justify-center transition" data-action="logout">
+                <i class="icon-logout text-gray-400 hover:text-white text-xl"></i>
+            </button>
+
+        `;
+
+        this.parent.html(sidebarHtml);
     }
 
     createMenuItems(menuItems) {
         return menuItems
             .map((item) => {
-                if (item.submenu) {
-                    return `<li class="submenu text-gray-400">
-                        <button class="submenucito w-full text-left flex items-center justify-between text-base font-medium px-3 py-2 rounded-lg hover:bg-gray-700 hover:text-white transition">
-                            <span class="flex items-center gap-2">
-                               <img src="/dev/src/img/ventas-menu.svg" alt="icono" class="w-5 h-5" />
-                                ${item.text}
-                            </span>
-                            <svg class="h-5 w-5 text-gray-400 group-hover:text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <ul class="mt-2 pl-4 space-y-2 hidden">
-                            ${this.createMenuItems(item.submenu)}
-                        </ul>
-                    </li>`;
-                }
-                return `<li class='rounded-lg'><a href="${item.url}" class="block text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition px-3 py-2 rounded-lg">${item.text}</a></li>`;
+                const activeClass = item.active ? "bg-[#4A3733]" : "";
+                const dataAttr = item.url ? `data-url="${item.url}"` : item.action ? `data-action="${item.action}"` : "";
+                
+                return `
+                    <button class="w-12 h-12 ${activeClass} hover:bg-[#4A3733] rounded-xl flex items-center justify-center transition" ${dataAttr}>
+                        <i class="${item.icon} ${item.active ? 'text-white' : 'text-gray-400 hover:text-white'} text-xl"></i>
+                    </button>
+                `;
             })
             .join("");
     }
 
     initEvents() {
-        // Evento para manejar el despliegue de submenús
-        $(".submenu > button").on("click", (e) => this.toggleSubmenu(e));
+        this.parent.on("click", "button[data-url]", (e) => {
+            const url = $(e.currentTarget).data("url");
+            window.location.href = url;
+        });
+
+        this.parent.on("click", "button[data-action='search']", () => {
+            this.handleSearch();
+        });
+
+        this.parent.on("click", "button[data-action='notifications']", () => {
+            this.handleNotifications();
+        });
+
+        this.parent.on("click", "button[data-action='logout']", () => {
+            this.handleLogout();
+        });
+
+        this.parent.on("click", "button[data-action='toggle']", () => {
+            this.handleToggle();
+        });
     }
 
-    toggleSubmenu(e) {
-        const submenu = $(e.target).closest("li").find("ul");
+    handleSearch() {
+        console.log("Búsqueda activada");
+    }
 
-        // Cerrar todos los submenús antes de abrir el actual con animación
-        $(".submenu > ul").not(submenu).slideUp(300);
+    handleNotifications() {
+        console.log("Notificaciones");
+    }
 
-        // Abrir o cerrar el submenú clicado con animación
-        submenu.stop(true, true).slideToggle(300);
+    handleLogout() {
+        Swal.fire({
+            title: "¿Cerrar sesión?",
+            text: "¿Estás seguro de que deseas cerrar sesión?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, cerrar sesión",
+            cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../../salir";
+            }
+        });
+    }
+
+    handleToggle() {
+        console.log("Toggle activado");
     }
 
     highlightCurrentRoute() {
         const currentUrl = window.location.pathname;
-
-        $("#menuSidebar a").each(function () {
-            const url = $(this);
-            if (url.attr("href") === currentUrl) {
-                url.addClass("text-white font-bold"); // Resalta el enlace
-                url.closest("ul").slideDown(300); // Abre el submenú si está cerrado
-                url.closest("li").addClass("text-white"); // Cambia el color del texto del li
-                url.closest("li").addClass("bg-[#374151]"); // Cambia el color del texto del li
+        this.parent.find("button[data-url]").each(function () {
+            const button = $(this);
+            if (button.data("url") === currentUrl) {
+                button.addClass("bg-[#4A3733]");
+                button.find("i").removeClass("text-gray-400").addClass("text-white");
             }
         });
     }
 }
 
 $(async () => {
-    // rutes = await useFetch({ url: "/dev/access/ctrl/ctrl-access.php", data: { opc: 'sidebar' } });
-rutes = [];
     let sidebar = new Sidebar();
-    sidebar.init({
-        parent: "#menu-sidebar", // Si deseas cambiar el contenedor padre
-        menuItems: rutes
-    });
+    sidebar.init({});
 });
