@@ -20,7 +20,9 @@ require_once('layout/core-libraries.php');
 <script src="https://www.plugins.erp-varoch.com/ERP/JS/complementos.js"></script>
 
 <body>
-    <?php require_once('../../layout/navbar.php'); ?>
+    <?php
+    //  require_once('../../../layout/navbar.php'); 
+     ?>
 
     <main>
         <section id="sidebar"></section>
@@ -37,11 +39,14 @@ require_once('layout/core-libraries.php');
             <!-- Main Container -->
             <div class="main-container" id="root"></div>
 
-            <!-- Componente tabLayout -->
-            <script src="../../src/js/components/tabLayout.js?t=<?php echo time(); ?>"></script>
+            <!--  -->
+            <script src="../../acceso/src/js/navbar.js"></script>
+           <script src="../../acceso/src/js/sidebar.js"></script>
             
             <!-- Módulo de Catálogo -->
             <script src="js/almacen.js?t=<?php echo time(); ?>"></script>
+            <script src="js/catalogo.js?t=<?php echo time(); ?>"></script>
+            <script src="js/catalogo.js?t=<?php echo time(); ?>"></script>
         </div>
     </main>
 </body>
