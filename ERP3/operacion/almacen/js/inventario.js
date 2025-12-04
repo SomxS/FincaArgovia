@@ -1,18 +1,18 @@
-let api = 'ctrl/ctrl-inventario.php';
-let inventario, captura;
+// let api = 'ctrl/ctrl-inventario.php';
+// let inventario, captura;
 
-let tipoMovimiento, productos;
+// let tipoMovimiento, productos;
 
-$(async () => {
-    const data = await useFetch({ url: api, data: { opc: "init" } });
-    tipoMovimiento = data.tipoMovimiento;
-    productos = data.productos;
+// $(async () => {
+//     const data = await useFetch({ url: api, data: { opc: "init" } });
+//     tipoMovimiento = data.tipoMovimiento;
+//     productos = data.productos;
 
-    inventario = new Inventario(api, "root");
-    captura = new CapturaMovimiento(api, "root");
+//     inventario = new Inventario(api, "root");
+//     captura = new CapturaMovimiento(api, "root");
     
-    inventario.render();
-});
+//     inventario.render();
+// });
 
 class Inventario extends Templates {
     constructor(link, div_modulo) {

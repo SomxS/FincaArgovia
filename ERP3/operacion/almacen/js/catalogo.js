@@ -1,18 +1,16 @@
-let api = 'ctrl/ctrl-catalogo.php';
-let app, category, area, zone;
+// let api = 'ctrl/ctrl-catalogo.php';
 
-$(async () => {
-    const data = await useFetch({ url: api, data: { opc: "init" } });
 
-    app = new App(api, "root");
-    category = new Category(api, "root");
-    area = new Area(api, "root");
-    zone = new Zone(api, "root");
+// $(async () => {
+//     const data = await useFetch({ url: api, data: { opc: "init" } });
+
+//     app = new App(api, "root");
+  
     
-    app.render();
-});
+//     app.render();
+// });
 
-class App extends Templates {
+class Catalogo extends Templates {
     constructor(link, div_modulo) {
         super(link, div_modulo);
         this.PROJECT_NAME = "catalogo";
@@ -25,7 +23,7 @@ class App extends Templates {
 
     layout() {
         this.primaryLayout({
-            parent: "root",
+            parent: "container-catalogo",
             id: this.PROJECT_NAME,
             class: "w-full",
             card: {
