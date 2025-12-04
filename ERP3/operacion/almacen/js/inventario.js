@@ -255,7 +255,7 @@ class CapturaMovimiento extends Templates {
         const leftSection = $("<div>", {
             class: "flex-1"
         }).html(`
-            <div id="seccionAgregarProducto"></div>
+            <div class="border rounded-lg p-3" id="seccionAgregarProducto"></div>
         `);
 
         const rightSection = $("<div>", {
@@ -282,38 +282,36 @@ class CapturaMovimiento extends Templates {
     }
 
     renderSeccionAgregar() {
-        const seccion = $("<div>", {
-            class: "border p-4 rounded-lg"
-        }).html(`
-            <h3 class="text-md font-semibold mb-3 flex items-center gap-2">
-                <span class="text-blue-600">+</span> Agregar Producto
-            </h3>
-            <div class="flex flex-wrap items-end gap-3">
-                <div class="flex-1 min-w-[200px]">
-                    <label class="form-label text-sm text-gray-600">Producto</label>
-                    <select id="selectProducto" class="form-control"></select>
-                </div>
-                <div class="w-24">
-                    <label class="form-label text-sm text-gray-600">Cantidad</label>
-                    <input type="number" id="inputCantidad" class="form-control text-center" min="1" value="1">
-                </div>
-                <div>
-                    <button id="btnAgregarProducto" class="btn btn-primary">
-                        <i class="icon-plus"></i> Agregar
-                    </button>
-                </div>
-            </div>
-        `);
-
-        $("#seccionAgregarProducto").html(seccion);
-
-        $("#selectProducto").option_select({
-            data: productos,
-            placeholder: "Seleccionar producto",
-            select2: true
+        this.createfilterBar({
+            parent: "seccionAgregarProducto",
+            data: [
+                {
+                    opc: "select",
+                    id: "selectProducto",
+                    lbl: "Producto",
+                    class: "col-12 col-md-3",
+                    data: productos,
+                    placeholder: "Seleccionar producto"
+                },
+                {
+                    opc: "input",
+                    id: "inputCantidad",
+                    lbl: "Cantidad",
+                    tipo: "numero",
+                    class: "col-12 col-md-2",
+                    value: "1",
+                    min: "1"
+                },
+                {
+                    opc: "button",
+                    id: "btnAgregarProducto",
+                    text: "Agregar",
+                    class: "col-12 col-md-3",
+                    icono: "icon-plus",
+                    onClick: () => this.addProducto()
+                }
+            ]
         });
-
-        $("#btnAgregarProducto").on("click", () => this.addProducto());
     }
 
     async addProducto() {
@@ -380,7 +378,7 @@ class CapturaMovimiento extends Templates {
                 id_movimiento: this.idMovimiento 
             },
             coffeesoft: true,
-            conf: { datatable: false },
+            conf: { datatable: true },
             attr: {
                 id: "tbDetalleMovimiento",
                 theme: "light",
@@ -442,33 +440,33 @@ class CapturaMovimiento extends Templates {
             : '↓';
 
         const resumen = $("<div>", {
-            class: "p-3 rounded-2xl border sticky top-4"
+            class: "p-3 rounded-lg border sticky top-4 text-xs"
         }).html(`
-            <h3 class="text-lg font-semibold text-gray-800 mb-6">Resumen</h3>
+            <h3 class="text-xs font-semibold text-gray-800 mb-2">Resumen</h3>
             
-            <div class="space-y-5">
+            <div class="space-y-1">
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500">Folio:</span>
-                    <span class="font-bold text-gray-900">${this.movimientoData.folio}</span>
+                    <span class="text-gray-500 text-xs">Folio:</span>
+                    <span class="font-bold text-gray-900 text-xs">${this.movimientoData.folio}</span>
                 </div>
                 
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500">Tipo:</span>
-                    <span class="font-semibold ${tipoColor}">${tipoIcon} ${this.movimientoData.tipo_movimiento}</span>
+                    <span class="text-gray-500 text-xs">Tipo:</span>
+                    <span class="font-semibold text-xs ${tipoColor}">${tipoIcon} ${this.movimientoData.tipo_movimiento}</span>
                 </div>
             </div>
             
-            <hr class="my-5 border-gray-200">
+            <hr class="my-2 border-gray-200">
             
-            <div class="space-y-5">
+            <div class="space-y-1">
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500">Productos:</span>
-                    <span class="font-bold text-2xl text-gray-900">${totalProductos}</span>
+                    <span class="text-gray-500 text-xs">Productos:</span>
+                    <span class="font-bold text-sm text-gray-900">${totalProductos}</span>
                 </div>
                 
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-500">Total unidades:</span>
-                    <span class="font-bold text-2xl text-gray-900">${totalUnidades}</span>
+                    <span class="text-gray-500 text-xs">Total unidades:</span>
+                    <span class="font-bold text-sm text-gray-900">${totalUnidades}</span>
                 </div>
             </div>
         `);

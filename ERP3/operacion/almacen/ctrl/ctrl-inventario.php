@@ -485,7 +485,7 @@ function renderTipoMovimiento($tipo) {
         case 'Entrada':
             return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-blue-100 text-blue-700 min-w-[100px] text-center">↑ Entrada</span>';
         case 'Salida':
-            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-orange-100 text-orange-700 min-w-[100px] text-center">↓ Salida</span>';
+            return '<span class="inline-block px-3 py-1 rounded-2xl text-sm font-semibold bg-red-100 text-red-700 min-w-[100px] text-center">↓ Salida</span>';
         default:
             return $tipo;
     }

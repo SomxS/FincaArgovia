@@ -1,5 +1,5 @@
 let api = 'ctrl/ctrl-almacen.php';
-let app;
+let main,products;
 let zonas, categorias, areas, departamentos, proveedores;
 
 $(async () => {
@@ -10,11 +10,78 @@ $(async () => {
     departamentos  = data.departamentos;
     proveedores    = data.proveedores;
 
-    app = new App(api, "root");
-    app.render();
+    main = new Main(api, "root");
+    main.render();
+
+    // Productos.
+    products = new Productos(api, "root");
+    products.render();
+
 });
 
-class App extends Templates {
+class Main extends Templates {
+    constructor(link, div_modulo) {
+        super(link, div_modulo);
+        this.PROJECT_NAME = "almacenMain";
+    }
+
+    render() {
+        this.layout();
+     
+    }
+
+    layout() {
+        this.primaryLayout({
+            parent: "root",
+            id: this.PROJECT_NAME,
+            class: "w-full",
+            card: {
+                filterBar: { class: "w-full", id: `filterBar${this.PROJECT_NAME}` },
+                container: { class: "w-full h-full", id: `container${this.PROJECT_NAME}` }
+            }
+        });
+
+
+        this.tabLayout({
+            parent: `container${this.PROJECT_NAME}`,
+            id: `tabs${this.PROJECT_NAME}`,
+            theme: "light",
+            type: "short",
+            json: [
+                {
+                    id: "productos",
+                    tab: "Productos",
+                    lucideIcon: "package",
+                    class: "mb-1",
+                    active: true,
+                    onClick: () => materiales.render()
+                },
+                {
+                    id: "inventario",
+                    tab: "Inventario",
+                    lucideIcon: "clipboard-list",
+                    onClick: () => inventario.render()
+                },
+                {
+                    id: "movimientos",
+                    tab: "Movimientos",
+                    lucideIcon: "arrow-left-right",
+                    onClick: () => movimientos.render()
+                },
+                {
+                    id: "catalogo",
+                    tab: "Catálogo",
+                    lucideIcon: "book-open",
+                    onClick: () => catalogo.render()
+                }
+            ]
+        });
+    }
+}
+
+
+
+class Productos extends Templates {
     constructor(link, div_modulo) {
         super(link, div_modulo);
         this.PROJECT_NAME = "almacen";
@@ -28,7 +95,7 @@ class App extends Templates {
 
     layout() {
         this.primaryLayout({
-            parent: 'root',
+            parent: 'container-productos',
             id: this.PROJECT_NAME,
             class: 'w-full p-3',
             card: {
@@ -37,10 +104,10 @@ class App extends Templates {
             }
         });
 
-        $(`#container${this.PROJECT_NAME}`).prepend(`
-            <div class="px-4 pt-3 pb-3">
-                <h2 class="text-2xl font-semibold">📦 Materiales</h2>
-                <p class="text-gray-400">Gestión de materiales del almacén</p>
+        $(`#filterBar${this.PROJECT_NAME}`).prepend(`
+            <div class="px-2 pb-2">
+                <h2 class="text-2xl font-semibold">📦 Productos</h2>
+                <p class="text-gray-400">Gestión de productos del almacén</p>
             </div>
         `);
     }
@@ -95,9 +162,9 @@ class App extends Templates {
             attr: {
                 id: 'tbMateriales',
                 theme: 'light',
-                title: 'Lista de productos',
                 class: 'w-100 lowercase',
-                subtitle: 'Productos registrados en el sistema',
+                // title: 'Lista de productos',
+                // subtitle: 'Productos registrados en el sistema',
                 striped:true,
                 center: [1,4,5,7],
                 right: [6],

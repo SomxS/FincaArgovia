@@ -54,7 +54,7 @@ class ctrl extends mdl {
                     'html'  => renderProductImage($item['rutaImagen'], $item['Equipo'])
                 ],
                 // 'Código'       => $item['CodigoEquipo'],
-                'Equipo'       => $item['Equipo'],
+                // 'Equipo'       => $item['Equipo'],
                 'Área'         => $item['area'] ?? '-',
                 'Cantidad'     => $item['cantidad'],
                 'Categoría'    => $item['categoria'] ?? '-',
