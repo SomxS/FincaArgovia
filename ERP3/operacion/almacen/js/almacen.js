@@ -32,8 +32,8 @@ $(async () => {
           tipoMovimiento = invt.tipoMovimiento;
           productos      = invt.productos;
 
-    inventario = new Inventario(api, "root");
-    captura    = new CapturaMovimiento(api, "root");
+    inventario = new Inventario(api_inventario, "root");
+    captura = new CapturaMovimiento(api_inventario, "root");
     inventario.render();
 
 
@@ -89,20 +89,21 @@ class Main extends Templates {
                     id: "inventario",
                     tab: "Inventario",
                     lucideIcon: "clipboard-list",
+                    active: true,
                     onClick: () => inventario.render()
                 },
                 {
                     id: "movimientos",
                     tab: "Movimientos",
                     lucideIcon: "arrow-left-right",
-                    onClick: () => movimientos.render()
+                    // onClick: () => movimientos.render()
                 },
                 {
                     id: "catalogo",
                     tab: "Catálogo",
                     lucideIcon: "book-open",
-                    active: true,
-                    onClick: () => catalogo.render()
+                  
+                  
                 }
             ]
         });

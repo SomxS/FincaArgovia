@@ -1,14 +1,4 @@
-// let api = 'ctrl/ctrl-catalogo.php';
 
-
-// $(async () => {
-//     const data = await useFetch({ url: api, data: { opc: "init" } });
-
-//     app = new App(api, "root");
-  
-    
-//     app.render();
-// });
 
 class Catalogo extends Templates {
     constructor(link, div_modulo) {

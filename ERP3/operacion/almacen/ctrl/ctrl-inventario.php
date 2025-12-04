@@ -241,8 +241,9 @@ class ctrl extends mdl {
         $idDetalle = $_POST['id_detalle'];
         $status    = 500;
         $message   = 'Error al eliminar producto';
+        
 
-        $delete    = $this->deleteDetalleMovimientoById($idDetalle);
+        $delete    = $this->deleteDetalleMovimientoById($this->util->sql(['id_detalle' => $idDetalle], 1));
 
         if ($delete) {
             $status = 200;

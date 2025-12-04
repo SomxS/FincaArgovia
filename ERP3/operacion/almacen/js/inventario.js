@@ -1,18 +1,3 @@
-// let api = 'ctrl/ctrl-inventario.php';
-// let inventario, captura;
-
-// let tipoMovimiento, productos;
-
-// $(async () => {
-//     const data = await useFetch({ url: api, data: { opc: "init" } });
-//     tipoMovimiento = data.tipoMovimiento;
-//     productos = data.productos;
-
-//     inventario = new Inventario(api, "root");
-//     captura = new CapturaMovimiento(api, "root");
-    
-//     inventario.render();
-// });
 
 class Inventario extends Templates {
     constructor(link, div_modulo) {
@@ -28,9 +13,9 @@ class Inventario extends Templates {
 
     layout() {
         this.primaryLayout({
-            parent: "root",
+            parent: "container-inventario",
             id: this.PROJECT_NAME,
-            class: "w-full p-3",
+            class: "w-full",
             card: {
                 filterBar: { class: "w-full mb-3 border rounded p-3", id: `filterBar${this.PROJECT_NAME}` },
                 container: { class: "w-full h-full", id: `container${this.PROJECT_NAME}` }
@@ -48,7 +33,7 @@ class Inventario extends Templates {
                     opc: "input-calendar",
                     id: "calendar",
                     lbl: "Rango de Fechas",
-                    class: "col-12 col-md-2"
+                    class: "col-12 col-md-3"
                 },
                 {
                     opc: "select",
@@ -230,12 +215,12 @@ class CapturaMovimiento extends Templates {
         });
 
         const header = $("<div>", {
-            class: "mb-4 pb-4 border-b flex justify-between items-center rounded-lg p-4 "
+            class: "mb-4 pb-4 border  flex justify-between items-center rounded-lg p-4 "
         }).html(`
             <div class="flex items-center gap-3">
                 <span class="text-2xl">📦</span>
                 <div>
-                    <h2 class="text-xl font-semibold text-gray-800">Captura de Productos</h2>
+                    <h2 class="text-xl font-semibold text-gray-800">Captura de inventarios</h2>
                     <p class="text-gray-500 text-sm">Folio: ${this.movimientoData.folio} | Tipo: ${this.movimientoData.tipo_movimiento}</p>
                 </div>
             </div>
@@ -256,7 +241,7 @@ class CapturaMovimiento extends Templates {
         const leftSection = $("<div>", {
             class: "lg:col-span-3"
         }).html(`
-            <div class="bg-white border rounded-lg p-4  h-full">
+            <div class=" border rounded-lg p-4  h-full">
                 <div id="resumenMovimiento"></div>
             </div>
         `);
@@ -278,11 +263,11 @@ class CapturaMovimiento extends Templates {
         $("#btnGuardarMovimiento").on("click", () => this.guardarMovimiento());
         $("#btnCancelarCaptura").on("click", () => this.cancelarCaptura());
 
-        this.renderSeccionAgregar();
+        this.filterAddProduct();
         this.updateResumen();
     }
 
-    renderSeccionAgregar() {
+    filterAddProduct() {
         this.createfilterBar({
             parent: "seccionAgregarProducto",
             data: [
@@ -292,14 +277,14 @@ class CapturaMovimiento extends Templates {
                     lbl: "Producto",
                     class: "col-12 col-md-3",
                     data: productos,
-                    placeholder: "Seleccionar producto"
+                    placeholder: "Seleccionar producto",
                 },
                 {
                     opc: "input",
                     id: "inputCantidad",
                     lbl: "Cantidad",
                     tipo: "numero",
-                    class: "col-12 col-md-2",
+                    class: "col-12 col-md-3",
                     value: "1",
                     min: "1"
                 },
@@ -307,12 +292,18 @@ class CapturaMovimiento extends Templates {
                     opc: "button",
                     id: "btnAgregarProducto",
                     text: "Agregar",
+                    className: 'w-100',
                     class: "col-12 col-md-3",
                     icono: "icon-plus",
                     onClick: () => this.addProducto()
                 }
             ]
         });
+
+        $("#selectProducto").option_select({ select2: true,
+             placeholder: 'Selecciona uno o más módulos',
+              multiple: true });
+
     }
 
     async addProducto() {
@@ -403,11 +394,11 @@ class CapturaMovimiento extends Templates {
         });
 
         if (response.status === 200) {
-            alert({
-                icon: "success",
-                text: "Producto eliminado",
-                btn1: true
-            });
+            // alert({
+            //     icon: "success",
+            //     text: "Producto eliminado",
+            //     btn1: true
+            // });
 
             this.lsDetalleMovimiento();
             this.updateResumen();
