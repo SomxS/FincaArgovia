@@ -55,6 +55,7 @@ class ctrl extends mdl {
                 'Total Productos' => $item['total_productos'],
                 'Total Unidades'  => $item['total_unidades'],
                 'Estado'          => renderEstado($item['estado']),
+                'Creado por'      => $item['fecha'],
                 'a'               => $a
             ];
         }
