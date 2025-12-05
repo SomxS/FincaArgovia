@@ -1,4 +1,3 @@
-
 class Inventario extends Templates {
     constructor(link, div_modulo) {
         super(link, div_modulo);
@@ -100,17 +99,10 @@ class Inventario extends Templates {
             },
             json: this.jsonMovimiento(),
             success: (response) => {
-                if (response.status === 200) {
-                    alert({
-                        icon: "success",
-                        title: "Lista Creada",
-                        text: response.message,
-                        btn1: true,
-                        btn1Text: "Aceptar"
-                    });
+                console.log(response)
 
-                    console.log('RESPONSE:',response)
-                    
+                if (response.status === 200) {
+                                  
                     captura.render(response.id_movimiento);
                 } else {
                     alert({
@@ -185,7 +177,6 @@ class Inventario extends Templates {
     }
 }
 
-
 class CapturaMovimiento extends Templates {
     constructor(link, div_modulo) {
         super(link, div_modulo);
@@ -225,10 +216,10 @@ class CapturaMovimiento extends Templates {
                 </div>
             </div>
             <div class="flex gap-2">
-                <button id="btnGuardarMovimiento" class="px-6 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-sm font-medium transition">
+                <button id="btnGuardarMovimiento" class="px-6 py-1 bg-blue-500 w-32 hover:bg-blue-600 text-white rounded-lg font-medium transition">
                     Guardar
                 </button>
-                <button id="btnCancelarCaptura" class="px-6 py-1 bg-red-400 hover:bg-red-500 text-white rounded-sm font-medium transition">
+                <button id="btnCancelarCaptura" class="px-6 py-1 bg-red-400 w-32 hover:bg-red-500 text-white rounded-lg font-medium transition">
                     Salir
                 </button>
             </div>
@@ -420,8 +411,7 @@ class CapturaMovimiento extends Templates {
             }
         });
 
-        console.log('details',detalles)
-
+       
         const totalProductos = detalles.ls ? detalles.ls.length : 0;
         const totalUnidades = detalles.ls ? detalles.ls.reduce((sum, item) => sum + parseInt(item.cantidad), 0) : 0;
 

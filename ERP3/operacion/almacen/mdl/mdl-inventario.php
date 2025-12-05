@@ -58,6 +58,15 @@ class mdl extends CRUD {
         ]);
     }
 
+    function getMaxMovimientoId() {
+        $query = "
+            SELECT MAX(id_movimiento) AS id_movimiento
+            FROM {$this->bd}mtto_inventario_movimientos
+        ";
+        $result = $this->_Read($query, []);
+        return $result[0]['id_movimiento'] ?? 0;
+    }
+
     function updateMovimiento($array) {
         return $this->_Update([
             'table'  => "{$this->bd}mtto_inventario_movimientos",

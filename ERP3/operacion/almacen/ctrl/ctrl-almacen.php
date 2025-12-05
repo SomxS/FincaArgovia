@@ -55,9 +55,9 @@ class ctrl extends mdl {
                 ],
                 // 'Código'       => $item['CodigoEquipo'],
                 // 'Equipo'       => $item['Equipo'],
-                'Área'         => $item['area'] ?? '-',
+                'Grupo'         => $item['area'] ?? '-',
                 'Cantidad'     => $item['cantidad'],
-                'Categoría'    => $item['categoria'] ?? '-',
+                'Presentación'    => $item['categoria'] ?? '-',
                 'Costo'        => [
                     'html'  => '$' . number_format($item['Costo'], 2),
                     'class' => 'text-end '
@@ -141,7 +141,10 @@ class ctrl extends mdl {
         $status  = 500;
         $message = 'No se pudo eliminar el material';
 
-        $delete = $this->deleteMaterialById($_POST['id']);
+        $values = $this->util->sql(['idProducto' => $_POST['idProducto']], 1);
+
+
+        $delete = $this->deleteMaterialById( $values);
 
         if ($delete) {
             $status  = 200;

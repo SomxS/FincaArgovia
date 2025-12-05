@@ -138,14 +138,29 @@ Debe respetarse el formato de CoffeeSoft
 <_Delete>
 
 ```php
-  function remove($array){
-
+  function delete[Entidad]($array) {
     return $this->_Delete([
       'table' => "{$this->bd}table_name",
       'where' => $array['where'],
-      'data'  => $array['data'],
+      'data'  => $array['data']
     ]);
   }
+```
+
+**Notas sobre _Delete:**
+- El parámetro de la función es `$array` (o el identificador necesario)
+- Internamente usa `$array['where']` para la cláusula WHERE
+- Internamente usa `$array['data']` para los valores del placeholder
+- Esta estructura permite flexibilidad en las condiciones de eliminación
+- Ejemplo: 
+
+```php
+ function deleteMaterialById($id) { 
+  return $this->_Delete([
+    'table' => "{$this->bd}mtto_almacen", 
+    'where' => $array['where'], 
+    'data' => $array['data']]);
+ }
 ```
 
 ### 4. Estructura para Consultas tipo `<select>`

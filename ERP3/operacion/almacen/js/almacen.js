@@ -105,14 +105,15 @@ class Main extends Templates {
                     id: "inventario",
                     tab: "Inventario",
                     lucideIcon: "clipboard-list",
+                    active: true,
+
                     onClick: () => inventario.render()
                 },
                 {
                     id: "movimientos",
                     tab: "Movimientos",
                     lucideIcon: "arrow-left-right",
-                    active: true,
-
+                   
                     onClick: () => movimientos.renderMovimiento()
                 },
                 {
@@ -264,7 +265,7 @@ class Productos extends Templates {
             {
                 opc: "select",
                 id: "Area",
-                lbl: "Área *",
+                lbl: "Grupo",
                 class: "col-12 col-md-6 mb-3",
                 data: areas,
                 required: true
@@ -285,7 +286,7 @@ class Productos extends Templates {
             {
                 opc: "select",
                 id: "id_categoria",
-                lbl: "Categoría *",
+                lbl: "Presentación *",
                 class: "col-12 col-md-6 mb-3",
                 data: categorias,
                 required: true
@@ -395,10 +396,10 @@ class Productos extends Templates {
         this.swalQuestion({
             opts: {
                 title: "¿Está seguro?",
-                html: "Esta acción eliminará permanentemente el material. Esta acción no se puede deshacer.",
+                html: "Esta acción eliminará permanentemente el producto. Esta acción no se puede deshacer.",
                 icon: "warning"
             },
-            data: { opc: "deleteMaterial", id: id },
+            data: { opc: "deleteMaterial", idProducto: id },
             methods: {
                 send: (response) => {
                     if (response.status === 200) {

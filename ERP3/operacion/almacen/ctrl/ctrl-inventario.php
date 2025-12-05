@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if (empty($_POST['opc'])) exit(0);
 
 header("Access-Control-Allow-Origin: *");
@@ -73,22 +73,24 @@ class ctrl extends mdl {
         $nuevoNumero = $maxFolio + 1;
         $folio       = formatFolio($nuevoNumero);
 
-        $_POST['folio']            = $folio;
-        $_POST['total_productos']  = 0;
-        $_POST['total_unidades']   = 0;
-        $_POST['estado']           = 'Activa';
+        $_POST['folio']           = $folio;
+        $_POST['total_productos'] = 0;
+        $_POST['total_unidades']  = 0;
+        $_POST['estado']          = 'Activa';
+        $_POST['user_id']         = $_COOKIE['IDU'];
 
         $create = $this->createMovimiento($this->util->sql($_POST));
 
         if ($create) {
-            $status = 200;
-            $message = 'Lista creada exitosamente';
+            $status        = 200;
+            $message       = 'Lista creada exitosamente';
+            $id_movimiento = $this->getMaxMovimientoId();
         }
 
         return [
             'status'        => $status,
             'message'       => $message,
-            'id_movimiento' => $create,
+            'id_movimiento' => $id_movimiento,
             'folio'         => $folio
         ];
     }
@@ -199,7 +201,8 @@ class ctrl extends mdl {
 
         return [
             'row' => $rows,
-            'ls'  => $ls
+            'ls'  => $ls,
+            '$_SESION' => $_COOKIE
         ];
     }
 

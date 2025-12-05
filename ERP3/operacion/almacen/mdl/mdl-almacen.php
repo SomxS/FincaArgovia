@@ -171,9 +171,9 @@ class mdl extends CRUD {
 
     function deleteMaterialById($id) {
         return $this->_Delete([
-            'table' => "{$this->bd}mtto_almacen",
-            'where' => 'idAlmacen = ?',
-            'data'  => [$id]
+           'table' => "{$this->bd}mtto_almacen",
+           'where' => $array['where'],
+           'data'  => $array['data']
         ]);
     }
 
