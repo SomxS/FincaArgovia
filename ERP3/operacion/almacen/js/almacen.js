@@ -76,6 +76,7 @@ class Main extends Templates {
     }
 
     layout() {
+        
         this.primaryLayout({
             parent: "root",
             id: this.PROJECT_NAME,
@@ -97,6 +98,7 @@ class Main extends Templates {
                     id: "productos",
                     tab: "Productos",
                     lucideIcon: "package",
+                    active: true,
                     class: "mb-1",
                     
                     onClick: () => products.render()
@@ -105,7 +107,7 @@ class Main extends Templates {
                     id: "inventario",
                     tab: "Inventario",
                     lucideIcon: "clipboard-list",
-                    active: true,
+                  
 
                     onClick: () => inventario.render()
                 },

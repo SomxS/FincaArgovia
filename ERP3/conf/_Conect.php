@@ -9,7 +9,7 @@
                 $host = "localhost";
                 $user = "root";
                 $pass = "";
-                $db   = "hgpqgijw_erp";
+                $db   = "fayxzvov_erp";
                 
                 //  La opción especifica que se debe ejecutar el comando "SET NAMES utf8" para asegurarse de que la conexión use la codificación de caracteres UTF-8.
                 $opc = array(
