@@ -16,6 +16,7 @@ switch($_POST['opc']){
                 $expira = time() + (365 * 24 * 60 * 60);
                 setcookie( "IDU", $usr_datos[0]['IDU'] , $expira, "/");
                 setcookie( "IDP", $usr_datos[0]['IDP'] , $expira, "/");
+                setcookie( "idUDN", $usr_datos[0]['udn_id'] , $expira, "/");
                 
                 unset($usr_datos[0]['IDU']);
                 unset($usr_datos[0]['IDP']);

@@ -21,6 +21,7 @@ class mdl extends CRUD {
                 active
             FROM {$this->bd}mtto_categoria
             WHERE active = ?
+            AND udn_id = ".$_COOKIE['idUDN']."
             ORDER BY idcategoria DESC
         ";
         return $this->_Read($query, $array);
@@ -75,6 +76,7 @@ class mdl extends CRUD {
                 active
             FROM {$this->bd}mtto_almacen_area
             WHERE active = ?
+            AND udn_id = ".$_COOKIE['idUDN']."
             ORDER BY idArea DESC
         ";
         return $this->_Read($query, $array);
@@ -129,6 +131,7 @@ class mdl extends CRUD {
                 active
             FROM {$this->bd}mtto_almacen_zona
             WHERE active = ?
+            AND udn_id = ".$_COOKIE['idUDN']."
             ORDER BY id_zona DESC
         ";
         return $this->_Read($query, $array);

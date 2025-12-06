@@ -51,7 +51,8 @@ class ctrl extends mdl {
 
         return [
             'row' => $rows,
-            'ls'  => $ls
+            'ls'  => $ls,
+            
         ];
     }
 
@@ -82,6 +83,7 @@ class ctrl extends mdl {
 
         $_POST['date_creation'] = date('Y-m-d H:i:s');
         $_POST['active']        = 1;
+        $_POST['udn_id']        = $_COOKIE['idUDN'];
 
         $exists = $this->existsCategoryByName([$_POST['nombreCategoria']]);
 
@@ -212,6 +214,7 @@ class ctrl extends mdl {
 
         $_POST['date_creation'] = date('Y-m-d H:i:s');
         $_POST['active']        = 1;
+        $_POST['udn_id']        = $_COOKIE['idUDN'];
 
         $exists = $this->existsAreaByName([$_POST['nombre_area']]);
 
@@ -338,6 +341,7 @@ class ctrl extends mdl {
 
         $_POST['date_creation'] = date('Y-m-d H:i:s');
         $_POST['active']        = 1;
+        $_POST['udn_id']        = $_COOKIE['idUDN'];
 
         $exists = $this->existsZoneByName([$_POST['nombre_zona']]);
 

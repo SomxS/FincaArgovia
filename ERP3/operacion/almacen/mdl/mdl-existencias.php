@@ -18,7 +18,8 @@ class mdl extends CRUD {
         $query = "
             SELECT id_zona as id, nombre_zona AS valor
             FROM {$this->bd}mtto_almacen_zona
-            WHERE active = 1
+            WHERE active = 1 and
+            udn_id = ".$_COOKIE['idUDN']."
             ORDER BY nombre_zona ASC
         ";
         return $this->_Read($query, []);
@@ -28,7 +29,8 @@ class mdl extends CRUD {
         $query = "
             SELECT idcategoria as id, nombreCategoria AS valor
             FROM {$this->bd}mtto_categoria
-            WHERE active = 1
+            WHERE active = 1  and
+            udn_id = ".$_COOKIE['idUDN']."
             ORDER BY nombreCategoria ASC
         ";
         return $this->_Read($query, []);
@@ -38,7 +40,7 @@ class mdl extends CRUD {
         $query = "
             SELECT idArea as id, nombre_area AS valor
             FROM {$this->bd}mtto_almacen_area
-            WHERE active = 1
+            WHERE active = 1 AND udn_id = ".$_COOKIE['idUDN']."
             ORDER BY nombre_area ASC
         ";
         return $this->_Read($query, []);
@@ -47,7 +49,7 @@ class mdl extends CRUD {
     // Existencias
 
     function listExistencias($filters) {
-        $whereConditions = ['1 = 1'];
+        $whereConditions = ['a.UDN_Almacen = '.$_COOKIE['idUDN']];
         $params = [];
 
         if (!empty($filters['zona']) && $filters['zona'] != 'Todos') {
@@ -108,6 +110,7 @@ class mdl extends CRUD {
             LEFT JOIN {$this->bd}mtto_almacen_zona z ON a.id_zona = z.id_zona
             LEFT JOIN {$this->bd}mtto_almacen_area ar ON a.Area = ar.idArea
             WHERE $whereClause
+            
             ORDER BY a.Equipo ASC
         ";
 
@@ -115,7 +118,7 @@ class mdl extends CRUD {
     }
 
     function getResumen($filters) {
-        $whereConditions = ['1 = 1'];
+        $whereConditions = ['a.UDN_Almacen = '.$_COOKIE['idUDN']];
         $params = [];
 
         if (!empty($filters['zona']) && $filters['zona'] != 'Todos') {
@@ -160,7 +163,7 @@ class mdl extends CRUD {
             LEFT JOIN {$this->bd}mtto_categoria c ON a.id_categoria = c.idcategoria
             LEFT JOIN {$this->bd}mtto_almacen_zona z ON a.id_zona = z.id_zona
             LEFT JOIN {$this->bd}mtto_almacen_area ar ON a.Area = ar.idArea
-            WHERE a.idAlmacen = ?
+            WHERE a.idAlmacen = ? AND a.UDN_Almacen = ".$_COOKIE['idUDN']."
         ";
         $result = $this->_Read($query, [$id]);
         return $result[0] ?? null;

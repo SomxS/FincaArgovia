@@ -5,7 +5,8 @@ class Index extends CRUD {
         return $this->_Read('SELECT
         	idUser AS IDU,
         	usr_perfil AS IDP,
-        	dir_ruta AS ruta
+        	dir_ruta AS ruta,
+			usr_udn as udn_id
         FROM
         	usuarios
         	INNER JOIN permisos ON id_Perfil = usr_perfil

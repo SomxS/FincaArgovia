@@ -85,13 +85,12 @@ class mdl extends CRUD {
                 d.nombre as departamento,
                 p.nombreProveedor as proveedor
             FROM {$this->bd}mtto_almacen a
-            LEFT JOIN {$this->bd}mtto_almacen_area ar ON a.Area = ar.idArea
-            LEFT JOIN {$this->bd}mtto_categoria c ON a.id_categoria = c.idcategoria
-            LEFT JOIN {$this->bd}mtto_almacen_zona z ON a.id_zona = z.id_zona
-            LEFT JOIN {$this->bd}departamento d ON a.id_dpto = d.id
-            LEFT JOIN {$this->bd}mtto_proveedores p ON a.id_Proveedor = p.idProveedor
-            WHERE 1 = 1
-            
+            LEFT  JOIN {$this->bd}mtto_almacen_area ar ON a.Area       = ar.idArea
+            LEFT  JOIN {$this->bd}mtto_categoria c ON a.id_categoria   = c.idcategoria
+            LEFT  JOIN {$this->bd}mtto_almacen_zona z ON a.id_zona     = z.id_zona
+            LEFT  JOIN {$this->bd}departamento d ON a.id_dpto          = d.id
+            LEFT  JOIN {$this->bd}mtto_proveedores p ON a.id_Proveedor = p.idProveedor
+            WHERE UDN_Almacen                                          = ".$_COOKIE['idUDN']."
         ";
 
         $params = [];
@@ -169,7 +168,7 @@ class mdl extends CRUD {
         ]);
     }
 
-    function deleteMaterialById($id) {
+    function deleteMaterialById($array) {
         return $this->_Delete([
            'table' => "{$this->bd}mtto_almacen",
            'where' => $array['where'],

@@ -90,7 +90,8 @@ class ctrl extends mdl {
         return [
             'status'  => $status,
             'message' => $message,
-            'data'    => $data
+            'data'    => $data,
+           
         ];
     }
 
@@ -100,6 +101,7 @@ class ctrl extends mdl {
         
         $_POST['FechaIngreso'] = date('Y-m-d H:i:s');
         $_POST['Estado'] = 1;
+        $_POST['UDN_Almacen'] = $_COOKIE['idUDN'];
 
         $exists = $this->existsMaterialByCode($_POST['CodigoEquipo']);
 
@@ -141,10 +143,7 @@ class ctrl extends mdl {
         $status  = 500;
         $message = 'No se pudo eliminar el material';
 
-        $values = $this->util->sql(['idProducto' => $_POST['idProducto']], 1);
-
-
-        $delete = $this->deleteMaterialById( $values);
+        $delete = $this->deleteMaterialById($this->util->sql(['idAlmacen' => $_POST['idProducto']], 1));
 
         if ($delete) {
             $status  = 200;

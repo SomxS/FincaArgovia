@@ -72,7 +72,9 @@ class mdl extends CRUD {
             LEFT JOIN {$this->bd}mtto_categoria cat ON a.id_categoria = cat.idcategoria
             LEFT JOIN {$this->bd}mtto_almacen_zona z ON a.id_zona = z.id_zona
             LEFT JOIN {$this->bd}mtto_almacen_area ar ON a.Area = ar.idArea
-            WHERE MONTH(m.fecha) = ? 
+            WHERE
+            m.udn_id = ".$_COOKIE['idUDN']."
+            and MONTH(m.fecha) = ? 
             AND YEAR(m.fecha) = ?
             $whereExtra
             ORDER BY m.fecha DESC, m.id_movimiento DESC
@@ -119,7 +121,9 @@ class mdl extends CRUD {
             LEFT JOIN {$this->bd}mtto_categoria cat ON a.id_categoria = cat.idcategoria
             LEFT JOIN {$this->bd}mtto_almacen_zona z ON a.id_zona = z.id_zona
             LEFT JOIN {$this->bd}mtto_almacen_area ar ON a.Area = ar.idArea
-            WHERE MONTH(m.fecha) = ? 
+            WHERE 
+             m.udn_id = ".$_COOKIE['idUDN']."
+            AND MONTH(m.fecha) = ? 
             AND YEAR(m.fecha) = ?
             $whereExtra
             GROUP BY m.tipo_movimiento

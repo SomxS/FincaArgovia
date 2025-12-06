@@ -22,8 +22,11 @@ class mdl extends CRUD {
                 total_productos,
                 total_unidades,
                 estado,
+                user_id,
+                usser as responsable,
                 DATE_FORMAT(fecha_creacion, '%d/%m/%Y %H:%i') as fecha_creacion
             FROM {$this->bd}mtto_inventario_movimientos
+            LEFT JOIN fayxzvov_erp.usuarios ON fayxzvov_erp.usuarios.idUser = user_id
             WHERE fecha BETWEEN ? AND ?
             AND (? = 'Todos' OR tipo_movimiento = ?)
             ORDER BY id_movimiento DESC
