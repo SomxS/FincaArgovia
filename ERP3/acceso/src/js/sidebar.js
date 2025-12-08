@@ -11,9 +11,9 @@ class Sidebar {
             parent: "#menu-sidebar",
             logo: "../../src/img/logos/coffee_icon.png",
             menuItems: [
-                { icon: "icon-home",   url: "/ERP3/operacion/almacen/index.php", title: "Inicio" },
+                { icon: "icon-home",   url: "/ERP3/operacion/almacen/", title: "Inicio" },
                 { icon: "icon-chart-line-1", url: "/ERP3/operacion/almacen/reporte.php", title: "Reportes" },
-                { icon: "icon-gauge", url: "/ERP3/finanzas/administrador/", title: "Dashboard" },
+                { icon: "icon-gauge", url: "/ERP3/operacion/almacen/dashboard.php", title: "Dashboard" },
                 // { icon: "icon-clock", url: "/ERP3/operacion/historial/", title: "Historial" },
                 // { icon: "icon-heart", url: "/ERP3/operacion/favoritos/", title: "Favoritos" },
             ],
