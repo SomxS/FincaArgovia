@@ -1,0 +1,7 @@
+
+
+table#tableGasto th:nth-child(5),
+table#tableGasto td:nth-child(5) {
+    width: 120px; /* Ancho fijo para la segunda columna */
+    /* background: #f2f2f2;  */
+}
